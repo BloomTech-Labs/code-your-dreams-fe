@@ -1,0 +1,25 @@
+/* Footer always at the bottom of the page */
+body {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  align-content: flex-start;
+  min-height: 100vh;
+}
+
+header {
+  flex-shrink: 0;
+}
+
+main {
+  flex: 1 0 auto;
+  margin-top: $header-height;
+  @include desktop-xl { margin-top: $header-height-xl; }
+}
+
+footer {
+  flex-shrink: 0;
+  margin-top: auto;
+}

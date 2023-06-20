@@ -1,0 +1,60 @@
+/* 
+Responsive design mixins for use across all scss stylesheets
+(Breakpoint definitions as defined in Bootstrap, https://getbootstrap.com/docs/5.3/layout/breakpoints/)
+
+Default Layout: Mobile Portrait
+@media (max-width: 575px) {}
+*/
+
+/* Desktop XS (Mobile Landscape) */
+@mixin mobile-wide {
+  @media (min-width: 576px) {
+      @content;
+  }
+}
+
+/* Desktop S (Tablet Landscape) */
+@mixin desktop-s {
+  @media (min-width: 768px) {
+      @content;
+  }
+}
+
+/* Desktop M */
+@mixin desktop-m {
+  @media (min-width: 992px) {
+      @content;
+  }
+}
+
+/* Desktop L */
+@mixin desktop-l {
+  @media (min-width: 1200px) {
+      @content;
+  }
+}
+
+/* Desktop XL */
+@mixin desktop-xl {
+  @media (min-width: 1400px) {
+      @content;
+  }
+}
+
+/*
+Custom mixin definitions for specific screen orientations
+*/
+
+/* Mobile Only */
+@mixin mobile-only {
+  @media (max-width: 575px) {
+      @content;
+  }
+}
+
+/* Tablet Portrait */
+@mixin tablet-tall {
+  @media (orientation: portrait) and (min-width: 576px) {
+      @content;
+  }
+}

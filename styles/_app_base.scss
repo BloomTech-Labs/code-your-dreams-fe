@@ -1,0 +1,65 @@
+:root {
+  font-size: 1rem;
+}
+
+body {
+  line-height: 1.5;
+}
+
+p,
+li,
+h1,
+h2,
+h3,
+h4 {
+  margin: 0 auto 1.5rem;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 600;
+}
+
+section {
+  padding: 1rem;
+  width: 100%;
+}
+
+// General class styles
+.italic {
+  font-style: italic;
+}
+.bold {
+  font-weight: 700;
+}
+.no-text {
+  font-size: 0;
+}
+
+a {
+  color: $cyd-pink;
+  text-decoration: none;
+}
+a:hover {
+  color: $cyd-dark-pink;
+  text-decoration: underline;
+}
+
+// Forms
+button, .button {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid transparent;
+  border-radius: 50em;
+  background-color: $cyd-pink;
+  color: white;
+  text-decoration: none;
+}
+button:hover, .button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: $cyd-dark-pink;
+}

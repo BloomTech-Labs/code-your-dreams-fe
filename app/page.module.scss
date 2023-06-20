@@ -1,0 +1,14 @@
+@import "styles/variables";
+@import "styles/media";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+}
+
+.test {
+  display: block;
+}
