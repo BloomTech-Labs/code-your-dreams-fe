@@ -49,17 +49,58 @@ a:hover {
   text-decoration: underline;
 }
 
+// Header styles
+header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  margin: 0;
+  width: 100%;
+
+  box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
+
+  padding: 1rem;
+  width: 100%;
+
+  background-color: white;
+  height: $header-height;
+  @include desktop-xl { height: $header-height-xl; }
+  
+  nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
 // Forms
 button, .button {
   padding: 0.75rem 1.5rem;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   border-radius: 50em;
   background-color: $cyd-pink;
   color: white;
   text-decoration: none;
+  text-align: center;
+}
+button.secondary, .button.secondary {
+  border-color: $cyd-pink;
+  background-color: white;
+  color: $cyd-pink;
 }
 button:hover, .button:hover {
   color: white;
   text-decoration: none;
   background-color: $cyd-dark-pink;
+  border-color: $cyd-dark-pink;
 }

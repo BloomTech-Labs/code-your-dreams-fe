@@ -1,11 +1,17 @@
 @import "styles/variables";
 @import "styles/media";
 
+.main {
+  background-color: $cyd-light-gray;
+}
+
 .examples {
   margin: 1rem;
   padding: 1rem;
   border: 1px solid #ebebeb;
   border-radius: 5px;
+
+  background-color: white;
 }
 
 .colors {
@@ -31,10 +37,14 @@
     color: white;
   }
   .color4 {
-    background-color: $cyd-gray;
+    background-color: $cyd-light-gray;
     color: black;
   }
   .color5 {
+    background-color: $cyd-gray;
+    color: black;
+  }
+  .color6 {
     background-color: $cyd-black;
     color: white;
   }

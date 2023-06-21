@@ -2,8 +2,16 @@
 @import "styles/media";
 
 footer.site-footer {
-  margin-top: 1rem;
-  padding: 1rem;
+  margin: 0;
+  padding: 2rem 1rem;
 
   border-top: 1px dashed $cyd-purple;
+
+  .notice {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
 }
