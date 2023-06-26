@@ -15,8 +15,6 @@ header {
 
 main {
   flex: 1 0 auto;
-  margin-top: $header-height;
-  @include desktop-xl { margin-top: $header-height-xl; }
 }
 
 footer {

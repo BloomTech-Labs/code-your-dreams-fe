@@ -13,14 +13,13 @@ header.site-header {
   left: 0;
   z-index: 1000;
   margin: 0;
+  padding: 1rem $site-padding;
   width: 100%;
 
   box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
   -webkit-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
   -moz-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
 
-  padding: 1rem;
-  width: 100%;
 
   background-color: white;
   height: $header-height;

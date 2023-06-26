@@ -6,6 +6,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  margin-top: $header-height;
+  @include desktop-xl { margin-top: $header-height-xl; }
   padding: 1rem;
   
   background-color: $cyd-light-gray;

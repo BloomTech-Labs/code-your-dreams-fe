@@ -7,6 +7,7 @@ export default function Header() {
     <header className={styles["site-header"]}>
       <SiteLogo />
       <nav>
+        <Link href="/admin">Admin</Link>
         <Link href="/" className="button secondary">
           Logout
         </Link>

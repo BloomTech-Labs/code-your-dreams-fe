@@ -2,6 +2,8 @@
 @import "styles/media";
 
 .main {
+  margin-top: $header-height;
+  @include desktop-xl { margin-top: $header-height-xl; }
   background-color: $cyd-light-gray;
 }
 

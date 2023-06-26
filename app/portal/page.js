@@ -6,6 +6,10 @@ export default function Home() {
     <main>
       <section>
         <p>You are logged in.</p>
+        <h1>Organization Name</h1>
+        <div>Your Courses</div>
+        <div>Member List for Org Admins</div>
+        <div>Your Account</div>
       </section>
     </main>
   )
