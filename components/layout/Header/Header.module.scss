@@ -1,0 +1,34 @@
+@import "styles/variables";
+@import "styles/media";
+
+header.site-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  margin: 0;
+  padding: 1rem $site-padding;
+  width: 100%;
+
+  box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
+  -moz-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
+
+
+  background-color: white;
+  height: $header-height;
+  @include desktop-xl { height: $header-height-xl; }
+
+  nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}

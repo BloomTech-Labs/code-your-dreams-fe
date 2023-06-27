@@ -1,0 +1,17 @@
+@import "styles/variables";
+@import "styles/media";
+
+footer.site-footer {
+  margin: 0;
+  padding: 2rem $site-padding;
+
+  border-top: 1px dashed $cyd-purple;
+
+  .notice {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+}

@@ -1,0 +1,61 @@
+@import "styles/variables";
+@import "styles/media";
+
+.main {
+  margin-top: $header-height;
+  @include desktop-xl { margin-top: $header-height-xl; }
+  background-color: $cyd-light-gray;
+}
+
+.examples {
+  margin: 1rem;
+  padding: 1rem;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+
+  background-color: white;
+}
+
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+
+  span {
+    padding: 0.5rem 1rem;
+    border: 1px solid black;
+  }
+
+  .color1 {
+    background-color: $cyd-pink;
+    color: white;
+  }
+  .color2 {
+    background-color: $cyd-dark-pink;
+    color: white;
+  }
+  .color3 {
+    background-color: $cyd-purple;
+    color: white;
+  }
+  .color4 {
+    background-color: $cyd-light-gray;
+    color: black;
+  }
+  .color5 {
+    background-color: $cyd-gray;
+    color: black;
+  }
+  .color6 {
+    background-color: $cyd-black;
+    color: white;
+  }
+  .white {
+    background-color: white;
+    color: black;
+  }
+  .black {
+    background-color: black;
+    color: white;
+  }
+}
