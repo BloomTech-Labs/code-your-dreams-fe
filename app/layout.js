@@ -1,8 +1,8 @@
 import "../styles/globals.scss"
-import { Nunito_Sans } from "next/font/google"
+import { Roboto_Flex } from "next/font/google"
 import Footer from "components/layout/Footer/Footer"
 
-const nunitos = Nunito_Sans({ subsets: ["latin"] })
+const robotoflex = Roboto_Flex({ subsets: ["latin"] })
 
 export const metadata = {
   title: "Courses | Code Your Dreams",
@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={nunitos.className}>
+      <body className={robotoflex.className}>
         {/* <Header /> */}
         {children}
         <Footer />

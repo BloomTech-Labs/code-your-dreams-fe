@@ -5,9 +5,9 @@ export default function SiteLogo() {
   return (
     <Link href="/" className="no-text">
       <Image
-        src="/images/CYD_Logo_2020.jpg"
+        src="/images/CYD-Logo.png"
         alt="Code Your Dreams logo"
-        width={102}
+        width={105}
         height={60}
       />
     </Link>

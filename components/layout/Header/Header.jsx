@@ -1,16 +1,17 @@
-import Link from "next/link"
+"use client"
+
 import SiteLogo from "../SiteLogo/SiteLogo"
 import styles from "./Header.module.scss"
+import { Button } from "@mui/material"
 
 export default function Header() {
   return (
     <header className={styles["site-header"]}>
       <SiteLogo />
       <nav>
-        <Link href="/admin">Admin</Link>
-        <Link href="/" className="button secondary">
+        <Button variant="outlined" href="/">
           Logout
-        </Link>
+        </Button>
       </nav>
     </header>
   )

@@ -1,21 +1,74 @@
 @import "styles/variables";
 @import "styles/media";
 
-.main {
+.header {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: $header-height;
-  @include desktop-xl { margin-top: $header-height-xl; }
-  padding: 1rem;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: transparent;
+  position: relative;
+
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+}
+
+.main {
+  margin-top: calc(-1 * $header-height);
+  @include desktop-xl {
+    margin-top: calc(-1 * $header-height-xl);
+  }
   
   background-color: $cyd-light-gray;
 
   .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    .image-wrapper {
+      z-index: -1;
+    }
+
     .hero-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem 2vw;
+
+      width: 100%;
       @include desktop-m {
         width: 50%;
+      }
+
+      .message-content {
+        background-color: rgba(255,255,255,0.8);
+        padding: 1rem;
+        @include desktop-s {
+          padding: 1.5rem;
+        }
+        border-radius: 10px;
+      }
+
+      h1 {
+        line-height: 1;
+        font-weight: 400;
+        text-align: center;
+
+        .app-name {
+          color: $cyd-black;
+          font-weight: 600;
+        }
+      }
+
+      img {
+        margin: 3rem auto 0;
       }
     }
 
@@ -26,7 +79,7 @@
       @include desktop-s {
         grid-template-columns: repeat(2, auto);
         justify-items: center;
-        justify-content: start;
+        justify-content: center;
       }
     }
   }

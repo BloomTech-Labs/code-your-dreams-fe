@@ -4,7 +4,9 @@
 nav.site-nav {
   display: flex;
   flex-direction: row;
-  gap: 1.6rem;
+  gap: 2vw;
+  @include mobile-wide { gap: 1rem; }
+  @include desktop-s { gap: 1.6rem; }
 
   margin-top: $header-height;
   @include desktop-xl { margin-top: $header-height-xl; }

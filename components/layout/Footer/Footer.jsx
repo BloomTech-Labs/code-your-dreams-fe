@@ -1,4 +1,7 @@
+"use client"
+
 import styles from "./Footer.module.scss"
+import Link from "@mui/material/Link"
 
 export default function Footer() {
   return (
@@ -6,9 +9,14 @@ export default function Footer() {
       <div className={styles.notice}>
         <span>&copy; {new Date().getFullYear()} All Rights Reserved. </span>
         <span>
-          <a href="https://www.codeyourdreams.org/" target="_blank">
+          <Link
+            href="https://www.codeyourdreams.org/"
+            underline="hover"
+            target="_blank"
+            rel="noopener"
+          >
             Code Your Dreams
-          </a>{" "}
+          </Link>{" "}
           is a 501(c)(3) organization.
         </span>
         <span>EIN: 82-5426088.</span>

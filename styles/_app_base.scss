@@ -4,6 +4,7 @@
 
 body {
   line-height: 1.5;
+  font-weight: 300;
 }
 
 p,
@@ -12,9 +13,8 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0 auto 1.5rem;
-  overflow-wrap: break-word;
-  hyphens: auto;
+  margin: 0 0 1.2rem;
+  @include desktop-m { margin: 0 0 1.5rem; }
 }
 
 h1,
@@ -22,6 +22,8 @@ h2,
 h3,
 h4 {
   font-weight: 600;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 section {
@@ -68,7 +70,7 @@ header {
   -webkit-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
   -moz-box-shadow: 1px 10px 10px 0px rgba(0,0,0,0.1);
 
-  padding: 1rem;
+  padding: 1rem $site-padding;
   width: 100%;
 
   background-color: white;
@@ -103,4 +105,76 @@ button:hover, .button:hover {
   text-decoration: none;
   background-color: $cyd-dark-pink;
   border-color: $cyd-dark-pink;
+}
+
+// Portal Styles
+.header-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+
+  h1 { margin-bottom: 0; }
+
+  .add-button {    
+    .compact-button {
+      display: flex;
+      @include desktop-s { display: none; }
+    }
+    .full-button {
+      display: none;
+      @include desktop-s { display: flex; }
+    }
+  }
+}
+
+// Modal Styles
+.modal {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  @include desktop-s {
+    width: 80vw;
+    height: 80vh;
+  }
+  background-color: white;
+  border: none;
+  box-shadow: 24px;
+
+  padding: 0.3rem 1rem 1rem;
+
+  .modal-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .modal-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+  }
 }
