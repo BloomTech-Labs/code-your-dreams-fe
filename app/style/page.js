@@ -1,7 +1,7 @@
 import SiteLogo from "@/components/layout/SiteLogo/SiteLogo"
 import styles from "./page.module.scss"
 
-export default function Home() {
+export default function Page() {
   return (
     <>
       <header>

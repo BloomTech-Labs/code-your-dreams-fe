@@ -1,42 +1,68 @@
-import Link from "next/link"
-import SiteLogo from "@/components/layout/SiteLogo/SiteLogo"
-import styles from "./page.module.scss"
+"use client"
 
-export default function Home() {
+import { Button, Link } from "@mui/material"
+import styles from "./page.module.scss"
+import Image from "next/image"
+
+export default function Page() {
   return (
     <>
-      <header>
-        <SiteLogo />
-        <nav>
-          <Link href="/style">Style</Link>
-          <Link href="/portal" className="button secondary">
-            Login
-          </Link>
-        </nav>
+      <header className={styles.header}>
+        <Image
+          priority
+          src="/images/CYD-Logo.png"
+          width={112}
+          height={64}
+          alt="A laptop with Code Your Dreams on the screen"
+        />
       </header>
       <main className={styles.main}>
         <section className={styles.hero}>
+          <div className={styles["image-wrapper"]}>
+            <Image
+              priority
+              src="/images/Code-Your-Dreams-Hero.jpg"
+              fill
+              style={{ objectFit: "cover" }}
+            />
+          </div>
           <div className={styles["hero-message"]}>
-            <h1>Code Your Dreams</h1>
-            <p>Welcome to the Code Your Dreams curriculum portal.</p>
-            <p>
-              This app is where our affiliated instructors can come to access
-              our curriculum. If your organization would like to join us, please
-              use the button below to fill out an interest form.
-            </p>
-            <p>
-              <a href="https://www.codeyourdreams.org/" target="_blank">
-                Visit our website
-              </a>{" "}
-              to learn more about who we are.
-            </p>
-            <div className={styles["button-row"]}>
-              <a href="#" className="button">
-                Sign-in to App
-              </a>
-              <a href="#" className="button secondary">
-                Submit Interest
-              </a>
+            <h1>
+              Code Your Dreams
+              <br />
+              <span className={`h2 ${styles["app-name"]}`}>
+                Curriculum Portal
+              </span>
+            </h1>
+            <div className={styles["message-content"]}>
+              <p>
+                This app is for affiliated instructors to access our curriculum.
+                If your organization would like to join us, please use the
+                button below to fill out an interest form.
+              </p>
+              <p>
+                <Link
+                  href="https://www.codeyourdreams.org/"
+                  underline="hover"
+                  target="_blank"
+                  rel="noopener"
+                >
+                  Visit our website
+                </Link>{" "}
+                to learn more about who we are.
+              </p>
+              <div className={styles["button-row"]}>
+                <Button variant="contained" href="/portal">
+                  Sign-in to app
+                </Button>
+                <Button
+                  variant="outlined"
+                  href="https://forms.gle/XS9hL3nXintpFLpn9"
+                  target="_blank"
+                >
+                  Submit interest
+                </Button>
+              </div>
             </div>
           </div>
         </section>
