@@ -113,8 +113,8 @@ export default function Page() {
         <Box className="modal">
           <div className="modal-header">
             <h2>Modal title</h2>
-            <IconButton>
-              <CloseIcon onClick={handleClose} />
+            <IconButton onClick={handleClose}>
+              <CloseIcon />
             </IconButton>
           </div>
           {/* Insert modal component here */}
