@@ -124,7 +124,7 @@ export default function Page() {
               Save
             </Button>
             <Button variant="text" onClick={handleClose}>
-              Cancel without saving
+              Close without saving
             </Button>
           </div>
         </Box>

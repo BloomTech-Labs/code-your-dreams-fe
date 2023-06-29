@@ -42,15 +42,6 @@ section {
   font-size: 0;
 }
 
-a {
-  color: $cyd-pink;
-  text-decoration: none;
-}
-a:hover {
-  color: $cyd-dark-pink;
-  text-decoration: underline;
-}
-
 // Header styles
 header {
   display: flex;
@@ -83,28 +74,6 @@ header {
     align-items: center;
     gap: 1rem;
   }
-}
-
-// Forms
-button, .button {
-  padding: 0.75rem 1.5rem;
-  border: 2px solid transparent;
-  border-radius: 50em;
-  background-color: $cyd-pink;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-}
-button.secondary, .button.secondary {
-  border-color: $cyd-pink;
-  background-color: white;
-  color: $cyd-pink;
-}
-button:hover, .button:hover {
-  color: white;
-  text-decoration: none;
-  background-color: $cyd-dark-pink;
-  border-color: $cyd-dark-pink;
 }
 
 // Portal Styles
