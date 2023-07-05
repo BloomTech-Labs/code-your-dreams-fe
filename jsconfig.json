@@ -4,6 +4,6 @@
       "@/components/*": ["components/*"],
       "@/*": ["./*"]
     },
-    "baseUrl": ""
+    "baseUrl": "."
   }
 }
