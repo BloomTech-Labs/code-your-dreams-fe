@@ -23,6 +23,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@types/node": "20.3.3",
     "sass": "^1.63.4"
   }
 }
