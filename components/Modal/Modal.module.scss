@@ -1,0 +1,52 @@
+@import "styles/variables";
+@import "styles/media";
+
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 1rem;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  @include desktop-s {
+    width: 80vw;
+    height: 80vh;
+  }
+  background-color: white;
+  border: none;
+  box-shadow: 24px;
+
+  padding: 1rem 1rem 1.5rem;
+
+  .modal-header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-bottom: 1rem;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .modal-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+  }
+}
