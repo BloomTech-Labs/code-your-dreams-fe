@@ -1,6 +1,7 @@
 import "../styles/globals.scss"
 import { Roboto_Flex } from "next/font/google"
 import Footer from "components/layout/Footer/Footer"
+import { NextAuthProvider } from "./providers";
 
 const robotoflex = Roboto_Flex({ subsets: ["latin"] })
 
@@ -14,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={robotoflex.className}>
         {/* <Header /> */}
-        {children}
+        <NextAuthProvider>{children}</NextAuthProvider>
         <Footer />
       </body>
     </html>
