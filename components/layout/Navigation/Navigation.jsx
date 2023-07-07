@@ -3,7 +3,6 @@
 import styles from "./Navigation.module.scss"
 import { Button, IconButton } from "@mui/material"
 import HomeIcon from "@mui/icons-material/Home"
-import Component from "../../auth/login-btn";
 
 export default function Navigation() {
   return (
@@ -24,7 +23,6 @@ export default function Navigation() {
         Chapters
       </Button>
       {/* Temporarily adding new sign in button here for testing*/}
-      <Component />
     </nav>
   )
 }
