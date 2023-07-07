@@ -4,12 +4,11 @@ import styles from "./page.module.scss"
 import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
-  const session = await getServerSession(authOptions);
-
+  const { data: session } = useSession();
   if (!session) {
     redirect("/api/auth/signin");
   };

@@ -12,7 +12,6 @@ const SignInBtn = () => {
 }
 
 const SignOutBtn = () => {
-    const { data: session } = useSession();
     return (
         <Button variant="contained" onClick={() => signOut()}>Sign Out</Button>
     )
