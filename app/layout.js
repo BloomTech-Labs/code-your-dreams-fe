@@ -9,7 +9,7 @@ export const metadata = {
   description: "Course management portal for Code Your Dreams",
   // Temporarily adding in to prevent indexing of the build site
   robots: {
-    noindex,
+    index: false,
   },
 }
 
