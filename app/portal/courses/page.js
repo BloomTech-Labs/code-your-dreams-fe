@@ -3,8 +3,17 @@
 import styles from "./page.module.scss"
 import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../api/auth/[...nextauth]/route";
+import { redirect } from "next/navigation";
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/api/auth/signin");
+  };
+
   return (
     <main className={styles.courses}>
       <section>
