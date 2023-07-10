@@ -6,8 +6,6 @@ import { Button, IconButton, Box, Modal } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import CloseIcon from "@mui/icons-material/Close"
 import { DataGrid } from "@mui/x-data-grid"
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -52,11 +50,6 @@ export default async function Page() {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-
-  const { data: session } = useSession();
-  if (!session) {
-    redirect("/api/auth/signin");
-  };
 
   return (
     <>

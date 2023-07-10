@@ -4,15 +4,8 @@ import { Button, Link } from "@mui/material"
 import styles from "./page.module.scss"
 import Image from "next/image"
 import { SignInBtn } from "../components/auth/AuthButtons";
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 export default async function Page() {
-  const { data: session } = useSession();
-  console.log(useSession());
-  if (session) {
-    redirect("/portal");
-  };
 
   return (
     <>

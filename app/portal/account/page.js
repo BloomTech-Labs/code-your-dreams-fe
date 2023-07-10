@@ -1,12 +1,9 @@
+"use client"
+
 import styles from "./page.module.scss"
-import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { SignOutBtn } from "@/components/auth/AuthButtons"
 
 export default async function Page() {
-  const { data: session } = useSession();
-  if (!session) {
-    redirect("/api/auth/signin");
-  };
 
   return (
     <main className={styles.account}>
@@ -19,7 +16,7 @@ export default async function Page() {
       </section>
       <section>
         <p>Sign out from the app.</p>
-        <button className="secondary">Sign Out</button>
+        <SignOutBtn className="secondary">Sign Out</SignOutBtn>
       </section>
     </main>
   )

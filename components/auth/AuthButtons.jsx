@@ -7,13 +7,16 @@ const SignInBtn = () => {
         return;
     }
     return (
-        <Button variant="contained" onClick={() => signIn()}>SIGN-IN TO APP</Button>
+        <Button variant="contained" onClick={() => signIn(undefined, { callbackUrl: "/portal" })}>SIGN-IN TO APP</Button>
     )
 }
 
 const SignOutBtn = () => {
     return (
-        <Button variant="contained" onClick={() => signOut()}>Sign Out</Button>
+        <Button variant="contained" onClick={() => {
+            console.log(process.env.NEXT_PUBLIC_SIGNOUTCALLBACKURL)
+            signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_SIGNOUTCALLBACKURL}` })}
+        }>Sign Out</Button>
     )
 }
 
