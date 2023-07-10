@@ -7,7 +7,7 @@ export default async function Page() {
 
   return (
     // This is the landing page for users that are logged in
-    <main>
+    <main className={styles.main}>
       <section>
         <h1>Portal Home</h1>
         {/* Only logged in users will see this page */}
