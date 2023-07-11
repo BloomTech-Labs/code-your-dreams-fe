@@ -22,7 +22,6 @@ export default function Navigation() {
       <Button variant="text" href="/portal/chapters">
         Chapters
       </Button>
-      {/* Temporarily adding new sign in button here for testing*/}
     </nav>
   )
 }
