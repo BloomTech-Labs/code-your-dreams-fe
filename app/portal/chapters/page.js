@@ -54,7 +54,7 @@ export default async function Page() {
 
   return (
     <main className={styles.organizations}>
-      <section>
+      <section className="container">
         {/* This page is restricted to only Super Admins */}
         <div className="header-row">
           <h1>Chapters</h1>
