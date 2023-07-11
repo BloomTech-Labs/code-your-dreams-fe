@@ -47,7 +47,7 @@ const rows = [
   },
 ]
 
-export default function Page() {
+export default async function Page() {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)

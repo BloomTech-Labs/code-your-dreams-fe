@@ -3,8 +3,10 @@
 import { Button, Link } from "@mui/material"
 import styles from "./page.module.scss"
 import Image from "next/image"
+import { SignInBtn } from "../components/auth/AuthButtons";
 
-export default function Page() {
+export default async function Page() {
+
   return (
     <>
       <header className={styles.header}>
@@ -52,9 +54,7 @@ export default function Page() {
                 to learn more about who we are.
               </p>
               <div className={styles["button-row"]}>
-                <Button variant="contained" href="/portal">
-                  Sign-in to app
-                </Button>
+                <SignInBtn />
                 <Button
                   variant="outlined"
                   href="https://forms.gle/XS9hL3nXintpFLpn9"
