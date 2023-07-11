@@ -3,7 +3,8 @@
 import styles from "./page.module.scss"
 import { Link } from "@mui/material"
 
-export default function Page() {
+export default async function Page() {
+
   return (
     // This is the landing page for users that are logged in
     <main className={styles.main}>
