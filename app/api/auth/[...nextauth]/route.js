@@ -9,7 +9,25 @@ const authOptions = {
       clientSecret: process.env.AUTH0_CLIENT_SECRET,
       issuer: process.env.AUTH0_ISSUER_BASE_URL
     })
-  ]
+  ],
+  callbacks: {
+    jwt: async function jwt({ token, account }) {
+      if(account) {
+        token.accessToken = account.access_token;
+        token.idToken = account.id_token;
+        token.id = token.sub;
+      }
+
+      return token;
+    },
+    session: async function session({ session, token }) {
+      session.accessToken = token.accessToken;
+      session.idToken = token.idToken;
+      session.user.id = token.id;
+
+      return session;
+    }
+  }
 }
 
 const handler = NextAuth(authOptions)
