@@ -27,8 +27,17 @@ h4 {
 }
 
 section {
-  padding: 1rem $site-padding;
+  padding: 1rem $site-padding 2rem;
+  @include desktop-xl {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.container {
+  margin: 0 auto;
   width: 100%;
+  max-width: $content-width;
 }
 
 // General class styles

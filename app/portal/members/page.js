@@ -5,10 +5,9 @@ import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 
 export default async function Page() {
-
   return (
     <main className={styles.main}>
-      <section>
+      <section className="container">
         <div className="header-row">
           <h1>Members</h1>
           <div className="add-button">

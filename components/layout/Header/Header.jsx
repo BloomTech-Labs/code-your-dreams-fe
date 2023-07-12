@@ -8,12 +8,18 @@ import PersonIcon from "@mui/icons-material/Person"
 export default function Header() {
   return (
     <header className={styles["site-header"]}>
-      <SiteLogo />
-      <nav>
-        <Button variant="text" endIcon={<PersonIcon />} href="/portal/account">
-          Account
-        </Button>
-      </nav>
+      <div className={`container ${styles["header-container"]}`}>
+        <SiteLogo />
+        <nav>
+          <Button
+            variant="text"
+            endIcon={<PersonIcon />}
+            href="/portal/account"
+          >
+            Account
+          </Button>
+        </nav>
+      </div>
     </header>
   )
 }
