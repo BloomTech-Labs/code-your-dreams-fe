@@ -14,7 +14,6 @@ const SignInBtn = () => {
 const SignOutBtn = () => {
     return (
         <Button variant="contained" onClick={() => {
-            console.log(process.env.NEXT_PUBLIC_SIGNOUTCALLBACKURL)
             signOut({ callbackUrl: `${process.env.NEXT_PUBLIC_SIGNOUTCALLBACKURL}` })}
         }>Sign Out</Button>
     )
