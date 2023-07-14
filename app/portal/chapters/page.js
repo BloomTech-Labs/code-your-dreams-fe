@@ -1,8 +1,8 @@
 "use client"
 
-import React from "react"
+import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { Button, IconButton } from "@mui/material"
+import Button from "@mui/material/Button"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
@@ -47,8 +47,8 @@ const rows = [
   },
 ]
 
-export default async function Page() {
-  const [open, setOpen] = React.useState(false)
+export default function Page() {
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
@@ -59,19 +59,10 @@ export default async function Page() {
         <div className="header-row">
           <h1>Chapters</h1>
           <div className="add-button">
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={handleOpen}
-              aria-label="add"
-              className="compact-button"
-            >
-              <AddIcon />
-            </IconButton>
             <Button
               variant="contained"
               startIcon={<AddIcon />}
-              onClick={handleOpen}
+              onClick={() => handleOpen()}
               aria-label="add"
               className="full-button"
             >
