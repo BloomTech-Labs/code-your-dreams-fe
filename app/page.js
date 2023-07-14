@@ -5,7 +5,7 @@ import styles from "./page.module.scss"
 import Image from "next/image"
 import { SignInBtn } from "../components/auth/AuthButtons";
 
-export default async function Page() {
+export default function Page() {
 
   return (
     <>
