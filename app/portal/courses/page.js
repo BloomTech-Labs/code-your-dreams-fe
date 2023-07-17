@@ -4,7 +4,7 @@ import styles from "./page.module.scss"
 import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 
-export default async function Page() {
+export default function Page() {
   return (
     <main className={styles.courses}>
       <section className="container">

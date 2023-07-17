@@ -3,7 +3,7 @@ import SectionAdmin from "./SectionAdmin"
 import SectionCourses from "./SectionCourses"
 import SectionWelcome from "./SectionWelcome"
 
-export default async function Page() {
+export default function Page() {
 
   return (
     // This is the landing page for users that are logged in
