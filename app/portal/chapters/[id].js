@@ -1,4 +1,4 @@
-// This is the dynamic page for chapters, where "slug" is the URL friendly chapter name that is generated when a new chapter is created.
+// This is the dynamic page for chapters, where "id" is the URL friendly chapter name that is generated when a new chapter is created.
 // When an admin clicks on a chapter entry in the chapter admin page, it will open up the link with the chapter slug in the window, to show the chapter detail page.
 
 "use client"

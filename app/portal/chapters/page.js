@@ -48,14 +48,16 @@ const rows = [
 ]
 
 export default async function Page() {
+  {
+    /* This page is restricted to only Super Admins */
+  }
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
   return (
-    <main className={styles.organizations}>
+    <main className={styles.chapters}>
       <section className="container">
-        {/* This page is restricted to only Super Admins */}
         <div className="header-row">
           <h1>Chapters</h1>
           <div className="add-button">

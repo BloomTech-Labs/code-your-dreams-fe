@@ -1,0 +1,20 @@
+@import "styles/variables";
+@import "styles/media";
+
+.chapters {
+  display: block;
+
+  .table {
+    overflow: auto;
+  }
+
+  .table-container {
+    width: 100%;
+    display: table;
+    table-layout: fixed;
+  }
+}
+
+.detail {
+  display: block;
+}
