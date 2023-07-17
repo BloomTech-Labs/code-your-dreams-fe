@@ -1,11 +1,23 @@
 "use client"
 
+import { useEffect } from 'react'
 import { Button, Link } from "@mui/material"
 import styles from "./page.module.scss"
 import Image from "next/image"
-import { SignInBtn } from "../components/auth/AuthButtons";
+import { SignInBtn } from "../components/auth/AuthButtons"
+import { useSession } from "next-auth/react"
+import { redirect } from 'next/navigation'
 
 export default function Page() {
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session) {
+      redirect('/portal');
+    }
+  
+  }, [session])
+  
 
   return (
     <>
