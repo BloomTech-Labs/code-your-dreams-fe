@@ -2,6 +2,7 @@
 
 import styles from "./page.module.scss"
 import { SignOutBtn } from "@/components/auth/AuthButtons"
+import { Button } from "@mui/material"
 import { useSession } from "next-auth/react"
 
 export default function Page() {
@@ -15,7 +16,7 @@ export default function Page() {
         <p>Organization: Code Your Dreams</p>
         <p>Email address: {session ? session.user.email : ""}</p>
         {/* Check to see what is managed in Auth0 vs locally in-app */}
-        <button>Edit account</button>
+        <Button variant="outlined">Edit account</Button>
       </section>
       <section className="container">
         <p>Sign out from the app.</p>
