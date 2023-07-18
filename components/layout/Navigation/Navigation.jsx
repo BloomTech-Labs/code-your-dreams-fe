@@ -8,20 +8,18 @@ export default function Navigation() {
   return (
     <nav className={styles["site-nav"]}>
       <div className="container">
-        <IconButton href="/portal" color="primary">
-          <HomeIcon />
-        </IconButton>
-        {/* Courses are available to all users */}
-        <Button variant="text" href="/portal/courses">
-          Courses
-        </Button>
-        {/* Members are restricted to Org Admins */}
+        <span className="uppercase">Organization Name</span>
+        {/* "Members" are restricted to Org Admins and higher */}
         <Button variant="text" href="/portal/members">
           Members
         </Button>
-        {/* Organizations is restricted to super admins */}
+        {/* "Organizations" is restricted to super admins */}
         <Button variant="text" href="/portal/chapters">
           Chapters
+        </Button>
+        {/* "Global Settings" is restricted to super admins */}
+        <Button variant="text" href="#">
+          Global Settings
         </Button>
       </div>
     </nav>

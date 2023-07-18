@@ -2,11 +2,18 @@
 @import "styles/media";
 
 nav.site-nav {
-  display: flex;
-  flex-direction: row;
-  gap: 2vw;
-  @include mobile-wide { gap: 1rem; }
-  @include desktop-s { gap: 1.6rem; }
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2vw;
+    @include mobile-wide { gap: 1rem; }
+    @include desktop-s { gap: 1.6rem; }
+
+    span {
+      font-size: 1rem;
+    }
+  }
 
   margin-top: $header-height;
   @include desktop-xl { margin-top: $header-height-xl; }
