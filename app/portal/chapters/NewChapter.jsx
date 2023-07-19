@@ -12,22 +12,10 @@ export default function NewChapter() {
       </div>
       <TextField
         required
-        id="filled-basic"
-        label="Organization Name"
+        id="chapter-name"
+        label="Chapter Name"
         variant="outlined"
-        helperText="Primary contact's name"
-      />
-      <TextField
-        required
-        id="outlined-helperText"
-        label="Primary Contact"
-        helperText="Primary contact's name"
-      />
-      <TextField
-        required
-        id="outlined-helperText"
-        label="Email Address"
-        helperText="Primary contact's email address"
+        helperText="Enter the chapter name"
       />
     </div>
   )

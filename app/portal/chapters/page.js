@@ -11,7 +11,6 @@ import NewChapter from "./NewChapter"
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "chapterName", headerName: "Chapter name", width: 250 },
-  { field: "primaryContact", headerName: "Primary contact", width: 200 },
   {
     field: "members",
     headerName: "Members",
@@ -24,25 +23,21 @@ const rows = [
   {
     id: 1,
     chapterName: "Code Your Dreams",
-    primaryContact: "Brianne Caplan",
     members: 25,
   },
   {
     id: 2,
     chapterName: "Coding Bootcamp",
-    primaryContact: "John Schmoe",
     members: 42,
   },
   {
     id: 3,
     chapterName: "Community Center",
-    primaryContact: "Jane Doe",
     members: 36,
   },
   {
     id: 4,
     chapterName: "Neighborhood Public School",
-    primaryContact: "Tom Thumb",
     members: 45,
   },
 ]
@@ -53,9 +48,8 @@ export default function Page() {
   const handleClose = () => setOpen(false)
 
   return (
-    <main className={styles.organizations}>
+    <main className={styles.chapters}>
       <section className="container">
-        {/* This page is restricted to only Super Admins */}
         <div className="header-row">
           <h1>Chapters</h1>
           <div className="add-button">
