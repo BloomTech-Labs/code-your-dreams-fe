@@ -1,10 +1,13 @@
 "use client"
 
-import * as React from "react"
+import React, { useState } from "react"
 import styles from "./page.module.scss"
 import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
+import Modal from "@/components/Modal/Modal"
+import NewCourse from "./NewMember"
+import NewMember from "./NewMember"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -32,6 +35,10 @@ const rows = [
 ]
 
 export default function Page() {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     <main className={styles.main}>
       <section className="container">
@@ -41,6 +48,7 @@ export default function Page() {
             <IconButton
               color="primary"
               size="large"
+              onClick={() => handleOpen()}
               aria-label="add"
               className="compact-button"
             >
@@ -49,6 +57,7 @@ export default function Page() {
             <Button
               variant="contained"
               startIcon={<AddIcon />}
+              onClick={() => handleOpen()}
               aria-label="add"
               className="full-button"
             >
@@ -69,6 +78,10 @@ export default function Page() {
           />
         </div>
       </section>
+
+      <Modal title="Add a New Member" open={open} handleClose={handleClose}>
+        <NewMember />
+      </Modal>
     </main>
   )
 }

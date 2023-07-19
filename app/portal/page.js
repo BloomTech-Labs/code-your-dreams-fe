@@ -1,15 +1,18 @@
 "use client"
 
-import * as React from "react"
+import React, { useState } from "react"
 import styles from "./page.module.scss"
 import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Link from "next/link"
+import Modal from "@/components/Modal/Modal"
+import NewCourse from "./NewCourse"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "courseName", headerName: "Course name", width: 250 },
+  { field: "courseDescription", headerName: "Description", width: 350 },
   {
     field: "files",
     headerName: "Files",
@@ -22,16 +25,24 @@ const rows = [
   {
     id: 1,
     courseName: "Python",
+    courseDescription:
+      "This is a long course description that should get cutoff from the demo page because it is so long-winded and excessive, and no it is not about phyton snakes.",
     files: 25,
   },
   {
     id: 2,
     courseName: "App Inventor",
+    courseDescription:
+      "Helping new coders explore the creation of apps in an Android environment.",
     files: 42,
   },
 ]
 
 export default function Page() {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     // This is the landing (courses) page for users that are logged in
     <main>
@@ -43,6 +54,7 @@ export default function Page() {
             <IconButton
               color="primary"
               size="large"
+              onClick={() => handleOpen()}
               aria-label="add"
               className="compact-button"
             >
@@ -51,6 +63,7 @@ export default function Page() {
             <Button
               variant="contained"
               startIcon={<AddIcon />}
+              onClick={() => handleOpen()}
               aria-label="add"
               className="full-button"
             >
@@ -84,6 +97,10 @@ export default function Page() {
           </Link>
         </aside>
       </section>
+
+      <Modal title="Create a New Course" open={open} handleClose={handleClose}>
+        <NewCourse />
+      </Modal>
     </main>
   )
 }
