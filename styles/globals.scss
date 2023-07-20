@@ -4,3 +4,13 @@
 @import "fluid_fonts";
 @import "core_layout";
 @import "app_base";
+
+.TODO {
+  // This class should be removed once we are done with all "TODO" tasks
+  // and implement and delete all instances in the app.
+  margin: 1rem;
+  padding: 1rem;
+  background-color: yellow;
+  color: red;
+  border: 1px solid red;
+}

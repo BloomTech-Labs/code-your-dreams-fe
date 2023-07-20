@@ -44,13 +44,12 @@ export default function Page() {
   const handleClose = () => setOpen(false)
 
   return (
-    // This is the landing (courses) page for users that are logged in
     <main>
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
           <h1>Courses</h1>
           <div className="add-button">
-            {/* Only for CYD super admins */}
+            {/* TODO: make button visible only to CYD super admins */}
             <IconButton
               color="primary"
               size="large"
@@ -89,7 +88,7 @@ export default function Page() {
           </div>
         </div>
 
-        <aside>
+        <aside className="TODO">
           <br />
           <Link href="/portal/courses">
             Temporary link to course detail page template&mdash;links to actual
