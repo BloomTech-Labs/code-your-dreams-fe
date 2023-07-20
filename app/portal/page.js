@@ -45,6 +45,11 @@ export default function Page() {
 
   return (
     <main>
+      <aside className="TODO">
+        We need to add in a page loading component as the forwarding process
+        makes the page hang for a moment with only the footer visible.
+      </aside>
+
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
           <h1>Courses</h1>
@@ -73,6 +78,7 @@ export default function Page() {
 
         <div className={styles.table}>
           <div className={styles["table-container"]}>
+            {/* TODO: Clicking on a course name should open up a detail page */}
             <div style={{ height: 500, width: "100%" }}>
               <DataGrid
                 rows={rows}
@@ -89,7 +95,6 @@ export default function Page() {
         </div>
 
         <aside className="TODO">
-          <br />
           <Link href="/portal/courses">
             Temporary link to course detail page template&mdash;links to actual
             course detail pages will be in the course name in the table above.
