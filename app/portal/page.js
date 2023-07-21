@@ -46,8 +46,18 @@ export default function Page() {
   return (
     <main>
       <aside className="TODO">
-        We need to add in a page loading component as the forwarding process
-        makes the page hang for a moment with only the footer visible.
+        TODO:
+        <ul>
+          <li>
+            Add in a page loading component as the forwarding process makes the
+            page hang for a moment with only the footer visible.
+          </li>
+          <li>
+            For the lack of a more appropriate place--forward traffic from
+            "/portal/courses" back to this page ("/portal")--dynamic course
+            detail pages will not be forwarded, "/portal/courses/[course-name]"
+          </li>
+        </ul>
       </aside>
 
       <section className={`container ${styles.courses}`}>

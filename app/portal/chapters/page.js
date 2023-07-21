@@ -49,6 +49,13 @@ export default function Page() {
 
   return (
     <main className={styles.chapters}>
+      <aside className="TODO">
+        TODO:
+        <ul>
+          <li>Link to detail page</li>
+        </ul>
+      </aside>
+
       <section className="container">
         <div className="header-row">
           <h1>Chapters</h1>

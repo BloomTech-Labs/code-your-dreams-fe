@@ -39,8 +39,8 @@ export default function Page() {
       </aside>
 
       <section className="container">
-        <h1>App Settings</h1>
-        <h2>Super admin users</h2>
+        <h1>Admin Settings</h1>
+        <h2>Super users</h2>
         {/* TODO: We'll need to enable user editing via Auth0 as well as local editing.
             Locally we'd need to managed the admin flag, if anything else. */}
         <div style={{ height: 500, width: "100%" }}>

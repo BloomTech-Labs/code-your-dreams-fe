@@ -18,7 +18,7 @@ export default function Navigation() {
         </Button>
         {/* "Global Settings" is restricted to super admins */}
         <Button variant="text" href="/portal/admin">
-          Global Settings
+          Admin
         </Button>
       </div>
     </nav>
