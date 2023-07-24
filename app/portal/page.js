@@ -62,7 +62,6 @@ export default function Page() {
             the text in the "Course name" table cell.
           </li>
           <li>The modal needs to be connected to create a new instance.</li>
-          <li>Cleanup the modal to resize it to a minimal size on screen.</li>
         </ul>
       </aside>
 
