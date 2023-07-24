@@ -15,13 +15,13 @@ const Modal = ({ children, title, open, handleClose }) => {
       <Box>
         <form className={styles.modal}>
           <div className={styles["modal-header"]}>
-            <h2>{title}</h2>
+            <div className="h3">{title}</div>
             <IconButton onClick={handleClose}>
               <CloseIcon />
             </IconButton>
           </div>
 
-          {children}
+          <div className={styles["modal-body"]}>{children}</div>
 
           <div className={styles["modal-footer"]}>
             <Button variant="contained" onClick={handleClose}>

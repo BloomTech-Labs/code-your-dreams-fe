@@ -5,7 +5,9 @@ import {
   Autocomplete,
   FormGroup,
   FormControlLabel,
+  FormHelperText,
   Checkbox,
+  Card,
 } from "@mui/material"
 import styles from "./NewMember.module.scss"
 
@@ -17,7 +19,7 @@ const chapterList = [
 
 export default function NewMember() {
   return (
-    <div className={styles["new-member"]}>
+    <>
       <div className="italic">Fill out the form to add a new member.</div>
       <TextField
         required
@@ -40,15 +42,24 @@ export default function NewMember() {
         renderInput={(params) => (
           <TextField
             {...params}
+            required
             label="Chapter"
             variant="outlined"
             helperText="Select the chapter the member is a part of"
           />
         )}
       />
-      <FormGroup>
-        <FormControlLabel control={<Checkbox />} label="Make a Chapter Admin" />
-      </FormGroup>
-    </div>
+      <Card variant="outlined" className={styles["form-group"]}>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox />}
+            label="Make a Chapter Admin"
+          />
+        </FormGroup>
+        <FormHelperText>
+          If selected, this member will be able to add new chapter members
+        </FormHelperText>
+      </Card>
+    </>
   )
 }

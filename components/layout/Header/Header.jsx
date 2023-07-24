@@ -2,19 +2,34 @@
 
 import SiteLogo from "../SiteLogo/SiteLogo"
 import styles from "./Header.module.scss"
-import { Button } from "@mui/material"
+import { Button, IconButton } from "@mui/material"
 import PersonIcon from "@mui/icons-material/Person"
 
 export default function Header() {
   return (
     <header className={styles["site-header"]}>
       <div className={`container ${styles["header-container"]}`}>
-        <SiteLogo />
+        <div className={styles["left-side"]}>
+          <SiteLogo />
+          {/* When a user is logged in, display their chapter name */}
+          <div className="h4">Chapter Name</div>
+        </div>
         <nav>
+          <IconButton
+            href="/portal/account"
+            color="primary"
+            size="large"
+            aria-label="account"
+            className="compact-button"
+          >
+            <PersonIcon />
+          </IconButton>
           <Button
+            href="/portal/account"
             variant="text"
             endIcon={<PersonIcon />}
-            href="/portal/account"
+            aria-label="account"
+            className="full-button"
           >
             Account
           </Button>

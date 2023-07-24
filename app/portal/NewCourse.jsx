@@ -5,7 +5,7 @@ import styles from "./NewCourse.module.scss"
 
 export default function NewCourse() {
   return (
-    <div className={styles["new-course"]}>
+    <>
       <div className="italic">Fill out the form to create a new course.</div>
       <TextField
         required
@@ -20,6 +20,6 @@ export default function NewCourse() {
         label="Description"
         helperText="A short description about the course"
       />
-    </div>
+    </>
   )
 }

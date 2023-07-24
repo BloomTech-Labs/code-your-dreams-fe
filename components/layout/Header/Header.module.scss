@@ -26,6 +26,15 @@ header.site-header {
     justify-content: space-between;
     align-items: center;
 
+    .left-side {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 1rem;
+    }
+
     nav {
       display: flex;
       flex-direction: row;
