@@ -5,7 +5,9 @@ import {
   Autocomplete,
   FormGroup,
   FormControlLabel,
+  FormHelperText,
   Checkbox,
+  Card,
 } from "@mui/material"
 import styles from "./NewMember.module.scss"
 
@@ -46,9 +48,17 @@ export default function NewMember() {
           />
         )}
       />
-      <FormGroup>
-        <FormControlLabel control={<Checkbox />} label="Make a Chapter Admin" />
-      </FormGroup>
+      <Card variant="outlined" className={styles["form-group"]}>
+        <FormGroup>
+          <FormControlLabel
+            control={<Checkbox />}
+            label="Make a Chapter Admin"
+          />
+        </FormGroup>
+        <FormHelperText>
+          If selected, this member will be able to add new chapter members
+        </FormHelperText>
+      </Card>
     </>
   )
 }

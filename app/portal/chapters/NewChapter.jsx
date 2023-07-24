@@ -6,10 +6,7 @@ import styles from "./NewChapter.module.scss"
 export default function NewChapter() {
   return (
     <>
-      <div className="italic">
-        Fill out the form to create a new chapter and designate a primary
-        contact.
-      </div>
+      <div className="italic">Fill out the form to create a new chapter.</div>
       <TextField
         required
         id="chapter-name"

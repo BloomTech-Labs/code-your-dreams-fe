@@ -86,6 +86,15 @@ header {
     align-items: center;
     gap: 1rem;
   }
+
+  .compact-button {
+    display: flex;
+    @include desktop-s { display: none; }
+  }
+  .full-button {
+    display: none;
+    @include desktop-s { display: flex; }
+  }
 }
 
 // Portal Styles
@@ -98,13 +107,13 @@ header {
   margin-bottom: 1.5rem;
 
   h1 { margin-bottom: 0; }
-}
-
-.compact-button {
-  display: flex;
-  @include desktop-s { display: none; }
-}
-.full-button {
-  display: none;
-  @include desktop-s { display: flex; }
+  
+  .compact-button {
+    display: flex;
+    @include desktop-s { display: none; }
+  }
+  .full-button {
+    display: none;
+    @include desktop-s { display: flex; }
+  }
 }
