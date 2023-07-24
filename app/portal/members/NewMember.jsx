@@ -17,7 +17,7 @@ const chapterList = [
 
 export default function NewMember() {
   return (
-    <div className={styles["new-member"]}>
+    <>
       <div className="italic">Fill out the form to add a new member.</div>
       <TextField
         required
@@ -49,6 +49,6 @@ export default function NewMember() {
       <FormGroup>
         <FormControlLabel control={<Checkbox />} label="Make a Chapter Admin" />
       </FormGroup>
-    </div>
+    </>
   )
 }

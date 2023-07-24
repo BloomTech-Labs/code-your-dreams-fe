@@ -5,7 +5,7 @@ import styles from "./NewChapter.module.scss"
 
 export default function NewChapter() {
   return (
-    <div className={styles["new-chapter"]}>
+    <>
       <div className="italic">
         Fill out the form to create a new chapter and designate a primary
         contact.
@@ -17,6 +17,6 @@ export default function NewChapter() {
         variant="outlined"
         helperText="Enter the chapter name"
       />
-    </div>
+    </>
   )
 }
