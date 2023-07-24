@@ -45,6 +45,7 @@ export default function Page() {
         <div className="header-row">
           <h1>Members</h1>
           <div className="add-button">
+            {/* TODO: This button should only be visible to super admin users */}
             <IconButton
               color="primary"
               size="large"
@@ -66,6 +67,8 @@ export default function Page() {
           </div>
         </div>
         <div style={{ height: 500, width: "100%" }}>
+          {/* TODO: We'll have to figure out how to update a user in Auth0 and if there are any local changes we manage within the app */}
+          {/* TODO: When we have an edit here, we'll have to figure out how we handle the change--maybe via pop up (if changes are local)? */}
           <DataGrid
             rows={rows}
             columns={columns}

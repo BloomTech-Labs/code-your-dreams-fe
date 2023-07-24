@@ -11,6 +11,16 @@ export default function Page() {
 
   return (
     <main className={styles.account}>
+      <aside className="TODO">
+        TODO:
+        <ul>
+          <li>
+            Add functionality to Auth0 here and connect the "Edit Account"
+            button with the service.
+          </li>
+          <li>Connect member chapter with "Organization" from database.</li>
+        </ul>
+      </aside>
       <section className="container">
         <h1>Account</h1>
         <p>Organization: Code Your Dreams</p>

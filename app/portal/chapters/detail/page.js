@@ -9,6 +9,13 @@ export default function Page() {
 
   return (
     <main className={styles.detail}>
+      <aside className="TODO">
+        TODO:
+        <ul>
+          <li>Finish the layout of this page</li>
+        </ul>
+      </aside>
+
       <section className="container">
         <div className="header-row">
           <h1>Chapter Name</h1>

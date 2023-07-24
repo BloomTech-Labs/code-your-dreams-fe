@@ -49,6 +49,13 @@ export default function Page() {
 
   return (
     <main className={styles.chapters}>
+      <aside className="TODO">
+        TODO:
+        <ul>
+          <li>Link text in "Chapter name" table cell to detail page.</li>
+        </ul>
+      </aside>
+
       <section className="container">
         <div className="header-row">
           <h1>Chapters</h1>
@@ -72,6 +79,7 @@ export default function Page() {
 
         <div className={styles.table}>
           <div className={styles["table-container"]}>
+            {/* TODO: Clicking on a chapter name should open up a detail page */}
             <div style={{ height: 500, width: "100%" }}>
               <DataGrid
                 rows={rows}

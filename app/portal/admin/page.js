@@ -29,9 +29,20 @@ const rows = [
 export default function Page() {
   return (
     <main className={styles.account}>
+      <aside className="TODO">
+        TODO: (This page still needs some love and thought)
+        <ul>
+          <li>Implement Auth0 integration for admin users.</li>
+          <li>Implement local changes for admin users, e.g., admin flag.</li>
+          <li>Design the "Materials types" admin section.</li>
+        </ul>
+      </aside>
+
       <section className="container">
-        <h1>App Settings</h1>
-        <h2>Super admin users</h2>
+        <h1>Admin Settings</h1>
+        <h2>Super users</h2>
+        {/* TODO: We'll need to enable user editing via Auth0 as well as local editing.
+            Locally we'd need to managed the admin flag, if anything else. */}
         <div style={{ height: 500, width: "100%" }}>
           <DataGrid
             rows={rows}
@@ -46,6 +57,9 @@ export default function Page() {
         </div>
       </section>
       <section className="container">
+        {/* TODO: This is where we will put our materials types definitions.
+            We'll need to think through logic on when we allow removal of a definition.
+            E.g., if there are any instances linked to that definition, you cannot delete, etc. */}
         <h2>Materials types</h2>
         <ul>
           <li>Document</li>
