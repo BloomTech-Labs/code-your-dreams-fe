@@ -57,6 +57,12 @@ export default function Page() {
             "/portal/courses" back to this page ("/portal")--dynamic course
             detail pages will not be forwarded, "/portal/courses/[course-name]"
           </li>
+          <li>
+            When the database is connected, the course page should be linked to
+            the text in the "Course name" table cell.
+          </li>
+          <li>The modal needs to be connected to create a new instance.</li>
+          <li>Cleanup the modal to resize it to a minimal size on screen.</li>
         </ul>
       </aside>
 

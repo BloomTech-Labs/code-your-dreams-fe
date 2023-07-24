@@ -52,7 +52,7 @@ export default function Page() {
       <aside className="TODO">
         TODO:
         <ul>
-          <li>Link to detail page</li>
+          <li>Link text in "Chapter name" table cell to detail page.</li>
         </ul>
       </aside>
 
