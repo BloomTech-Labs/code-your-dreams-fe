@@ -42,6 +42,7 @@ export default function NewMember() {
         renderInput={(params) => (
           <TextField
             {...params}
+            required
             label="Chapter"
             variant="outlined"
             helperText="Select the chapter the member is a part of"
