@@ -7,7 +7,9 @@ export default function Navigation() {
   return (
     <nav className={styles["site-nav"]}>
       <div className="container">
-        <span className="italic">Organization Name</span>
+        <Button variant="text" href="/portal">
+          Courses
+        </Button>
         {/* "Members" are restricted to Org Admins and higher */}
         <Button variant="text" href="/portal/members">
           Members
