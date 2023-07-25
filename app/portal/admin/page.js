@@ -16,7 +16,8 @@ import {
 import AddIcon from "@mui/icons-material/Add"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import Modal from "@/components/Modal/Modal"
-import NewMaterialType from "./NewMaterialType"
+// import NewMaterialType from "./NewMaterialType"
+import NewSuperUser from "./NewSuperUser"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -64,9 +65,9 @@ export default function Page() {
         <ul>
           <li>Implement Auth0 integration for admin users.</li>
           <li>Implement local changes for admin users, e.g., admin flag.</li>
+          <li>Add support for multiple modals on same page.</li>
         </ul>
       </aside>
-
       <section className="container">
         <h1>Admin Settings</h1>
         <div className="header-row">
@@ -75,7 +76,7 @@ export default function Page() {
             <IconButton
               color="primary"
               size="large"
-              // onClick={() => handleOpen()}
+              onClick={() => handleOpen()}
               aria-label="add a super user"
               className="compact-button"
             >
@@ -84,7 +85,7 @@ export default function Page() {
             <Button
               variant="outlined"
               startIcon={<PersonAddIcon />}
-              // onClick={() => handleOpen()}
+              onClick={() => handleOpen()}
               aria-label="add a super user"
               className="full-button"
             >
@@ -171,13 +172,17 @@ export default function Page() {
           </Table>
         </TableContainer>
       </section>
-
+      {/* TODO: We need to add support for multiple modal options in the same page.
+      One would show the "NewMaterialType" component, while the other shows the
+      "NewSuperUser" component. Each will need to have its own title field prop
+      to send to the component. */}
       <Modal
         title="Create a New Materials Type"
         open={open}
         handleClose={handleClose}
       >
-        <NewMaterialType />
+        {/* <NewMaterialType /> */}
+        <NewSuperUser />
       </Modal>
     </main>
   )

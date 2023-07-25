@@ -1,7 +1,6 @@
 "use client"
 
 import { TextField } from "@mui/material"
-// import styles from "./NewMaterialType.module.scss"
 
 export default function NewMaterialType() {
   return (
