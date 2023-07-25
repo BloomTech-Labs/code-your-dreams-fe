@@ -1,6 +1,12 @@
 @import "styles/variables";
 @import "styles/media";
 
-.account {
+.admin {
   display: block;
+
+  .materials {
+    table {
+      width: auto;
+    }
+  }
 }
