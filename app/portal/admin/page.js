@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import React, { useState } from "react"
 import styles from "./page.module.scss"
 import { DataGrid } from "@mui/x-data-grid"
 import {
@@ -15,6 +15,8 @@ import {
 } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
+import Modal from "@/components/Modal/Modal"
+import NewMaterialType from "./NewMaterialType"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -51,10 +53,14 @@ const tableRows = [
 ]
 
 export default function Page() {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     <main className={styles.admin}>
       <aside className="TODO">
-        TODO: (This page still needs some love and thought)
+        TODO:
         <ul>
           <li>Implement Auth0 integration for admin users.</li>
           <li>Implement local changes for admin users, e.g., admin flag.</li>
@@ -118,7 +124,7 @@ export default function Page() {
               color="primary"
               size="large"
               onClick={() => handleOpen()}
-              aria-label="add a material type"
+              aria-label="add a materials type"
               className="compact-button"
             >
               <AddIcon />
@@ -127,10 +133,10 @@ export default function Page() {
               variant="outlined"
               startIcon={<AddIcon />}
               onClick={() => handleOpen()}
-              aria-label="add a material type"
+              aria-label="add a materials type"
               className="full-button"
             >
-              Add a material type
+              Add a materials type
             </Button>
           </div>
         </div>
@@ -145,7 +151,7 @@ export default function Page() {
               <TableRow>
                 <TableCell>Types</TableCell>
                 <TableCell align="right">Count</TableCell>
-                <TableCell>Edit</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -165,6 +171,14 @@ export default function Page() {
           </Table>
         </TableContainer>
       </section>
+
+      <Modal
+        title="Create a New Materials Type"
+        open={open}
+        handleClose={handleClose}
+      >
+        <NewMaterialType />
+      </Modal>
     </main>
   )
 }
