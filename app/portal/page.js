@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styles from "./page.module.scss"
 import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
@@ -8,6 +8,8 @@ import { DataGrid } from "@mui/x-data-grid"
 import Link from "next/link"
 import Modal from "@/components/Modal/Modal"
 import NewCourse from "./NewCourse"
+import AxiosWithAuth from '@/utils/axiosWithAuth';
+import { useSession } from "next-auth/react"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -42,6 +44,20 @@ export default function Page() {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+  // Example implementation for AxiosWithAuth, TODO: remove later.
+  const { data: session } = useSession();
+  session && console.log(session);
+  const axiosInstance = AxiosWithAuth();
+
+  useEffect(() => {
+    axiosInstance.get('http://localhost:8080/protected-route')
+    .then(res => {
+      console.log(res);
+    })
+    .catch(err => {
+      console.error(err.message);
+    })
+  }, [session])
 
   return (
     <main>
