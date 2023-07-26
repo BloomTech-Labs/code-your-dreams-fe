@@ -56,7 +56,7 @@ export default function Page() {
               <AddIcon />
             </IconButton>
             <Button
-              variant="contained"
+              variant="outlined"
               startIcon={<AddIcon />}
               onClick={() => handleOpen()}
               aria-label="add"

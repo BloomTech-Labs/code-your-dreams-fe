@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import styles from "./page.module.scss"
-import { Button } from "@mui/material"
+import { Button, IconButton } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import { DataGrid } from "@mui/x-data-grid"
 
@@ -52,8 +52,17 @@ export default function Page() {
           <h1>Course Name</h1>
           <div className="add-button">
             {/* TODO: This button should only be visible to super admin users */}
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpen()}
+              aria-label="add"
+              className="compact-button"
+            >
+              <EditIcon />
+            </IconButton>
             <Button
-              variant="contained"
+              variant="outlined"
               startIcon={<EditIcon />}
               aria-label="add"
               className="full-button"
