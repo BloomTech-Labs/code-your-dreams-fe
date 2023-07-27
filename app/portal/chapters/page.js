@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import styles from "./page.module.scss"
-import Button from "@mui/material/Button"
+import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
@@ -60,8 +60,18 @@ export default function Page() {
         <div className="header-row">
           <h1>Chapters</h1>
           <div className="add-button">
+            {/* TODO: This button should only be visible to super admin users */}
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpen()}
+              aria-label="add"
+              className="compact-button"
+            >
+              <AddIcon />
+            </IconButton>
             <Button
-              variant="contained"
+              variant="outlined"
               startIcon={<AddIcon />}
               onClick={() => handleOpen()}
               aria-label="add"

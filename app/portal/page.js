@@ -8,7 +8,7 @@ import { DataGrid } from "@mui/x-data-grid"
 import Link from "next/link"
 import Modal from "@/components/Modal/Modal"
 import NewCourse from "./NewCourse"
-import AxiosWithAuth from '@/utils/axiosWithAuth';
+import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useSession } from "next-auth/react"
 
 const columns = [
@@ -45,18 +45,19 @@ export default function Page() {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
   // Example implementation for AxiosWithAuth, TODO: remove later.
-  const { data: session } = useSession();
-  session && console.log(session);
-  const axiosInstance = AxiosWithAuth();
+  const { data: session } = useSession()
+  session && console.log(session)
+  const axiosInstance = AxiosWithAuth()
 
   useEffect(() => {
-    axiosInstance.get('http://localhost:8080/protected-route')
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.error(err.message);
-    })
+    axiosInstance
+      .get("http://localhost:8080/protected-route")
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.error(err.message)
+      })
   }, [session])
 
   return (
@@ -96,7 +97,7 @@ export default function Page() {
               <AddIcon />
             </IconButton>
             <Button
-              variant="contained"
+              variant="outlined"
               startIcon={<AddIcon />}
               onClick={() => handleOpen()}
               aria-label="add"
