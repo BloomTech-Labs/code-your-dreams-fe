@@ -5,6 +5,8 @@ nav.site-nav {
   div {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    @include desktop-s { justify-content: flex-start; }
     align-items: center;
     gap: 2vw;
     @include mobile-wide { gap: 1rem; }

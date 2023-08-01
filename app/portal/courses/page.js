@@ -7,9 +7,9 @@ import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Link from "next/link"
 import Modal from "@/components/Modal/Modal"
-import NewCourse from "./NewCourse"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useSession } from "next-auth/react"
+import NewCourse from "./_components/NewCourse"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
