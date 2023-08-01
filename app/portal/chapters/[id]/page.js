@@ -21,6 +21,7 @@ export default function Page() {
       </aside>
 
       <BreadcrumbRow>
+        {/* TODO: Make this menu visible only to CYD users */}
         <Link underline="hover" color="inherit" href="/portal/chapters">
           Chapters
         </Link>
@@ -29,7 +30,8 @@ export default function Page() {
 
       <section className="container">
         <div className="header-row">
-          <h1>Chapter Details</h1>
+          {/* TODO: Switch title based on user (CYD vs chapter user) */}
+          <h1>[Chapter Details] or [My Chapter]</h1>
           <div>
             {/* TODO: This button should only be visible to super admin users */}
             <IconButton
