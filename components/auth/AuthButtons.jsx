@@ -1,5 +1,6 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import { Button } from "@mui/material"
+import { useRouter } from "next/navigation"
 
 const SignInBtn = () => {
   const { data: session } = useSession()
@@ -9,7 +10,8 @@ const SignInBtn = () => {
   return (
     <Button
       variant="contained"
-      onClick={() => signIn(undefined, { callbackUrl: "/portal" })}
+      onClick={() => signIn('auth0', { callbackUrl: "/portal", prompt: "login" })}
+      // onClick={() => signIn({ callbackUrl: "/portal/courses" })}
     >
       SIGN-IN TO APP
     </Button>
@@ -31,4 +33,21 @@ const SignOutBtn = () => {
   )
 }
 
-export { SignInBtn, SignOutBtn }
+const SignOutButton = () => {
+  const router = useRouter();
+
+  function signOutHandler() {
+    router.push('auth/federated-sign-out');
+  }
+
+  return (
+    <Button
+      variant="outlined"
+      onClick={signOutHandler}
+    >
+      Sign Out
+    </Button>
+  )
+}
+
+export { SignInBtn, SignOutBtn, SignOutButton }
