@@ -126,6 +126,10 @@ export default function Page() {
           </div>
         </div>
 
+        <p className="italic">
+          Contact Code Your Dreams for access to more courses.
+        </p>
+
         <aside className="TODO">
           <Link href="/portal/courses/detail">
             Temporary link to course detail page template&mdash;links to actual

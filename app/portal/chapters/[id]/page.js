@@ -14,10 +14,37 @@ import {
   TableHead,
   TableRow,
 } from "@mui/material"
+import { DataGrid } from "@mui/x-data-grid"
 import EditIcon from "@mui/icons-material/Edit"
+import AddIcon from "@mui/icons-material/Add"
 import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "../_components/NewChapter"
+
+const columns = [
+  { field: "id", headerName: "ID", width: 100 },
+  { field: "memberName", headerName: "Name", width: 250 },
+  { field: "emailAddress", headerName: "Email", width: 300 },
+  { field: "adminFlag", headerName: "Admin?", width: 120 },
+  { field: "delete", headerName: "Delete?", width: 120 },
+]
+
+const rows = [
+  {
+    id: 1,
+    memberName: "Brianne Caplan",
+    emailAddress: "brianne@codeyourdreams.org",
+    adminFlag: "Yes",
+    delete: "delete",
+  },
+  {
+    id: 2,
+    memberName: "John Dodson",
+    emailAddress: "john.dodson@bloomtech.com",
+    adminFlag: "",
+    delete: "delete",
+  },
+]
 
 function createData(name, remove) {
   return { name, remove }
@@ -54,8 +81,7 @@ export default function Page() {
 
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
-          {/* TODO: Switch title based on user (CYD vs chapter user) */}
-          <h1>[Chapter Details] or [My Chapter]</h1>
+          <h1>[Chapter_Name]</h1>
           <div>
             {/* TODO: This button should only be visible to super admin users */}
             <IconButton
@@ -88,16 +114,16 @@ export default function Page() {
               aria-label="edit"
               className="compact-button"
             >
-              <EditIcon />
+              <AddIcon />
             </IconButton>
             <Button
               variant="outlined"
-              startIcon={<EditIcon />}
+              startIcon={<AddIcon />}
               onClick={() => handleOpen()}
               aria-label="edit"
               className="full-button"
             >
-              Edit course access
+              Add course access
             </Button>
           </div>
         </div>
@@ -129,15 +155,49 @@ export default function Page() {
         <div className={styles["chapter-notice"]}>
           <Link underline="hover" href="/portal/courses">
             View the Courses page to access course materials.
-          </Link>{" "}
-          <div className="italic">
-            Contact Code Your Dreams for access to more courses.
-          </div>
+          </Link>
         </div>
       </section>
       <section className="container">
-        <h2>Members</h2>
-        <div>List of members</div>
+        <div className="header-row">
+          <h2>Members</h2>
+          <div className="add-button">
+            {/* TODO: This button should only be visible to super admin users */}
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpen()}
+              aria-label="add"
+              className="compact-button"
+            >
+              <AddIcon />
+            </IconButton>
+            <Button
+              variant="outlined"
+              startIcon={<AddIcon />}
+              onClick={() => handleOpen()}
+              aria-label="add"
+              className="full-button"
+            >
+              Add a new member
+            </Button>
+          </div>
+        </div>
+        <div style={{ height: 500, width: "100%" }}>
+          {/* TODO: This is the same table as the member view. Should we componentize this? */}
+          {/* TODO: We'll have to figure out how to update a user in Auth0 and if there are any local changes we manage within the app */}
+          {/* TODO: When we have an edit here, we'll have to figure out how we handle the change--maybe via pop up (if changes are local)? */}
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+          />
+        </div>
       </section>
 
       <Modal title="Create a New Chapter" open={open} handleClose={handleClose}>

@@ -55,7 +55,6 @@ export default function Page() {
         <ul>
           <li>Link text in "Chapter name" table cell to detail page.</li>
           <li>Limit this page only to CYD upser users/admins.</li>
-          <li>For all other users, forward users to their linked chapter.</li>
         </ul>
       </aside>
 
@@ -110,7 +109,7 @@ export default function Page() {
       </section>
 
       <aside className="TODO">
-        <Link href="/portal/chapters/bloomtech">
+        <Link href="/portal/chapters/chapter-name">
           Temporary link to chapter detail page template&mdash;links to actual
           course detail pages will be in the course name in the table above.
         </Link>
