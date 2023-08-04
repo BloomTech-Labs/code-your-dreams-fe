@@ -1,0 +1,16 @@
+@import "styles/variables";
+@import "styles/media";
+
+nav.breadcrumbs {
+  margin: 0 auto;
+  width: 100%;
+  max-width: $content-width;
+
+  padding: 1rem $site-padding;
+  @include desktop-xl {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  li { margin-bottom: 0; }
+}

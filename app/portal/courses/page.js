@@ -7,9 +7,9 @@ import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Link from "next/link"
 import Modal from "@/components/Modal/Modal"
-import NewCourse from "./NewCourse"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useSession } from "next-auth/react"
+import NewCourse from "./_components/NewCourse"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -125,6 +125,10 @@ export default function Page() {
             </div>
           </div>
         </div>
+
+        <p className="italic">
+          Contact Code Your Dreams for access to more courses.
+        </p>
 
         <aside className="TODO">
           <Link href="/portal/courses/detail">

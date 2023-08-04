@@ -3,10 +3,11 @@
 import React, { useState } from "react"
 import styles from "./page.module.scss"
 import { Button, IconButton } from "@mui/material"
+import Link from "next/link"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
-import NewChapter from "./NewChapter"
+import NewChapter from "./_components/NewChapter"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -53,6 +54,7 @@ export default function Page() {
         TODO:
         <ul>
           <li>Link text in "Chapter name" table cell to detail page.</li>
+          <li>Limit this page only to CYD upser users/admins.</li>
         </ul>
       </aside>
 
@@ -105,6 +107,13 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      <aside className="TODO">
+        <Link href="/portal/chapters/chapter-name">
+          Temporary link to chapter detail page template&mdash;links to actual
+          course detail pages will be in the course name in the table above.
+        </Link>
+      </aside>
 
       <Modal title="Create a New Chapter" open={open} handleClose={handleClose}>
         <NewChapter />

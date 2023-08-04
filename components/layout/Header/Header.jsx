@@ -11,8 +11,9 @@ export default function Header() {
       <div className={`container ${styles["header-container"]}`}>
         <div className={styles["left-side"]}>
           <SiteLogo />
-          {/* When a user is logged in, display their chapter name */}
-          <div className="h4">Chapter Name</div>
+          {/* TODO: If they are a CYD user, display "Code Your Dreams" */}
+          {/* TODO: When a user is logged in, display their chapter name */}
+          <div className="h4">[Code Your Dreams] or [Chapter Name]</div>
         </div>
         <nav>
           <IconButton

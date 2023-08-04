@@ -6,7 +6,6 @@ import { Button, IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
-import NewCourse from "./NewMember"
 import NewMember from "./NewMember"
 
 const columns = [
@@ -69,6 +68,7 @@ export default function Page() {
         <div style={{ height: 500, width: "100%" }}>
           {/* TODO: We'll have to figure out how to update a user in Auth0 and if there are any local changes we manage within the app */}
           {/* TODO: When we have an edit here, we'll have to figure out how we handle the change--maybe via pop up (if changes are local)? */}
+          {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
           <DataGrid
             rows={rows}
             columns={columns}

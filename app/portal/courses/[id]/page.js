@@ -1,10 +1,13 @@
 "use client"
 
-import * as React from "react"
+import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { Button, IconButton } from "@mui/material"
+import { Button, IconButton, Link, Typography } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import { DataGrid } from "@mui/x-data-grid"
+import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
+import Modal from "@/components/Modal/Modal"
+import NewCourse from "../_components/NewCourse"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -41,16 +44,27 @@ const rows = [
 ]
 
 export default function Page() {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     <main className={styles.courses}>
       <aside className="TODO">
-        This is a temporary page that should serve as a default dynamic-page
-        template for a course detail page.
+        This page will need to be updated to support course detail content.
       </aside>
+
+      <BreadcrumbRow>
+        <Link underline="hover" color="inherit" href="/portal/courses">
+          Courses
+        </Link>
+        <Typography color="text.primary">[Course_Name]</Typography>
+      </BreadcrumbRow>
+
       <section className="container">
         <div className="header-row">
           <h1>Course Name</h1>
-          <div className="add-button">
+          <div>
             {/* TODO: This button should only be visible to super admin users */}
             <IconButton
               color="primary"
@@ -64,6 +78,7 @@ export default function Page() {
             <Button
               variant="outlined"
               startIcon={<EditIcon />}
+              onClick={() => handleOpen()}
               aria-label="add"
               className="full-button"
             >
@@ -97,6 +112,12 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      <Modal title="Create a New Course" open={open} handleClose={handleClose}>
+        {/* TODO: Can we repurpose the "NewCourse" component for both creating a new and editing a course? */}
+        {/* TODO: Add to the component to allow the addition of materials to the course. */}
+        <NewCourse />
+      </Modal>
     </main>
   )
 }
