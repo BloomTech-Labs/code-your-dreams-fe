@@ -21,6 +21,13 @@ const columns = [
     type: "number",
     width: 150,
   },
+  {
+    field: "chapters",
+    headerName: "Chapters",
+    type: "number",
+    width: 150,
+  },
+  { field: "visibility", headerName: "Visibility", width: 150 },
 ]
 
 const rows = [
@@ -30,6 +37,8 @@ const rows = [
     courseDescription:
       "This is a long course description that should get cutoff from the demo page because it is so long-winded and excessive, and no it is not about phyton snakes.",
     files: 25,
+    chapters: 12,
+    visibility: "available",
   },
   {
     id: 2,
@@ -37,6 +46,16 @@ const rows = [
     courseDescription:
       "Helping new coders explore the creation of apps in an Android environment.",
     files: 42,
+    chapters: 14,
+    visibility: "available",
+  },
+  {
+    id: 3,
+    courseName: "Test Course",
+    courseDescription: "Testing setup for a new course",
+    files: 3,
+    chapters: 0,
+    visibility: "hidden",
   },
 ]
 
@@ -70,15 +89,13 @@ export default function Page() {
             page hang for a moment with only the footer visible.
           </li>
           <li>
-            For the lack of a more appropriate place--forward traffic from
-            "/portal/courses" back to this page ("/portal")--dynamic course
-            detail pages will not be forwarded, "/portal/courses/[course-name]"
-          </li>
-          <li>
             When the database is connected, the course page should be linked to
             the text in the "Course name" table cell.
           </li>
           <li>The modal needs to be connected to create a new instance.</li>
+          <li>
+            Hide the "chapters" and "visibility" columns from non-CYD users.
+          </li>
         </ul>
       </aside>
 

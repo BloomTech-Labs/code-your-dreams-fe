@@ -2,8 +2,18 @@
 
 import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { Button, IconButton, Link, Typography } from "@mui/material"
+import {
+  Button,
+  IconButton,
+  Link,
+  Typography,
+  Card,
+  FormGroup,
+  FormControlLabel,
+  Switch,
+} from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
+import DeleteIcon from "@mui/icons-material/Delete"
 import { DataGrid } from "@mui/x-data-grid"
 import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
 import Modal from "@/components/Modal/Modal"
@@ -64,6 +74,12 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Course Name</h1>
+          <FormGroup>
+            <FormControlLabel
+              control={<Switch defaultChecked />}
+              label="Visibile"
+            />
+          </FormGroup>
           <div>
             {/* TODO: This button should only be visible to super admin users */}
             <IconButton
@@ -111,6 +127,22 @@ export default function Page() {
             </div>
           </div>
         </div>
+      </section>
+      <section>
+        <Card variant="outlined" className={styles["danger-group"]}>
+          <Typography color="error" className="h4">
+            *Danger Zone*
+          </Typography>
+          <p className="italic">
+            Please be careful and sure you want to proceed before doing anything
+            in this section.
+          </p>
+          <div>
+            <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
+              Delete Course
+            </Button>
+          </div>
+        </Card>
       </section>
 
       <Modal title="Create a New Course" open={open} handleClose={handleClose}>
