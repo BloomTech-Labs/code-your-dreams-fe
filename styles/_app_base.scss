@@ -101,7 +101,8 @@ header {
 .header-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  @include desktop-s { flex-wrap: nowrap; }
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
