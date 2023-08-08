@@ -1,7 +1,6 @@
 "use client"
 
 import { TextField } from "@mui/material"
-import styles from "./NewCourse.module.scss"
 
 export default function NewCourse() {
   return (
