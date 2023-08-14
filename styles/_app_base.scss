@@ -118,3 +118,15 @@ header {
     @include desktop-s { display: flex; }
   }
 }
+
+.modal-card {
+  padding: 9px 18px;
+  border-style: dotted;
+}
+
+.danger-group {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-style: dotted;
+  background-color: $cyd-light-gray;
+}
