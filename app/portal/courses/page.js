@@ -109,19 +109,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add"
-              className="compact-button"
             >
-              <AddIcon />
+              <AddIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add"
-              className="full-button"
-            >
-              Create a new course
-            </Button>
           </div>
         </div>
 

@@ -18,6 +18,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import Modal from "@/components/Modal/Modal"
 // import NewMaterialType from "./NewMaterialType"
 import NewSuperUser from "./NewSuperUser"
+import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -41,16 +42,16 @@ const rows = [
   },
 ]
 
-function createData(type, count, edit) {
-  return { type, count, edit }
+function createData(type, count, edit, destroy) {
+  return { type, count, edit, destroy }
 }
 
 const tableRows = [
-  createData("Document", 52, "edit"),
-  createData("Presentation", 64, "edit"),
-  createData("Video", 16, "edit"),
-  createData("Quiz", 8, "edit"),
-  createData("Test", 0, "edit delete"),
+  createData("Document", 52, "edit", ""),
+  createData("Presentation", 64, "edit", ""),
+  createData("Video", 16, "edit", ""),
+  createData("Quiz", 8, "edit", ""),
+  createData("Test", 0, "edit", "delete"),
 ]
 
 export default function Page() {
@@ -78,19 +79,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add a super user"
-              className="compact-button"
             >
-              <PersonAddIcon />
+              <PersonAddIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<PersonAddIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add a super user"
-              className="full-button"
-            >
-              Add a super user
-            </Button>
           </div>
         </div>
         <p className="italic">
@@ -117,7 +108,7 @@ export default function Page() {
         {/* TODO: This is where we will put our materials types definitions.
             We'll need to think through logic on when we allow removal of a definition.
             E.g., if there are any instances linked to that definition, you cannot delete, etc.
-            Hopefully the UI will help ensure users only can delete an unlinked type. */}
+            The UI must help ensure users only can delete an unlinked material type. */}
         <div className="header-row">
           <h2>Materials types</h2>
           <div className="add-button">
@@ -126,19 +117,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add a materials type"
-              className="compact-button"
             >
-              <AddIcon />
+              <AddIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add a materials type"
-              className="full-button"
-            >
-              Add a materials type
-            </Button>
           </div>
         </div>
         <p className="italic">
@@ -146,13 +127,15 @@ export default function Page() {
           being used&mdash;you must change the type for each file for all files
           before you can delete a type.
         </p>
+        {/* TODO: the DestroyButton component should be inserted into the "destroy" column of any material-type row with 0 linked materials */}
+        <DestroyButton label="delete" />
         <TableContainer>
           <Table size="small" aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Types</TableCell>
                 <TableCell align="right">Count</TableCell>
-                <TableCell>Actions</TableCell>
+                <TableCell colSpan={2}>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -166,12 +149,14 @@ export default function Page() {
                   </TableCell>
                   <TableCell align="right">{tableRows.count}</TableCell>
                   <TableCell>{tableRows.edit}</TableCell>
+                  <TableCell>{tableRows.destroy}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
         </TableContainer>
       </section>
+
       {/* TODO: We need to add support for multiple modal options in the same page.
       One would show the "NewMaterialType" component, while the other shows the
       "NewSuperUser" component. Each will need to have its own title field prop

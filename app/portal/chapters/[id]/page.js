@@ -17,7 +17,9 @@ import {
 import { DataGrid } from "@mui/x-data-grid"
 import EditIcon from "@mui/icons-material/Edit"
 import AddIcon from "@mui/icons-material/Add"
+import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
+import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "../_components/NewChapter"
 
@@ -89,19 +91,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="edit"
-              className="compact-button"
             >
-              <EditIcon />
+              <EditIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<EditIcon />}
-              onClick={() => handleOpen()}
-              aria-label="edit"
-              className="full-button"
-            >
-              Edit chapter name
-            </Button>
           </div>
         </div>
         <div className="header-row">
@@ -112,21 +104,13 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="edit"
-              className="compact-button"
             >
-              <AddIcon />
+              <AddIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={() => handleOpen()}
-              aria-label="edit"
-              className="full-button"
-            >
-              Add course access
-            </Button>
           </div>
         </div>
+        {/* TODO: the DestroyButton component should be inserted into the "remove?" column for each course row */}
+        <DestroyButton label="remove" />
         {/* TODO: If admin, show a list of the courses */}
         <TableContainer>
           <Table size="small" aria-label="simple table">
@@ -152,9 +136,9 @@ export default function Page() {
           </Table>
         </TableContainer>
         {/* TODO: Else, display a link to the courses page */}
-        <div className={styles["chapter-notice"]}>
+        <div className={`italic ${styles["chapter-notice"]}`}>
           <Link underline="hover" href="/portal/courses">
-            View the Courses page to access course materials.
+            Visit the Courses page to access course materials.
           </Link>
         </div>
       </section>
@@ -168,19 +152,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add"
-              className="compact-button"
             >
-              <AddIcon />
+              <PersonAddIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add"
-              className="full-button"
-            >
-              Add a new member
-            </Button>
           </div>
         </div>
         <div style={{ height: 500, width: "100%" }}>

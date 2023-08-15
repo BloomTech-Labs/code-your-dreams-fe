@@ -63,6 +63,7 @@ export default function Page() {
           warning: <VisibilityOffIcon fontSize="inherit" />,
         }}
         severity="warning"
+        className="container"
       >
         This course is hidden. Edit the course settings to make it visible.
       </Alert>
@@ -77,19 +78,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add"
-              className="compact-button"
             >
-              <EditIcon />
+              <EditIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<EditIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add"
-              className="full-button"
-            >
-              Edit course
-            </Button>
           </div>
         </div>
         <div>

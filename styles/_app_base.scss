@@ -109,14 +109,12 @@ header {
 
   h1, h2 { margin-bottom: 0; }
   
-  .compact-button {
-    display: flex;
-    @include desktop-s { display: none; }
+  // custom MUI icon button styles
+  .MuiIconButton-root {
+    border: 1px solid;
+    border-color: $cyd-light-gray !important;
   }
-  .full-button {
-    display: none;
-    @include desktop-s { display: flex; }
-  }
+  .MuiIconButton-root:hover { border-color: transparent !important; }
 }
 
 .modal-card {
