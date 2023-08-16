@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { Button, IconButton } from "@mui/material"
+import { IconButton } from "@mui/material"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
