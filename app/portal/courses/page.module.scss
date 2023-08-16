@@ -5,4 +5,12 @@ section.courses {
   .table {
     margin-bottom: 1rem;
   }
+
+  .purple {
+    path { fill: $cyd-purple; }
+  }
+  
+  .gray {
+    path { fill: $cyd-gray; }
+  }
 }

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react"
 import styles from "./page.module.scss"
-import { Button, IconButton } from "@mui/material"
+import { IconButton } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Link from "next/link"
@@ -10,6 +10,22 @@ import Modal from "@/components/Modal/Modal"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useSession } from "next-auth/react"
 import NewCourse from "./_components/NewCourse"
+import VisibilityIcon from "@mui/icons-material/Visibility"
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark"
+
+const convertStatusToIcon = (status) => {
+  let statusIcon
+
+  switch (status) {
+    case "visible":
+      return (statusIcon = <VisibilityIcon className={styles.purple} />)
+    case "hidden":
+      return (statusIcon = <VisibilityOffIcon className={styles.gray} />)
+    default:
+      return (statusIcon = <QuestionMarkIcon className={styles.gray} />)
+  }
+}
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -18,16 +34,24 @@ const columns = [
   {
     field: "files",
     headerName: "Files",
+    headerAlign: "left",
     type: "number",
-    width: 150,
+    width: 130,
   },
   {
     field: "chapters",
     headerName: "Chapters",
+    headerAlign: "left",
     type: "number",
-    width: 150,
+    width: 130,
   },
-  { field: "visibility", headerName: "Visibility", width: 150 },
+  {
+    field: "visibility",
+    headerName: "Visibility",
+    align: "center",
+    width: 130,
+    renderCell: (params) => convertStatusToIcon(params.value),
+  },
 ]
 
 const rows = [
@@ -38,7 +62,7 @@ const rows = [
       "This is a long course description that should get cutoff from the demo page because it is so long-winded and excessive, and no it is not about phyton snakes.",
     files: 25,
     chapters: 12,
-    visibility: "available",
+    visibility: "visible",
   },
   {
     id: 2,
@@ -47,7 +71,7 @@ const rows = [
       "Helping new coders explore the creation of apps in an Android environment.",
     files: 42,
     chapters: 14,
-    visibility: "available",
+    visibility: "visible",
   },
   {
     id: 3,
