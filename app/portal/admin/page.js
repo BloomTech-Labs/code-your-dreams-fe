@@ -20,11 +20,25 @@ import Modal from "@/components/Modal/Modal"
 import NewSuperUser from "./NewSuperUser"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
+const showDestroyButton = (status) => {
+  if (status) {
+    return <DestroyButton label="delete" />
+  }
+  return null
+}
+
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
   { field: "emailAddress", headerName: "Email", width: 300 },
   { field: "adminFlag", headerName: "Super Admin?", width: 200 },
+  {
+    field: "delete",
+    headerName: "Actions",
+    align: "center",
+    width: 120,
+    renderCell: (params) => showDestroyButton(params.value),
+  },
 ]
 
 const rows = [
@@ -33,12 +47,14 @@ const rows = [
     memberName: "Brianne Caplan",
     emailAddress: "brianne@codeyourdreams.org",
     adminFlag: "Yes",
+    delete: "delete",
   },
   {
     id: 2,
     memberName: "John Dodson",
     emailAddress: "john@codeyourdreams.org",
     adminFlag: "",
+    delete: "delete",
   },
 ]
 

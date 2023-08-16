@@ -23,12 +23,25 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "../_components/NewChapter"
 
+const showDestroyButton = (status) => {
+  if (status) {
+    return <DestroyButton label="delete" />
+  }
+  return null
+}
+
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
   { field: "emailAddress", headerName: "Email", width: 300 },
   { field: "adminFlag", headerName: "Admin?", width: 120 },
-  { field: "delete", headerName: "Delete?", width: 120 },
+  {
+    field: "delete",
+    headerName: "Actions",
+    align: "center",
+    width: 120,
+    renderCell: (params) => showDestroyButton(params.value),
+  },
 ]
 
 const rows = [
