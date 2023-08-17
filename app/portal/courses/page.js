@@ -109,8 +109,9 @@ export default function Page() {
         TODO:
         <ul>
           <li>
-            Add in a page loading component as the forwarding process makes the
-            page hang for a moment with only the footer visible.
+            Add a page loading component as the forwarding process causes the
+            page hang for a moment with only the footer visible and/or figure
+            out why it happens.
           </li>
           <li>
             When the database is connected, the course page should be linked to

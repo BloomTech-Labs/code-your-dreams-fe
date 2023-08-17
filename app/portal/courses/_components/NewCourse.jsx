@@ -7,7 +7,7 @@ export default function NewCourse() {
     <>
       <div className="italic">
         Fill out the form to create a new course. Visibility for a new course by
-        default will be "hidden".
+        default will be set to "hidden".
       </div>
       <TextField
         required

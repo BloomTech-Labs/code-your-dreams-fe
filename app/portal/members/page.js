@@ -40,6 +40,16 @@ export default function Page() {
 
   return (
     <main className={styles.main}>
+      <aside className="TODO">
+        TODO:
+        <ul>
+          <li>
+            Determine user management design: what happens locally vs. what will
+            be done in the Auth0 UI.
+          </li>
+          <li>Implement the UI for user management.</li>
+        </ul>
+      </aside>
       <section className="container">
         <div className="header-row">
           <h1>Members</h1>
