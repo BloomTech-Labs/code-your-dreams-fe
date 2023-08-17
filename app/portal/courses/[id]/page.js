@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { Alert, Button, IconButton, Link, Typography } from "@mui/material"
+import { Alert, IconButton, Link, Typography } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { DataGrid } from "@mui/x-data-grid"
@@ -63,6 +63,7 @@ export default function Page() {
           warning: <VisibilityOffIcon fontSize="inherit" />,
         }}
         severity="warning"
+        className="container"
       >
         This course is hidden. Edit the course settings to make it visible.
       </Alert>
@@ -77,19 +78,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add"
-              className="compact-button"
             >
-              <EditIcon />
+              <EditIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<EditIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add"
-              className="full-button"
-            >
-              Edit course
-            </Button>
           </div>
         </div>
         <div>

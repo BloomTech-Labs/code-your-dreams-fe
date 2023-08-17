@@ -2,9 +2,9 @@
 
 import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { Button, IconButton } from "@mui/material"
+import { IconButton } from "@mui/material"
 import Link from "next/link"
-import AddIcon from "@mui/icons-material/Add"
+import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "./_components/NewChapter"
@@ -68,19 +68,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add"
-              className="compact-button"
             >
-              <AddIcon />
+              <GroupAddIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add"
-              className="full-button"
-            >
-              Create a new chapter
-            </Button>
           </div>
         </div>
         <p className="italic">

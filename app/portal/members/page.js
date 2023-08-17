@@ -2,8 +2,8 @@
 
 import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { Button, IconButton } from "@mui/material"
-import AddIcon from "@mui/icons-material/Add"
+import { IconButton } from "@mui/material"
+import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
 import NewMember from "./NewMember"
@@ -50,19 +50,9 @@ export default function Page() {
               size="large"
               onClick={() => handleOpen()}
               aria-label="add"
-              className="compact-button"
             >
-              <AddIcon />
+              <PersonAddIcon fontSize="inherit" />
             </IconButton>
-            <Button
-              variant="outlined"
-              startIcon={<AddIcon />}
-              onClick={() => handleOpen()}
-              aria-label="add"
-              className="full-button"
-            >
-              Add a new member
-            </Button>
           </div>
         </div>
         <div style={{ height: 500, width: "100%" }}>

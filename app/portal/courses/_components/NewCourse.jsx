@@ -5,7 +5,10 @@ import { TextField } from "@mui/material"
 export default function NewCourse() {
   return (
     <>
-      <div className="italic">Fill out the form to create a new course.</div>
+      <div className="italic">
+        Fill out the form to create a new course. Visibility for a new course by
+        default will be "hidden".
+      </div>
       <TextField
         required
         id="course-name"
