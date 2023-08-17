@@ -51,6 +51,14 @@ export default function Page() {
 
   return (
     <main className={styles.courses}>
+      <aside className="TODO">
+        <p>This is a course detail page</p>
+        TODO:
+        <ul>
+          <li>Implement course material create/update/delete</li>
+        </ul>
+      </aside>
+
       <BreadcrumbRow>
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses

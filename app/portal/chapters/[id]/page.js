@@ -80,7 +80,7 @@ export default function Page() {
         <p>This is a chapter detail page</p>
         TODO:
         <ul>
-          <li>Finish the layout of this page</li>
+          <li>Implement separate modals for each section</li>
           <li>Restrict page to chapter admins and CYD users</li>
         </ul>
       </aside>
