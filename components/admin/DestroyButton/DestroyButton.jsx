@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import {
+  IconButton,
   Button,
   Dialog,
   DialogActions,
@@ -10,9 +11,10 @@ import {
   DialogTitle,
 } from "@mui/material"
 import styles from "./DestroyButton.module.scss"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 
 // TODO: Pass along a function into this component to destroy the object
-const DestroyButton = ({ children, label }) => {
+const DestroyButton = ({ label }) => {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -25,9 +27,9 @@ const DestroyButton = ({ children, label }) => {
 
   return (
     <>
-      <Button variant="text" color="error" onClick={handleClickOpen}>
-        {label}
-      </Button>
+      <IconButton color="error" onClick={handleClickOpen}>
+        {<DeleteForeverIcon />}
+      </IconButton>
       <Dialog
         open={open}
         onClose={handleClose}
