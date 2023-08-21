@@ -13,7 +13,7 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 import Modal from "@/components/Modal/Modal"
 import EditCourse from "../_components/EditCourse"
 import NewMaterial from "../_components/NewMaterial"
-// import EditMaterial from "../_components/EditMaterial"
+import EditMaterial from "../_components/EditMaterial"
 import EditButton from "@/components/admin/EditButton/EditButton"
 
 const showLinkButton = (url) => {
@@ -25,7 +25,11 @@ const showLinkButton = (url) => {
 }
 
 const showEditButton = (url) => {
-  return <EditButton />
+  return (
+    <EditButton title="Edit Material">
+      <EditMaterial />
+    </EditButton>
+  )
 }
 
 const showDestroyButton = (status) => {
