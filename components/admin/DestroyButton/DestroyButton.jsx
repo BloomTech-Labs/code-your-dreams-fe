@@ -14,7 +14,7 @@ import styles from "./DestroyButton.module.scss"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 
 // TODO: Pass along a function into this component to destroy the object
-const DestroyButton = ({ label }) => {
+const DestroyButton = ({ action }) => {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -40,11 +40,11 @@ const DestroyButton = ({ label }) => {
           id="alert-dialog-title"
           className={`h4 ${styles["dialog-title"]}`}
         >
-          {label + " confirmation"}
+          {action + " confirmation"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to {label} the entry?
+            Are you sure you want to {action} the entry?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
