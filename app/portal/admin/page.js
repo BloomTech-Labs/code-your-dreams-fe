@@ -15,15 +15,19 @@ import {
 import AddIcon from "@mui/icons-material/Add"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import Modal from "@/components/Modal/Modal"
-// import NewMaterialType from "./NewMaterialType"
-import NewSuperUser from "./NewSuperUser"
+import NewSuperUser from "./_components/NewSuperUser"
+import NewMaterialType from "./_components/NewMaterialType"
+import EditSuperUser from "./_components/EditSuperUser"
+import EditMaterialType from "./_components/EditMaterialType"
+import EditButton from "@/components/admin/EditButton/EditButton"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-const showDestroyButton = (status) => {
-  if (status) {
-    return <DestroyButton label="delete" />
-  }
-  return null
+const showEditButton = () => {
+  return (
+    <EditButton title="Edit Super User">
+      <EditSuperUser />
+    </EditButton>
+  )
 }
 
 const columns = [
@@ -32,11 +36,11 @@ const columns = [
   { field: "emailAddress", headerName: "Email", width: 300 },
   { field: "adminFlag", headerName: "Super Admin?", width: 200 },
   {
-    field: "delete",
-    headerName: "Actions",
+    field: "edit",
+    headerName: "Edit",
     align: "center",
-    width: 120,
-    renderCell: (params) => showDestroyButton(params.value),
+    width: 80,
+    renderCell: (params) => showEditButton(params.value),
   },
 ]
 
@@ -46,14 +50,14 @@ const rows = [
     memberName: "Brianne Caplan",
     emailAddress: "brianne@codeyourdreams.org",
     adminFlag: "Yes",
-    delete: "delete",
+    edit: "",
   },
   {
     id: 2,
     memberName: "John Dodson",
     emailAddress: "john@codeyourdreams.org",
     adminFlag: "",
-    delete: "delete",
+    edit: "",
   },
 ]
 
@@ -70,6 +74,11 @@ const tableRows = [
 ]
 
 export default function Page() {
+  // Super user NEW modal
+  const [openSuperUserNew, setOpenSuperUserNew] = useState(false)
+  const handleOpenSuperUserNew = () => setOpenSuperUserNew(true)
+  const handleCloseSuperUserNew = () => setOpenSuperUserNew(false)
+  // Material type NEW modal
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -92,7 +101,7 @@ export default function Page() {
             <IconButton
               color="primary"
               size="large"
-              onClick={() => handleOpen()}
+              onClick={() => handleOpenSuperUserNew()}
               aria-label="add a super user"
             >
               <PersonAddIcon fontSize="inherit" />
@@ -142,8 +151,12 @@ export default function Page() {
           being used&mdash;you must change the type for each file for all files
           before you can delete a type.
         </p>
-        {/* TODO: the DestroyButton component should be inserted into the "destroy" column of any material-type row with 0 linked materials */}
-        <DestroyButton label="delete" />
+
+        {/* TODO: the EditButton component should be inserted into the edit column */}
+        <EditButton title="Edit Material Type">
+          <EditMaterialType />
+        </EditButton>
+
         <TableContainer>
           <Table size="small" aria-label="simple table">
             <TableHead>
@@ -172,17 +185,19 @@ export default function Page() {
         </TableContainer>
       </section>
 
-      {/* TODO: We need to add support for multiple modal options in the same page.
-      One would show the "NewMaterialType" component, while the other shows the
-      "NewSuperUser" component. Each will need to have its own title field prop
-      to send to the component. */}
+      <Modal
+        title="Add a New Super User"
+        open={openSuperUserNew}
+        handleClose={handleCloseSuperUserNew}
+      >
+        <NewSuperUser />
+      </Modal>
       <Modal
         title="Create a New Materials Type"
         open={open}
         handleClose={handleClose}
       >
-        {/* <NewMaterialType /> */}
-        <NewSuperUser />
+        <NewMaterialType />
       </Modal>
     </main>
   )

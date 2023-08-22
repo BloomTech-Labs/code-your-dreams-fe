@@ -24,7 +24,7 @@ const showLinkButton = (url) => {
   )
 }
 
-const showEditButton = (url) => {
+const showEditButton = () => {
   return (
     <EditButton title="Edit Material">
       <EditMaterial />
@@ -114,10 +114,6 @@ export default function Page() {
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  // Material EDIT modal
-  // const [openMaterialEdit, setOpenMaterialEdit] = useState(false)
-  // const handleOpenMaterialEdit = () => setOpenMaterialEdit(true)
-  // const handleCloseMaterialEdit = () => setOpenMaterialEdit(false)
 
   return (
     <main className={styles.courses}>
