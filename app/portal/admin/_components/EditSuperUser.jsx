@@ -10,12 +10,6 @@ import {
   Card,
 } from "@mui/material"
 
-const chapterList = [
-  { label: "Code Your Dreams" },
-  { label: "CoderHeroes" },
-  { label: "BloomTech" },
-]
-
 export default function EditSuperUser() {
   return (
     <>

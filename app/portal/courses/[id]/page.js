@@ -5,6 +5,7 @@ import styles from "./page.module.scss"
 import { Alert, Button, IconButton, Link, Typography } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import EditIcon from "@mui/icons-material/Edit"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import OpenInNewIcon from "@mui/icons-material/OpenInNew"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { DataGrid } from "@mui/x-data-grid"
@@ -34,7 +35,11 @@ const showEditButton = () => {
 
 const showDestroyButton = (status) => {
   if (status) {
-    return <DestroyButton action="delete" />
+    return (
+      <DestroyButton action="delete">
+        <DeleteForeverIcon />
+      </DestroyButton>
+    )
   }
   return null
 }

@@ -20,7 +20,6 @@ import NewMaterialType from "./_components/NewMaterialType"
 import EditSuperUser from "./_components/EditSuperUser"
 import EditMaterialType from "./_components/EditMaterialType"
 import EditButton from "@/components/admin/EditButton/EditButton"
-import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
 const showEditButton = () => {
   return (

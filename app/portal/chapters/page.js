@@ -7,7 +7,7 @@ import Link from "next/link"
 import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
-import NewChapter from "./_components/NewChapter"
+import NewChapter from "./_components/EditChapter"
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },

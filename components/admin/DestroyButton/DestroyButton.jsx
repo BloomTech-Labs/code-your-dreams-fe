@@ -14,7 +14,7 @@ import styles from "./DestroyButton.module.scss"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 
 // TODO: Pass along a function into this component to destroy the object
-const DestroyButton = ({ action }) => {
+const DestroyButton = ({ action, children }) => {
   const [open, setOpen] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -28,7 +28,7 @@ const DestroyButton = ({ action }) => {
   return (
     <>
       <IconButton color="error" onClick={handleClickOpen}>
-        {<DeleteForeverIcon />}
+        {children}
       </IconButton>
       <Dialog
         open={open}
