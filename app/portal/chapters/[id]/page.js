@@ -66,13 +66,9 @@ const rows = [
   },
 ]
 
-function createData(name, remove) {
-  return { name, remove }
-}
-
-const tableRows = [
-  createData("Python", "remove"),
-  createData("App Inventor", "remove"),
+const demoData = [
+  { id: 1, name: "Python", showButton: true },
+  { id: 2, name: "App Inventor", showButton: true },
 ]
 
 export default function Page() {
@@ -95,7 +91,6 @@ export default function Page() {
         <p>This is a chapter detail page</p>
         TODO:
         <ul>
-          <li>Implement separate modals for each section</li>
           <li>Restrict page to chapter admins and CYD users</li>
         </ul>
       </aside>
@@ -136,10 +131,6 @@ export default function Page() {
             </IconButton>
           </div>
         </div>
-        {/* TODO: the DestroyButton component should be inserted into the "unlink?" column for each course row */}
-        <DestroyButton action="unlink">
-          <RemoveCircleOutlineIcon />
-        </DestroyButton>
         {/* TODO: If admin, show a list of the courses */}
         <TableContainer>
           <Table size="small" aria-label="simple table">
@@ -150,15 +141,16 @@ export default function Page() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tableRows.map((tableRows) => (
-                <TableRow
-                  key={tableRows.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {tableRows.name}
+              {demoData.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell align="center">
+                    {row.showButton && (
+                      <DestroyButton action="unlink">
+                        <RemoveCircleOutlineIcon />
+                      </DestroyButton>
+                    )}
                   </TableCell>
-                  <TableCell>{tableRows.remove}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

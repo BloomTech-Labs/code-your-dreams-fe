@@ -60,16 +60,12 @@ const rows = [
   },
 ]
 
-function createData(type, count, edit, destroy) {
-  return { type, count, edit, destroy }
-}
-
-const tableRows = [
-  createData("Document", 52, "edit", ""),
-  createData("Presentation", 64, "edit", ""),
-  createData("Video", 16, "edit", ""),
-  createData("Quiz", 8, "edit", ""),
-  createData("Test", 0, "edit", "delete"),
+const demoData = [
+  { id: 1, name: "Document", quantity: 52, showButton: true },
+  { id: 2, name: "Presentation", quantity: 64, showButton: true },
+  { id: 3, name: "Video", quantity: 16, showButton: true },
+  { id: 4, name: "Quiz", quantity: 8, showButton: true },
+  { id: 5, name: "Test", quantity: 0, showButton: true },
 ]
 
 export default function Page() {
@@ -89,7 +85,6 @@ export default function Page() {
         <ul>
           <li>Implement Auth0 integration for admin users.</li>
           <li>Implement local changes for admin users, e.g., admin flag.</li>
-          <li>Add support for multiple modals on same page.</li>
         </ul>
       </aside>
       <section className="container">
@@ -151,32 +146,27 @@ export default function Page() {
           before you can delete a type.
         </p>
 
-        {/* TODO: the EditButton component should be inserted into the edit column */}
-        <EditButton title="Edit Material Type">
-          <EditMaterialType />
-        </EditButton>
-
         <TableContainer>
           <Table size="small" aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Types</TableCell>
                 <TableCell align="right">Count</TableCell>
-                <TableCell colSpan={2}>Actions</TableCell>
+                <TableCell>Edit</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {tableRows.map((tableRows) => (
-                <TableRow
-                  key={tableRows.type}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {tableRows.type}
+              {demoData.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell align="center">{row.quantity}</TableCell>
+                  <TableCell align="center">
+                    {row.showButton && (
+                      <EditButton title="Edit Material Type">
+                        <EditMaterialType />
+                      </EditButton>
+                    )}
                   </TableCell>
-                  <TableCell align="right">{tableRows.count}</TableCell>
-                  <TableCell>{tableRows.edit}</TableCell>
-                  <TableCell>{tableRows.destroy}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
