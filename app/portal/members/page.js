@@ -6,7 +6,17 @@ import { IconButton } from "@mui/material"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
-import NewMember from "./NewMember"
+import NewMember from "./_components/NewMember"
+import EditButton from "@/components/admin/EditButton/EditButton"
+import EditMember from "./_components/EditMember"
+
+const showEditButton = () => {
+  return (
+    <EditButton title="Edit Member">
+      <EditMember />
+    </EditButton>
+  )
+}
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -14,6 +24,13 @@ const columns = [
   { field: "emailAddress", headerName: "Email", width: 300 },
   { field: "chapterName", headerName: "Chapter", width: 300 },
   { field: "adminFlag", headerName: "Admin?", width: 150 },
+  {
+    field: "edit",
+    headerName: "Edit",
+    align: "center",
+    width: 80,
+    renderCell: () => showEditButton(),
+  },
 ]
 
 const rows = [
@@ -23,6 +40,7 @@ const rows = [
     emailAddress: "brianne@codeyourdreams.org",
     chapterName: "CoderHeroes",
     adminFlag: "Yes",
+    edit: "",
   },
   {
     id: 2,
@@ -30,6 +48,7 @@ const rows = [
     emailAddress: "john.dodson@bloomtech.com",
     chapterName: "BT Labs - Remote",
     adminFlag: "",
+    edit: "",
   },
 ]
 
@@ -47,7 +66,6 @@ export default function Page() {
             Determine user management design: what happens locally vs. what will
             be done in the Auth0 UI.
           </li>
-          <li>Implement the UI for user management.</li>
         </ul>
       </aside>
       <section className="container">
@@ -67,7 +85,6 @@ export default function Page() {
         </div>
         <div style={{ height: 500, width: "100%" }}>
           {/* TODO: We'll have to figure out how to update a user in Auth0 and if there are any local changes we manage within the app */}
-          {/* TODO: When we have an edit here, we'll have to figure out how we handle the change--maybe via pop up (if changes are local)? */}
           {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
           <DataGrid
             rows={rows}
