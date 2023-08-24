@@ -1,6 +1,5 @@
 "use client"
 
-import styles from "./NewSuperUser.module.scss"
 import {
   TextField,
   // Autocomplete,
@@ -11,16 +10,12 @@ import {
   Card,
 } from "@mui/material"
 
-const chapterList = [
-  { label: "Code Your Dreams" },
-  { label: "CoderHeroes" },
-  { label: "BloomTech" },
-]
-
-export default function NewMember() {
+export default function EditSuperUser() {
   return (
     <>
-      <div className="italic">Fill out the form to add a new super user.</div>
+      {/* TODO: Determine what fields to add to sync up with Auth0 and what will remain local to the app */}
+      <span>TODO: TBD</span>
+      {/* <div className="italic">Fill out the form to add a new super user.</div>
       <TextField
         required
         id="super-user-name"
@@ -43,7 +38,7 @@ export default function NewMember() {
           If selected, this super admin will be able to administer everything in
           the app
         </FormHelperText>
-      </Card>
+      </Card> */}
     </>
   )
 }

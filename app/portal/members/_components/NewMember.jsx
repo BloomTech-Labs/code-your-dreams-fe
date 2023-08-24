@@ -9,7 +9,7 @@ import {
   Checkbox,
   Card,
 } from "@mui/material"
-import styles from "./NewMember.module.scss"
+import styles from "./MemberModals.module.scss"
 
 const chapterList = [
   { label: "Code Your Dreams" },

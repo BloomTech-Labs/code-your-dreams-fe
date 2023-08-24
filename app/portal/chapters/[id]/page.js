@@ -17,16 +17,22 @@ import { DataGrid } from "@mui/x-data-grid"
 import EditIcon from "@mui/icons-material/Edit"
 import AddIcon from "@mui/icons-material/Add"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
+import EditButton from "@/components/admin/EditButton/EditButton"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 import Modal from "@/components/Modal/Modal"
-import NewChapter from "../_components/NewChapter"
+import EditChapter from "../_components/EditChapter"
+import NewMember from "../_components/NewMember"
+import EditMember from "../_components/EditMember"
+import LinkCourse from "../_components/LinkCourse"
 
-const showDestroyButton = (status) => {
-  if (status) {
-    return <DestroyButton label="delete" />
-  }
-  return null
+const showEditButton = () => {
+  return (
+    <EditButton title="Edit Member">
+      <EditMember />
+    </EditButton>
+  )
 }
 
 const columns = [
@@ -35,11 +41,11 @@ const columns = [
   { field: "emailAddress", headerName: "Email", width: 300 },
   { field: "adminFlag", headerName: "Admin?", width: 120 },
   {
-    field: "delete",
-    headerName: "Actions",
+    field: "edit",
+    headerName: "Edit",
     align: "center",
-    width: 120,
-    renderCell: (params) => showDestroyButton(params.value),
+    width: 80,
+    renderCell: () => showEditButton(),
   },
 ]
 
@@ -49,30 +55,35 @@ const rows = [
     memberName: "Brianne Caplan",
     emailAddress: "brianne@codeyourdreams.org",
     adminFlag: "Yes",
-    delete: "delete",
+    edit: "",
   },
   {
     id: 2,
     memberName: "John Dodson",
     emailAddress: "john.dodson@bloomtech.com",
     adminFlag: "",
-    delete: "delete",
+    edit: "",
   },
 ]
 
-function createData(name, remove) {
-  return { name, remove }
-}
-
-const tableRows = [
-  createData("Python", "remove"),
-  createData("App Inventor", "remove"),
+const demoData = [
+  { id: 1, name: "Python", showButton: true },
+  { id: 2, name: "App Inventor", showButton: true },
 ]
 
 export default function Page() {
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  // Chapter EDIT modal
+  const [openChapterEdit, setOpenChapterEdit] = useState(false)
+  const handleOpenChapterEdit = () => setOpenChapterEdit(true)
+  const handleCloseChapterEdit = () => setOpenChapterEdit(false)
+  // Course LINK modal
+  const [openCourseLink, setOpenCourseLink] = useState(false)
+  const handleOpenCourseLink = () => setOpenCourseLink(true)
+  const handleCloseCourseLink = () => setOpenCourseLink(false)
+  // Member NEW modal
+  const [openMemberNew, setOpenMemberNew] = useState(false)
+  const handleOpenMemberNew = () => setOpenMemberNew(true)
+  const handleCloseMemberNew = () => setOpenMemberNew(false)
 
   return (
     <main className={styles.detail}>
@@ -80,7 +91,6 @@ export default function Page() {
         <p>This is a chapter detail page</p>
         TODO:
         <ul>
-          <li>Implement separate modals for each section</li>
           <li>Restrict page to chapter admins and CYD users</li>
         </ul>
       </aside>
@@ -101,7 +111,7 @@ export default function Page() {
             <IconButton
               color="primary"
               size="large"
-              onClick={() => handleOpen()}
+              onClick={() => handleOpenChapterEdit()}
               aria-label="edit"
             >
               <EditIcon fontSize="inherit" />
@@ -114,34 +124,33 @@ export default function Page() {
             <IconButton
               color="primary"
               size="large"
-              onClick={() => handleOpen()}
+              onClick={() => handleOpenCourseLink()}
               aria-label="edit"
             >
               <AddIcon fontSize="inherit" />
             </IconButton>
           </div>
         </div>
-        {/* TODO: the DestroyButton component should be inserted into the "remove?" column for each course row */}
-        <DestroyButton label="remove" />
         {/* TODO: If admin, show a list of the courses */}
         <TableContainer>
           <Table size="small" aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell>Course Name</TableCell>
-                <TableCell>Remove?</TableCell>
+                <TableCell>Unlink Course?</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {tableRows.map((tableRows) => (
-                <TableRow
-                  key={tableRows.name}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row">
-                    {tableRows.name}
+              {demoData.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell align="center">
+                    {row.showButton && (
+                      <DestroyButton action="unlink">
+                        <RemoveCircleOutlineIcon />
+                      </DestroyButton>
+                    )}
                   </TableCell>
-                  <TableCell>{tableRows.remove}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -162,7 +171,7 @@ export default function Page() {
             <IconButton
               color="primary"
               size="large"
-              onClick={() => handleOpen()}
+              onClick={() => handleOpenMemberNew()}
               aria-label="add"
             >
               <PersonAddIcon fontSize="inherit" />
@@ -186,9 +195,26 @@ export default function Page() {
         </div>
       </section>
 
-      <Modal title="Create a New Chapter" open={open} handleClose={handleClose}>
-        {/* TODO: Can we repurpose the "NewChapter" component for both creating a new and editing a chapter? */}
-        <NewChapter />
+      <Modal
+        title="Edit Chapter"
+        open={openChapterEdit}
+        handleClose={handleCloseChapterEdit}
+      >
+        <EditChapter />
+      </Modal>
+      <Modal
+        title="Link a Course"
+        open={openCourseLink}
+        handleClose={handleCloseCourseLink}
+      >
+        <LinkCourse />
+      </Modal>
+      <Modal
+        title="Add a New Member"
+        open={openMemberNew}
+        handleClose={handleCloseMemberNew}
+      >
+        <NewMember />
       </Modal>
     </main>
   )

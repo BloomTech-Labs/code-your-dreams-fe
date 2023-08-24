@@ -1,18 +1,17 @@
 "use client"
 
 import { TextField } from "@mui/material"
-import styles from "./NewChapter.module.scss"
 
-export default function NewChapter() {
+export default function EditChapter() {
   return (
     <>
-      <div className="italic">Fill out the form to create a new chapter.</div>
+      <div className="italic">Update the chapter name here.</div>
       <TextField
         required
         id="chapter-name"
         label="Chapter Name"
         variant="outlined"
-        helperText="Enter the chapter name"
+        helperText="Enter an updated chapter name"
       />
     </>
   )
