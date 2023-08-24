@@ -122,7 +122,8 @@ export default function Page() {
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses
         </Link>
-        <Typography color="text.primary">[Course_Name]</Typography>
+        {/* TODO: Insert course name from database for current page */}
+        <Typography color="text.primary">{"{course_name}"}</Typography>
       </BreadcrumbRow>
 
       <Alert
