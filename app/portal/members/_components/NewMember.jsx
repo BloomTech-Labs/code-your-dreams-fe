@@ -9,7 +9,6 @@ import {
   Checkbox,
   Card,
 } from "@mui/material"
-import styles from "./MemberModals.module.scss"
 
 const chapterList = [
   { label: "Code Your Dreams" },
@@ -32,7 +31,7 @@ export default function NewMember() {
         required
         id="member-email"
         type="email"
-        label="Email address"
+        label="Email Address"
         helperText="Enter the email address of the member to be added"
       />
       <Autocomplete
@@ -49,7 +48,7 @@ export default function NewMember() {
           />
         )}
       />
-      <Card variant="outlined" className={styles["form-group"]}>
+      <Card variant="outlined" className="modal-card">
         <FormGroup>
           <FormControlLabel
             control={<Checkbox />}

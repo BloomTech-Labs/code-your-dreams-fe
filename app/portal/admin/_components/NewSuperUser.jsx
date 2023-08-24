@@ -1,9 +1,7 @@
 "use client"
 
-import styles from "./NewSuperUser.module.scss"
 import {
   TextField,
-  // Autocomplete,
   FormGroup,
   FormControlLabel,
   FormHelperText,
@@ -26,10 +24,10 @@ export default function NewMember() {
         required
         id="super-user-email"
         type="email"
-        label="Email address"
+        label="Email Address"
         helperText="Enter the email address of the super user to be added"
       />
-      <Card variant="outlined" className={styles["form-group"]}>
+      <Card variant="outlined" className="modal-card">
         <FormGroup>
           <FormControlLabel control={<Checkbox />} label="Make a Super Admin" />
         </FormGroup>

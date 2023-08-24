@@ -2,12 +2,15 @@
 
 import styles from "./page.module.scss"
 import { SignOutBtn } from "@/components/auth/AuthButtons"
-import { Button, Card } from "@mui/material"
+import { Card } from "@mui/material"
 import { useSession } from "next-auth/react"
+import EditButton from "@/components/admin/EditButton/EditButton"
+import EditMember from "./_components/EditMember"
 
 export default function Page() {
   const { data: session } = useSession()
-  /* Can pull user name, email, and "image" (avatar) using "session.user.*" Everything else will need to be stored and retrieved from our own database. */
+  /* Can pull user name, email, and "image" (avatar) using "session.user.*"
+  Everything else will need to be stored and retrieved from our own database. */
 
   return (
     <main className={styles.account}>
@@ -30,7 +33,9 @@ export default function Page() {
         <Card variant="outlined" className={styles["action-group"]}>
           <p>Account email: {session ? session.user.email : ""}</p>
           {/* Check to see what is managed in Auth0 vs locally in-app */}
-          <Button variant="outlined">Edit account</Button>
+          <EditButton title="Edit Account Details" isFullButton={true}>
+            <EditMember />
+          </EditButton>
         </Card>
       </section>
     </main>

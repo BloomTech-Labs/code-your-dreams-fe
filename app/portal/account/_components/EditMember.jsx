@@ -4,33 +4,35 @@ import { TextField, Divider, Typography, Card } from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditChapter() {
+export default function EditMember() {
   return (
     <>
+      {/* TODO: Determine what fields to add to sync up with Auth0 and what will remain local to the app */}
       <div className="italic">
-        Update the chapter name here and click the save button to continue.
+        Edit your details by updating any of the fields and clicking the save
+        button.
       </div>
       <TextField
         required
-        id="chapter-name"
-        label="Chapter Name"
+        id="member-name"
+        label="Your full name"
         variant="outlined"
+      />
+      <TextField
+        required
+        id="member-email"
+        type="email"
+        label="Your email address"
       />
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
-      <div className="italic">
-        A chapter can only be deleted if it is not linked to any members. Please
-        remove all linked member accounts if you would like to delete this
-        chapter.
-      </div>
       <Card variant="outlined" className="danger-group">
         <p className="italic">
-          Be careful&mdash;deleting a chapter is a permanent action.
+          Deleting your account is a permanent action. If you continue, you will
+          also be logged out of the app.
         </p>
         <div>
-          {/* TODO: This button should be grayed out if there are >0 members
-            linked to the chapter. */}
           <DestroyButton action="delete" isFullButton={true}>
             <DeleteForeverIcon />
           </DestroyButton>

@@ -11,25 +11,33 @@ import {
   DialogTitle,
 } from "@mui/material"
 import styles from "./DestroyButton.module.scss"
-import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 
 // TODO: Pass along a function into this component to destroy the object
-const DestroyButton = ({ action, children }) => {
+const DestroyButton = ({ action, isFullButton, children }) => {
   const [open, setOpen] = React.useState(false)
-
   const handleClickOpen = () => {
     setOpen(true)
   }
-
   const handleClose = () => {
     setOpen(false)
   }
 
   return (
     <>
-      <IconButton color="error" onClick={handleClickOpen}>
-        {children}
-      </IconButton>
+      {isFullButton ? (
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={handleClickOpen}
+          startIcon={children}
+        >
+          {action}
+        </Button>
+      ) : (
+        <IconButton color="error" onClick={handleClickOpen}>
+          {children}
+        </IconButton>
+      )}
       <Dialog
         open={open}
         onClose={handleClose}

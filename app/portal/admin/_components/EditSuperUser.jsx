@@ -2,43 +2,54 @@
 
 import {
   TextField,
-  // Autocomplete,
   FormGroup,
   FormControlLabel,
-  FormHelperText,
+  Divider,
+  Typography,
   Checkbox,
   Card,
 } from "@mui/material"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
+import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
 export default function EditSuperUser() {
   return (
     <>
-      {/* TODO: Determine what fields to add to sync up with Auth0 and what will remain local to the app */}
-      <span>TODO: TBD</span>
-      {/* <div className="italic">Fill out the form to add a new super user.</div>
+      <div className="italic">
+        Edit super user details by updating any of the fields and clicking the
+        save button.
+      </div>
       <TextField
         required
         id="super-user-name"
         label="Super User Name"
         variant="outlined"
-        helperText="Enter the full name of the super user to add"
       />
       <TextField
         required
         id="super-user-email"
         type="email"
-        label="Email address"
-        helperText="Enter the email address of the super user to be added"
+        label="Email Address"
       />
-      <Card variant="outlined" className={styles["form-group"]}>
+      <Card variant="outlined" className="modal-card">
         <FormGroup>
           <FormControlLabel control={<Checkbox />} label="Make a Super Admin" />
         </FormGroup>
-        <FormHelperText>
-          If selected, this super admin will be able to administer everything in
-          the app
-        </FormHelperText>
-      </Card> */}
+      </Card>
+      <Divider>
+        <Typography color="error">Danger Zone</Typography>
+      </Divider>
+      <Card variant="outlined" className="danger-group">
+        <p className="italic">
+          Deleting the super user will permanently remove them from the
+          database.
+        </p>
+        <div>
+          <DestroyButton action="delete" isFullButton={true}>
+            <DeleteForeverIcon />
+          </DestroyButton>
+        </div>
+      </Card>
     </>
   )
 }

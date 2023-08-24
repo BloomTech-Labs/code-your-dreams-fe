@@ -65,14 +65,6 @@ const columns = [
     width: 80,
     renderCell: (params) => showEditButton(params.value),
   },
-  {
-    field: "delete",
-    headerName: "Delete",
-    headerAlign: "center",
-    align: "center",
-    width: 80,
-    renderCell: (params) => showDestroyButton(params.value),
-  },
 ]
 
 const rows = [
@@ -82,7 +74,6 @@ const rows = [
     materialType: "Document",
     materialDetails: "Course description and expectations",
     url: "https://drive.google.com",
-    delete: "delete",
   },
   {
     id: 2,
@@ -90,7 +81,6 @@ const rows = [
     materialType: "Presentation",
     materialDetails: "Getting started with Python",
     url: "https://dropbox.com",
-    delete: "delete",
   },
   {
     id: 3,
@@ -98,7 +88,6 @@ const rows = [
     materialType: "Video",
     materialDetails: "Setting up your environment",
     url: "https://microsoft365.com",
-    delete: "delete",
   },
   {
     id: 4,
@@ -106,7 +95,6 @@ const rows = [
     materialType: "Quiz",
     materialDetails: "Assessment for section 1",
     url: "https://icloud.com",
-    delete: "delete",
   },
 ]
 
