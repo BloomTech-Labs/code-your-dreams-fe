@@ -5,10 +5,10 @@ import {
   Autocomplete,
   Divider,
   Typography,
-  Button,
   Card,
 } from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
+import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
 // TODO: Pull in materials type from DB and populate the linked select field
 const typeList = [
@@ -21,13 +21,14 @@ const typeList = [
 export default function EditMaterial() {
   return (
     <>
-      <div className="italic">Edit the linked source material.</div>
+      <div className="italic">
+        Edit the linked source material and click save to continue.
+      </div>
       <TextField
         required
         id="material-name"
         label="Material Name"
         variant="outlined"
-        helperText="The name of the course material item displayed in the app"
       />
       <Autocomplete
         disablePortal
@@ -39,23 +40,11 @@ export default function EditMaterial() {
             required
             label="Material Type"
             variant="outlined"
-            helperText="The material type"
           />
         )}
       />
-      <TextField
-        required
-        id="material-details"
-        label="Details"
-        helperText="A short description about the material"
-      />
-      <TextField
-        required
-        id="material-source"
-        type="url"
-        label="Source URL"
-        helperText="Web URL for the source location of the file"
-      />
+      <TextField required id="material-details" label="Details" />
+      <TextField required id="material-source" type="url" label="Source URL" />
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
@@ -65,13 +54,9 @@ export default function EditMaterial() {
           The source file will NOT be deleted from its cloud storage location.
         </p>
         <div>
-          <Button
-            variant="outlined"
-            color="error"
-            startIcon={<DeleteForeverIcon />}
-          >
-            Delete Material
-          </Button>
+          <DestroyButton action="delete" isFullButton={true}>
+            <DeleteForeverIcon />
+          </DestroyButton>
         </div>
       </Card>
     </>

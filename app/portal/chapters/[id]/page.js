@@ -100,7 +100,8 @@ export default function Page() {
         <Link underline="hover" color="inherit" href="/portal/chapters">
           Chapters
         </Link>
-        <Typography color="text.primary">[Chapter_Name]</Typography>
+        {/* TODO: Insert course name from database for current page */}
+        <Typography color="text.primary">{"{chapter_name}"}</Typography>
       </BreadcrumbRow>
 
       <section className={`container ${styles.courses}`}>

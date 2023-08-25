@@ -1,18 +1,17 @@
 "use client"
 
 import {
-  Button,
   Card,
   Divider,
   FormControlLabel,
   FormGroup,
-  FormHelperText,
   Stack,
   Switch,
   TextField,
   Typography,
 } from "@mui/material"
-import DeleteIcon from "@mui/icons-material/Delete"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
+import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
 export default function EditCourse() {
   return (
@@ -22,14 +21,8 @@ export default function EditCourse() {
         id="course-name"
         label="Course Name"
         variant="outlined"
-        helperText="Edit the course name"
       />
-      <TextField
-        required
-        id="course-description"
-        label="Description"
-        helperText="Edit the course description"
-      />
+      <TextField required id="course-description" label="Description" />
       <Card variant="outlined" className="modal-card">
         <FormGroup>
           <Stack direction="row" spacing={1} alignItems="center">
@@ -38,9 +31,6 @@ export default function EditCourse() {
             <Typography>Visible</Typography>
           </Stack>
         </FormGroup>
-        <FormHelperText>
-          Mark the course as "Visible" when it is ready to be shared with users.
-        </FormHelperText>
       </Card>
       <Divider>
         <Typography color="error">Danger Zone</Typography>
@@ -51,9 +41,9 @@ export default function EditCourse() {
           in this section.
         </p>
         <div>
-          <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
-            Delete Course
-          </Button>
+          <DestroyButton action="delete" isFullButton={true}>
+            <DeleteForeverIcon />
+          </DestroyButton>
         </div>
       </Card>
     </>

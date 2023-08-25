@@ -8,7 +8,6 @@ import {
   Checkbox,
   Card,
 } from "@mui/material"
-import styles from "./NewMember.module.scss"
 
 export default function NewMember() {
   return (
@@ -25,7 +24,7 @@ export default function NewMember() {
         required
         id="member-email"
         type="email"
-        label="Email address"
+        label="Email Address"
         helperText="Enter the email address of the member to be added"
       />
       {/* TODO: Insert the chapter name into the "defaultValue" field below */}
@@ -34,11 +33,11 @@ export default function NewMember() {
         disabled
         id="chapter-name"
         label="Chapter"
-        defaultValue="{current_chapter_name}"
+        defaultValue="{TODO:current_chapter_name}"
         variant="outlined"
         helperText="The member will be added to the current chapter"
       />
-      <Card variant="outlined" className={styles["form-group"]}>
+      <Card variant="outlined" className="modal-card">
         <FormGroup>
           <FormControlLabel
             control={<Checkbox />}

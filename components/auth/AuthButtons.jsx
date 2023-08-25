@@ -1,5 +1,7 @@
 import { useSession, signIn, signOut } from "next-auth/react"
 import { Button } from "@mui/material"
+import LoginIcon from "@mui/icons-material/Login"
+import LogoutIcon from "@mui/icons-material/Logout"
 
 const SignInBtn = () => {
   const { data: session } = useSession()
@@ -9,6 +11,7 @@ const SignInBtn = () => {
   return (
     <Button
       variant="contained"
+      startIcon={<LoginIcon />}
       onClick={() => signIn(undefined, { callbackUrl: "/portal" })}
     >
       SIGN-IN TO APP
@@ -20,6 +23,7 @@ const SignOutBtn = () => {
   return (
     <Button
       variant="outlined"
+      startIcon={<LogoutIcon />}
       onClick={() => {
         signOut({
           callbackUrl: `${process.env.NEXT_PUBLIC_SIGNOUTCALLBACKURL}`,

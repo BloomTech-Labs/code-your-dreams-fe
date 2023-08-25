@@ -13,7 +13,9 @@ export default function Header() {
           <SiteLogo />
           {/* TODO: If they are a CYD user, display "Code Your Dreams" */}
           {/* TODO: When a user is logged in, display their chapter name */}
-          <div className="h4">[Code Your Dreams] or [Chapter Name]</div>
+          <div className="h4">
+            {"{Code Your Dreams Admin}"} or {"{chapter_name}"}
+          </div>
         </div>
         <nav>
           <IconButton

@@ -5,10 +5,13 @@ import {
   Autocomplete,
   FormGroup,
   FormControlLabel,
+  Divider,
+  Typography,
   Checkbox,
   Card,
 } from "@mui/material"
-import styles from "./MemberModals.module.scss"
+import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
+import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
 const chapterList = [
   { label: "Code Your Dreams" },
@@ -34,7 +37,7 @@ export default function EditMember() {
         required
         id="member-email"
         type="email"
-        label="Email address"
+        label="Email Address"
       />
       <Autocomplete
         disablePortal
@@ -44,13 +47,26 @@ export default function EditMember() {
           <TextField {...params} required label="Chapter" variant="outlined" />
         )}
       />
-      <Card variant="outlined" className={styles["form-group"]}>
+      <Card variant="outlined" className="modal-card">
         <FormGroup>
           <FormControlLabel
             control={<Checkbox />}
             label="Make a Chapter Admin"
           />
         </FormGroup>
+      </Card>
+      <Divider>
+        <Typography color="error">Danger Zone</Typography>
+      </Divider>
+      <Card variant="outlined" className="danger-group">
+        <p className="italic">
+          Deleting the member will permanently remove them from the database.
+        </p>
+        <div>
+          <DestroyButton action="delete" isFullButton={true}>
+            <DeleteForeverIcon />
+          </DestroyButton>
+        </div>
       </Card>
     </>
   )
