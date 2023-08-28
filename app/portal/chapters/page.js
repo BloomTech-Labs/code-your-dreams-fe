@@ -2,8 +2,7 @@
 
 import React, { useState } from "react"
 import styles from "./page.module.scss"
-import { IconButton } from "@mui/material"
-import Link from "next/link"
+import { IconButton, Link } from "@mui/material"
 import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
@@ -28,8 +27,8 @@ const rows = [
   },
   {
     id: 2,
-    chapterName: "Coding Bootcamp",
-    members: 42,
+    chapterName: "CoderHeroes",
+    members: 3,
   },
   {
     id: 3,
@@ -41,12 +40,28 @@ const rows = [
     chapterName: "Neighborhood Public School",
     members: 45,
   },
+  {
+    id: 5,
+    chapterName: "Coding Bootcamp",
+    members: 17,
+  },
 ]
 
 export default function Page() {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const handleRowClick = (params) => {
+    // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
+    const { id } = params.row
+
+    return (
+      <Link underline="hover" href={`/portal/chapters/${id}`}>
+        {params.value}
+      </Link>
+    )
+  }
 
   return (
     <main className={styles.chapters}>
@@ -85,7 +100,11 @@ export default function Page() {
             <div style={{ height: 500, width: "100%" }}>
               <DataGrid
                 rows={rows}
-                columns={columns}
+                columns={columns.map((column) =>
+                  column.field === "chapterName"
+                    ? { ...column, renderCell: handleRowClick }
+                    : column
+                )}
                 initialState={{
                   pagination: {
                     paginationModel: { page: 0, pageSize: 5 },
@@ -97,13 +116,6 @@ export default function Page() {
           </div>
         </div>
       </section>
-
-      <aside className="TODO">
-        <Link href="/portal/chapters/chapter-name">
-          Temporary link to chapter detail page template&mdash;links to actual
-          course detail pages will be in the course name in the table above.
-        </Link>
-      </aside>
 
       <Modal title="Create a New Chapter" open={open} handleClose={handleClose}>
         <NewChapter />
