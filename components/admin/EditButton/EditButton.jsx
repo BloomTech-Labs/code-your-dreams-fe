@@ -5,7 +5,7 @@ import { Button, IconButton } from "@mui/material"
 import EditIcon from "@mui/icons-material/Edit"
 import Modal from "@/components/Modal/Modal"
 
-// TODO: Pass along a function into this component to destroy the object
+// TODO: Pass along a function into this component to edit the object
 const EditButton = ({ title, isFullButton, children }) => {
   const [open, setOpen] = React.useState(false)
   const handleOpen = () => {
