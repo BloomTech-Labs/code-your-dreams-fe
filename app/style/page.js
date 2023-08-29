@@ -8,26 +8,28 @@ export default function Page() {
         <SiteLogo />
       </header>
       <main className={styles.main}>
-        <section>
+        <section className="container">
           <h1>Style Guide</h1>
           <p>
             This is the style guild for the Code Your Dreams courses web app
           </p>
         </section>
-        <section>
+        <section className="container">
           <h2>Typography</h2>
           <p>
-            The app uses fluid typography for sizing for headers, based on 1rem
-            and the container width.
+            The app uses fluid typography for sizing for headers, based on a
+            base 1rem font size and the container width.
           </p>
           <h3>Fonts</h3>
           <p>
             The site uses Google font{" "}
-            <a href="https://fonts.google.com/specimen/Nunito" target="_blank">
-              Nunito Sans
+            <a
+              href="https://fonts.google.com/specimen/Roboto+Flex"
+              target="_blank"
+            >
+              Roboto Flex
             </a>
-            , a variable font that supports weights from 200 to 1000, and has a
-            single variable axis <span className="italic">(italic)</span>.
+            .
           </p>
           <h3>Headings</h3>
           <div className={styles.examples}>
@@ -37,7 +39,7 @@ export default function Page() {
             <h4>Header 4</h4>
           </div>
         </section>
-        <section>
+        <section className="container">
           <h2>Colors</h2>
           <p>
             These are colors pulled from the Code Your Dreams website, used in
@@ -48,19 +50,25 @@ export default function Page() {
               Color 1: <code>$cyd-pink</code>
             </span>
             <span className={styles.color2}>
-              Color 2: <code>$cyd-dark-pink</code>
+              Color 2: <code>$cyd-light-pink</code>
             </span>
             <span className={styles.color3}>
-              Color 3: <code>$cyd-purple</code>
+              Color 3: <code>$cyd-blue</code>
             </span>
             <span className={styles.color4}>
-              Color 4: <code>$cyd-light-gray</code>
+              Color 4: <code>$cyd-light-blue</code>
             </span>
             <span className={styles.color5}>
-              Color 5: <code>$cyd-gray</code>
+              Color 5: <code>$cyd-purple</code>
             </span>
             <span className={styles.color6}>
-              Color 5: <code>$cyd-black</code>
+              Color 6: <code>$cyd-gray</code>
+            </span>
+            <span className={styles.color7}>
+              Color 7: <code>$cyd-light-gray</code>
+            </span>
+            <span className={styles.color8}>
+              Color 8: <code>$cyd-black</code>
             </span>
             <span className={styles.white}>
               White: <code>white</code>

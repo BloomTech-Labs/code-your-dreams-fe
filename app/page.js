@@ -36,7 +36,7 @@ export default function Page() {
               src="/images/Code-Your-Dreams-Hero.jpg"
               fill
               style={{ objectFit: "cover" }}
-              alt="Code Your Dreams students cheering"
+              alt="Code Your Dreams students jumping up and cheering"
             />
           </div>
           <div className={styles["hero-message"]}>

@@ -6,6 +6,9 @@ export default function robots() {
   return {
     rules: {
       userAgent: "*",
+      disallow: "/api/",
+      disallow: "/portal/",
+      disallow: "/style/",
       disallow: "/",
     },
     // sitemap: 'https://acme.com/sitemap.xml',
