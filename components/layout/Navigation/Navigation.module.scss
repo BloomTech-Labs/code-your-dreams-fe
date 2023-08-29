@@ -2,6 +2,10 @@
 @import "styles/media";
 
 nav.site-nav {
+  box-shadow: 1px 5px 5px 0px rgba(100,100,100,0.1);
+  -webkit-box-shadow: 1px 5px 5px 0px rgba(100,100,100,0.1);
+  -moz-box-shadow: 1px 5px 5px 0px rgba(100,100,100,0.1);
+
   div {
     display: flex;
     flex-direction: row;

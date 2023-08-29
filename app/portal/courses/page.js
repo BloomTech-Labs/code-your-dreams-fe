@@ -2,10 +2,9 @@
 
 import React, { useState, useEffect } from "react"
 import styles from "./page.module.scss"
-import { IconButton } from "@mui/material"
+import { IconButton, Link } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
-import Link from "next/link"
 import Modal from "@/components/Modal/Modal"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useSession } from "next-auth/react"
@@ -29,8 +28,13 @@ const convertStatusToIcon = (status) => {
 
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
-  { field: "courseName", headerName: "Course name", width: 250 },
-  { field: "courseDescription", headerName: "Description", width: 350 },
+  { field: "courseName", headerName: "Course Name", minWidth: 150, flex: 1 },
+  {
+    field: "courseDescription",
+    headerName: "Description",
+    minWidth: 350,
+    flex: 2,
+  },
   {
     field: "files",
     headerName: "Materials",
@@ -93,6 +97,17 @@ export default function Page() {
   session && console.log(session)
   const axiosInstance = AxiosWithAuth()
 
+  const handleRowClick = (params) => {
+    // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
+    const { id } = params.row
+
+    return (
+      <Link underline="hover" href={`/portal/courses/${id}`}>
+        {params.value}
+      </Link>
+    )
+  }
+
   useEffect(() => {
     axiosInstance
       .get("http://localhost:8080/protected-route")
@@ -147,7 +162,11 @@ export default function Page() {
             <div style={{ height: 500, width: "100%" }}>
               <DataGrid
                 rows={rows}
-                columns={columns}
+                columns={columns.map((column) =>
+                  column.field === "courseName"
+                    ? { ...column, renderCell: handleRowClick }
+                    : column
+                )}
                 initialState={{
                   pagination: {
                     paginationModel: { page: 0, pageSize: 5 },
@@ -162,13 +181,6 @@ export default function Page() {
         <p className="italic">
           Contact Code Your Dreams for access to more courses.
         </p>
-
-        <aside className="TODO">
-          <Link href="/portal/courses/detail">
-            Temporary link to course detail page template&mdash;links to actual
-            course detail pages will be in the course name in the table above.
-          </Link>
-        </aside>
       </section>
 
       <Modal title="Create a New Course" open={open} handleClose={handleClose}>
