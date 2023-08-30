@@ -15,6 +15,9 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 export default function EditSuperUser() {
   return (
     <>
+      {/* TODO: Take in prop for database entry to be edited.
+        Link form to update that project when saved.
+        Update Auth0 entry based on changes made in this form. */}
       <div className="italic">
         Edit super user details by updating any of the fields and clicking the
         save button.

@@ -12,6 +12,8 @@ import {
 export default function NewMember() {
   return (
     <>
+      {/* TODO: The linked form should create a new DB entry based on the form details,
+        add a user to Auth0, close the modal, and return to the admin page. */}
       <div className="italic">Fill out the form to add a new super user.</div>
       <TextField
         required

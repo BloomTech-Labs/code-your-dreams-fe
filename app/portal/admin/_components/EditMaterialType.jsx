@@ -7,6 +7,8 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 export default function EditMaterialType() {
   return (
     <>
+      {/* TODO: Take in prop for database entry to be edited.
+        Link form to update that project when saved. */}
       <div className="italic">
         Any change here will be reflected across the entire app and all course
         material labels linked to this type.
@@ -25,7 +27,7 @@ export default function EditMaterialType() {
           Be careful&mdash;deleting the material type is a permanent action.
         </p>
         <div>
-          {/* TODO: This button should be grayed out if there are >0 instances
+          {/* TODO: This button should be disabled if there are >0 instances
             linked to a material of this respective type. */}
           <DestroyButton action="delete" isFullButton={true}>
             <DeleteForeverIcon />

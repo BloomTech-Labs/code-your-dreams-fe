@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import styles from "./page.module.scss"
 import { DataGrid } from "@mui/x-data-grid"
 import {
   IconButton,
@@ -74,19 +73,12 @@ export default function Page() {
   const handleOpenSuperUserNew = () => setOpenSuperUserNew(true)
   const handleCloseSuperUserNew = () => setOpenSuperUserNew(false)
   // Material type NEW modal
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const [openMaterialNew, setOpenMaterialNew] = useState(false)
+  const handleOpenMaterialNew = () => setOpenMaterialNew(true)
+  const handleCloseMaterialNew = () => setOpenMaterialNew(false)
 
   return (
-    <main className={styles.admin}>
-      <aside className="TODO">
-        TODO:
-        <ul>
-          <li>Implement Auth0 integration for admin users.</li>
-          <li>Implement local changes for admin users, e.g., admin flag.</li>
-        </ul>
-      </aside>
+    <main>
       <section className="container">
         <h1>Admin Settings</h1>
         <div className="header-row">
@@ -107,8 +99,7 @@ export default function Page() {
           Super admins will have the ability to manage settings for the entire
           application.
         </p>
-        {/* TODO: We'll need to enable user editing via Auth0 as well as local editing.
-            Locally we'd need to managed the admin flag, if anything else. */}
+        {/* TODO: We need to send the selected user over to the edit modal */}
         <div style={{ height: 500, width: "100%" }}>
           <DataGrid
             rows={rows}
@@ -122,18 +113,14 @@ export default function Page() {
           />
         </div>
       </section>
-      <section className={`container ${styles.materials}`}>
-        {/* TODO: This is where we will put our materials types definitions.
-            We'll need to think through logic on when we allow removal of a definition.
-            E.g., if there are any instances linked to that definition, you cannot delete, etc.
-            The UI must help ensure users only can delete an unlinked material type. */}
+      <section className="container">
         <div className="header-row">
           <h2>Materials types</h2>
           <div className="add-button">
             <IconButton
               color="primary"
               size="large"
-              onClick={() => handleOpen()}
+              onClick={() => handleOpenMaterialNew()}
               aria-label="add a materials type"
             >
               <AddIcon fontSize="inherit" />
@@ -145,9 +132,9 @@ export default function Page() {
           being used&mdash;you must change the type for each file for all files
           before you can delete a type.
         </p>
-
+        {/* TODO: We need to send the selected material type over to the edit modal */}
         <TableContainer>
-          <Table size="small" aria-label="simple table">
+          <Table size="small" aria-label="simple table" className="min-width">
             <TableHead>
               <TableRow>
                 <TableCell>Types</TableCell>
@@ -183,8 +170,8 @@ export default function Page() {
       </Modal>
       <Modal
         title="Create a New Materials Type"
-        open={open}
-        handleClose={handleClose}
+        open={openMaterialNew}
+        handleClose={handleCloseMaterialNew}
       >
         <NewMaterialType />
       </Modal>
