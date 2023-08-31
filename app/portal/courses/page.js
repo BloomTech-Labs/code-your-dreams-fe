@@ -143,7 +143,7 @@ export default function Page() {
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
           <h1>Courses</h1>
-          <div className="add-button">
+          <div>
             {/* TODO: make button visible only to CYD super admins */}
             <IconButton
               color="primary"

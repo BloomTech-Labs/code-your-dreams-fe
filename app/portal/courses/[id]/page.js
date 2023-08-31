@@ -158,7 +158,7 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h2>Materials</h2>
-          <div className="add-button">
+          <div>
             <IconButton
               color="primary"
               size="large"

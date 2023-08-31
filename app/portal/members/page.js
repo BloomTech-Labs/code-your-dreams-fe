@@ -71,7 +71,7 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Members</h1>
-          <div className="add-button">
+          <div>
             {/* TODO: This button should only be visible to super admin users */}
             <IconButton
               color="primary"

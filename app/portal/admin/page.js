@@ -83,16 +83,14 @@ export default function Page() {
         <h1>Admin Settings</h1>
         <div className="header-row">
           <h2>Super users</h2>
-          <div className="add-button">
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenSuperUserNew()}
-              aria-label="add a super user"
-            >
-              <PersonAddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenSuperUserNew()}
+            aria-label="add a super user"
+          >
+            <PersonAddIcon fontSize="inherit" />
+          </IconButton>
         </div>
         <p className="italic">
           Super users will have the ability to access all course materials.
@@ -116,16 +114,14 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h2>Materials types</h2>
-          <div className="add-button">
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenMaterialNew()}
-              aria-label="add a materials type"
-            >
-              <AddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenMaterialNew()}
+            aria-label="add a materials type"
+          >
+            <AddIcon fontSize="inherit" />
+          </IconButton>
         </div>
         <p className="italic">
           A materials type can only be removed if there are zero instances of it
