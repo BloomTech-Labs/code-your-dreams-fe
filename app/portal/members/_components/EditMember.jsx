@@ -62,11 +62,9 @@ export default function EditMember() {
         <p className="italic">
           Deleting the member will permanently remove them from the database.
         </p>
-        <div>
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

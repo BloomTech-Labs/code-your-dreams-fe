@@ -21,6 +21,9 @@ const typeList = [
 export default function EditMaterial() {
   return (
     <>
+      {/* TODO: Take in prop for database entry to be edited.
+        Link form to update that project when saved. */}
+      {/* TODO: Fill in all details in form from DB. */}
       <div className="italic">
         Edit the linked source material and click save to continue.
       </div>
@@ -53,11 +56,9 @@ export default function EditMaterial() {
           Deleting the material will only remove the record entry in this app.
           The source file will NOT be deleted from its cloud storage location.
         </p>
-        <div>
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

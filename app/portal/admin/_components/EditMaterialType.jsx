@@ -26,13 +26,11 @@ export default function EditMaterialType() {
         <p className="italic">
           Be careful&mdash;deleting the material type is a permanent action.
         </p>
-        <div>
-          {/* TODO: This button should be disabled if there are >0 instances
+        {/* TODO: This button should be disabled if there are >0 instances
             linked to a material of this respective type. */}
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

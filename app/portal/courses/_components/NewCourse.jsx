@@ -5,6 +5,7 @@ import { TextField } from "@mui/material"
 export default function NewCourse() {
   return (
     <>
+      {/* TODO: Take in prop for which table to add a new instance. */}
       <div className="italic">
         Fill out the form to create a new course. Visibility for a new course by
         default will be set to "hidden".

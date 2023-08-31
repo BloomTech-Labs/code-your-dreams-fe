@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import styles from "./page.module.scss"
-import { Alert, Button, IconButton, Link, Typography } from "@mui/material"
+import { Alert, IconButton, Link, Typography } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import EditIcon from "@mui/icons-material/Edit"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
@@ -44,14 +43,15 @@ const showDestroyButton = (status) => {
   return null
 }
 
+// TODO: Replace demo data with actual data from the courses instance in the table.
 const columns = [
-  { field: "id", headerName: "ID", width: 80 },
+  { field: "id", headerName: "ID", width: 100 },
   {
     field: "url",
     headerName: "Link",
     headerAlign: "center",
     align: "center",
-    width: 80,
+    width: 100,
     renderCell: (params) => showLinkButton(params.value),
   },
   { field: "materialName", headerName: "Name", width: 250 },
@@ -62,11 +62,10 @@ const columns = [
     headerName: "Edit",
     headerAlign: "center",
     align: "center",
-    width: 80,
+    width: 100,
     renderCell: (params) => showEditButton(params.value),
   },
 ]
-
 const rows = [
   {
     id: 1,
@@ -109,15 +108,7 @@ export default function Page() {
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
 
   return (
-    <main className={styles.courses}>
-      <aside className="TODO">
-        <p>This is a course detail page</p>
-        TODO:
-        <ul>
-          <li>Implement course material create/update/delete</li>
-        </ul>
-      </aside>
-
+    <main>
       <BreadcrumbRow>
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses
@@ -126,6 +117,7 @@ export default function Page() {
         <Typography color="text.primary">{"{course_name}"}</Typography>
       </BreadcrumbRow>
 
+      {/* TODO: Display only when course is hidden */}
       <Alert
         iconMapping={{
           warning: <VisibilityOffIcon fontSize="inherit" />,
@@ -139,56 +131,46 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Course Name</h1>
-          <div>
-            {/* TODO: This button should only be visible to super admin users */}
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenCourse()}
-              aria-label="add"
-            >
-              <EditIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          {/* TODO: This button should only be visible to super admin users */}
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenCourse()}
+            aria-label="add"
+          >
+            <EditIcon fontSize="inherit" />
+          </IconButton>
         </div>
+        {/* TODO: Fill in this field from the database. */}
         <p>
-          This is a course description that is provided in the courses table.
+          {
+            "{This is a course description that is provided in the courses table.}"
+          }
         </p>
       </section>
       <section className="container">
         <div className="header-row">
           <h2>Materials</h2>
-          <div>
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenMaterialNew()}
-              aria-label="add a course material"
-            >
-              <AddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenMaterialNew()}
+            aria-label="add a course material"
+          >
+            <AddIcon fontSize="inherit" />
+          </IconButton>
         </div>
-        <div>
-          <div className={styles.table}>
-            <div className={styles["table-container"]}>
-              <div style={{ height: 500, width: "100%" }}>
-                {/* TODO: We will want to add a link to the provided URL to the name field */}
-                {/* TODO: We need to build a way for users to modify the contents in the table (edit course material).
-                    I am leaning toward inline or a pop-up design, so we'll have to figure out what that will look like and how to implement it. */}
-                <DataGrid
-                  rows={rows}
-                  columns={columns}
-                  initialState={{
-                    pagination: {
-                      paginationModel: { page: 0, pageSize: 5 },
-                    },
-                  }}
-                  pageSizeOptions={[5, 10]}
-                />
-              </div>
-            </div>
-          </div>
+        <div className="data-grid">
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+          />
         </div>
       </section>
 

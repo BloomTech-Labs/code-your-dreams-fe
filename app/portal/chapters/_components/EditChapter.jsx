@@ -31,13 +31,11 @@ export default function EditChapter() {
         <p className="italic">
           Be careful&mdash;deleting a chapter is a permanent action.
         </p>
-        <div>
-          {/* TODO: This button should be disabled if there are >0 members
+        {/* TODO: This button should be disabled if there are >0 members
             linked to the chapter. */}
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

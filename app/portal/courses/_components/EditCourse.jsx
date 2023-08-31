@@ -16,6 +16,9 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 export default function EditCourse() {
   return (
     <>
+      {/* TODO: Take in prop for database entry to be edited.
+      Link form to update that project when saved. */}
+      {/* TODO: Fill in all details in form from DB. */}
       <TextField
         required
         id="course-name"
@@ -35,16 +38,20 @@ export default function EditCourse() {
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
+      <div className="italic">
+        A course can only be deleted if it is not linked to any materials.
+        Please remove all linked materials if you would like to delete this
+        course.
+      </div>
       <Card variant="outlined" className="danger-group">
         <p className="italic">
-          Please be careful and sure you want to proceed before doing anything
-          in this section.
+          Be careful&mdash;deleting a course is a permanent action.
         </p>
-        <div>
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        {/* TODO: This button should be disabled if there are >0 materials
+          linked to the chapter. */}
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

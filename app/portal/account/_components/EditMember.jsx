@@ -32,11 +32,9 @@ export default function EditMember() {
           Deleting your account is a permanent action. If you continue, you will
           also be logged out of the app.
         </p>
-        <div>
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

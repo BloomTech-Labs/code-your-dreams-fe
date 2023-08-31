@@ -47,11 +47,9 @@ export default function EditSuperUser() {
           Deleting the super user will permanently remove them from the
           database.
         </p>
-        <div>
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )
