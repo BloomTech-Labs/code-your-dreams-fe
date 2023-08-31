@@ -7,6 +7,7 @@ import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "./_components/EditChapter"
 
+// TODO: Replace demo data with actual data from the chapters table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "chapterName", headerName: "Chapter name", width: 250 },
@@ -17,7 +18,6 @@ const columns = [
     width: 150,
   },
 ]
-
 const rows = [
   {
     id: 1,

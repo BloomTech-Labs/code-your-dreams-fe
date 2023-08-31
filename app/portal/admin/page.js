@@ -28,6 +28,7 @@ const showEditButton = () => {
   )
 }
 
+// TODO: Replace demo data with actual data from the users table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
@@ -41,7 +42,6 @@ const columns = [
     renderCell: (params) => showEditButton(params.value),
   },
 ]
-
 const rows = [
   {
     id: 1,
@@ -59,6 +59,7 @@ const rows = [
   },
 ]
 
+// TODO: Replace demo data with actual data from the materials type table.
 const demoData = [
   { id: 1, name: "Document", quantity: 52, showButton: true },
   { id: 2, name: "Presentation", quantity: 64, showButton: true },
@@ -98,7 +99,7 @@ export default function Page() {
           application.
         </p>
         {/* TODO: We need to send the selected user over to the edit modal */}
-        <div style={{ height: 500, width: "100%" }}>
+        <div className="data-grid">
           <DataGrid
             rows={rows}
             columns={columns}

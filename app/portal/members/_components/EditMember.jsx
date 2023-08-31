@@ -13,6 +13,7 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
+// TODO: Replace chapter list from chapter table in DB.
 const chapterList = [
   { label: "Code Your Dreams" },
   { label: "CoderHeroes" },
@@ -22,7 +23,9 @@ const chapterList = [
 export default function EditMember() {
   return (
     <>
-      {/* TODO: Determine what fields to add to sync up with Auth0 and what will remain local to the app */}
+      {/* TODO: Take in prop for database entry to be edited.
+        Link form to update that project when saved. */}
+      {/* TODO: Fill in all details in form from DB. */}
       <div className="italic">
         Edit member details by updating any of the fields and clicking the save
         button.
@@ -39,6 +42,7 @@ export default function EditMember() {
         type="email"
         label="Email Address"
       />
+      {/* TODO: For a chapter admin, this should be a fixed field. For a super admin they should see a dropdown. */}
       <Autocomplete
         disablePortal
         id="chapter-name"

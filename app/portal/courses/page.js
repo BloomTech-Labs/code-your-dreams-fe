@@ -152,7 +152,7 @@ export default function Page() {
         <div className={styles.table}>
           <div className={styles["table-container"]}>
             {/* TODO: Clicking on a course name should open up a detail page */}
-            <div style={{ height: 500, width: "100%" }}>
+            <div className="data-grid">
               <DataGrid
                 rows={rows}
                 columns={columns.map((column) =>
