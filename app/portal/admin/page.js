@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import styles from "./page.module.scss"
 import { DataGrid } from "@mui/x-data-grid"
 import {
   IconButton,
@@ -29,6 +28,7 @@ const showEditButton = () => {
   )
 }
 
+// TODO: Replace demo data with actual data from the users table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
@@ -42,7 +42,6 @@ const columns = [
     renderCell: (params) => showEditButton(params.value),
   },
 ]
-
 const rows = [
   {
     id: 1,
@@ -60,6 +59,7 @@ const rows = [
   },
 ]
 
+// TODO: Replace demo data with actual data from the materials type table.
 const demoData = [
   { id: 1, name: "Document", quantity: 52, showButton: true },
   { id: 2, name: "Presentation", quantity: 64, showButton: true },
@@ -74,42 +74,32 @@ export default function Page() {
   const handleOpenSuperUserNew = () => setOpenSuperUserNew(true)
   const handleCloseSuperUserNew = () => setOpenSuperUserNew(false)
   // Material type NEW modal
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const [openMaterialNew, setOpenMaterialNew] = useState(false)
+  const handleOpenMaterialNew = () => setOpenMaterialNew(true)
+  const handleCloseMaterialNew = () => setOpenMaterialNew(false)
 
   return (
-    <main className={styles.admin}>
-      <aside className="TODO">
-        TODO:
-        <ul>
-          <li>Implement Auth0 integration for admin users.</li>
-          <li>Implement local changes for admin users, e.g., admin flag.</li>
-        </ul>
-      </aside>
+    <main>
       <section className="container">
         <h1>Admin Settings</h1>
         <div className="header-row">
           <h2>Super users</h2>
-          <div className="add-button">
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenSuperUserNew()}
-              aria-label="add a super user"
-            >
-              <PersonAddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenSuperUserNew()}
+            aria-label="add a super user"
+          >
+            <PersonAddIcon fontSize="inherit" />
+          </IconButton>
         </div>
         <p className="italic">
           Super users will have the ability to access all course materials.
           Super admins will have the ability to manage settings for the entire
           application.
         </p>
-        {/* TODO: We'll need to enable user editing via Auth0 as well as local editing.
-            Locally we'd need to managed the admin flag, if anything else. */}
-        <div style={{ height: 500, width: "100%" }}>
+        {/* TODO: We need to send the selected user over to the edit modal */}
+        <div className="data-grid">
           <DataGrid
             rows={rows}
             columns={columns}
@@ -122,32 +112,26 @@ export default function Page() {
           />
         </div>
       </section>
-      <section className={`container ${styles.materials}`}>
-        {/* TODO: This is where we will put our materials types definitions.
-            We'll need to think through logic on when we allow removal of a definition.
-            E.g., if there are any instances linked to that definition, you cannot delete, etc.
-            The UI must help ensure users only can delete an unlinked material type. */}
+      <section className="container">
         <div className="header-row">
           <h2>Materials types</h2>
-          <div className="add-button">
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpen()}
-              aria-label="add a materials type"
-            >
-              <AddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenMaterialNew()}
+            aria-label="add a materials type"
+          >
+            <AddIcon fontSize="inherit" />
+          </IconButton>
         </div>
         <p className="italic">
           A materials type can only be removed if there are zero instances of it
           being used&mdash;you must change the type for each file for all files
           before you can delete a type.
         </p>
-
+        {/* TODO: We need to send the selected material type over to the edit modal */}
         <TableContainer>
-          <Table size="small" aria-label="simple table">
+          <Table size="small" aria-label="simple table" className="min-width">
             <TableHead>
               <TableRow>
                 <TableCell>Types</TableCell>
@@ -183,8 +167,8 @@ export default function Page() {
       </Modal>
       <Modal
         title="Create a New Materials Type"
-        open={open}
-        handleClose={handleClose}
+        open={openMaterialNew}
+        handleClose={handleCloseMaterialNew}
       >
         <NewMaterialType />
       </Modal>

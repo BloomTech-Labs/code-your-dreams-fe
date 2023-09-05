@@ -10,6 +10,7 @@ import {
   Card,
 } from "@mui/material"
 
+// TODO: Replace chapter list from chapters table in DB.
 const chapterList = [
   { label: "Code Your Dreams" },
   { label: "CoderHeroes" },
@@ -19,6 +20,7 @@ const chapterList = [
 export default function NewMember() {
   return (
     <>
+      {/* TODO: Take in prop for which table to add a new instance. */}
       <div className="italic">Fill out the form to add a new member.</div>
       <TextField
         required
@@ -34,6 +36,7 @@ export default function NewMember() {
         label="Email Address"
         helperText="Enter the email address of the member to be added"
       />
+      {/* TODO: For a chapter admin, this should be a fixed field. For a super admin they should see a dropdown. */}
       <Autocomplete
         disablePortal
         id="chapter-name"

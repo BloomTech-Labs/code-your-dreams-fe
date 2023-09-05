@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import styles from "./page.module.scss"
 import {
   IconButton,
   Link,
@@ -35,6 +34,7 @@ const showEditButton = () => {
   )
 }
 
+// TODO: Replace demo data with actual data from the chapters table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
@@ -44,11 +44,10 @@ const columns = [
     field: "edit",
     headerName: "Edit",
     align: "center",
-    width: 80,
+    width: 100,
     renderCell: () => showEditButton(),
   },
 ]
-
 const rows = [
   {
     id: 1,
@@ -66,6 +65,7 @@ const rows = [
   },
 ]
 
+// TODO: Replace demo data with actual data from the courses table.
 const demoData = [
   { id: 1, name: "Python", showButton: true },
   { id: 2, name: "App Inventor", showButton: true },
@@ -86,17 +86,9 @@ export default function Page() {
   const handleCloseMemberNew = () => setOpenMemberNew(false)
 
   return (
-    <main className={styles.detail}>
-      <aside className="TODO">
-        <p>This is a chapter detail page</p>
-        TODO:
-        <ul>
-          <li>Restrict page to chapter admins and CYD users</li>
-        </ul>
-      </aside>
-
+    // TODO: Restrict page to chapter admins and CYD users
+    <main>
       <BreadcrumbRow>
-        {/* TODO: Make this menu visible only to CYD users */}
         <Link underline="hover" color="inherit" href="/portal/chapters">
           Chapters
         </Link>
@@ -104,37 +96,59 @@ export default function Page() {
         <Typography color="text.primary">{"{chapter_name}"}</Typography>
       </BreadcrumbRow>
 
-      <section className={`container ${styles.courses}`}>
+      <section className="container">
         <div className="header-row">
           <h1>[Chapter_Name]</h1>
-          <div>
-            {/* TODO: This button should only be visible to super admin users */}
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenChapterEdit()}
-              aria-label="edit"
-            >
-              <EditIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          {/* TODO: This button should only be visible to super admin users */}
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenChapterEdit()}
+            aria-label="edit"
+          >
+            <EditIcon fontSize="inherit" />
+          </IconButton>
         </div>
         <div className="header-row">
-          <h2>Available Courses</h2>
-          <div>
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenCourseLink()}
-              aria-label="edit"
-            >
-              <AddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          <h2>Members</h2>
+          {/* TODO: This button should only be visible to super admin users */}
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenMemberNew()}
+            aria-label="add"
+          >
+            <PersonAddIcon fontSize="inherit" />
+          </IconButton>
         </div>
-        {/* TODO: If admin, show a list of the courses */}
+        <div className="data-grid">
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+          />
+        </div>
+      </section>
+      {/* TODO: Restrict the following section to only super admin users */}
+      <section className="container">
+        <div className="header-row">
+          <h2>Available Courses</h2>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenCourseLink()}
+            aria-label="edit"
+          >
+            <AddIcon fontSize="inherit" />
+          </IconButton>
+        </div>
         <TableContainer>
-          <Table size="small" aria-label="simple table">
+          <Table size="small" aria-label="simple table" className="min-width">
             <TableHead>
               <TableRow>
                 <TableCell>Course Name</TableCell>
@@ -157,42 +171,10 @@ export default function Page() {
             </TableBody>
           </Table>
         </TableContainer>
-        {/* TODO: Else, display a link to the courses page */}
-        <div className={`italic ${styles["chapter-notice"]}`}>
+        <div className="italic">
           <Link underline="hover" href="/portal/courses">
             Visit the Courses page to access course materials.
           </Link>
-        </div>
-      </section>
-      <section className="container">
-        <div className="header-row">
-          <h2>Members</h2>
-          <div className="add-button">
-            {/* TODO: This button should only be visible to super admin users */}
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenMemberNew()}
-              aria-label="add"
-            >
-              <PersonAddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
-        </div>
-        <div style={{ height: 500, width: "100%" }}>
-          {/* TODO: This is the same table as the member view. Should we componentize this? */}
-          {/* TODO: We'll have to figure out how to update a user in Auth0 and if there are any local changes we manage within the app */}
-          {/* TODO: When we have an edit here, we'll have to figure out how we handle the change--maybe via pop up (if changes are local)? */}
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-          />
         </div>
       </section>
 

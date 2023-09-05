@@ -15,6 +15,9 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 export default function EditMember() {
   return (
     <>
+      {/* TODO: Take in prop for database entry to be edited.
+      Link form to update that project when saved. */}
+      {/* TODO: Fill in all details in form from DB. */}
       <div className="italic">
         Edit member details by updating any of the fields and clicking the save
         button.
@@ -31,6 +34,7 @@ export default function EditMember() {
         type="email"
         label="Email Address"
       />
+      {/* TODO: Fill in chapter name from DB for current user */}
       <TextField
         disabled
         id="chapter-name"
@@ -53,11 +57,9 @@ export default function EditMember() {
         <p className="italic">
           Deleting the member will permanently remove them from the database.
         </p>
-        <div>
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

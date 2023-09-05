@@ -2,6 +2,7 @@
 
 import { TextField, Autocomplete } from "@mui/material"
 
+// TODO: Replace materials type list from materials type table in DB.
 const typeList = [
   { label: "Document" },
   { label: "Presentation" },
@@ -12,6 +13,7 @@ const typeList = [
 export default function NewMaterial() {
   return (
     <>
+      {/* TODO: Take in prop for which table to add a new instance. */}
       <div className="italic">
         Add the link to a source material file saved at a cloud service such as
         Google Drive, Dropbox, etc.

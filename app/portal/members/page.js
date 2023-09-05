@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from "react"
-import styles from "./page.module.scss"
 import { IconButton } from "@mui/material"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import { DataGrid } from "@mui/x-data-grid"
@@ -18,6 +17,7 @@ const showEditButton = () => {
   )
 }
 
+// TODO: Replace demo data with actual data from the members table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
@@ -32,7 +32,6 @@ const columns = [
     renderCell: () => showEditButton(),
   },
 ]
-
 const rows = [
   {
     id: 1,
@@ -58,33 +57,21 @@ export default function Page() {
   const handleClose = () => setOpen(false)
 
   return (
-    <main className={styles.main}>
-      <aside className="TODO">
-        TODO:
-        <ul>
-          <li>
-            Determine user management design: what happens locally vs. what will
-            be done in the Auth0 UI.
-          </li>
-        </ul>
-      </aside>
+    <main>
       <section className="container">
         <div className="header-row">
           <h1>Members</h1>
-          <div className="add-button">
-            {/* TODO: This button should only be visible to super admin users */}
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpen()}
-              aria-label="add"
-            >
-              <PersonAddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          {/* TODO: This button should only be visible to super admin users */}
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpen()}
+            aria-label="add"
+          >
+            <PersonAddIcon fontSize="inherit" />
+          </IconButton>
         </div>
-        <div style={{ height: 500, width: "100%" }}>
-          {/* TODO: We'll have to figure out how to update a user in Auth0 and if there are any local changes we manage within the app */}
+        <div className="data-grid">
           {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
           <DataGrid
             rows={rows}

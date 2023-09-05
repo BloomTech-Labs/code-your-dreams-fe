@@ -7,6 +7,9 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 export default function EditChapter() {
   return (
     <>
+      {/* TODO: Take in prop for database entry to be edited.
+        Link form to update that project when saved. */}
+      {/* TODO: Fill in all details in form from DB. */}
       <div className="italic">
         Update the chapter name here and click the save button to continue.
       </div>
@@ -28,13 +31,11 @@ export default function EditChapter() {
         <p className="italic">
           Be careful&mdash;deleting a chapter is a permanent action.
         </p>
-        <div>
-          {/* TODO: This button should be grayed out if there are >0 members
+        {/* TODO: This button should be disabled if there are >0 members
             linked to the chapter. */}
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

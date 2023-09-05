@@ -7,7 +7,7 @@ import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 export default function EditMember() {
   return (
     <>
-      {/* TODO: Determine what fields to add to sync up with Auth0 and what will remain local to the app */}
+      {/* TODO: Connect this form to a process that will update Auth0 and the local DB */}
       <div className="italic">
         Edit your details by updating any of the fields and clicking the save
         button.
@@ -32,11 +32,9 @@ export default function EditMember() {
           Deleting your account is a permanent action. If you continue, you will
           also be logged out of the app.
         </p>
-        <div>
-          <DestroyButton action="delete" isFullButton={true}>
-            <DeleteForeverIcon />
-          </DestroyButton>
-        </div>
+        <DestroyButton action="delete" isFullButton={true}>
+          <DeleteForeverIcon />
+        </DestroyButton>
       </Card>
     </>
   )

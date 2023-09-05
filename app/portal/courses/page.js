@@ -26,6 +26,7 @@ const convertStatusToIcon = (status) => {
   }
 }
 
+// TODO: Replace demo data with actual data from the courses table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "courseName", headerName: "Course Name", minWidth: 150, flex: 1 },
@@ -58,7 +59,6 @@ const columns = [
     renderCell: (params) => convertStatusToIcon(params.value),
   },
 ]
-
 const rows = [
   {
     id: 1,
@@ -98,7 +98,7 @@ export default function Page() {
   const axiosInstance = AxiosWithAuth()
 
   const handleRowClick = (params) => {
-    // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
+    // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
     const { id } = params.row
 
     return (
@@ -130,11 +130,6 @@ export default function Page() {
             out why it happens.
           </li>
           <li>
-            When the database is connected, the course page should be linked to
-            the text in the "Course name" table cell.
-          </li>
-          <li>The modal needs to be connected to create a new instance.</li>
-          <li>
             Hide the "chapters" and "visibility" columns from non-CYD users.
           </li>
         </ul>
@@ -143,23 +138,21 @@ export default function Page() {
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
           <h1>Courses</h1>
-          <div className="add-button">
-            {/* TODO: make button visible only to CYD super admins */}
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpen()}
-              aria-label="add"
-            >
-              <AddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          {/* TODO: make button visible only to CYD super admins */}
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpen()}
+            aria-label="add"
+          >
+            <AddIcon fontSize="inherit" />
+          </IconButton>
         </div>
 
         <div className={styles.table}>
           <div className={styles["table-container"]}>
             {/* TODO: Clicking on a course name should open up a detail page */}
-            <div style={{ height: 500, width: "100%" }}>
+            <div className="data-grid">
               <DataGrid
                 rows={rows}
                 columns={columns.map((column) =>
@@ -178,6 +171,7 @@ export default function Page() {
           </div>
         </div>
 
+        {/* TODO: Show only to non-CYD users */}
         <p className="italic">
           Contact Code Your Dreams for access to more courses.
         </p>

@@ -117,6 +117,16 @@ header {
   .MuiIconButton-root:hover { border-color: transparent !important; }
 }
 
+table.min-width {
+  margin-bottom: 1.5rem;
+  width: auto;
+}
+
+.data-grid {
+  min-height: 400px;
+  width: 100%;
+}
+
 .modal-card {
   padding: 9px 18px;
   border-style: dotted;
@@ -127,4 +137,6 @@ header {
   padding: 1rem;
   border-style: dotted;
   background-color: $cyd-light-gray;
+
+  text-align: center;
 }

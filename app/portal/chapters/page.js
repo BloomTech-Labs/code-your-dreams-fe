@@ -1,13 +1,13 @@
 "use client"
 
 import React, { useState } from "react"
-import styles from "./page.module.scss"
 import { IconButton, Link } from "@mui/material"
 import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "./_components/EditChapter"
 
+// TODO: Replace demo data with actual data from the chapters table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "chapterName", headerName: "Chapter name", width: 250 },
@@ -18,7 +18,6 @@ const columns = [
     width: 150,
   },
 ]
-
 const rows = [
   {
     id: 1,
@@ -64,29 +63,20 @@ export default function Page() {
   }
 
   return (
-    <main className={styles.chapters}>
-      <aside className="TODO">
-        TODO:
-        <ul>
-          <li>Link text in "Chapter name" table cell to detail page.</li>
-          <li>Limit this page only to CYD upser users/admins.</li>
-        </ul>
-      </aside>
-
+    // TODO: Limit this page only to CYD super users/admins.
+    <main>
       <section className="container">
         <div className="header-row">
           <h1>Chapters</h1>
-          <div className="add-button">
-            {/* TODO: This button should only be visible to super admin users */}
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpen()}
-              aria-label="add"
-            >
-              <GroupAddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
+          {/* TODO: This button should only be visible to super admins */}
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpen()}
+            aria-label="add"
+          >
+            <GroupAddIcon fontSize="inherit" />
+          </IconButton>
         </div>
         <p className="italic">
           This is a list of all the chapters that are managed within the app.
@@ -94,26 +84,21 @@ export default function Page() {
           below to view or edit a chapter.
         </p>
 
-        <div className={styles.table}>
-          <div className={styles["table-container"]}>
-            {/* TODO: Clicking on a chapter name should open up a detail page */}
-            <div style={{ height: 500, width: "100%" }}>
-              <DataGrid
-                rows={rows}
-                columns={columns.map((column) =>
-                  column.field === "chapterName"
-                    ? { ...column, renderCell: handleRowClick }
-                    : column
-                )}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                  },
-                }}
-                pageSizeOptions={[5, 10]}
-              />
-            </div>
-          </div>
+        <div className="data-grid">
+          <DataGrid
+            rows={rows}
+            columns={columns.map((column) =>
+              column.field === "chapterName"
+                ? { ...column, renderCell: handleRowClick }
+                : column
+            )}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 5 },
+              },
+            }}
+            pageSizeOptions={[5, 10]}
+          />
         </div>
       </section>
 
