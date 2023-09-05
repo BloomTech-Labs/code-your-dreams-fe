@@ -32,17 +32,6 @@ const showEditButton = () => {
   )
 }
 
-const showDestroyButton = (status) => {
-  if (status) {
-    return (
-      <DestroyButton action="delete">
-        <DeleteForeverIcon />
-      </DestroyButton>
-    )
-  }
-  return null
-}
-
 // TODO: Replace demo data with actual data from the courses instance in the table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
@@ -107,6 +96,16 @@ export default function Page() {
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
 
+  const handleRowClick = (params) => {
+    const { url, materialName } = params.row
+
+    return (
+      <Link underline="hover" href={`${url}`} target="_new">
+        {materialName}
+      </Link>
+    )
+  }
+
   return (
     <main>
       <BreadcrumbRow>
@@ -163,7 +162,11 @@ export default function Page() {
         <div className="data-grid">
           <DataGrid
             rows={rows}
-            columns={columns}
+            columns={columns.map((column) =>
+              column.field === "materialName"
+                ? { ...column, renderCell: handleRowClick }
+                : column
+            )}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 },
