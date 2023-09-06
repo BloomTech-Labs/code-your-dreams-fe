@@ -2,6 +2,8 @@
 
 Equipping K-12 and adult students with the skills and resources to innovate technology solutions for our world.
 
+The Code Your Dreams (CYD) Curriculum Portal is an app that helps the CYD team provide access to chapter members across the organization. Is is a tool that helps to organize files hosted on the cloud (like in Google Drive or Dropbox) and create a single location where members can come to find links to all of the materials they need for their chapter. The portal provides organization for chapters and members, courses and links to course materials, and other administrative use cases.
+
 ## Deployed Project
 
 [Code Your Dreams](https://code-your-dreams-fe.vercel.app/)
@@ -16,8 +18,8 @@ Equipping K-12 and adult students with the skills and resources to innovate tech
 
 ### User types
 
-- Super admin - Code Your Dreams user that can administer all app content and features
-- Super user - Code Your Dreams user with access to view all content
+- Super admin - CYD user that can administer all app content and features
+- Super user - CYD user with access to view all content
 - Chapter admin - a chapter user that can administer other members of the chapter
 - Chapter user - a chapter user that can view chapter materials
 
