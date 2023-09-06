@@ -4,17 +4,16 @@ import React, { useState } from "react"
 import { Alert, IconButton, Link, Typography } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import EditIcon from "@mui/icons-material/Edit"
-import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import OpenInNewIcon from "@mui/icons-material/OpenInNew"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { DataGrid } from "@mui/x-data-grid"
 import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
-import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 import Modal from "@/components/Modal/Modal"
 import EditCourse from "../_components/EditCourse"
 import NewMaterial from "../_components/NewMaterial"
 import EditMaterial from "../_components/EditMaterial"
 import EditButton from "@/components/admin/EditButton/EditButton"
+import styles from "./page.module.scss"
 
 const showLinkButton = (url) => {
   return (
@@ -30,17 +29,6 @@ const showEditButton = () => {
       <EditMaterial />
     </EditButton>
   )
-}
-
-const showDestroyButton = (status) => {
-  if (status) {
-    return (
-      <DestroyButton action="delete">
-        <DeleteForeverIcon />
-      </DestroyButton>
-    )
-  }
-  return null
 }
 
 // TODO: Replace demo data with actual data from the courses instance in the table.
@@ -107,8 +95,18 @@ export default function Page() {
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
 
+  const handleRowClick = (params) => {
+    const { url, materialName } = params.row
+
+    return (
+      <Link underline="hover" href={`${url}`} target="_new">
+        {materialName}
+      </Link>
+    )
+  }
+
   return (
-    <main>
+    <main className={styles.course}>
       <BreadcrumbRow>
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses
@@ -125,7 +123,11 @@ export default function Page() {
         severity="warning"
         className="container"
       >
-        This course is hidden. Edit the course settings to make it visible.
+        This course is hidden.{" "}
+        <a onClick={() => handleOpenCourse()} className={styles.alert}>
+          Edit the course settings
+        </a>{" "}
+        to make it visible.
       </Alert>
 
       <section className="container">
@@ -163,7 +165,11 @@ export default function Page() {
         <div className="data-grid">
           <DataGrid
             rows={rows}
-            columns={columns}
+            columns={columns.map((column) =>
+              column.field === "materialName"
+                ? { ...column, renderCell: handleRowClick }
+                : column
+            )}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 },
