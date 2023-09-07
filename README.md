@@ -1,8 +1,8 @@
 # Code Your Dreams
 
-Equipping K-12 and adult students with the skills and resources to innovate technology solutions for our world.
+_Equipping K-12 and adult students with the skills and resources to innovate technology solutions for our world._
 
-The Code Your Dreams (CYD) Curriculum Portal is an app that helps the CYD team provide access to chapter members across the organization. Is is a tool that helps to organize files hosted on the cloud (like in Google Drive or Dropbox) and create a single location where members can come to find links to all of the materials they need for their chapter. The portal provides organization for chapters and members, courses and links to course materials, and other administrative use cases.
+The Code Your Dreams (CYD) Curriculum Portal is an app that helps the CYD team provide access to chapter members across each organization. It is a tool that helps to organize files hosted in the cloud (like in Google Drive or Dropbox) by creating a single location where members can come to find links to all of the materials they need for their chapter. The portal provides organization for chapters and members, courses and links to course materials, and other administrative use cases.
 
 ## Deployed Project
 
@@ -37,24 +37,61 @@ TBA
 
 TBA
 
+### Prerequisites
+
+- _(If there is no need for the app to appear in search engines, then this step can be ignored.)_ The code as written is set for testing. Once the app is deployed it needs to be configured to allow search engine indexing. There are two files to update:
+
+  1. `robots.js` : Delete the following lines of code, 12 and 1-4. Line 12, `disallow: "/",` is what blocks indexing across the entire app. The first four lines are for comments that are no longer needed.
+
+     ```
+      // This file is temporarily set to disallow all bots
+      // Set to [allow: "/",] when the app goes live
+      // Also included a spot for generating a sitemap when ready
+
+      export default function robots() {
+        return {
+          rules: {
+            userAgent: "*",
+            disallow: "/api/",
+            disallow: "/portal/",
+            disallow: "/style/",
+            disallow: "/",
+          },
+          // sitemap: 'https://acme.com/sitemap.xml',
+        }
+      }
+     ```
+
+  2. `layout.js` : Delete the following code, lines 11-14.
+     ```
+      // Temporarily adding in to prevent indexing of the build site
+      robots: {
+        index: false,
+      },
+     ```
+
 ## QA Test Cases
 
-QA prerequisites:
+The following section provides a comprehensive list of tests that should be performed to ensure that all functions of the application are working as intended. It is split apart into the different app user types and the aspects of the apps that they use.
 
+**QA prerequisites:**
+
+- An Auth0 account is required for the app to function.
+- The Auth0 credentials must be added to the `.env.local` file.
 - A CYD super user account must be created in Auth0.
 - Notes
   - The app was built for use on a desktop and responsive design for mobile/table was not taken into consideration during development.
   - Modals do not auto-save, so any changes must be followed by clicking the "Save" button.
 
+---
+
 ### Super Admin
 
-#### Basics
-
-- Login to the app.
+- Login to the app with a super admin account.
   - Verify that app is forwarded to the Courses page.
 - Click on the Admin page link.
 
-#### User admin
+#### Superuser admin
 
 - Create a new super admin using the new user button (check the "Make a Super Admin" option in the form).
   - Verify that the new user appears on the Super Users table on the admin page.
@@ -68,8 +105,6 @@ QA prerequisites:
   - Verify that the user is no longer in Auth0 as well.
 - Create a new super user (do NOT check the super admin checkbox).
   - Verify that the user appears on the admin page.
-- Delete the new super user.
-  - Verify that the user is no longer on the table and not in Auth0.
 
 #### Materials admin
 
@@ -101,8 +136,83 @@ QA prerequisites:
 - Delete the course.
   - Verify that the app returns to the Courses page and that the course is no longer on the table.
 
+#### Chapter admin
+
+-
+
+#### Member admin
+
+-
+
 ### Super User
+
+#### Courses
+
+#### Members
+
+#### Chapters
+
+---
 
 ### Chapter Admin
 
+#### Courses
+
+#### Member admin
+
+---
+
 ### Chapter User
+
+- Login to the app with a basic user account.
+  - Verify that app is forwarded to the Courses page.
+  - Verify that the member chapter name appears in the header.
+  - Verify that the assigned chapter course (as created above) is visible for the user.
+- Click on the course link.
+  - Verify that the course materials are available.
+- Click on both of the course material links.
+  - Verify that the links open in a new tab/window in the browser.
+
+#### User profile
+
+- Click on the profile link.
+- Update the user email address.
+- Logout from the app.
+
+---
+
+### Testing Cleanup
+
+- Login to the app with a super admin account.
+
+#### Users
+
+- Click on the Members link.
+- Remove all users created for testing.
+  - Verify that all new users do not show up on the user table.
+
+#### Chapters
+
+- Click on the Chapters link.
+- Click on the link for the chapter that was created for testing.
+  - Verify that the member list is empty.
+- Delete the chapter.
+
+#### Courses
+
+- Click on the Courses link.
+- Click on the link for the course that was created for testing.
+- Scroll down to the materials table.
+- Remove all materials created for testing.
+- Delete the course.
+
+#### Admin
+
+- Click on the Admin link.
+- Delete all super users created for testing (do NOT delete the account being used for cleanup).
+  - Verify that the user is no longer on the table and not in Auth0.
+- Delete all material types created for testing.
+- Click on the profile page.
+- Logout from the app.
+- _(Optional)_
+  - If the super admin account is no longer needed, go to Auth0 and delete the super admin account used for testing.
