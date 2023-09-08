@@ -77,7 +77,7 @@ The following section provides a comprehensive list of tests that should be perf
 **QA prerequisites:**
 
 - An Auth0 account is required for the app to function.
-- The Auth0 credentials must be added to the `.env.local` file.
+- The Auth0 credentials must be added to the `.env` file.
 - A CYD super user account must be created in Auth0.
 - Notes
   - The app was built for use on a desktop and responsive design for mobile/table was not taken into consideration during development.
@@ -85,7 +85,7 @@ The following section provides a comprehensive list of tests that should be perf
 
 ---
 
-### Super Admin
+### Super Administrator
 
 - Login to the app with a super admin account.
   - Verify that app is forwarded to the Courses page.
@@ -133,16 +133,35 @@ The following section provides a comprehensive list of tests that should be perf
   - Verify that the table row for the type is removed from the table.
 - Mark the course as visible.
   - Verify in both on the Course page (course table "eyeball") and on the course detail page (hidden alert banner is gone).
-- Delete the course.
-  - Verify that the app returns to the Courses page and that the course is no longer on the table.
 
 #### Chapter admin
 
--
+- Click on the Chapters page link.
+- Click on the plus button to create two new chapters.
+  - Verify that the new chapter is added to the table on the Chapters page.
+- Open one of the chapter pages by clicking the link in the chapter name.
+- Add a chapter user using the new member button.
+  - Verify that the new member appears in the members table.
+- Link two courses to the chapter.
+  - Verify that the linked course appears in the courses table.
+- Delete one of the linked courses from the chapter.
 
 #### Member admin
 
--
+- Click on the Members page link.
+- Click on the plus button to create a new member (add to either of the two chapters).
+  - Verify that the new member is added to the table on the Members page.
+- Find and delete the member that was created during the chapter admin tests.
+  - Verify that the member no longer displays on the members table.
+
+#### User profile
+
+- Click on the profile link.
+- Update the admin name.
+  - Verify that the new name appears in the app.
+- Logout from the app.
+
+---
 
 ### Super User
 
@@ -154,11 +173,34 @@ The following section provides a comprehensive list of tests that should be perf
 
 ---
 
-### Chapter Admin
+### Chapter Administrator
 
 #### Courses
 
+- Login to the app with a chapter admin account.
+  - Verify that app is forwarded to the Courses page.
+  - Verify that the member chapter name appears in the header.
+  - Verify that the assigned chapter course (as created above) is visible for the user.
+- Click on the course link.
+  - Verify that the course materials are available.
+- Click on both of the course material links.
+  - Verify that the links open in a new tab/window in the browser.
+
 #### Member admin
+
+- Click on the members link.
+  - Verify that the member table is visible on the page.
+- Add a new chapter member account (do not click the admin checkbox).
+  - Verify that the new user appears in the member table.
+- Edit the user and make the user a chapter admin.
+  - Verify that the member now has "Yes" in the "Admin?" column.
+- Delete the new user account.
+
+#### User profile
+
+- Click on the profile link.
+- Update the user email address.
+- Logout from the app.
 
 ---
 
