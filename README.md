@@ -89,6 +89,7 @@ The following section provides a comprehensive list of tests that should be perf
 
 - Login to the app with a super admin account.
   - Verify that app is forwarded to the Courses page.
+  - Verify that "Code Your Dreams Admin" appears in the header.
 - Click on the Admin page link.
 
 #### Superuser admin
@@ -129,10 +130,10 @@ The following section provides a comprehensive list of tests that should be perf
   - Verify that the links open in a new tab/window in the browser.
 - Change the material type to the other type not used.
   - Verify that the type changes in the table.
-- Delete the material from the course.
-  - Verify that the table row for the type is removed from the table.
 - Mark the course as visible.
   - Verify in both on the Course page (course table "eyeball") and on the course detail page (hidden alert banner is gone).
+- Create a second course.
+  - Verify that the new course appears on the table.
 
 #### Chapter admin
 
@@ -165,11 +166,30 @@ The following section provides a comprehensive list of tests that should be perf
 
 ### Super User
 
+- Login to the app with a super user account.
+  - Verify that app is forwarded to the Courses page.
+  - Verify that "Code Your Dreams Admin" appears in the header.
+
 #### Courses
+
+- Verify that the courses created in the test cases above appear on the courses table.
+- Click on the course link.
+  - Verify that the course materials appear on the table.
+- Click on both of the course material links.
+  - Verify that the links open in a new tab/window in the browser.
 
 #### Members
 
+- Click on the members link.
+  - Verify that the member table is visible on the page.
+  - Verify that the edit links column is NOT visible on the table.
+
 #### Chapters
+
+- Click on the Chapters page link.
+  - Verify that the chapters appear on the table.
+- Open one of the chapter pages by clicking the link in the chapter name.
+  - Verify that the chapter page is visible and the page is view-only (NO action links).
 
 ---
 
@@ -182,7 +202,7 @@ The following section provides a comprehensive list of tests that should be perf
   - Verify that the member chapter name appears in the header.
   - Verify that the assigned chapter course (as created above) is visible for the user.
 - Click on the course link.
-  - Verify that the course materials are available.
+  - Verify that the course materials appear on the table.
 - Click on both of the course material links.
   - Verify that the links open in a new tab/window in the browser.
 
