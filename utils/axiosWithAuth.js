@@ -8,7 +8,7 @@ const AxiosWithAuth = () => {
 
   instance.interceptors.request.use(
     async config => {
-      const idToken = session?.data.idToken;
+      const idToken = session.data?.idToken && session.data.idToken;
 
       // If the tokens exist, add them to the headers
       if (idToken) {

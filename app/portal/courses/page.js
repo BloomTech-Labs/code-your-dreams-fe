@@ -94,7 +94,6 @@ export default function Page() {
   const handleClose = () => setOpen(false)
   // Example implementation for AxiosWithAuth, TODO: remove later.
   const { data: session } = useSession()
-  session && console.log(session)
   const axiosInstance = AxiosWithAuth()
 
   const handleRowClick = (params) => {
