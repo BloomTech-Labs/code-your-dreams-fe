@@ -37,6 +37,7 @@ const authOptions = {
       session.idToken = token.idToken;
       session.user.id = token.id;
       session.roles = token.roles;
+      session.maxAge = 14400;
 
       return session;
     }

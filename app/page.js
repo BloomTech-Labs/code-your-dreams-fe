@@ -7,13 +7,19 @@ import Image from "next/image"
 import { SignInBtn } from "../components/auth/AuthButtons"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
+import tokenExpired from "@/utils/tokenExpired"
+import { signOut } from "next-auth/react"
 
 export default function Page() {
   const { data: session } = useSession()
 
   useEffect(() => {
-    if (session) {
-      redirect("/portal/courses")
+    if(session) {
+      if (tokenExpired(session.idToken) === false) {
+        redirect("/portal/courses")
+      } else if (tokenExpired(session.idToken) === true) {
+        signOut()
+      }
     }
   }, [session])
 

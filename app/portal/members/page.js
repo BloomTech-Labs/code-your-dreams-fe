@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { IconButton } from "@mui/material"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import { DataGrid } from "@mui/x-data-grid"
@@ -8,6 +8,8 @@ import Modal from "@/components/Modal/Modal"
 import NewMember from "./_components/NewMember"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
+import AxiosWithAuth from "@/utils/axiosWithAuth"
+import { useData } from "@/context/appContext"
 
 const showEditButton = () => {
   return (
@@ -18,20 +20,6 @@ const showEditButton = () => {
 }
 
 // TODO: Replace demo data with actual data from the members table.
-const columns = [
-  { field: "id", headerName: "ID", width: 100 },
-  { field: "memberName", headerName: "Name", width: 250 },
-  { field: "emailAddress", headerName: "Email", width: 300 },
-  { field: "chapterName", headerName: "Chapter", width: 300 },
-  { field: "adminFlag", headerName: "Admin?", width: 150 },
-  {
-    field: "edit",
-    headerName: "Edit",
-    align: "center",
-    width: 80,
-    renderCell: () => showEditButton(),
-  },
-]
 const rows = [
   {
     id: 1,
@@ -53,8 +41,43 @@ const rows = [
 
 export default function Page() {
   const [open, setOpen] = useState(false)
+  const [members, setMembers] = useState(null)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const axiosInstance = AxiosWithAuth()
+  const { state } = useData()
+
+  const columns = [
+    { field: "id", headerName: "ID", width: 100 },
+    { field: "name", headerName: "Name", width: 250 },
+    { field: "email", headerName: "Email", width: 300 },
+    {
+      field: "chapter_name",
+      headerName: "Chapter",
+      width: 300,
+    },
+    {
+      field: "adminFlag",
+      headerName: "Admin?",
+      width: 150,
+      valueGetter: (params) => params.row.role === 'admin' ? 'Yes' : 'No'
+    },
+    {
+      field: "edit",
+      headerName: "Edit",
+      align: "center",
+      width: 80,
+      renderCell: () => showEditButton(),
+    },
+  ]
+
+useEffect(() => {
+  console.log(state)
+  if (state.users) {
+    setMembers(state.users)
+  }
+}, [state])
 
   return (
     <main>
@@ -73,16 +96,19 @@ export default function Page() {
         </div>
         <div className="data-grid">
           {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
-              },
-            }}
-            pageSizeOptions={[5, 10]}
-          />
+          {
+            members &&
+            <DataGrid
+              rows={members}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
+            />
+          }
         </div>
       </section>
 
