@@ -19,7 +19,7 @@ export const AppProvider = ({ children }) => {
         if (state.session === null || session?.status === "authenticated") {
             session && (sessionTemp = session)
         }
-
+        // Then, grab members data
         axiosInstance
             .get(`http://localhost:8080/users/`)
             .then(res => {
@@ -27,7 +27,7 @@ export const AppProvider = ({ children }) => {
             let data = res.data.map((i) => {
                 i.id = count
                 count++
-
+                // Pull chapter name for each user, add to state for grid
                 axiosInstance
                 .get(`http://localhost:8080/chapters/${i.chapter_id}`)
                 .then(res => {
