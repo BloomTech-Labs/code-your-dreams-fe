@@ -128,9 +128,6 @@ export default function Page() {
             page hang for a moment with only the footer visible and/or figure
             out why it happens.
           </li>
-          <li>
-            Hide the "chapters" and "visibility" columns from non-CYD users.
-          </li>
         </ul>
       </aside>
 
@@ -150,7 +147,10 @@ export default function Page() {
 
         <div className={styles.table}>
           <div className={styles["table-container"]}>
+            {/* TODO: Handle use case of an empty data grid.
+            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
             {/* TODO: Clicking on a course name should open up a detail page */}
+            {/* TODO: Hide the "chapters" and "visibility" columns from non-CYD users. */}
             <div className="data-grid">
               <DataGrid
                 rows={rows}

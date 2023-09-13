@@ -84,6 +84,8 @@ export default function Page() {
           below to view or edit a chapter.
         </p>
 
+        {/* TODO: Handle use case of an empty data grid.
+            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         <div className="data-grid">
           <DataGrid
             rows={rows}

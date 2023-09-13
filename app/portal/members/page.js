@@ -61,7 +61,7 @@ export default function Page() {
       field: "adminFlag",
       headerName: "Admin?",
       width: 150,
-      valueGetter: (params) => params.row.role === 'admin' ? 'Yes' : 'No'
+      valueGetter: (params) => (params.row.role === "admin" ? "Yes" : "No"),
     },
     {
       field: "edit",
@@ -72,12 +72,12 @@ export default function Page() {
     },
   ]
 
-useEffect(() => {
-  console.log(state)
-  if (state.users) {
-    setMembers(state.users)
-  }
-}, [state])
+  useEffect(() => {
+    console.log(state)
+    if (state.users) {
+      setMembers(state.users)
+    }
+  }, [state])
 
   return (
     <main>
@@ -95,9 +95,11 @@ useEffect(() => {
           </IconButton>
         </div>
         <div className="data-grid">
+          {/* TODO: Handle use case of an empty data grid.
+            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
+          {/* TODO: We need to send the selected user over to the edit modal */}
           {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
-          {
-            members &&
+          {members && (
             <DataGrid
               rows={members}
               columns={columns}
@@ -108,7 +110,7 @@ useEffect(() => {
               }}
               pageSizeOptions={[5, 10]}
             />
-          }
+          )}
         </div>
       </section>
 
