@@ -25,7 +25,11 @@ export default function Page() {
           <SignOutBtn className="secondary">Sign Out</SignOutBtn>
         </Card>
         <Card variant="outlined" className={styles["action-group"]}>
-          <p>Account email: {session ? session.user.email : "unknown"}</p>
+          <p>
+            Name: {session ? session.user.name : "unknown"}
+            <br />
+            Email: {session ? session.user.email : "unknown"}
+          </p>
           <EditButton title="Edit Account Details" isFullButton={true}>
             <EditMember />
           </EditButton>
