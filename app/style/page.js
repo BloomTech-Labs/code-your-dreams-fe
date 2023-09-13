@@ -11,7 +11,8 @@ export default function Page() {
         <section className="container">
           <h1>Style Guide</h1>
           <p>
-            This is the style guild for the Code Your Dreams courses web app
+            This is the style guild for the Code Your Dreams Curriculum Portal
+            web app.
           </p>
         </section>
         <section className="container">
@@ -97,8 +98,8 @@ export default function Page() {
             <a href="https://material.io/" target="_new">
               Material Design
             </a>{" "}
-            styles by default. There is minimal diversion from the style library
-            applied in this app.
+            styles by default. There is minimal diversion from the style
+            library.
           </p>
         </section>
       </main>
