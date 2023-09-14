@@ -9,6 +9,7 @@ import NewMember from "./_components/NewMember"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
+// import useData
 import { useData } from "@/context/appContext"
 
 const showEditButton = () => {
@@ -46,10 +47,11 @@ export default function Page() {
   const handleClose = () => setOpen(false)
 
   const axiosInstance = AxiosWithAuth()
+  // By running useData, we can pull in and access
+  // our entire data store!
   const { state } = useData()
 
   const columns = [
-    { field: "id", headerName: "ID", width: 100 },
     { field: "name", headerName: "Name", width: 250 },
     { field: "email", headerName: "Email", width: 300 },
     {
@@ -72,12 +74,15 @@ export default function Page() {
     },
   ]
 
-  useEffect(() => {
-    console.log(state)
-    if (state.users) {
-      setMembers(state.users)
-    }
-  }, [state])
+useEffect(() => {
+  console.log(state)
+  // Here we're checking to be sure we have users
+  // in state, then setting that data set to local (component)
+  // state for the data grid to work off of!
+  if (state.users) {
+    setMembers(state.users)
+  }
+}, [state])
 
   return (
     <main>
@@ -102,6 +107,7 @@ export default function Page() {
           {members && (
             <DataGrid
               rows={members}
+              getRowId={(row) => row.auth0_id}
               columns={columns}
               initialState={{
                 pagination: {
