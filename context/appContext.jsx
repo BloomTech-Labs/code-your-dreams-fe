@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import AxiosWithAuth from "@/utils/axiosWithAuth";
 import axios from "axios";
 
-export const AppContext = createContext();
+export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
     const axiosInstance = AxiosWithAuth();
@@ -127,21 +127,20 @@ export const AppProvider = ({ children }) => {
         setState(newState)
     }
 
-    return (
-        <AppContext.Provider value={{ state, updateState }}>
-            {children}
-        </AppContext.Provider>
-    )
+  return (
+    <AppContext.Provider value={{ state, updateState }}>
+      {children}
+    </AppContext.Provider>
+  )
 }
 
 // useData is imported wherever you need to access our data store
 // - see members/page.js for an example and notes!
 export function useData() {
-    const context = useContext(AppContext);
-    if (context === undefined) {
-        throw new Error("useData must be used within a Provider")
-    }
+  const context = useContext(AppContext)
+  if (context === undefined) {
+    throw new Error("useData must be used within a Provider")
+  }
 
-    return context
+  return context
 }
-

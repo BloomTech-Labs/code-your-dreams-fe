@@ -3,6 +3,6 @@ export const metadata = {
   description: "CYD Curriculum Portal app style guide",
 }
 
-export default function RootLayout({ children }) {
+export default function StyleLayout({ children }) {
   return <>{children}</>
 }

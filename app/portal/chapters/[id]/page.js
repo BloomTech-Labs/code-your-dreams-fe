@@ -121,6 +121,8 @@ export default function Page() {
             <PersonAddIcon fontSize="inherit" />
           </IconButton>
         </div>
+        {/* TODO: Handle use case of an empty data grid.
+            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         <div className="data-grid">
           <DataGrid
             rows={rows}
@@ -147,6 +149,8 @@ export default function Page() {
             <AddIcon fontSize="inherit" />
           </IconButton>
         </div>
+        {/* TODO: Add in logic to show the following if the table data is empty
+          {data.length === 0 && (<TableRow><TableCell colSpan={2}>no records found</TableCell></TableRow>)} */}
         <TableContainer>
           <Table size="small" aria-label="simple table" className="min-width">
             <TableHead>

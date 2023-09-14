@@ -5,6 +5,12 @@
   margin-top: $header-height;
   @include desktop-xl { margin-top: $header-height-xl; }
   background-color: $cyd-light-gray;
+
+  code.highlighted {
+    padding: .05rem .1rem;
+    border-radius: 3px;
+    background-color: $cyd-light-pink;
+  }
 }
 
 .examples {
