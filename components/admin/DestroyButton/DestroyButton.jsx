@@ -10,7 +10,6 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material"
-import styles from "./DestroyButton.module.scss"
 
 // TODO: Pass along a function into this component to destroy the object
 const DestroyButton = ({ action, isFullButton, children }) => {
@@ -44,10 +43,7 @@ const DestroyButton = ({ action, isFullButton, children }) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="admin destroy action confirmation"
       >
-        <DialogTitle
-          id="alert-dialog-title"
-          className={`h4 ${styles["dialog-title"]}`}
-        >
+        <DialogTitle id="alert-dialog-title" className="h4 capitalize">
           {action + " confirmation"}
         </DialogTitle>
         <DialogContent>
