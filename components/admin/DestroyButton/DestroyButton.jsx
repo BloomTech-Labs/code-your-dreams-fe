@@ -29,11 +29,16 @@ const DestroyButton = ({ action, isFullButton, children }) => {
           color="error"
           onClick={handleClickOpen}
           startIcon={children}
+          aria-label="remove/delete button"
         >
           {action}
         </Button>
       ) : (
-        <IconButton color="error" onClick={handleClickOpen}>
+        <IconButton
+          color="error"
+          onClick={handleClickOpen}
+          aria-label="remove/delete button"
+        >
           {children}
         </IconButton>
       )}
@@ -41,7 +46,7 @@ const DestroyButton = ({ action, isFullButton, children }) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
-        aria-describedby="admin destroy action confirmation"
+        aria-describedby="admin remove/delete action confirmation"
       >
         <DialogTitle id="alert-dialog-title" className="h4 capitalize">
           {action + " confirmation"}

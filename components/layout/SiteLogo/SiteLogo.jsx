@@ -3,7 +3,11 @@ import Image from "next/image"
 
 export default function SiteLogo() {
   return (
-    <Link href="/portal" className="no-text">
+    <Link
+      href="/portal"
+      className="no-text"
+      aria-label="return to default page"
+    >
       <Image
         src="/images/CYD-Logo.png"
         alt="Code Your Dreams logo"

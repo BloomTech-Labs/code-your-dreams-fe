@@ -11,6 +11,7 @@ export default function Footer() {
         <span>
           <Link
             href="https://www.codeyourdreams.org/"
+            aria-label="Visit the Code Your Dreams website"
             underline="hover"
             target="_blank"
             rel="noopener"

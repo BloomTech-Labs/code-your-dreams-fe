@@ -13,8 +13,9 @@ const SignInBtn = () => {
       variant="contained"
       startIcon={<LoginIcon />}
       onClick={() => signIn(undefined, { callbackUrl: "/portal" })}
+      aria-label="sign in button"
     >
-      SIGN-IN TO APP
+      Sign In to App
     </Button>
   )
 }
@@ -29,6 +30,7 @@ const SignOutBtn = () => {
           callbackUrl: `${process.env.NEXT_PUBLIC_SIGNOUTCALLBACKURL}`,
         })
       }}
+      aria-label="sign out button"
     >
       Sign Out
     </Button>
