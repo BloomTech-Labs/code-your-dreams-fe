@@ -10,12 +10,13 @@ const Modal = ({ children, title, open, handleClose }) => {
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
     >
       <Box>
         <form className={styles.modal}>
           <div className={styles["modal-header"]}>
-            <div className="h3">{title}</div>
+            <div className="h3" id="modal-modal-title">
+              {title}
+            </div>
             <IconButton onClick={handleClose} aria-label="Close modal">
               <CloseIcon />
             </IconButton>
