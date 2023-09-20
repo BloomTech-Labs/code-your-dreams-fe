@@ -20,7 +20,7 @@ export default function Navigation() {
         <Button
           variant="text"
           href="/portal/members"
-          aria-label="view members"
+          aria-label="View members"
           aria-current="page"
           tabIndex={2}
         >
@@ -30,7 +30,7 @@ export default function Navigation() {
         <Button
           variant="text"
           href="/portal/chapters"
-          aria-label="view chapters"
+          aria-label="View chapters"
           aria-current="page"
           tabIndex={3}
         >
@@ -40,7 +40,7 @@ export default function Navigation() {
         <Button
           variant="text"
           href="/portal/admin"
-          aria-label="view admin tools"
+          aria-label="View admin tools"
           aria-current="page"
           tabIndex={4}
         >

@@ -22,7 +22,7 @@ export default function Header() {
             href="/portal/account"
             color="primary"
             size="large"
-            aria-label="view account"
+            aria-label="View account"
             className="compact-button"
             tabIndex={5}
           >
@@ -32,7 +32,7 @@ export default function Header() {
             href="/portal/account"
             variant="text"
             endIcon={<PersonIcon />}
-            aria-label="view account"
+            aria-label="View account"
             className="full-button"
             tabIndex={5}
           >

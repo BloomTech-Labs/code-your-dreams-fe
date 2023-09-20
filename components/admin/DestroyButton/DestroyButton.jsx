@@ -29,7 +29,7 @@ const DestroyButton = ({ action, isFullButton, children }) => {
           color="error"
           onClick={handleClickOpen}
           startIcon={children}
-          aria-label="remove/delete button"
+          aria-label="Remove/delete button"
         >
           {action}
         </Button>
@@ -37,7 +37,7 @@ const DestroyButton = ({ action, isFullButton, children }) => {
         <IconButton
           color="error"
           onClick={handleClickOpen}
-          aria-label="remove/delete button"
+          aria-label="Remove/delete button"
         >
           {children}
         </IconButton>

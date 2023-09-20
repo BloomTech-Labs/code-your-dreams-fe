@@ -22,7 +22,7 @@ const EditButton = ({ title, isFullButton, children }) => {
           variant="outlined"
           startIcon={<EditIcon />}
           onClick={handleOpen}
-          aria-label="edit button"
+          aria-label="Edit button"
         >
           {title}
         </Button>
@@ -30,7 +30,7 @@ const EditButton = ({ title, isFullButton, children }) => {
         <IconButton
           color="primary"
           onClick={handleOpen}
-          aria-label="edit button"
+          aria-label="Edit button"
         >
           {<EditIcon />}
         </IconButton>

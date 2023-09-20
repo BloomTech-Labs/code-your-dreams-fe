@@ -18,11 +18,26 @@ const convertStatusToIcon = (status) => {
 
   switch (status) {
     case "visible":
-      return (statusIcon = <VisibilityIcon className={styles.purple} />)
+      return (statusIcon = (
+        <VisibilityIcon
+          className={styles.purple}
+          aria-label="Selected course is visible"
+        />
+      ))
     case "hidden":
-      return (statusIcon = <VisibilityOffIcon className={styles.gray} />)
+      return (statusIcon = (
+        <VisibilityOffIcon
+          className={styles.gray}
+          aria-label="Selected course is hidden"
+        />
+      ))
     default:
-      return (statusIcon = <QuestionMarkIcon className={styles.gray} />)
+      return (statusIcon = (
+        <QuestionMarkIcon
+          className={styles.gray}
+          aria-label="Selected course status is unknown"
+        />
+      ))
   }
 }
 
@@ -101,7 +116,11 @@ export default function Page() {
     const { id } = params.row
 
     return (
-      <Link underline="hover" href={`/portal/courses/${id}`}>
+      <Link
+        underline="hover"
+        href={`/portal/courses/${id}`}
+        aria-label={`Open detail page for the ${params.value} course`}
+      >
         {params.value}
       </Link>
     )
@@ -139,7 +158,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpen()}
-            aria-label="add"
+            aria-label="Add a new course"
           >
             <AddIcon fontSize="inherit" />
           </IconButton>
@@ -165,6 +184,7 @@ export default function Page() {
                   },
                 }}
                 pageSizeOptions={[5, 10]}
+                aria-label="Data grid of courses"
               />
             </div>
           </div>

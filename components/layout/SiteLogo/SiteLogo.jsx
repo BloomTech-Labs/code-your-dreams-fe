@@ -6,7 +6,7 @@ export default function SiteLogo() {
     <Link
       href="/portal"
       className="no-text"
-      aria-label="return to default page"
+      aria-label="Return to default page"
     >
       <Image
         src="/images/CYD-Logo.png"
