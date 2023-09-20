@@ -10,7 +10,7 @@ export default function Navigation() {
         <Button
           variant="text"
           href="/portal/courses"
-          aria-label="view courses"
+          aria-label="View courses"
           aria-current="page"
           tabIndex={1}
         >

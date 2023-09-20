@@ -46,7 +46,6 @@ const DestroyButton = ({ action, isFullButton, children }) => {
         open={open}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
-        aria-describedby="admin remove/delete action confirmation"
       >
         <DialogTitle id="alert-dialog-title" className="h4 capitalize">
           {action + " confirmation"}
