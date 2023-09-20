@@ -111,10 +111,9 @@ export default function Page() {
               columns={columns}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
+                  paginationModel: { page: 0, pageSize: 20 },
                 },
               }}
-              pageSizeOptions={[5, 10]}
               aria-label="Data grid of members"
             />
           )}
