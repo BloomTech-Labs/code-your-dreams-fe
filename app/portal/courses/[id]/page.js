@@ -138,7 +138,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpenCourse()}
-            aria-label="add"
+            aria-label="Edit course details"
           >
             <EditIcon fontSize="inherit" />
           </IconButton>
@@ -157,7 +157,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpenMaterialNew()}
-            aria-label="add a course material"
+            aria-label="Add a course material"
           >
             <AddIcon fontSize="inherit" />
           </IconButton>
@@ -174,10 +174,10 @@ export default function Page() {
             )}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                paginationModel: { page: 0, pageSize: 20 },
               },
             }}
-            pageSizeOptions={[5, 10]}
+            aria-label="Data grid of course materials"
           />
         </div>
       </section>

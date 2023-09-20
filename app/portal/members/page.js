@@ -74,15 +74,15 @@ export default function Page() {
     },
   ]
 
-useEffect(() => {
-  console.log(state)
-  // Here we're checking to be sure we have users
-  // in state, then setting that data set to local (component)
-  // state for the data grid to work off of!
-  if (state.users) {
-    setMembers(state.users)
-  }
-}, [state])
+  useEffect(() => {
+    console.log(state)
+    // Here we're checking to be sure we have users
+    // in state, then setting that data set to local (component)
+    // state for the data grid to work off of!
+    if (state.users) {
+      setMembers(state.users)
+    }
+  }, [state])
 
   return (
     <main>
@@ -94,7 +94,7 @@ useEffect(() => {
             color="primary"
             size="large"
             onClick={() => handleOpen()}
-            aria-label="add"
+            aria-label="Add a new member"
           >
             <PersonAddIcon fontSize="inherit" />
           </IconButton>
@@ -111,10 +111,10 @@ useEffect(() => {
               columns={columns}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 5 },
+                  paginationModel: { page: 0, pageSize: 20 },
                 },
               }}
-              pageSizeOptions={[5, 10]}
+              aria-label="Data grid of members"
             />
           )}
         </div>

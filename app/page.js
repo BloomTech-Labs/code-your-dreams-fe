@@ -14,7 +14,7 @@ export default function Page() {
   const { data: session } = useSession()
 
   useEffect(() => {
-    if(session) {
+    if (session) {
       if (tokenExpired(session.idToken) === false) {
         redirect("/portal/courses")
       } else if (tokenExpired(session.idToken) === true) {
@@ -65,6 +65,7 @@ export default function Page() {
                   underline="hover"
                   target="_blank"
                   rel="noopener"
+                  aria-label="Use this link to visit our website"
                 >
                   Visit our website
                 </Link>{" "}
@@ -76,6 +77,7 @@ export default function Page() {
                   variant="outlined"
                   href="https://forms.gle/XS9hL3nXintpFLpn9"
                   target="_blank"
+                  aria-label="Submit interest via linked Google Form"
                 >
                   Submit interest
                 </Button>

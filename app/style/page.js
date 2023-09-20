@@ -23,6 +23,7 @@ export default function Page() {
             <a
               href="https://fonts.google.com/specimen/Roboto+Flex"
               target="_blank"
+              aria-label="Learn more about Roboto Flex at the Google Fonts website"
             >
               Roboto Flex
             </a>{" "}
@@ -91,11 +92,19 @@ export default function Page() {
           <h2>UI Components</h2>
           <p>
             The application takes advantage of{" "}
-            <a href="https://mui.com/material-ui/" target="_new">
+            <a
+              href="https://mui.com/material-ui/"
+              target="_new"
+              aria-label="Learn more about Material UI at their website"
+            >
               Material UI
             </a>{" "}
             components which use{" "}
-            <a href="https://material.io/" target="_new">
+            <a
+              href="https://material.io/"
+              target="_new"
+              aria-label="Learn more about Material Design at their website"
+            >
               Material Design
             </a>{" "}
             styles by default. There is minimal diversion from the style

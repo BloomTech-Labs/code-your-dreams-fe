@@ -88,7 +88,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpenSuperUserNew()}
-            aria-label="add a super user"
+            aria-label="Add a super user"
           >
             <PersonAddIcon fontSize="inherit" />
           </IconButton>
@@ -107,10 +107,10 @@ export default function Page() {
             columns={columns}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                paginationModel: { page: 0, pageSize: 20 },
               },
             }}
-            pageSizeOptions={[5, 10]}
+            aria-label="Data grid of super users"
           />
         </div>
       </section>
@@ -121,7 +121,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpenMaterialNew()}
-            aria-label="add a materials type"
+            aria-label="Add a materials type"
           >
             <AddIcon fontSize="inherit" />
           </IconButton>
@@ -136,6 +136,7 @@ export default function Page() {
           {data.length === 0 && (<TableRow><TableCell colSpan={3}>no records found</TableCell></TableRow>)} */}
         <TableContainer>
           <Table size="small" aria-label="simple table" className="min-width">
+            <caption>Admin table for materials types</caption>
             <TableHead>
               <TableRow>
                 <TableCell>Types</TableCell>

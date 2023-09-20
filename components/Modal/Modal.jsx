@@ -10,13 +10,14 @@ const Modal = ({ children, title, open, handleClose }) => {
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
     >
       <Box>
         <form className={styles.modal}>
           <div className={styles["modal-header"]}>
-            <div className="h3">{title}</div>
-            <IconButton onClick={handleClose}>
+            <div className="h3" id="modal-modal-title">
+              {title}
+            </div>
+            <IconButton onClick={handleClose} aria-label="Close modal">
               <CloseIcon />
             </IconButton>
           </div>
@@ -24,10 +25,18 @@ const Modal = ({ children, title, open, handleClose }) => {
           <div className={styles["modal-body"]}>{children}</div>
 
           <div className={styles["modal-footer"]}>
-            <Button variant="contained" onClick={handleClose}>
+            <Button
+              variant="contained"
+              onClick={handleClose}
+              aria-label="Save changes"
+            >
               Save
             </Button>
-            <Button variant="text" onClick={handleClose}>
+            <Button
+              variant="text"
+              onClick={handleClose}
+              aria-label="Close without saving"
+            >
               Close without saving
             </Button>
           </div>

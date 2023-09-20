@@ -116,7 +116,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpenMemberNew()}
-            aria-label="add"
+            aria-label="Add a new chapter member"
           >
             <PersonAddIcon fontSize="inherit" />
           </IconButton>
@@ -129,10 +129,10 @@ export default function Page() {
             columns={columns}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                paginationModel: { page: 0, pageSize: 20 },
               },
             }}
-            pageSizeOptions={[5, 10]}
+            aria-label="Data grid of chapter members"
           />
         </div>
       </section>
@@ -144,7 +144,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpenCourseLink()}
-            aria-label="edit"
+            aria-label="Link a course to the chapter"
           >
             <AddIcon fontSize="inherit" />
           </IconButton>
@@ -153,6 +153,7 @@ export default function Page() {
           {data.length === 0 && (<TableRow><TableCell colSpan={2}>no records found</TableCell></TableRow>)} */}
         <TableContainer>
           <Table size="small" aria-label="simple table" className="min-width">
+            <caption>Admin table for linked courses</caption>
             <TableHead>
               <TableRow>
                 <TableCell>Course Name</TableCell>

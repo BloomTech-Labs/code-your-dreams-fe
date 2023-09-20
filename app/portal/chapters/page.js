@@ -56,7 +56,11 @@ export default function Page() {
     const { id } = params.row
 
     return (
-      <Link underline="hover" href={`/portal/chapters/${id}`}>
+      <Link
+        underline="hover"
+        href={`/portal/chapters/${id}`}
+        aria-label={`Open chapter detail page for ${params.value}`}
+      >
         {params.value}
       </Link>
     )
@@ -73,7 +77,7 @@ export default function Page() {
             color="primary"
             size="large"
             onClick={() => handleOpen()}
-            aria-label="add"
+            aria-label="Add a new chapter"
           >
             <GroupAddIcon fontSize="inherit" />
           </IconButton>
@@ -96,10 +100,10 @@ export default function Page() {
             )}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 5 },
+                paginationModel: { page: 0, pageSize: 20 },
               },
             }}
-            pageSizeOptions={[5, 10]}
+            aria-label="Data grid of chapters"
           />
         </div>
       </section>
