@@ -23,14 +23,14 @@ const Modal = ({ children, title, open, handleClose }) => {
 
           <div className={styles["modal-body"]}>{children}</div>
 
-          <div className={styles["modal-footer"]}>
+          {/* <div className={styles["modal-footer"]}>
             <Button variant="contained" onClick={handleClose}>
               Save
             </Button>
             <Button variant="text" onClick={handleClose}>
               Close without saving
             </Button>
-          </div>
+          </div> */}
         </form>
       </Box>
     </MuiModal>
