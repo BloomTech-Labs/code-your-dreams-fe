@@ -6,12 +6,11 @@ import { IconButton, Link } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
-import AxiosWithAuth from "@/utils/axiosWithAuth"
-import { useSession } from "next-auth/react"
 import NewCourse from "./_components/NewCourse"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark"
+import { useData } from "@/context/appContext"
 
 const convertStatusToIcon = (status) => {
   let statusIcon
@@ -41,12 +40,10 @@ const convertStatusToIcon = (status) => {
   }
 }
 
-// TODO: Replace demo data with actual data from the courses table.
 const columns = [
-  { field: "id", headerName: "ID", width: 100 },
-  { field: "courseName", headerName: "Course Name", minWidth: 150, flex: 1 },
+  { field: "name", headerName: "Course Name", minWidth: 150, flex: 1 },
   {
-    field: "courseDescription",
+    field: "description",
     headerName: "Description",
     minWidth: 350,
     flex: 2,
@@ -56,60 +53,32 @@ const columns = [
     headerName: "Materials",
     headerAlign: "right",
     type: "number",
-    width: 120,
+    width: 150,
   },
   {
     field: "chapters",
     headerName: "Chapters",
     headerAlign: "right",
     type: "number",
-    width: 120,
+    width: 150,
   },
   {
     field: "visibility",
     headerName: "Visibility",
     headerAlign: "center",
     align: "center",
-    width: 100,
+    width: 150,
     renderCell: (params) => convertStatusToIcon(params.value),
-  },
-]
-const rows = [
-  {
-    id: 1,
-    courseName: "Python",
-    courseDescription:
-      "This is a long course description that should get cutoff from the demo page because it is so long-winded and excessive, and no it is not about phyton snakes.",
-    files: 25,
-    chapters: 12,
-    visibility: "visible",
-  },
-  {
-    id: 2,
-    courseName: "App Inventor",
-    courseDescription:
-      "Helping new coders explore the creation of apps in an Android environment.",
-    files: 42,
-    chapters: 14,
-    visibility: "visible",
-  },
-  {
-    id: 3,
-    courseName: "Test Course",
-    courseDescription: "Testing setup for a new course",
-    files: 3,
-    chapters: 0,
-    visibility: "hidden",
   },
 ]
 
 export default function Page() {
+  const [courses, setCourses] = useState(null)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  // Example implementation for AxiosWithAuth, TODO: remove later.
-  const { data: session } = useSession()
-  const axiosInstance = AxiosWithAuth()
+
+  const { state } = useData()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
@@ -127,15 +96,11 @@ export default function Page() {
   }
 
   useEffect(() => {
-    axiosInstance
-      .get("http://localhost:8080/protected-route")
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.error(err.message)
-      })
-  }, [session])
+    console.log(state)
+    if (state.users) {
+      setCourses(state.courses)
+    }
+  }, [state])
 
   return (
     <main>
@@ -171,20 +136,23 @@ export default function Page() {
             {/* TODO: Clicking on a course name should open up a detail page */}
             {/* TODO: Hide the "chapters" and "visibility" columns from non-CYD users. */}
             <div className="data-grid">
-              <DataGrid
-                rows={rows}
-                columns={columns.map((column) =>
-                  column.field === "courseName"
-                    ? { ...column, renderCell: handleRowClick }
-                    : column
-                )}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 20 },
-                  },
-                }}
-                aria-label="Data grid of courses"
-              />
+              {courses && (
+                <DataGrid
+                  rows={courses}
+                  getRowId={(row) => row.id}
+                  columns={columns.map((column) =>
+                    column.field === "name"
+                      ? { ...column, renderCell: handleRowClick }
+                      : column
+                  )}
+                  initialState={{
+                    pagination: {
+                      paginationModel: { page: 0, pageSize: 20 },
+                    },
+                  }}
+                  aria-label="Data grid of courses"
+                />
+              )}
             </div>
           </div>
         </div>
