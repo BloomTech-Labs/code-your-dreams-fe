@@ -1,16 +1,15 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { IconButton, Link } from "@mui/material"
 import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "./_components/EditChapter"
+import { useData } from "@/context/appContext"
 
-// TODO: Replace demo data with actual data from the chapters table.
 const columns = [
-  { field: "id", headerName: "ID", width: 100 },
-  { field: "chapterName", headerName: "Chapter name", width: 250 },
+  { field: "name", headerName: "Chapter name", width: 250 },
   {
     field: "members",
     headerName: "Members",
@@ -18,38 +17,14 @@ const columns = [
     width: 150,
   },
 ]
-const rows = [
-  {
-    id: 1,
-    chapterName: "Code Your Dreams",
-    members: 25,
-  },
-  {
-    id: 2,
-    chapterName: "CoderHeroes",
-    members: 3,
-  },
-  {
-    id: 3,
-    chapterName: "Community Center",
-    members: 36,
-  },
-  {
-    id: 4,
-    chapterName: "Neighborhood Public School",
-    members: 45,
-  },
-  {
-    id: 5,
-    chapterName: "Coding Bootcamp",
-    members: 17,
-  },
-]
 
 export default function Page() {
+  const [chapters, setChapters] = useState(null)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const { state } = useData()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
@@ -65,6 +40,13 @@ export default function Page() {
       </Link>
     )
   }
+
+  useEffect(() => {
+    console.log(state)
+    if (state.chapters) {
+      setChapters(state.chapters)
+    }
+  }, [state])
 
   return (
     // TODO: Limit this page only to CYD super users/admins.
@@ -91,20 +73,23 @@ export default function Page() {
         {/* TODO: Handle use case of an empty data grid.
             https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         <div className="data-grid">
-          <DataGrid
-            rows={rows}
-            columns={columns.map((column) =>
-              column.field === "chapterName"
-                ? { ...column, renderCell: handleRowClick }
-                : column
-            )}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 20 },
-              },
-            }}
-            aria-label="Data grid of chapters"
-          />
+          {chapters && (
+            <DataGrid
+              rows={chapters}
+              getRowId={(row) => row.id}
+              columns={columns.map((column) =>
+                column.field === "name"
+                  ? { ...column, renderCell: handleRowClick }
+                  : column
+              )}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 20 },
+                },
+              }}
+              aria-label="Data grid of chapters"
+            />
+          )}
         </div>
       </section>
 

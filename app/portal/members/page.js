@@ -8,7 +8,6 @@ import Modal from "@/components/Modal/Modal"
 import NewMember from "./_components/NewMember"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
-import AxiosWithAuth from "@/utils/axiosWithAuth"
 // import useData
 import { useData } from "@/context/appContext"
 
@@ -20,33 +19,12 @@ const showEditButton = () => {
   )
 }
 
-// TODO: Replace demo data with actual data from the members table.
-const rows = [
-  {
-    id: 1,
-    memberName: "Brianne Caplan",
-    emailAddress: "brianne@codeyourdreams.org",
-    chapterName: "CoderHeroes",
-    adminFlag: "Yes",
-    edit: "",
-  },
-  {
-    id: 2,
-    memberName: "John Dodson",
-    emailAddress: "john.dodson@bloomtech.com",
-    chapterName: "BT Labs - Remote",
-    adminFlag: "",
-    edit: "",
-  },
-]
-
 export default function Page() {
-  const [open, setOpen] = useState(false)
   const [members, setMembers] = useState(null)
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const axiosInstance = AxiosWithAuth()
   // By running useData, we can pull in and access
   // our entire data store!
   const { state } = useData()
@@ -63,7 +41,7 @@ export default function Page() {
       field: "adminFlag",
       headerName: "Admin?",
       width: 150,
-      valueGetter: (params) => (params.row.role === "admin" ? "Yes" : "No"),
+      valueGetter: (params) => (params.row.role === "admin" ? "Yes" : ""),
     },
     {
       field: "edit",
