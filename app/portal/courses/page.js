@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styles from "./page.module.scss"
 import { IconButton, Link } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
