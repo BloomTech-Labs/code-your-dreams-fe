@@ -9,8 +9,8 @@ import NewMember from "./_components/NewMember"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
-// import useData
 import { useData } from "@/context/appContext"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 const showEditButton = () => {
   return (
@@ -20,36 +20,15 @@ const showEditButton = () => {
   )
 }
 
-// TODO: Replace demo data with actual data from the members table.
-const rows = [
-  {
-    id: 1,
-    memberName: "Brianne Caplan",
-    emailAddress: "brianne@codeyourdreams.org",
-    chapterName: "CoderHeroes",
-    adminFlag: "Yes",
-    edit: "",
-  },
-  {
-    id: 2,
-    memberName: "John Dodson",
-    emailAddress: "john.dodson@bloomtech.com",
-    chapterName: "BT Labs - Remote",
-    adminFlag: "",
-    edit: "",
-  },
-]
-
 export default function Page() {
   const [open, setOpen] = useState(false)
   const [members, setMembers] = useState(null)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const axiosInstance = AxiosWithAuth()
-  // By running useData, we can pull in and access
-  // our entire data store!
-  const { state } = useData()
+  useCheckTokenExpired()
+
+  const { user_session, users, chapters, courses, course_materials, material_types, course_permissions } = useData()
 
   const columns = [
     { field: "name", headerName: "Name", width: 250 },
@@ -75,14 +54,20 @@ export default function Page() {
   ]
 
   useEffect(() => {
-    console.log(state)
-    // Here we're checking to be sure we have users
-    // in state, then setting that data set to local (component)
-    // state for the data grid to work off of!
-    if (state.users) {
-      setMembers(state.users)
+    console.log([
+      user_session,
+      users,
+      chapters,
+      courses,
+      course_materials,
+      material_types,
+      course_permissions
+    ])
+
+    if (users) {
+      setMembers(users)
     }
-  }, [state])
+  }, [chapters, course_materials, course_permissions, courses, material_types, user_session, users])
 
   return (
     <main>

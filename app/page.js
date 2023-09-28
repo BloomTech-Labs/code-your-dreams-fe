@@ -1,27 +1,13 @@
 "use client"
 
-import { useEffect } from "react"
 import { Button, Link } from "@mui/material"
 import styles from "./page.module.scss"
 import Image from "next/image"
 import { SignInBtn } from "../components/auth/AuthButtons"
-import { useSession } from "next-auth/react"
-import { redirect } from "next/navigation"
-import tokenExpired from "@/utils/tokenExpired"
-import { signOut } from "next-auth/react"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 export default function Page() {
-  const { data: session } = useSession()
-
-  useEffect(() => {
-    if (session) {
-      if (tokenExpired(session.idToken) === false) {
-        redirect("/portal/courses")
-      } else if (tokenExpired(session.idToken) === true) {
-        signOut()
-      }
-    }
-  }, [session])
+  useCheckTokenExpired()
 
   return (
     <>

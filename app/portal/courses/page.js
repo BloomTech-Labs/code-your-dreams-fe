@@ -1,17 +1,16 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import styles from "./page.module.scss"
 import { IconButton, Link } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
-import AxiosWithAuth from "@/utils/axiosWithAuth"
-import { useSession } from "next-auth/react"
 import NewCourse from "./_components/NewCourse"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 const convertStatusToIcon = (status) => {
   let statusIcon
@@ -107,9 +106,8 @@ export default function Page() {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
-  // Example implementation for AxiosWithAuth, TODO: remove later.
-  const { data: session } = useSession()
-  const axiosInstance = AxiosWithAuth()
+
+  useCheckTokenExpired()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
@@ -125,17 +123,6 @@ export default function Page() {
       </Link>
     )
   }
-
-  useEffect(() => {
-    axiosInstance
-      .get("http://localhost:8080/protected-route")
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((err) => {
-        console.error(err.message)
-      })
-  }, [session])
 
   return (
     <main>

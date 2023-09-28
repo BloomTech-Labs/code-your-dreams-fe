@@ -6,6 +6,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "./_components/EditChapter"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 // TODO: Replace demo data with actual data from the chapters table.
 const columns = [
@@ -50,6 +51,8 @@ export default function Page() {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  useCheckTokenExpired()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
