@@ -19,6 +19,7 @@ import NewMaterialType from "./_components/NewMaterialType"
 import EditSuperUser from "./_components/EditSuperUser"
 import EditMaterialType from "./_components/EditMaterialType"
 import EditButton from "@/components/admin/EditButton/EditButton"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 const showEditButton = () => {
   return (
@@ -77,6 +78,8 @@ export default function Page() {
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
+
+  useCheckTokenExpired()
 
   return (
     <main>

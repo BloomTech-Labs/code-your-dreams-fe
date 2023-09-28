@@ -10,6 +10,7 @@ import NewCourse from "./_components/NewCourse"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import { useData } from "@/context/appContext"
 
 const convertStatusToIcon = (status) => {
@@ -73,12 +74,13 @@ const columns = [
 ]
 
 export default function Page() {
-  const [courses, setCourses] = useState(null)
+  const [localCourses, setLocalCourses] = useState(null)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const { state } = useData()
+  useCheckTokenExpired()
+  const { courses } = useData()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
@@ -96,11 +98,11 @@ export default function Page() {
   }
 
   useEffect(() => {
-    console.log(state)
-    if (state.users) {
-      setCourses(state.courses)
+    console.log(courses)
+    if (courses) {
+      setLocalCourses(courses)
     }
-  }, [state])
+  }, [courses])
 
   return (
     <main>
@@ -138,7 +140,7 @@ export default function Page() {
             <div className="data-grid">
               {courses && (
                 <DataGrid
-                  rows={courses}
+                  rows={localCourses}
                   getRowId={(row) => row.id}
                   columns={columns.map((column) =>
                     column.field === "name"

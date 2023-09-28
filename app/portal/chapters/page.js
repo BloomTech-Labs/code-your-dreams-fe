@@ -6,6 +6,7 @@ import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "./_components/EditChapter"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import { useData } from "@/context/appContext"
 
 const columns = [
@@ -19,12 +20,13 @@ const columns = [
 ]
 
 export default function Page() {
-  const [chapters, setChapters] = useState(null)
+  const [localChapters, setLocalChapters] = useState(null)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  const { state } = useData()
+  useCheckTokenExpired()
+  const { chapters } = useData()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
@@ -42,11 +44,11 @@ export default function Page() {
   }
 
   useEffect(() => {
-    console.log(state)
-    if (state.chapters) {
-      setChapters(state.chapters)
+    console.log(chapters)
+    if (chapters) {
+      setLocalChapters(chapters)
     }
-  }, [state])
+  }, [chapters])
 
   return (
     // TODO: Limit this page only to CYD super users/admins.
@@ -75,7 +77,7 @@ export default function Page() {
         <div className="data-grid">
           {chapters && (
             <DataGrid
-              rows={chapters}
+              rows={localChapters}
               getRowId={(row) => row.id}
               columns={columns.map((column) =>
                 column.field === "name"

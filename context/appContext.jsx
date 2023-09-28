@@ -8,16 +8,16 @@ export const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
     const axiosInstance = AxiosWithAuth();
-    const initialState = {
-        session: null
-    }
-    const [state, setState] = useState(initialState); // Our data store & data setting function, set to the value in initialState
-    const { data: session } = useSession(); // Session data from 'next-auth'
+    const [user_session, setUserSession] = useState(null)
+    const [users, setUsers] = useState(null)
+    const [chapters, setChapters] = useState(null)
+    const [courses, setCourses] = useState(null)
+    const [course_materials, setCourseMaterials] = useState(null)
+    const [material_types, setMaterialTypes] = useState(null)
+    const [course_permissions, setCoursePermissions] = useState(null)
+    const { data: session, status } = useSession();
 
     function getChapterName(i) {
-        // Maps over our users, references their chapter_id, and
-        // Contacts the back end for that chapter's name, applying
-        // it to the user before returning it in the map function
         axiosInstance
             .get(`${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/${i.chapter_id}`)
             .then(res => {
@@ -27,8 +27,6 @@ export const AppProvider = ({ children }) => {
     }
 
     function getMaterialDetails(i) {
-        // Same as the above function - this grabs course and
-        // material_type names, adding them to each course material
         const endpoints = [
             `${process.env.NEXT_PUBLIC_BE_API_URL}/courses/${i.course_id}`,
             `${process.env.NEXT_PUBLIC_BE_API_URL}/materialTypes/${i.material_type_id}`
@@ -47,7 +45,6 @@ export const AppProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        // An array of every basic "Get all" endpoint in the back end
         let endpoints = [
             `${process.env.NEXT_PUBLIC_BE_API_URL}/users/`,
             `${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/`,
@@ -57,85 +54,62 @@ export const AppProvider = ({ children }) => {
             `${process.env.NEXT_PUBLIC_BE_API_URL}/coursePermissions/`,
         ]
 
-        // First, grab session data, store in state
-        let sessionTemp;
-        // If session not already in state, or session exists and we
-        // are authenticated, run our data getters
-        if (state.session === null || session?.status === 'authenticated') {
-            // If session not in state, store it in 'sessionTemp'
-            // This prevents us from setting it if we have it, and
-            // sets us up for setting it into our data store
-            if (state.session === null) {
-                session && (sessionTemp = session)
+        if (status === 'authenticated') {
+            if (user_session === null) {
+                session && (setUserSession(session))
             }
 
-            // 'axios.all' allows us to send requests for data to
-            // each endpoint in the above array, giving us access
-            // to all data returned from those queries at the same time
-            // (and preventing this file from being clogged up with
-            // lengthy "axios.get(endpoint).then(result => {do stuff}" lines)
             axios.all(endpoints.map((endpoint) => axiosInstance.get(endpoint)))
                 .then(
-                    // Spreading the results from each query, making
-                    // them accessible
-                    axios.spread((users, chapters, courses, course_materials, material_types, course_permissions) => {
+                    axios.spread((users_res, chapters_res, courses_res, course_materials_res, material_types_res, course_permissions_res) => {
                         let result = {
-                            users,
-                            chapters,
-                            courses,
-                            course_materials,
-                            material_types,
-                            course_permissions
+                            users_res,
+                            chapters_res,
+                            courses_res,
+                            course_materials_res,
+                            material_types_res,
+                            course_permissions_res
                         }
                         
-                        // Sets all data into state! We start by
-                        // spreading whatever state is already there,
-                        // then assign each data set to an appropriate
-                        // value. Some values need further processing
-                        // before they get set into state and made
-                        // accessible across the app - we establish
-                        // functions that can be used in JS map
-                        // functions (Map functions simple go over
-                        // an array, running some set of code for 
-                        // each one), returning each value in the raw
-                        // array with any adjustments that need to be
-                        // made
-                        setState({
-                            ...state,
-                            session: sessionTemp,
-                            users: result.users.data.map(i => getChapterName(i)),
-                            chapters: result.chapters.data,
-                            courses: result.courses.data,
-                            course_materials: result.course_materials.data.map((i) => getMaterialDetails(i)),
-                            material_types: result.material_types.data,
-                            course_permissions: result.course_permissions.data
-                        })
+                        if (!users) {
+                            setUsers(result.users_res.data.map(i => getChapterName(i)))
+                        }
+                        if (!chapters) {
+                            setChapters(result.chapters_res.data)
+                        }
+                        if (!courses) {
+                            setCourses(result.courses_res.data)
+                        }
+                        if (!course_materials) {
+                            setCourseMaterials(result.course_materials_res.data.map((i) => getMaterialDetails(i)))
+                        }
+                        if (!material_types) {
+                            setMaterialTypes(result.material_types_res.data)
+                        }
+                        if (!course_permissions) {
+                            setCoursePermissions(result.course_permissions_res.data)
+                        }
                     })
                 )
 
         }
-    }, [session])
-
-    // updateState can be imported into any file where changes
-    // need to be made to the data in our data store locally.
-    // Typically, if I were making a request to update or add
-    // data to the database, I would also run this function
-    // to add it locally - this gives users the illusion of
-    // instant feedback, as data updates locally even while
-    // the app still works on updating the back end
-    const updateState = (newState) => {
-        setState(newState)
-    }
+    }, [session, status])
 
   return (
-    <AppContext.Provider value={{ state, updateState }}>
+    <AppContext.Provider value={{
+        user_session,
+        users,
+        chapters,
+        courses,
+        course_materials,
+        material_types,
+        course_permissions
+    }}>
       {children}
     </AppContext.Provider>
   )
 }
 
-// useData is imported wherever you need to access our data store
-// - see members/page.js for an example and notes!
 export function useData() {
   const context = useContext(AppContext)
   if (context === undefined) {

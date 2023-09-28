@@ -8,8 +8,8 @@ import Modal from "@/components/Modal/Modal"
 import NewMember from "./_components/NewMember"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
-// import useData
 import { useData } from "@/context/appContext"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 const showEditButton = () => {
   return (
@@ -25,9 +25,9 @@ export default function Page() {
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
-  // By running useData, we can pull in and access
-  // our entire data store!
-  const { state } = useData()
+  useCheckTokenExpired()
+
+  const { user_session, users, chapters, courses, course_materials, material_types, course_permissions } = useData()
 
   const columns = [
     { field: "name", headerName: "Name", width: 250 },
@@ -53,14 +53,20 @@ export default function Page() {
   ]
 
   useEffect(() => {
-    console.log(state)
-    // Here we're checking to be sure we have users
-    // in state, then setting that data set to local (component)
-    // state for the data grid to work off of!
-    if (state.users) {
-      setMembers(state.users)
+    console.log([
+      user_session,
+      users,
+      chapters,
+      courses,
+      course_materials,
+      material_types,
+      course_permissions
+    ])
+
+    if (users) {
+      setMembers(users)
     }
-  }, [state])
+  }, [chapters, course_materials, course_permissions, courses, material_types, user_session, users])
 
   return (
     <main>

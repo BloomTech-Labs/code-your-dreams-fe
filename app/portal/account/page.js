@@ -6,11 +6,14 @@ import { Card } from "@mui/material"
 import { useSession } from "next-auth/react"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
+import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 export default function Page() {
   const { data: session } = useSession()
   /* TODO: (delete comment when no longer needed) Can pull user name, email, and "image" (avatar) using "session.user.*"
   Everything else will need to be stored and retrieved from our own database. */
+
+  useCheckTokenExpired()
 
   return (
     <main className={styles.account}>
