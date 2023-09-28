@@ -11,6 +11,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
+import { useData } from "@/context/appContext"
 
 const convertStatusToIcon = (status) => {
   let statusIcon
@@ -40,12 +41,10 @@ const convertStatusToIcon = (status) => {
   }
 }
 
-// TODO: Replace demo data with actual data from the courses table.
 const columns = [
-  { field: "id", headerName: "ID", width: 100 },
-  { field: "courseName", headerName: "Course Name", minWidth: 150, flex: 1 },
+  { field: "name", headerName: "Course Name", minWidth: 150, flex: 1 },
   {
-    field: "courseDescription",
+    field: "description",
     headerName: "Description",
     minWidth: 350,
     flex: 2,
@@ -55,59 +54,33 @@ const columns = [
     headerName: "Materials",
     headerAlign: "right",
     type: "number",
-    width: 120,
+    width: 150,
   },
   {
     field: "chapters",
     headerName: "Chapters",
     headerAlign: "right",
     type: "number",
-    width: 120,
+    width: 150,
   },
   {
     field: "visibility",
     headerName: "Visibility",
     headerAlign: "center",
     align: "center",
-    width: 100,
+    width: 150,
     renderCell: (params) => convertStatusToIcon(params.value),
-  },
-]
-const rows = [
-  {
-    id: 1,
-    courseName: "Python",
-    courseDescription:
-      "This is a long course description that should get cutoff from the demo page because it is so long-winded and excessive, and no it is not about phyton snakes.",
-    files: 25,
-    chapters: 12,
-    visibility: "visible",
-  },
-  {
-    id: 2,
-    courseName: "App Inventor",
-    courseDescription:
-      "Helping new coders explore the creation of apps in an Android environment.",
-    files: 42,
-    chapters: 14,
-    visibility: "visible",
-  },
-  {
-    id: 3,
-    courseName: "Test Course",
-    courseDescription: "Testing setup for a new course",
-    files: 3,
-    chapters: 0,
-    visibility: "hidden",
   },
 ]
 
 export default function Page() {
+  const [localCourses, setLocalCourses] = useState(null)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
   useCheckTokenExpired()
+  const { courses } = useData()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
@@ -123,6 +96,13 @@ export default function Page() {
       </Link>
     )
   }
+
+  useEffect(() => {
+    console.log(courses)
+    if (courses) {
+      setLocalCourses(courses)
+    }
+  }, [courses])
 
   return (
     <main>
@@ -158,20 +138,23 @@ export default function Page() {
             {/* TODO: Clicking on a course name should open up a detail page */}
             {/* TODO: Hide the "chapters" and "visibility" columns from non-CYD users. */}
             <div className="data-grid">
-              <DataGrid
-                rows={rows}
-                columns={columns.map((column) =>
-                  column.field === "courseName"
-                    ? { ...column, renderCell: handleRowClick }
-                    : column
-                )}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 20 },
-                  },
-                }}
-                aria-label="Data grid of courses"
-              />
+              {courses && (
+                <DataGrid
+                  rows={localCourses}
+                  getRowId={(row) => row.id}
+                  columns={columns.map((column) =>
+                    column.field === "name"
+                      ? { ...column, renderCell: handleRowClick }
+                      : column
+                  )}
+                  initialState={{
+                    pagination: {
+                      paginationModel: { page: 0, pageSize: 20 },
+                    },
+                  }}
+                  aria-label="Data grid of courses"
+                />
+              )}
             </div>
           </div>
         </div>

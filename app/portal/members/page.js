@@ -8,7 +8,6 @@ import Modal from "@/components/Modal/Modal"
 import NewMember from "./_components/NewMember"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
-import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useData } from "@/context/appContext"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
@@ -21,8 +20,8 @@ const showEditButton = () => {
 }
 
 export default function Page() {
-  const [open, setOpen] = useState(false)
   const [members, setMembers] = useState(null)
+  const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
 
@@ -42,7 +41,7 @@ export default function Page() {
       field: "adminFlag",
       headerName: "Admin?",
       width: 150,
-      valueGetter: (params) => (params.row.role === "admin" ? "Yes" : "No"),
+      valueGetter: (params) => (params.row.role === "admin" ? "Yes" : ""),
     },
     {
       field: "edit",
