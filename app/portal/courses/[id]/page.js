@@ -163,8 +163,6 @@ export default function Page() {
             <AddIcon fontSize="inherit" />
           </IconButton>
         </div>
-        {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         <div className="data-grid">
           <DataGrid
             rows={rows}

@@ -72,9 +72,6 @@ export default function Page() {
           Use the button above to create a new chapter, or use any of the links
           below to view or edit a chapter.
         </p>
-
-        {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         <div className="data-grid">
           {localChapters && (
             <DataGrid

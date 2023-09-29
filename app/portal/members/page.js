@@ -101,8 +101,6 @@ export default function Page() {
           </IconButton>
         </div>
         <div className="data-grid">
-          {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
           {/* TODO: We need to send the selected user over to the edit modal */}
           {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
           {members && (

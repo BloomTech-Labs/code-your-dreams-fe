@@ -102,8 +102,6 @@ export default function Page() {
           Super admins will have the ability to manage settings for the entire
           application.
         </p>
-        {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         {/* TODO: We need to send the selected user over to the edit modal */}
         <div className="data-grid">
           <DataGrid
