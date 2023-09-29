@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { DataGrid } from "@mui/x-data-grid"
+import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import {
   IconButton,
   Table,
@@ -113,6 +114,11 @@ export default function Page() {
                 paginationModel: { page: 0, pageSize: 20 },
               },
             }}
+            slots={{
+              noRowsOverlay: NoRowsOverlay,
+            }}
+            autoHeight={true}
+            sx={{ "--DataGrid-overlayHeight": "300px" }}
             aria-label="Data grid of super users"
           />
         </div>

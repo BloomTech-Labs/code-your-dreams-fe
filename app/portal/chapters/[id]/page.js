@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@mui/material"
 import { DataGrid } from "@mui/x-data-grid"
+import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import EditIcon from "@mui/icons-material/Edit"
 import AddIcon from "@mui/icons-material/Add"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
@@ -132,6 +133,11 @@ export default function Page() {
                 paginationModel: { page: 0, pageSize: 20 },
               },
             }}
+            slots={{
+              noRowsOverlay: NoRowsOverlay,
+            }}
+            autoHeight={true}
+            sx={{ "--DataGrid-overlayHeight": "300px" }}
             aria-label="Data grid of chapter members"
           />
         </div>
@@ -182,6 +188,7 @@ export default function Page() {
           </Link>
         </div>
       </section>
+      <NoRowsOverlay />
 
       <Modal
         title="Edit Chapter"
