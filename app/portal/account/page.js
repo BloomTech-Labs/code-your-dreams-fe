@@ -21,7 +21,6 @@ export default function Page() {
     <main className={styles.account}>
       <section className={`container ${styles["content-body"]}`}>
         <h1>Account</h1>
-        {/* TODO: Connect chapter name or "Code Your Dreams" to display in the field below. */}
         <p>
           {current_user && `This account is associated with ${current_user.chapter}.`}
         </p>
