@@ -27,7 +27,7 @@ export default function Page() {
 
   useCheckTokenExpired()
 
-  const { user_session, users, chapters, courses, course_materials, material_types, course_permissions } = useData()
+  const { user_session, users, current_user, chapters, courses, course_materials, material_types, course_permissions } = useData()
 
   const columns = [
     { field: "name", headerName: "Name", width: 250 },
@@ -56,6 +56,7 @@ export default function Page() {
     console.log([
       user_session,
       users,
+      current_user,
       chapters,
       courses,
       course_materials,
@@ -66,7 +67,7 @@ export default function Page() {
     if (users) {
       setMembers(users)
     }
-  }, [chapters, course_materials, course_permissions, courses, material_types, user_session, users])
+  }, [chapters, course_materials, course_permissions, courses, material_types, user_session, users, current_user])
 
   return (
     <main>
