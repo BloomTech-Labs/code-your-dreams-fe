@@ -74,15 +74,17 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Members</h1>
-          {/* TODO: This button should only be visible to super admin users */}
-          <IconButton
+          {
+            current_user.role === 'admin' && current_user.chapter === 'Code Your Dreams' ? 
+            <IconButton
             color="primary"
             size="large"
             onClick={() => handleOpen()}
             aria-label="Add a new member"
           >
             <PersonAddIcon fontSize="inherit" />
-          </IconButton>
+          </IconButton> : null
+          }
         </div>
         <div className="data-grid">
           {/* TODO: Handle use case of an empty data grid.
