@@ -138,7 +138,7 @@ export default function Page() {
             {/* TODO: Clicking on a course name should open up a detail page */}
             {/* TODO: Hide the "chapters" and "visibility" columns from non-CYD users. */}
             <div className="data-grid">
-              {courses && (
+              {localCourses && (
                 <DataGrid
                   rows={localCourses}
                   getRowId={(row) => row.id}
