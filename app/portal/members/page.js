@@ -94,7 +94,7 @@ export default function Page() {
         <div className="header-row">
           <h1>Members</h1>
           {
-            current_user && current_user.role === 'admin' && current_user.chapter === 'Code Your Dreams' ? 
+            current_user && current_user.role === 'admin' && current_user.chapter_id === 1 ? 
             <IconButton
             color="primary"
             size="large"

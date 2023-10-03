@@ -59,7 +59,7 @@ export default function Page() {
           <h1>Chapters</h1>
           {/* TODO: This button should only be visible to super admins */}
           {
-            current_user && current_user.role === 'admin' && current_user.chapter === 'Code Your Dreams' ? 
+            current_user && current_user.role === 'admin' && current_user.chapter_id === 1 ? 
             <IconButton
             color="primary"
             size="large"
