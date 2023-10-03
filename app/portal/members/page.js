@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import { IconButton } from "@mui/material"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import { DataGrid } from "@mui/x-data-grid"
+import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import Modal from "@/components/Modal/Modal"
 import NewMember from "./_components/NewMember"
 import EditButton from "@/components/admin/EditButton/EditButton"
@@ -27,7 +28,16 @@ export default function Page() {
 
   useCheckTokenExpired()
 
-  const { user_session, users, current_user, chapters, courses, course_materials, material_types, course_permissions } = useData()
+  const {
+    user_session,
+    users,
+    current_user,
+    chapters,
+    courses,
+    course_materials,
+    material_types,
+    course_permissions,
+  } = useData()
 
   const columns = [
     { field: "name", headerName: "Name", width: 250 },
@@ -61,13 +71,22 @@ export default function Page() {
       courses,
       course_materials,
       material_types,
-      course_permissions
+      course_permissions,
     ])
 
     if (users) {
       setMembers(users)
     }
-  }, [chapters, course_materials, course_permissions, courses, material_types, user_session, users, current_user])
+  }, [
+    chapters,
+    course_materials,
+    course_permissions,
+    courses,
+    material_types,
+    user_session,
+    users,
+    current_user,
+  ])
 
   return (
     <main>
@@ -87,8 +106,6 @@ export default function Page() {
           }
         </div>
         <div className="data-grid">
-          {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
           {/* TODO: We need to send the selected user over to the edit modal */}
           {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
           {members && (
@@ -101,6 +118,11 @@ export default function Page() {
                   paginationModel: { page: 0, pageSize: 20 },
                 },
               }}
+              slots={{
+                noRowsOverlay: NoRowsOverlay,
+              }}
+              autoHeight={true}
+              sx={{ "--DataGrid-overlayHeight": "300px" }}
               aria-label="Data grid of members"
             />
           )}

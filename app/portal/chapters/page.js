@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react"
 import { IconButton, Link } from "@mui/material"
 import GroupAddIcon from "@mui/icons-material/GroupAdd"
 import { DataGrid } from "@mui/x-data-grid"
+import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import Modal from "@/components/Modal/Modal"
 import NewChapter from "./_components/EditChapter"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
@@ -74,9 +75,6 @@ export default function Page() {
           Use the button above to create a new chapter, or use any of the links
           below to view or edit a chapter.
         </p>
-
-        {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         <div className="data-grid">
           {localChapters && (
             <DataGrid
@@ -92,6 +90,11 @@ export default function Page() {
                   paginationModel: { page: 0, pageSize: 20 },
                 },
               }}
+              slots={{
+                noRowsOverlay: NoRowsOverlay,
+              }}
+              autoHeight={true}
+              sx={{ "--DataGrid-overlayHeight": "300px" }}
               aria-label="Data grid of chapters"
             />
           )}

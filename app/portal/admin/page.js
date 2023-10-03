@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import { DataGrid } from "@mui/x-data-grid"
+import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import {
   IconButton,
   Table,
@@ -101,8 +102,6 @@ export default function Page() {
           Super admins will have the ability to manage settings for the entire
           application.
         </p>
-        {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         {/* TODO: We need to send the selected user over to the edit modal */}
         <div className="data-grid">
           <DataGrid
@@ -113,6 +112,11 @@ export default function Page() {
                 paginationModel: { page: 0, pageSize: 20 },
               },
             }}
+            slots={{
+              noRowsOverlay: NoRowsOverlay,
+            }}
+            autoHeight={true}
+            sx={{ "--DataGrid-overlayHeight": "300px" }}
             aria-label="Data grid of super users"
           />
         </div>

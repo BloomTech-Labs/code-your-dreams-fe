@@ -5,6 +5,7 @@ import styles from "./page.module.scss"
 import { IconButton, Link } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import { DataGrid } from "@mui/x-data-grid"
+import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import Modal from "@/components/Modal/Modal"
 import NewCourse from "./_components/NewCourse"
 import VisibilityIcon from "@mui/icons-material/Visibility"
@@ -135,8 +136,6 @@ export default function Page() {
 
         <div className={styles.table}>
           <div className={styles["table-container"]}>
-            {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
             {/* TODO: Clicking on a course name should open up a detail page */}
             {/* TODO: Hide the "chapters" and "visibility" columns from non-CYD users. */}
             <div className="data-grid">
@@ -154,6 +153,11 @@ export default function Page() {
                       paginationModel: { page: 0, pageSize: 20 },
                     },
                   }}
+                  slots={{
+                    noRowsOverlay: NoRowsOverlay,
+                  }}
+                  autoHeight={true}
+                  sx={{ "--DataGrid-overlayHeight": "300px" }}
                   aria-label="Data grid of courses"
                 />
               )}
