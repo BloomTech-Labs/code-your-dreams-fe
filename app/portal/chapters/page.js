@@ -26,7 +26,7 @@ export default function Page() {
   const handleClose = () => setOpen(false)
 
   useCheckTokenExpired()
-  const { chapters } = useData()
+  const { chapters, current_user } = useData()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
@@ -57,14 +57,17 @@ export default function Page() {
         <div className="header-row">
           <h1>Chapters</h1>
           {/* TODO: This button should only be visible to super admins */}
-          <IconButton
+          {
+            current_user && current_user.role === 'admin' && current_user.chapter === 'Code Your Dreams' ? 
+            <IconButton
             color="primary"
             size="large"
             onClick={() => handleOpen()}
             aria-label="Add a new chapter"
           >
             <GroupAddIcon fontSize="inherit" />
-          </IconButton>
+          </IconButton> : null
+          }
         </div>
         <p className="italic">
           This is a list of all the chapters that are managed within the app.
