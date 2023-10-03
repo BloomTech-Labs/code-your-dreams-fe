@@ -7,6 +7,7 @@ import EditIcon from "@mui/icons-material/Edit"
 import OpenInNewIcon from "@mui/icons-material/OpenInNew"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { DataGrid } from "@mui/x-data-grid"
+import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
 import Modal from "@/components/Modal/Modal"
 import EditCourse from "../_components/EditCourse"
@@ -162,8 +163,6 @@ export default function Page() {
             <AddIcon fontSize="inherit" />
           </IconButton>
         </div>
-        {/* TODO: Handle use case of an empty data grid.
-            https://mui.com/x/react-data-grid/components/#no-rows-overlay */}
         <div className="data-grid">
           <DataGrid
             rows={rows}
@@ -177,6 +176,11 @@ export default function Page() {
                 paginationModel: { page: 0, pageSize: 20 },
               },
             }}
+            slots={{
+              noRowsOverlay: NoRowsOverlay,
+            }}
+            autoHeight={true}
+            sx={{ "--DataGrid-overlayHeight": "300px" }}
             aria-label="Data grid of course materials"
           />
         </div>
