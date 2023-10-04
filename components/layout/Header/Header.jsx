@@ -14,8 +14,9 @@ export default function Header() {
         <div className={styles["left-side"]}>
           <SiteLogo />
           <div className="h4">
-            {current_user && current_user.role === "admin" && `${current_user.chapter} - ${current_user.role[0].toUpperCase() + current_user.role.slice(1)}`}
-            {current_user && current_user.role === "user" && `${current_user.chapter} - Staff`}
+            {current_user && current_user.role === "admin" && `${current_user.chapter_name} - ${current_user.role[0].toUpperCase() + current_user.role.slice(1)}`}
+            {current_user && current_user.role === "super_admin" && `${current_user.chapter_name} - Super Admin`}
+            {current_user && current_user.role === "user" && `${current_user.chapter_name} - Staff`}
           </div>
         </div>
         <nav>
