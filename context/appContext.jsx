@@ -18,15 +18,6 @@ export const AppProvider = ({ children }) => {
     const [course_permissions, setCoursePermissions] = useState(null)
     const { data: session, status } = useSession();
 
-    function getChapterName(i) {
-        axiosInstance
-            .get(`${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/${i.chapter_id}`)
-            .then(res => {
-                i.chapter_name = res.data.name
-            })
-            return i
-    }
-
     function getMaterialDetails(i) {
         const endpoints = [
             `${process.env.NEXT_PUBLIC_BE_API_URL}/courses/${i.course_id}`,
@@ -85,7 +76,7 @@ export const AppProvider = ({ children }) => {
                         }
                         
                         if (!users) {
-                            setUsers(result.users_res.data.map(i => getChapterName(i)))
+                            setUsers(result.users_res.data)
                         }
                         if (!current_user) {
                             setCurrentUser(result.current_user_res.data)
