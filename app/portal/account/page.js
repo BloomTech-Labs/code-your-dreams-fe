@@ -22,7 +22,7 @@ export default function Page() {
       <section className={`container ${styles["content-body"]}`}>
         <h1>Account</h1>
         <p>
-          {current_user && `This account is associated with ${current_user.chapter}.`}
+          {current_user && `This account is associated with ${current_user.chapter_name}.`}
         </p>
         <Card variant="outlined" className={styles["action-group"]}>
           <p>Sign out from the app.</p>
