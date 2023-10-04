@@ -81,7 +81,7 @@ export default function Page() {
   const handleClose = () => setOpen(false)
 
   useCheckTokenExpired()
-  const { courses } = useData()
+  const { courses, current_user } = useData()
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
@@ -121,15 +121,17 @@ export default function Page() {
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
           <h1>Courses</h1>
-          {/* TODO: make button visible only to CYD super admins */}
-          <IconButton
+          {
+            current_user && current_user.role_id === 1 && current_user.chapter_id === 1 ? 
+            <IconButton
             color="primary"
             size="large"
             onClick={() => handleOpen()}
             aria-label="Add a new course"
           >
             <AddIcon fontSize="inherit" />
-          </IconButton>
+          </IconButton> : null
+          }
         </div>
 
         <div className={styles.table}>

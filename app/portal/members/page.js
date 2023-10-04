@@ -31,6 +31,7 @@ export default function Page() {
   const {
     user_session,
     users,
+    current_user,
     chapters,
     courses,
     course_materials,
@@ -50,7 +51,7 @@ export default function Page() {
       field: "adminFlag",
       headerName: "Admin?",
       width: 150,
-      valueGetter: (params) => (params.row.role === "admin" ? "Yes" : ""),
+      valueGetter: (params) => (params.row.role === "admin" || params.row.role === "super_admin" ? "Yes" : "No"),
     },
     {
       field: "edit",
@@ -65,6 +66,7 @@ export default function Page() {
     console.log([
       user_session,
       users,
+      current_user,
       chapters,
       courses,
       course_materials,
@@ -83,6 +85,7 @@ export default function Page() {
     material_types,
     user_session,
     users,
+    current_user,
   ])
 
   return (
@@ -90,15 +93,17 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Members</h1>
-          {/* TODO: This button should only be visible to super admin users */}
-          <IconButton
+          {
+            current_user && current_user.role_id === 1 && current_user.chapter_id === 1 ? 
+            <IconButton
             color="primary"
             size="large"
             onClick={() => handleOpen()}
             aria-label="Add a new member"
           >
             <PersonAddIcon fontSize="inherit" />
-          </IconButton>
+          </IconButton> : null
+          }
         </div>
         <div className="data-grid">
           {/* TODO: We need to send the selected user over to the edit modal */}
