@@ -51,7 +51,7 @@ export default function Page() {
       field: "adminFlag",
       headerName: "Admin?",
       width: 150,
-      valueGetter: (params) => (params.row.role === "admin" ? "Yes" : ""),
+      valueGetter: (params) => (params.row.role === "admin" || params.row.role === "super_admin" ? "Yes" : "No"),
     },
     {
       field: "edit",
