@@ -54,11 +54,7 @@ export const AppProvider = ({ children }) => {
                 session && axiosInstance.get(`${process.env.NEXT_PUBLIC_BE_API_URL}/users/${session.user.id}`)
                 .then((res) => {
                     let current_user_temp = res.data;
-                    axiosInstance.get(`${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/${res.data.chapter_id}`)
-                    .then((res) => {
-                        current_user_temp.chapter = res.data.name
-                        setCurrentUser(current_user_temp)
-                    })
+                    setCurrentUser(current_user_temp)
                 })
             }
 
