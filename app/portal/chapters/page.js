@@ -57,9 +57,8 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Chapters</h1>
-          {/* TODO: This button should only be visible to super admins */}
           {
-            current_user && current_user.role === 'admin' && current_user.chapter_id === 1 ? 
+            current_user && current_user.role_id === 1 && current_user.chapter_id === 1 ? 
             <IconButton
             color="primary"
             size="large"

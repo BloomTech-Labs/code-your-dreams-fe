@@ -122,7 +122,7 @@ export default function Page() {
         <div className="header-row">
           <h1>Courses</h1>
           {
-            current_user && current_user.role === 'admin' && current_user.chapter_id === 1 ? 
+            current_user && current_user.role_id === 1 && current_user.chapter_id === 1 ? 
             <IconButton
             color="primary"
             size="large"
