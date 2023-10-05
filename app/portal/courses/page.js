@@ -166,9 +166,12 @@ export default function Page() {
         </div>
 
         {/* TODO: Show only to non-CYD users */}
-        <p className="italic">
-          Contact Code Your Dreams for access to more courses.
-        </p>
+        {
+          current_user && current_user.role_id === 3 && 
+          <p className="italic">
+            Contact Code Your Dreams for access to more courses.
+          </p>
+        }
       </section>
 
       <Modal title="Create a New Course" open={open} handleClose={handleClose}>
