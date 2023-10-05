@@ -15,13 +15,12 @@ import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import { useData } from "@/context/appContext"
 
 const handleRowClick = (params) => {
-  // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
-  const { id } = params.row
+  const { id, name } = params.row
 
   return (
     <Link
       underline="hover"
-      href={`/portal/courses/${id}`}
+      href={`/portal/courses/${name.toLowerCase().replace(" ", "-")}`}
       aria-label={`Open detail page for the ${params.value} course`}
     >
       {params.value}
@@ -147,8 +146,6 @@ export default function Page() {
 
         <div className={styles.table}>
           <div className={styles["table-container"]}>
-            {/* TODO: Clicking on a course name should open up a detail page */}
-            {/* TODO: Hide the "chapters" and "visibility" columns from non-CYD users. */}
             <div className="data-grid">
               {localCourses && (
                 <DataGrid
