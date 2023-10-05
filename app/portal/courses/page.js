@@ -98,6 +98,16 @@ export default function Page() {
     }
   })
 
+  const columnVisibility = (column) => {
+    if (current_user.chapter_id !== 1 && column.field === "chapters") {
+      return
+    }
+    if (current_user.chapter_id !== 1 && column.field === "visibility") {
+      return
+    }
+    return column
+  }
+
   useEffect(() => {
     console.log(courses)
     if (courses) {
@@ -144,7 +154,7 @@ export default function Page() {
                 <DataGrid
                   rows={localCourses}
                   getRowId={(row) => row.id}
-                  columns={columns}
+                  columns={columns.filter(columnVisibility)}
                   initialState={{
                     pagination: {
                       paginationModel: { page: 0, pageSize: 20 },
@@ -162,7 +172,6 @@ export default function Page() {
           </div>
         </div>
 
-        {/* TODO: Show only to non-CYD users */}
         {
           current_user && current_user.role_id === 3 && 
           <p className="italic">
