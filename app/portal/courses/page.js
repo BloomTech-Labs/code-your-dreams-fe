@@ -14,31 +14,36 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import { useData } from "@/context/appContext"
 
-const convertStatusToIcon = (status) => {
-  let statusIcon
+const handleRowClick = (params) => {
+  // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
+  const { id } = params.row
 
-  switch (status) {
-    case "visible":
-      return (statusIcon = (
-        <VisibilityIcon
-          className={styles.purple}
-          aria-label="Selected course is visible"
-        />
-      ))
-    case "hidden":
-      return (statusIcon = (
-        <VisibilityOffIcon
-          className={styles.gray}
-          aria-label="Selected course is hidden"
-        />
-      ))
-    default:
-      return (statusIcon = (
-        <QuestionMarkIcon
-          className={styles.gray}
-          aria-label="Selected course status is unknown"
-        />
-      ))
+  return (
+    <Link
+      underline="hover"
+      href={`/portal/courses/${id}`}
+      aria-label={`Open detail page for the ${params.value} course`}
+    >
+      {params.value}
+    </Link>
+  )
+}
+
+const convertStatusToIcon = (params) => {
+  if (params.value) {
+    return (
+      <VisibilityIcon
+        className={styles.purple}
+        aria-label="Selected course is visible"
+      />
+    )
+  } else {
+    return (
+      <VisibilityOffIcon
+        className={styles.gray}
+        aria-label="Selected course is hidden"
+      />
+    )
   }
 }
 
@@ -70,7 +75,6 @@ const columns = [
     headerAlign: "center",
     align: "center",
     width: 150,
-    renderCell: (params) => convertStatusToIcon(params.value),
   },
 ]
 
@@ -83,20 +87,16 @@ export default function Page() {
   useCheckTokenExpired()
   const { courses, current_user } = useData()
 
-  const handleRowClick = (params) => {
-    // TODO: we'll want to add a descriptive ID like a URL slug instead of an "id" string
-    const { id } = params.row
-
-    return (
-      <Link
-        underline="hover"
-        href={`/portal/courses/${id}`}
-        aria-label={`Open detail page for the ${params.value} course`}
-      >
-        {params.value}
-      </Link>
-    )
+  const renderCellFunctions = {
+    name: (params) => handleRowClick(params),
+    visibility: (params) => convertStatusToIcon(params),
   }
+
+  columns.forEach((column) => {
+    if (renderCellFunctions[column.field]) {
+      column.renderCell = renderCellFunctions[column.field]
+    }
+  })
 
   useEffect(() => {
     console.log(courses)
@@ -121,17 +121,18 @@ export default function Page() {
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
           <h1>Courses</h1>
-          {
-            current_user && current_user.role_id === 1 && current_user.chapter_id === 1 ? 
+          {current_user &&
+          current_user.role_id === 1 &&
+          current_user.chapter_id === 1 ? (
             <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpen()}
-            aria-label="Add a new course"
-          >
-            <AddIcon fontSize="inherit" />
-          </IconButton> : null
-          }
+              color="primary"
+              size="large"
+              onClick={() => handleOpen()}
+              aria-label="Add a new course"
+            >
+              <AddIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
         </div>
 
         <div className={styles.table}>
@@ -143,11 +144,7 @@ export default function Page() {
                 <DataGrid
                   rows={localCourses}
                   getRowId={(row) => row.id}
-                  columns={columns.map((column) =>
-                    column.field === "name"
-                      ? { ...column, renderCell: handleRowClick }
-                      : column
-                  )}
+                  columns={columns}
                   initialState={{
                     pagination: {
                       paginationModel: { page: 0, pageSize: 20 },
