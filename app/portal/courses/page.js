@@ -154,9 +154,10 @@ export default function Page() {
                   columns={columns.filter(columnVisibility)}
                   initialState={{
                     pagination: {
-                      paginationModel: { page: 0, pageSize: 20 },
+                      paginationModel: { pageSize: 20 },
                     },
                   }}
+                  pageSizeOptions={[20]}
                   slots={{
                     noRowsOverlay: NoRowsOverlay,
                   }}
@@ -169,12 +170,11 @@ export default function Page() {
           </div>
         </div>
 
-        {
-          current_user && current_user.role_id === 3 && 
+        {current_user && current_user.role_id === 3 && (
           <p className="italic">
             Contact Code Your Dreams for access to more courses.
           </p>
-        }
+        )}
       </section>
 
       <Modal title="Create a New Course" open={open} handleClose={handleClose}>

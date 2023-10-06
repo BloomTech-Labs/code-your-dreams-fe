@@ -51,7 +51,10 @@ export default function Page() {
       field: "adminFlag",
       headerName: "Admin?",
       width: 150,
-      valueGetter: (params) => (params.row.role === "admin" || params.row.role === "super_admin" ? "Yes" : "No"),
+      valueGetter: (params) =>
+        params.row.role === "admin" || params.row.role === "super_admin"
+          ? "Yes"
+          : "No",
     },
     {
       field: "edit",
@@ -93,17 +96,18 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Members</h1>
-          {
-            current_user && current_user.role_id === 1 && current_user.chapter_id === 1 ? 
+          {current_user &&
+          current_user.role_id === 1 &&
+          current_user.chapter_id === 1 ? (
             <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpen()}
-            aria-label="Add a new member"
-          >
-            <PersonAddIcon fontSize="inherit" />
-          </IconButton> : null
-          }
+              color="primary"
+              size="large"
+              onClick={() => handleOpen()}
+              aria-label="Add a new member"
+            >
+              <PersonAddIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
         </div>
         <div className="data-grid">
           {/* TODO: We need to send the selected user over to the edit modal */}
@@ -115,9 +119,10 @@ export default function Page() {
               columns={columns}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 20 },
+                  paginationModel: { pageSize: 20 },
                 },
               }}
+              pageSizeOptions={[20]}
               slots={{
                 noRowsOverlay: NoRowsOverlay,
               }}

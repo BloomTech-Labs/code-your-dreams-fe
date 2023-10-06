@@ -109,9 +109,10 @@ export default function Page() {
             columns={columns}
             initialState={{
               pagination: {
-                paginationModel: { page: 0, pageSize: 20 },
+                paginationModel: { pageSize: 20 },
               },
             }}
+            pageSizeOptions={[20]}
             slots={{
               noRowsOverlay: NoRowsOverlay,
             }}

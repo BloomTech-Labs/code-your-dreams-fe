@@ -12,7 +12,7 @@ export default function NoRowsOverlay() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_2058_2)">
+        <g clipPath="url(#clip0_2058_2)">
           <path
             d="M59.8676 99.0616C84.2871 99.0616 104.083 95.3627 104.083 90.7998C104.083 86.237 84.2871 82.5381 59.8676 82.5381C35.4481 82.5381 15.6522 86.237 15.6522 90.7998C15.6522 95.3627 35.4481 99.0616 59.8676 99.0616Z"
             fill="#F5F5F5"
@@ -48,7 +48,7 @@ export default function NoRowsOverlay() {
           </clipPath>
         </defs>
       </svg>
-      <div className={styles.label}>No Rows</div>
+      <div className={styles.label}>No Data</div>
     </div>
   )
 }
