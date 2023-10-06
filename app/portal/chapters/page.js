@@ -57,17 +57,18 @@ export default function Page() {
       <section className="container">
         <div className="header-row">
           <h1>Chapters</h1>
-          {
-            current_user && current_user.role_id === 1 && current_user.chapter_id === 1 ? 
+          {current_user &&
+          current_user.role_id === 1 &&
+          current_user.chapter_id === 1 ? (
             <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpen()}
-            aria-label="Add a new chapter"
-          >
-            <GroupAddIcon fontSize="inherit" />
-          </IconButton> : null
-          }
+              color="primary"
+              size="large"
+              onClick={() => handleOpen()}
+              aria-label="Add a new chapter"
+            >
+              <GroupAddIcon fontSize="inherit" />
+            </IconButton>
+          ) : null}
         </div>
         <p className="italic">
           This is a list of all the chapters that are managed within the app.
@@ -86,9 +87,10 @@ export default function Page() {
               )}
               initialState={{
                 pagination: {
-                  paginationModel: { page: 0, pageSize: 20 },
+                  paginationModel: { pageSize: 20 },
                 },
               }}
+              pageSizeOptions={[20]}
               slots={{
                 noRowsOverlay: NoRowsOverlay,
               }}
