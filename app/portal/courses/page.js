@@ -10,12 +10,11 @@ import Modal from "@/components/Modal/Modal"
 import NewCourse from "./_components/NewCourse"
 import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import { useData } from "@/context/appContext"
 
 const handleRowClick = (params) => {
-  const { id, name } = params.row
+  const { name } = params.row
 
   return (
     <Link
