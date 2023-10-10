@@ -15,17 +15,17 @@ import {
 import AddIcon from "@mui/icons-material/Add"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import Modal from "@/components/Modal/Modal"
-import NewSuperUser from "./_components/NewSuperUser"
+import NewSuperAdmin from "./_components/NewSuperAdmin"
 import NewMaterialType from "./_components/NewMaterialType"
-import EditSuperUser from "./_components/EditSuperUser"
+import EditSuperAdmin from "./_components/EditSuperAdmin"
 import EditMaterialType from "./_components/EditMaterialType"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 
 const showEditButton = () => {
   return (
-    <EditButton title="Edit Super User">
-      <EditSuperUser />
+    <EditButton title="Edit Super Admin">
+      <EditSuperAdmin />
     </EditButton>
   )
 }
@@ -35,12 +35,11 @@ const columns = [
   { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
   { field: "emailAddress", headerName: "Email", width: 300 },
-  { field: "adminFlag", headerName: "Super Admin?", width: 200 },
   {
     field: "edit",
     headerName: "Edit",
     align: "center",
-    width: 80,
+    width: 100,
     renderCell: (params) => showEditButton(params.value),
   },
 ]
@@ -49,15 +48,11 @@ const rows = [
     id: 1,
     memberName: "Brianne Caplan",
     emailAddress: "brianne@codeyourdreams.org",
-    adminFlag: "Yes",
-    edit: "",
   },
   {
     id: 2,
     memberName: "John Dodson",
     emailAddress: "john@codeyourdreams.org",
-    adminFlag: "",
-    edit: "",
   },
 ]
 
@@ -71,10 +66,10 @@ const demoData = [
 ]
 
 export default function Page() {
-  // Super user NEW modal
-  const [openSuperUserNew, setOpenSuperUserNew] = useState(false)
-  const handleOpenSuperUserNew = () => setOpenSuperUserNew(true)
-  const handleCloseSuperUserNew = () => setOpenSuperUserNew(false)
+  // Super admin NEW modal
+  const [openSuperAdminNew, setOpenSuperAdminNew] = useState(false)
+  const handleOpenSuperAdminNew = () => setOpenSuperAdminNew(true)
+  const handleCloseSuperAdminNew = () => setOpenSuperAdminNew(false)
   // Material type NEW modal
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
@@ -87,20 +82,19 @@ export default function Page() {
       <section className="container">
         <h1>Admin Settings</h1>
         <div className="header-row">
-          <h2>Super users</h2>
+          <h2>Super admins</h2>
           <IconButton
             color="primary"
             size="large"
-            onClick={() => handleOpenSuperUserNew()}
-            aria-label="Add a super user"
+            onClick={() => handleOpenSuperAdminNew()}
+            aria-label="Add a super admin"
           >
             <PersonAddIcon fontSize="inherit" />
           </IconButton>
         </div>
         <p className="italic">
-          Super users will have the ability to access all course materials.
-          Super admins will have the ability to manage settings for the entire
-          application.
+          Super admins will have the ability to manage settings and users for
+          the entire application.
         </p>
         {/* TODO: We need to send the selected user over to the edit modal */}
         <div className="data-grid">
@@ -118,7 +112,7 @@ export default function Page() {
             }}
             autoHeight={true}
             sx={{ "--DataGrid-overlayHeight": "300px" }}
-            aria-label="Data grid of super users"
+            aria-label="Data grid of super admins"
           />
         </div>
       </section>
@@ -172,11 +166,11 @@ export default function Page() {
       </section>
 
       <Modal
-        title="Add a New Super User"
-        open={openSuperUserNew}
-        handleClose={handleCloseSuperUserNew}
+        title="Add a New Super Admin"
+        open={openSuperAdminNew}
+        handleClose={handleCloseSuperAdminNew}
       >
-        <NewSuperUser />
+        <NewSuperAdmin />
       </Modal>
       <Modal
         title="Create a New Materials Type"

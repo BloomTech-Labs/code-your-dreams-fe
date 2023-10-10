@@ -1,50 +1,38 @@
 "use client"
 
-import {
-  TextField,
-  FormGroup,
-  FormControlLabel,
-  Divider,
-  Typography,
-  Checkbox,
-  Card,
-} from "@mui/material"
+import { TextField, Divider, Typography, Card } from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditSuperUser() {
+export default function EditSuperAdmin() {
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
         Link form to update that project when saved.
         Update Auth0 entry based on changes made in this form. */}
       <div className="italic">
-        Edit super user details by updating any of the fields and clicking the
+        Edit super admin details by updating any of the fields and clicking the
         save button.
       </div>
       <TextField
         required
-        id="super-user-name"
-        label="Super User Name"
+        id="super-admin-name"
+        label="Name"
         variant="outlined"
       />
       <TextField
         required
-        id="super-user-email"
+        id="super-admin-email"
         type="email"
         label="Email Address"
       />
-      <Card variant="outlined" className="modal-card">
-        <FormGroup>
-          <FormControlLabel control={<Checkbox />} label="Make a Super Admin" />
-        </FormGroup>
-      </Card>
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
       <Card variant="outlined" className="danger-group">
+        {/* TODO: we need to introduct a control to prevent the user from deleting their own account with this form */}
         <p className="italic">
-          Deleting the super user will permanently remove them from the
+          Deleting the super admin will permanently remove them from the
           database.
         </p>
         <DestroyButton action="delete" isFullButton={true}>
