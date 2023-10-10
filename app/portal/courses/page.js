@@ -54,14 +54,14 @@ const columns = [
     flex: 2,
   },
   {
-    field: "files",
+    field: "materialsCount",
     headerName: "Materials",
     headerAlign: "right",
     type: "number",
     width: 150,
   },
   {
-    field: "chapters",
+    field: "permissionsCount",
     headerName: "Chapters",
     headerAlign: "right",
     type: "number",
