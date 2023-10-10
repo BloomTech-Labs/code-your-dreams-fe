@@ -19,7 +19,6 @@ The Code Your Dreams (CYD) Curriculum Portal is an app that helps the CYD team p
 ### User types
 
 - Super admin - CYD user that can administer all app content and features
-- Super user - CYD user with access to view all content
 - Chapter admin - a chapter user that can administer other members of the chapter
 - Chapter user - a chapter user that can view chapter materials
 
@@ -78,7 +77,7 @@ The following section provides a comprehensive list of tests that should be perf
 
 - An Auth0 account is required for the app to function.
 - The Auth0 credentials must be added to the `.env` file.
-- A CYD super user account must be created in Auth0.
+- A CYD super admin account must be created in Auth0.
 - _Notes_
   - The app was built for use on a desktop and responsive design for mobile/table was not taken into consideration during development.
   - Modals do not auto-save, so any changes must be followed by clicking the "Save" button.
@@ -96,16 +95,12 @@ A super admin user is for CYD administrators to perform all CRUD functions withi
 #### Superuser admin
 
 - Click on the Admin page link.
-  - Verify that the super user table is empty and the page loads properly.
-- Create a new super admin using the new user button (check the "Make a Super Admin" option in the form).
-  - Verify that the new user appears on the Super Users table on the admin page.
+  - Verify that the super admin table is empty and the page loads properly.
+- Create a new super admin using the new super admin button.
+  - Verify that the new user appears on the Super Admins table on the admin page.
   - Verify that the new user exists in the Auth0 account.
 - Click on the edit user button and update the user's name and email address and save the changes.
   - Verify that both the name and email address are updated on the admin page.
-- Create a new super user (do NOT check the super admin checkbox).
-  - Verify that the user appears on the admin page.
-- Click on the edit user button and check the Super Admin checkbox and save the changes.
-  - Verify that the "Super Admin?" column in the table says "Yes" for that user.
 
 #### Materials admin
 
@@ -158,43 +153,6 @@ A super admin user is for CYD administrators to perform all CRUD functions withi
 - Click on the profile link.
 - Update the user name.
   - Verify that the new name appears in the app.
-- Logout from the app.
-
----
-
-### Super User
-
-A super user is a CYD member that has read access to all data within the app.
-
-- Login to the app with a super user account.
-  - Verify that app is forwarded to the Courses page.
-  - Verify that "Code Your Dreams Staff" appears in the header.
-
-#### Courses
-
-- Verify that the courses created in the test cases above appear on the courses table.
-- Click on a course link.
-  - Verify that the course materials appear on the table.
-- Click on both of the course material links.
-  - Verify that the links open in a new tab/window in the browser.
-
-#### Members
-
-- Click on the members link.
-  - Verify that the member table is visible on the page.
-  - Verify that the edit links column is NOT visible on the table.
-
-#### Chapters
-
-- Click on the Chapters page link.
-  - Verify that the chapters appear on the table.
-- Open one of the chapter pages by clicking the link in the chapter name.
-  - Verify that the chapter page is visible and the page is view-only (NO action links).
-
-#### User profile
-
-- Click on the profile link.
-- Update the user email address.
 - Logout from the app.
 
 ---
@@ -287,7 +245,7 @@ A chapter admin user enables those with the role to administer other users in th
 #### Admin
 
 - Click on the Admin link.
-- Delete all super users created for testing (do NOT delete the account being used for cleanup).
+- Delete all users created for testing (do NOT delete the account being used for cleanup).
   - Verify that the user is no longer on the table and not in Auth0.
 - Delete all material types created for testing.
 - Click on the profile page.

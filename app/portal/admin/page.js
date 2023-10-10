@@ -66,7 +66,7 @@ const demoData = [
 ]
 
 export default function Page() {
-  // Super user NEW modal
+  // Super admin NEW modal
   const [openSuperAdminNew, setOpenSuperAdminNew] = useState(false)
   const handleOpenSuperAdminNew = () => setOpenSuperAdminNew(true)
   const handleCloseSuperAdminNew = () => setOpenSuperAdminNew(false)
@@ -112,7 +112,7 @@ export default function Page() {
             }}
             autoHeight={true}
             sx={{ "--DataGrid-overlayHeight": "300px" }}
-            aria-label="Data grid of super users"
+            aria-label="Data grid of super admins"
           />
         </div>
       </section>

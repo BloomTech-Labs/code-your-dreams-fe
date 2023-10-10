@@ -52,7 +52,7 @@ export default function Page() {
   }, [chapters])
 
   return (
-    // TODO: Limit this page only to CYD super users/admins.
+    // TODO: Limit this page only to CYD super admins.
     <main>
       <section className="container">
         <div className="header-row">
