@@ -245,8 +245,8 @@ A chapter admin user enables those with the role to administer other users in th
 #### Admin
 
 - Click on the Admin link.
-- Delete all users created for testing (do NOT delete the account being used for cleanup).
-  - Verify that the user is no longer on the table and not in Auth0.
+- Delete all admins created for testing (do NOT delete the account being used for cleanup).
+  - Verify that the user is no longer on the super admin table and not in Auth0.
 - Delete all material types created for testing.
 - Click on the profile page.
 - Logout from the app.
