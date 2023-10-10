@@ -92,7 +92,7 @@ A super admin user is for CYD administrators to perform all CRUD functions withi
   - Verify that app is forwarded to the Courses page.
   - Verify that "Code Your Dreams Admin" appears in the header.
 
-#### Superuser admin
+#### Super admin user admin
 
 - Click on the Admin page link.
   - Verify that the super admin table is empty and the page loads properly.
