@@ -12,6 +12,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import { useData } from "@/context/appContext"
+import AxiosWithAuth from "@/utils/axiosWithAuth"
 
 const handleRowClick = (params) => {
   const { name } = params.row
@@ -76,11 +77,34 @@ const columns = [
   },
 ]
 
+const initialState = {
+  name: '',
+  description: '',
+  visibility: false
+}
+
 export default function Page() {
   const [localCourses, setLocalCourses] = useState(null)
   const [open, setOpen] = useState(false)
+  const [formState, setFormState] = useState(initialState)
+  const axiosInstance = AxiosWithAuth()
   const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const handleClose = () => {
+    setOpen(false)
+    setFormState(initialState)
+  }
+  const handleSubmitForm = () => {
+    axiosInstance.post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/create`, formState)
+    .then((res) => {
+      console.log('Form data submitted to database:', res.data)
+      setLocalCourses([...localCourses, res.data[0]])
+      setFormState(initialState)
+      setOpen(false)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
+  }
 
   useCheckTokenExpired()
   const { courses, current_user } = useData()
@@ -176,8 +200,12 @@ export default function Page() {
         )}
       </section>
 
-      <Modal title="Create a New Course" open={open} handleClose={handleClose}>
-        <NewCourse />
+      <Modal title="Create a New Course" open={open} handleClose={handleClose} handleSubmit={handleSubmitForm}>
+        <NewCourse
+          formState={formState}
+          setFormState={setFormState}
+          onSubmit={handleSubmitForm}
+        />
       </Modal>
     </main>
   )
