@@ -8,15 +8,25 @@ import { useData } from "@/context/appContext"
 
 export default function Header() {
   const { current_user } = useData()
+
+  const roleMap = {
+    super_admin: "Super Admin",
+    admin: "Admin",
+    user: "Staff",
+  }
+
   return (
     <header className={styles["site-header"]}>
       <div className={`container ${styles["header-container"]}`}>
         <div className={styles["left-side"]}>
           <SiteLogo />
-          <div className="h4">
-            {current_user && current_user.role === "admin" && `${current_user.chapter_name} - ${current_user.role[0].toUpperCase() + current_user.role.slice(1)}`}
-            {current_user && current_user.role === "super_admin" && `${current_user.chapter_name} - Super Admin`}
-            {current_user && current_user.role === "user" && `${current_user.chapter_name} - Staff`}
+          <div className={styles["org-header"]}>
+            <span className={`${styles.title} h4`}>
+              {current_user ? current_user.chapter_name : ""}
+            </span>
+            <span className={styles.role}>
+              {current_user ? roleMap[current_user.role] : ""}
+            </span>
           </div>
         </div>
         <nav>

@@ -18,7 +18,7 @@ const handleRowClick = (params) => {
 
   return (
     <Link
-      underline="hover"
+      underline="always"
       href={`/portal/courses/${name.toLowerCase().replace(" ", "-")}`}
       aria-label={`Open detail page for the ${params.value} course`}
     >
