@@ -24,14 +24,30 @@ header.site-header {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 
     .left-side {
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      justify-content: flex-start;
       align-items: center;
       gap: 1rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+
+      .org-header {
+        display: flex;
+        flex-direction: column;
+
+        line-height: 1.2;
+        .title { font-weight: 500; }
+        .role {
+          padding-left: 0.5rem;
+          font-weight: 200;
+          font-style: italic;
+        }
+      }
     }
 
     nav {

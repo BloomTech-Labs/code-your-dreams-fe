@@ -100,7 +100,7 @@ export default function Page() {
     const { url, materialName } = params.row
 
     return (
-      <Link underline="hover" href={`${url}`} target="_new">
+      <Link underline="always" href={`${url}`} target="_new">
         {materialName}
       </Link>
     )

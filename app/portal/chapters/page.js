@@ -35,7 +35,7 @@ export default function Page() {
 
     return (
       <Link
-        underline="hover"
+        underline="always"
         href={`/portal/chapters/${id}`}
         aria-label={`Open chapter detail page for ${params.value}`}
       >
