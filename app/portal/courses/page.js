@@ -76,11 +76,26 @@ const columns = [
   },
 ]
 
+const initialState = {
+  name: '',
+  description: '',
+  visibility: false
+}
+
 export default function Page() {
   const [localCourses, setLocalCourses] = useState(null)
   const [open, setOpen] = useState(false)
+  const [formState, setFormState] = useState(initialState)
   const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const handleClose = () => {
+    setOpen(false)
+    setFormState(initialState)
+  }
+  const handleSubmitForm = (data) => {
+    console.log('Form data submitted:', formState);
+    setFormState(initialState)
+    setOpen(false);
+  }
 
   useCheckTokenExpired()
   const { courses, current_user } = useData()
@@ -176,8 +191,12 @@ export default function Page() {
         )}
       </section>
 
-      <Modal title="Create a New Course" open={open} handleClose={handleClose}>
-        <NewCourse />
+      <Modal title="Create a New Course" open={open} handleClose={handleClose} handleSubmit={handleSubmitForm}>
+        <NewCourse
+          formState={formState}
+          setFormState={setFormState}
+          onSubmit={handleSubmitForm}
+        />
       </Modal>
     </main>
   )

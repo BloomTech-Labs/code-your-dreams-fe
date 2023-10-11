@@ -4,7 +4,7 @@ import { Button, IconButton, Box, Modal as MuiModal } from "@mui/material"
 import CloseIcon from "@mui/icons-material/Close"
 import styles from "./Modal.module.scss"
 
-const Modal = ({ children, title, open, handleClose }) => {
+const Modal = ({ children, title, open, handleSubmit, handleClose }) => {
   return (
     <MuiModal
       open={open}
@@ -27,7 +27,7 @@ const Modal = ({ children, title, open, handleClose }) => {
           <div className={styles["modal-footer"]}>
             <Button
               variant="contained"
-              onClick={handleClose}
+              onClick={handleSubmit}
               aria-label="Save changes"
             >
               Save

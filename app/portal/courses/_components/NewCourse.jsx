@@ -1,8 +1,15 @@
 "use client"
 
-import { TextField } from "@mui/material"
+import { TextField, FormControlLabel, Checkbox } from "@mui/material"
 
-export default function NewCourse() {
+export default function NewCourse({ formState, setFormState, onSubmit }) {
+  const handleChange = (e) => {
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+    setFormState({
+      ...formState,
+      [e.target.name]: value,
+    })
+  }
   return (
     <>
       {/* TODO: Take in prop for which table to add a new instance. */}
@@ -16,12 +23,29 @@ export default function NewCourse() {
         label="Course Name"
         variant="outlined"
         helperText="The course name to be displayed in the app"
+        name="name"
+        value={formState.name}
+        onChange={handleChange}
       />
       <TextField
         required
         id="course-description"
         label="Description"
         helperText="A short description about the course"
+        name="description"
+        value={formState.description}
+        onChange={handleChange}
+      />
+      <FormControlLabel
+        label="Publish?"
+        control={
+          <Checkbox
+            name="visibility"
+            color="primary"
+            checked={formState.visibility || false}
+            onChange={handleChange}
+          />
+        }
       />
     </>
   )
