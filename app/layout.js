@@ -1,11 +1,11 @@
 import "../styles/globals.scss"
 import { Roboto_Flex } from "next/font/google"
-import Footer from "components/layout/Footer/Footer"
 import { NextAuthProvider } from "./providers"
 import { AppProvider } from "@/context/appContext"
-import Header from "@/components/layout/Header/Header"
 import { Suspense } from "react"
 import Loading from "./loading"
+import Header from "@/components/layout/Header/Header"
+import Footer from "@/components/layout/Footer/Footer"
 
 const robotoflex = Roboto_Flex({ subsets: ["latin"] })
 
