@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
+import LoadingBlock from "@/components/layout/LoadingBlock/LoadingBlock"
 
 export default function Page() {
   const { data: session } = useSession()
@@ -15,5 +16,5 @@ export default function Page() {
     }
   }, [session])
 
-  return <main>Loading...</main>
+  return <LoadingBlock />
 }

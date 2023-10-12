@@ -1,24 +1,7 @@
 @import "styles/variables";
 @import "styles/media";
 
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background-color: transparent;
-  position: relative;
-
-  box-shadow: none;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-}
-
 .main {
-  margin-top: calc(-1 * $header-height);
-  @include desktop-xl {
-    margin-top: calc(-1 * $header-height-xl);
-  }
-  
   background-color: $cyd-light-gray;
 
   .hero {
