@@ -11,15 +11,6 @@ export default function Page() {
 
   return (
     <>
-      <header className={styles.header}>
-        <Image
-          priority
-          src="/images/CYD-Logo.png"
-          width={112}
-          height={64}
-          alt="A laptop with Code Your Dreams on the screen"
-        />
-      </header>
       <main className={styles.main}>
         <section className={styles.hero}>
           <div className={styles["image-wrapper"]}>

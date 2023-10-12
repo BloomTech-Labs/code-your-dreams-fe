@@ -14,11 +14,6 @@
 }
 
 .main {
-  margin-top: calc(-1 * $header-height);
-  @include desktop-xl {
-    margin-top: calc(-1 * $header-height-xl);
-  }
-  
   background-color: $cyd-light-gray;
 
   .hero {

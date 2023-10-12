@@ -3,6 +3,9 @@ import { Roboto_Flex } from "next/font/google"
 import Footer from "components/layout/Footer/Footer"
 import { NextAuthProvider } from "./providers"
 import { AppProvider } from "@/context/appContext"
+import Header from "@/components/layout/Header/Header"
+import { Suspense } from "react"
+import Loading from "./loading"
 
 const robotoflex = Roboto_Flex({ subsets: ["latin"] })
 
@@ -19,12 +22,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={robotoflex.className}>
-        <NextAuthProvider>
-          <AppProvider>
-            {children}
-          </AppProvider>
-        </NextAuthProvider>
-        <Footer />
+        <Suspense fallback={<Loading />}>
+          <NextAuthProvider>
+            <AppProvider>
+              <Header />
+              {children}
+              <Footer />
+            </AppProvider>
+          </NextAuthProvider>
+        </Suspense>
       </body>
     </html>
   )
