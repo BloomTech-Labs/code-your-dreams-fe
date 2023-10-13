@@ -38,16 +38,16 @@ const showEditButton = () => {
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   {
-    field: "url",
+    field: "material_link",
     headerName: "Link",
     headerAlign: "center",
     align: "center",
     width: 100,
     renderCell: (params) => showLinkButton(params.value),
   },
-  { field: "materialName", headerName: "Name", width: 250 },
-  { field: "materialType", headerName: "Type", width: 150 },
-  { field: "materialDetails", headerName: "Details", width: 450 },
+  { field: "name", headerName: "Name", width: 250 },
+  { field: "material_type", headerName: "Type", width: 150 },
+  { field: "description", headerName: "Details", width: 450 },
   {
     field: "edit",
     headerName: "Edit",
@@ -123,20 +123,19 @@ export default function Page() {
           } else if (selectedMaterials === null) {
             setSelectedMaterials([obj])
           } else if (selectedMaterials) {
-            setSelectedMaterials([...selectedMaterials, obj])
+            setSelectedMaterials([obj, ...selectedMaterials])
           }
         }
       })
     }
-    console.log(selectedMaterials)
   })
 
   const handleRowClick = (params) => {
-    const { url, materialName } = params.row
+    const { url, name } = params.row
 
     return (
       <Link underline="always" href={`${url}`} target="_new">
-        {materialName}
+        {name}
       </Link>
     )
   }
@@ -150,7 +149,6 @@ export default function Page() {
         {selectedCourse && <Typography color="text.primary">{selectedCourse.name}</Typography>}
       </BreadcrumbRow>
 
-      {/* TODO: Display only when course is hidden */}
       {
         selectedCourse && selectedCourse.visibility === false ?
           <Alert
@@ -183,7 +181,6 @@ export default function Page() {
             <EditIcon fontSize="inherit" />
           </IconButton>
         </div>
-        {/* TODO: Fill in this field from the database. */}
         <p>
           {
             selectedCourse && selectedCourse.description
@@ -203,26 +200,29 @@ export default function Page() {
           </IconButton>
         </div>
         <div className="data-grid">
-          <DataGrid
-            rows={rows}
-            columns={columns.map((column) =>
-              column.field === "materialName"
-                ? { ...column, renderCell: handleRowClick }
-                : column
-            )}
-            initialState={{
-              pagination: {
-                paginationModel: { pageSize: 20 },
-              },
-            }}
-            pageSizeOptions={[20]}
-            slots={{
-              noRowsOverlay: NoRowsOverlay,
-            }}
-            autoHeight={true}
-            sx={{ "--DataGrid-overlayHeight": "300px" }}
-            aria-label="Data grid of course materials"
-          />
+          {
+            selectedMaterials && 
+              <DataGrid
+                rows={selectedMaterials}
+                columns={columns.map((column) =>
+                  column.field === "name"
+                    ? { ...column, renderCell: handleRowClick }
+                    : column
+                )}
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 20 },
+                  },
+                }}
+                pageSizeOptions={[20]}
+                slots={{
+                  noRowsOverlay: NoRowsOverlay,
+                }}
+                autoHeight={true}
+                sx={{ "--DataGrid-overlayHeight": "300px" }}
+                aria-label="Data grid of course materials"
+              />
+          }
         </div>
       </section>
 
