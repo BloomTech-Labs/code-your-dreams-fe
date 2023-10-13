@@ -78,9 +78,9 @@ const columns = [
 ]
 
 const initialState = {
-  name: '',
-  description: '',
-  visibility: false
+  name: "",
+  description: "",
+  visibility: false,
 }
 
 export default function Page() {
@@ -93,17 +93,19 @@ export default function Page() {
     setOpen(false)
     setFormState(initialState)
   }
+  // TODO: Prevent the form from being submitted with any required fields empty.
   const handleSubmitForm = () => {
-    axiosInstance.post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/create`, formState)
-    .then((res) => {
-      console.log('Form data submitted to database:', res.data)
-      setLocalCourses([...localCourses, res.data[0]])
-      setFormState(initialState)
-      setOpen(false)
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+    axiosInstance
+      .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/create`, formState)
+      .then((res) => {
+        console.log("Form data submitted to database:", res.data)
+        setLocalCourses([...localCourses, res.data[0]])
+        setFormState(initialState)
+        setOpen(false)
+      })
+      .catch((err) => {
+        console.error(err)
+      })
   }
 
   useCheckTokenExpired()
@@ -200,7 +202,12 @@ export default function Page() {
         )}
       </section>
 
-      <Modal title="Create a New Course" open={open} handleClose={handleClose} handleSubmit={handleSubmitForm}>
+      <Modal
+        title="Create a New Course"
+        open={open}
+        handleClose={handleClose}
+        handleSubmit={handleSubmitForm}
+      >
         <NewCourse
           formState={formState}
           setFormState={setFormState}

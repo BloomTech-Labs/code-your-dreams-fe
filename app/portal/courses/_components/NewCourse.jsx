@@ -2,9 +2,10 @@
 
 import { TextField, FormControlLabel, Checkbox } from "@mui/material"
 
-export default function NewCourse({ formState, setFormState, onSubmit }) {
+export default function NewCourse({ formState, setFormState }) {
   const handleChange = (e) => {
-    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value
     setFormState({
       ...formState,
       [e.target.name]: value,
