@@ -138,23 +138,28 @@ export default function Page() {
       </BreadcrumbRow>
 
       {/* TODO: Display only when course is hidden */}
-      <Alert
-        iconMapping={{
-          warning: <VisibilityOffIcon fontSize="inherit" />,
-        }}
-        severity="warning"
-        className="container"
-      >
-        This course is hidden.{" "}
-        <a onClick={() => handleOpenCourse()} className={styles.alert}>
-          Edit the course settings
-        </a>{" "}
-        to make it visible.
-      </Alert>
+      {
+        selectedCourse && selectedCourse.visibility === false ?
+          <Alert
+            iconMapping={{
+              warning: <VisibilityOffIcon fontSize="inherit" />,
+            }}
+            severity="warning"
+            className="container"
+          >
+            This course is hidden.{" "}
+            <a onClick={() => handleOpenCourse()} className={styles.alert}>
+              Edit the course settings
+            </a>{" "}
+            to make it visible.
+          </Alert>
+          :
+          null
+      }
 
       <section className="container">
         <div className="header-row">
-          <h1>Course Name</h1>
+          <h1>{selectedCourse && selectedCourse.name}</h1>
           {/* TODO: This button should only be visible to super admin users */}
           <IconButton
             color="primary"
@@ -168,7 +173,7 @@ export default function Page() {
         {/* TODO: Fill in this field from the database. */}
         <p>
           {
-            "{This is a course description that is provided in the courses table.}"
+            selectedCourse && selectedCourse.description
           }
         </p>
       </section>
