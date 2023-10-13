@@ -95,27 +95,40 @@ export default function Page() {
   const handleCloseCourse = () => setOpenCourse(false)
   // Material NEW modal
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
+  // Selected Course Data
   const [selectedCourse, setSelectedCourse] = useState(null)
+  const [selectedMaterials, setSelectedMaterials] = useState(null)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses } = useData();
+  const { courses, course_materials } = useData();
 
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(16).replace(regex, " ")
 
-  console.log(newStr)
 
   useEffect(() => {
-    console.log(courses)
     if (courses) {
       courses.some((obj) => {
-        console.log(obj.name.toLowerCase() === newStr)
         if (obj.name.toLowerCase() === newStr) {
           setSelectedCourse(obj)
         }
       })
     }
+    if (course_materials) {
+      course_materials.some((obj) => {
+        if (selectedCourse && obj.course_id === selectedCourse.id) {
+          if (selectedMaterials && selectedMaterials.includes(obj)) {
+            return
+          } else if (selectedMaterials === null) {
+            setSelectedMaterials([obj])
+          } else if (selectedMaterials) {
+            setSelectedMaterials([...selectedMaterials, obj])
+          }
+        }
+      })
+    }
+    console.log(selectedMaterials)
   })
 
   const handleRowClick = (params) => {
