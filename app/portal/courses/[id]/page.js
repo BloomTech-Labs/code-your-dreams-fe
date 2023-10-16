@@ -15,7 +15,7 @@ import NewMaterial from "../_components/NewMaterial"
 import EditMaterial from "../_components/EditMaterial"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
 
 const showLinkButton = (url) => {
@@ -100,12 +100,11 @@ export default function Page() {
   const [selectedMaterials, setSelectedMaterials] = useState(null)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials } = useData();
+  const { courses, course_materials } = useData()
 
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(16).replace(regex, " ")
-
 
   useEffect(() => {
     if (courses) {
@@ -146,27 +145,26 @@ export default function Page() {
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses
         </Link>
-        {selectedCourse && <Typography color="text.primary">{selectedCourse.name}</Typography>}
+        {selectedCourse && (
+          <Typography color="text.primary">{selectedCourse.name}</Typography>
+        )}
       </BreadcrumbRow>
 
-      {
-        selectedCourse && selectedCourse.visibility === false ?
-          <Alert
-            iconMapping={{
-              warning: <VisibilityOffIcon fontSize="inherit" />,
-            }}
-            severity="warning"
-            className="container"
-          >
-            This course is hidden.{" "}
-            <a onClick={() => handleOpenCourse()} className={styles.alert}>
-              Edit the course settings
-            </a>{" "}
-            to make it visible.
-          </Alert>
-          :
-          null
-      }
+      {selectedCourse && selectedCourse.visibility === false ? (
+        <Alert
+          iconMapping={{
+            warning: <VisibilityOffIcon fontSize="inherit" />,
+          }}
+          severity="warning"
+          className="container"
+        >
+          This course is hidden.{" "}
+          <a onClick={() => handleOpenCourse()} className={styles.alert}>
+            Edit the course settings
+          </a>{" "}
+          to make it visible.
+        </Alert>
+      ) : null}
 
       <section className="container">
         <div className="header-row">
@@ -181,11 +179,7 @@ export default function Page() {
             <EditIcon fontSize="inherit" />
           </IconButton>
         </div>
-        <p>
-          {
-            selectedCourse && selectedCourse.description
-          }
-        </p>
+        <p>{selectedCourse && selectedCourse.description}</p>
       </section>
       <section className="container">
         <div className="header-row">
@@ -200,29 +194,28 @@ export default function Page() {
           </IconButton>
         </div>
         <div className="data-grid">
-          {
-            selectedMaterials && 
-              <DataGrid
-                rows={selectedMaterials}
-                columns={columns.map((column) =>
-                  column.field === "name"
-                    ? { ...column, renderCell: handleRowClick }
-                    : column
-                )}
-                initialState={{
-                  pagination: {
-                    paginationModel: { pageSize: 20 },
-                  },
-                }}
-                pageSizeOptions={[20]}
-                slots={{
-                  noRowsOverlay: NoRowsOverlay,
-                }}
-                autoHeight={true}
-                sx={{ "--DataGrid-overlayHeight": "300px" }}
-                aria-label="Data grid of course materials"
-              />
-          }
+          {selectedMaterials && (
+            <DataGrid
+              rows={selectedMaterials}
+              columns={columns.map((column) =>
+                column.field === "name"
+                  ? { ...column, renderCell: handleRowClick }
+                  : column
+              )}
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 20 },
+                },
+              }}
+              pageSizeOptions={[20]}
+              slots={{
+                noRowsOverlay: NoRowsOverlay,
+              }}
+              autoHeight={true}
+              sx={{ "--DataGrid-overlayHeight": "300px" }}
+              aria-label="Data grid of course materials"
+            />
+          )}
         </div>
       </section>
 
