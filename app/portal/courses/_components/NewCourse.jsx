@@ -1,6 +1,12 @@
 "use client"
 
-import { TextField, FormControlLabel, Checkbox } from "@mui/material"
+import {
+  TextField,
+  FormControlLabel,
+  FormHelperText,
+  Checkbox,
+  Card,
+} from "@mui/material"
 
 export default function NewCourse({ formState, setFormState }) {
   const handleChange = (e) => {
@@ -15,8 +21,8 @@ export default function NewCourse({ formState, setFormState }) {
     <>
       {/* TODO: Take in prop for which table to add a new instance. */}
       <div className="italic">
-        Fill out the form to create a new course. Visibility for a new course by
-        default will be set to "hidden".
+        Fill out the form to create a new course. New courses are set as draft
+        by default, not visible to users.
       </div>
       <TextField
         required
@@ -37,17 +43,22 @@ export default function NewCourse({ formState, setFormState }) {
         value={formState.description}
         onChange={handleChange}
       />
-      <FormControlLabel
-        label="Publish?"
-        control={
-          <Checkbox
-            name="visibility"
-            color="primary"
-            checked={formState.visibility || false}
-            onChange={handleChange}
-          />
-        }
-      />
+      <Card variant="outlined" className="modal-card">
+        <FormControlLabel
+          label="Publish?"
+          control={
+            <Checkbox
+              name="visibility"
+              color="primary"
+              checked={formState.visibility || false}
+              onChange={handleChange}
+            />
+          }
+        />
+        <FormHelperText>
+          Selecting this will make the course visible to users.
+        </FormHelperText>
+      </Card>
     </>
   )
 }
