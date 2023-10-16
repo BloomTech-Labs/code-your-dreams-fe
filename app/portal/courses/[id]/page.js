@@ -34,7 +34,6 @@ const showEditButton = () => {
   )
 }
 
-// TODO: Replace demo data with actual data from the courses instance in the table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   {
@@ -55,36 +54,6 @@ const columns = [
     align: "center",
     width: 100,
     renderCell: (params) => showEditButton(params.value),
-  },
-]
-const rows = [
-  {
-    id: 1,
-    materialName: "Course syllabus",
-    materialType: "Document",
-    materialDetails: "Course description and expectations",
-    url: "https://drive.google.com",
-  },
-  {
-    id: 2,
-    materialName: "Lesson 1",
-    materialType: "Presentation",
-    materialDetails: "Getting started with Python",
-    url: "https://dropbox.com",
-  },
-  {
-    id: 3,
-    materialName: "Getting Started",
-    materialType: "Video",
-    materialDetails: "Setting up your environment",
-    url: "https://microsoft365.com",
-  },
-  {
-    id: 4,
-    materialName: "Quiz 1",
-    materialType: "Quiz",
-    materialDetails: "Assessment for section 1",
-    url: "https://icloud.com",
   },
 ]
 
