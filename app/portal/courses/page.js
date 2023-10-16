@@ -16,11 +16,12 @@ import AxiosWithAuth from "@/utils/axiosWithAuth"
 
 const handleRowClick = (params) => {
   const { name } = params.row
+  const regex = /( |%20)/g;
 
   return (
     <Link
       underline="always"
-      href={`/portal/courses/${name.toLowerCase().replace(" ", "-")}`}
+      href={`/portal/courses/${name.toLowerCase().replace(regex, "-")}`}
       aria-label={`Open detail page for the ${params.value} course`}
     >
       {params.value}

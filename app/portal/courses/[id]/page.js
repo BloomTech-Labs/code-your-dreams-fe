@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Alert, IconButton, Link, Typography } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import EditIcon from "@mui/icons-material/Edit"
@@ -15,6 +15,8 @@ import NewMaterial from "../_components/NewMaterial"
 import EditMaterial from "../_components/EditMaterial"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
+import { usePathname } from 'next/navigation'
+import { useData } from "@/context/appContext"
 
 const showLinkButton = (url) => {
   return (
@@ -36,16 +38,16 @@ const showEditButton = () => {
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   {
-    field: "url",
+    field: "material_link",
     headerName: "Link",
     headerAlign: "center",
     align: "center",
     width: 100,
     renderCell: (params) => showLinkButton(params.value),
   },
-  { field: "materialName", headerName: "Name", width: 250 },
-  { field: "materialType", headerName: "Type", width: 150 },
-  { field: "materialDetails", headerName: "Details", width: 450 },
+  { field: "name", headerName: "Name", width: 250 },
+  { field: "material_type", headerName: "Type", width: 150 },
+  { field: "description", headerName: "Details", width: 450 },
   {
     field: "edit",
     headerName: "Edit",
@@ -93,15 +95,47 @@ export default function Page() {
   const handleCloseCourse = () => setOpenCourse(false)
   // Material NEW modal
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
+  // Selected Course Data
+  const [selectedCourse, setSelectedCourse] = useState(null)
+  const [selectedMaterials, setSelectedMaterials] = useState(null)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
+  const { courses, course_materials } = useData();
+
+  const pathname = usePathname()
+  const regex = /-/g
+  const newStr = pathname.slice(16).replace(regex, " ")
+
+
+  useEffect(() => {
+    if (courses) {
+      courses.some((obj) => {
+        if (obj.name.toLowerCase() === newStr) {
+          setSelectedCourse(obj)
+        }
+      })
+    }
+    if (course_materials) {
+      course_materials.some((obj) => {
+        if (selectedCourse && obj.course_id === selectedCourse.id) {
+          if (selectedMaterials && selectedMaterials.includes(obj)) {
+            return
+          } else if (selectedMaterials === null) {
+            setSelectedMaterials([obj])
+          } else if (selectedMaterials) {
+            setSelectedMaterials([obj, ...selectedMaterials])
+          }
+        }
+      })
+    }
+  })
 
   const handleRowClick = (params) => {
-    const { url, materialName } = params.row
+    const { url, name } = params.row
 
     return (
       <Link underline="always" href={`${url}`} target="_new">
-        {materialName}
+        {name}
       </Link>
     )
   }
@@ -112,28 +146,31 @@ export default function Page() {
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses
         </Link>
-        {/* TODO: Insert course name from database for current page */}
-        <Typography color="text.primary">{"{course_name}"}</Typography>
+        {selectedCourse && <Typography color="text.primary">{selectedCourse.name}</Typography>}
       </BreadcrumbRow>
 
-      {/* TODO: Display only when course is hidden */}
-      <Alert
-        iconMapping={{
-          warning: <VisibilityOffIcon fontSize="inherit" />,
-        }}
-        severity="warning"
-        className="container"
-      >
-        This course is hidden.{" "}
-        <a onClick={() => handleOpenCourse()} className={styles.alert}>
-          Edit the course settings
-        </a>{" "}
-        to make it visible.
-      </Alert>
+      {
+        selectedCourse && selectedCourse.visibility === false ?
+          <Alert
+            iconMapping={{
+              warning: <VisibilityOffIcon fontSize="inherit" />,
+            }}
+            severity="warning"
+            className="container"
+          >
+            This course is hidden.{" "}
+            <a onClick={() => handleOpenCourse()} className={styles.alert}>
+              Edit the course settings
+            </a>{" "}
+            to make it visible.
+          </Alert>
+          :
+          null
+      }
 
       <section className="container">
         <div className="header-row">
-          <h1>Course Name</h1>
+          <h1>{selectedCourse && selectedCourse.name}</h1>
           {/* TODO: This button should only be visible to super admin users */}
           <IconButton
             color="primary"
@@ -144,10 +181,9 @@ export default function Page() {
             <EditIcon fontSize="inherit" />
           </IconButton>
         </div>
-        {/* TODO: Fill in this field from the database. */}
         <p>
           {
-            "{This is a course description that is provided in the courses table.}"
+            selectedCourse && selectedCourse.description
           }
         </p>
       </section>
@@ -164,26 +200,29 @@ export default function Page() {
           </IconButton>
         </div>
         <div className="data-grid">
-          <DataGrid
-            rows={rows}
-            columns={columns.map((column) =>
-              column.field === "materialName"
-                ? { ...column, renderCell: handleRowClick }
-                : column
-            )}
-            initialState={{
-              pagination: {
-                paginationModel: { pageSize: 20 },
-              },
-            }}
-            pageSizeOptions={[20]}
-            slots={{
-              noRowsOverlay: NoRowsOverlay,
-            }}
-            autoHeight={true}
-            sx={{ "--DataGrid-overlayHeight": "300px" }}
-            aria-label="Data grid of course materials"
-          />
+          {
+            selectedMaterials && 
+              <DataGrid
+                rows={selectedMaterials}
+                columns={columns.map((column) =>
+                  column.field === "name"
+                    ? { ...column, renderCell: handleRowClick }
+                    : column
+                )}
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 20 },
+                  },
+                }}
+                pageSizeOptions={[20]}
+                slots={{
+                  noRowsOverlay: NoRowsOverlay,
+                }}
+                autoHeight={true}
+                sx={{ "--DataGrid-overlayHeight": "300px" }}
+                aria-label="Data grid of course materials"
+              />
+          }
         </div>
       </section>
 
