@@ -2,11 +2,10 @@
 
 import {
   Card,
+  Checkbox,
   Divider,
   FormControlLabel,
-  FormGroup,
-  Stack,
-  Switch,
+  FormHelperText,
   TextField,
   Typography,
 } from "@mui/material"
@@ -27,13 +26,21 @@ export default function EditCourse() {
       />
       <TextField required id="course-description" label="Description" />
       <Card variant="outlined" className="modal-card">
-        <FormGroup>
-          <Stack direction="row" spacing={1} alignItems="center">
-            <Typography>Hidden</Typography>
-            <FormControlLabel control={<Switch defaultChecked />} />
-            <Typography>Visible</Typography>
-          </Stack>
-        </FormGroup>
+        {/* TODO: Connect the checkbox to the form and select checked/not-checked based on course data */}
+        <FormControlLabel
+          label="Published"
+          control={
+            <Checkbox
+              name="visibility"
+              color="primary"
+              checked=""
+              onChange=""
+            />
+          }
+        />
+        <FormHelperText>
+          If unselected, the course is in draft and not visible to users.
+        </FormHelperText>
       </Card>
       <Divider>
         <Typography color="error">Danger Zone</Typography>
