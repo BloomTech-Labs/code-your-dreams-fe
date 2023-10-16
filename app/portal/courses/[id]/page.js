@@ -20,7 +20,7 @@ import { useData } from "@/context/appContext"
 
 const showLinkButton = (url) => {
   return (
-    <IconButton color="primary" href={url} target="_new">
+    <IconButton color="primary" href={`//${url}`} target="_new">
       {<OpenInNewIcon />}
     </IconButton>
   )
@@ -131,10 +131,10 @@ export default function Page() {
   })
 
   const handleRowClick = (params) => {
-    const { url, name } = params.row
+    const { material_link, name } = params.row
 
     return (
-      <Link underline="always" href={`${url}`} target="_new">
+      <Link underline="always" href={`//${material_link}`} target="_new">
         {name}
       </Link>
     )
