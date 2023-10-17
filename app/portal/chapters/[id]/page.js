@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import {
   IconButton,
   Link,
@@ -26,6 +26,8 @@ import EditChapter from "../_components/EditChapter"
 import NewMember from "../_components/NewMember"
 import EditMember from "../_components/EditMember"
 import LinkCourse from "../_components/LinkCourse"
+import { usePathname } from "next/navigation"
+import { useData } from "@/context/appContext"
 
 const showEditButton = () => {
   return (
@@ -81,10 +83,41 @@ export default function Page() {
   const [openCourseLink, setOpenCourseLink] = useState(false)
   const handleOpenCourseLink = () => setOpenCourseLink(true)
   const handleCloseCourseLink = () => setOpenCourseLink(false)
+  // Selected Chapter Data
+  const { chapters, course_permissions } = useData()
+  const [selectedChapter, setSelectedChapter] = useState(null)
+  const [selectedCourses, setSelectedCourses] = useState(null)
   // Member NEW modal
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
   const handleCloseMemberNew = () => setOpenMemberNew(false)
+
+  const pathname = usePathname()
+  const regex = /-/g
+  const newStr = pathname.slice(17).replace(regex, " ")
+
+  useEffect(() => {
+    if (chapters) {
+      chapters.some((obj) => {
+        if (obj.name.toLowerCase() === newStr) {
+          setSelectedChapter(obj)
+        }
+      })
+    }
+    if (course_permissions) {
+      course_permissions.some((obj) => {
+        if (selectedChapter && obj.course_id === selectedChapter.id) {
+          if (selectedCourses && selectedCourses.includes(obj)) {
+            return
+          } else if (selectedCourses === null) {
+            setSelectedCourses([obj])
+          } else if (selectedCourses) {
+            setSelectedCourses([obj, ...selectedCourses])
+          }
+        }
+      })
+    }
+  })
 
   return (
     // TODO: Restrict page to chapter admins and CYD users
@@ -94,12 +127,14 @@ export default function Page() {
           Chapters
         </Link>
         {/* TODO: Insert course name from database for current page */}
-        <Typography color="text.primary">{"{chapter_name}"}</Typography>
+        {selectedChapter && (
+          <Typography color="text.primary">{selectedChapter.name}</Typography>
+        )}
       </BreadcrumbRow>
 
       <section className="container">
         <div className="header-row">
-          <h1>[Chapter_Name]</h1>
+          <h1>{selectedChapter && selectedChapter.name}</h1>
           {/* TODO: This button should only be visible to super admin users */}
           <IconButton
             color="primary"

@@ -15,7 +15,7 @@ import NewMaterial from "../_components/NewMaterial"
 import EditMaterial from "../_components/EditMaterial"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
-import { usePathname } from 'next/navigation'
+import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
 
 const showLinkButton = (url) => {
@@ -34,7 +34,6 @@ const showEditButton = () => {
   )
 }
 
-// TODO: Replace demo data with actual data from the courses instance in the table.
 const columns = [
   { field: "id", headerName: "ID", width: 100 },
   {
@@ -57,55 +56,24 @@ const columns = [
     renderCell: (params) => showEditButton(params.value),
   },
 ]
-const rows = [
-  {
-    id: 1,
-    materialName: "Course syllabus",
-    materialType: "Document",
-    materialDetails: "Course description and expectations",
-    url: "https://drive.google.com",
-  },
-  {
-    id: 2,
-    materialName: "Lesson 1",
-    materialType: "Presentation",
-    materialDetails: "Getting started with Python",
-    url: "https://dropbox.com",
-  },
-  {
-    id: 3,
-    materialName: "Getting Started",
-    materialType: "Video",
-    materialDetails: "Setting up your environment",
-    url: "https://microsoft365.com",
-  },
-  {
-    id: 4,
-    materialName: "Quiz 1",
-    materialType: "Quiz",
-    materialDetails: "Assessment for section 1",
-    url: "https://icloud.com",
-  },
-]
 
 export default function Page() {
   // Course EDIT modal
   const [openCourse, setOpenCourse] = useState(false)
   const handleOpenCourse = () => setOpenCourse(true)
   const handleCloseCourse = () => setOpenCourse(false)
-  // Material NEW modal
+  // Course Material NEW modal
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
   // Selected Course Data
   const [selectedCourse, setSelectedCourse] = useState(null)
   const [selectedMaterials, setSelectedMaterials] = useState(null)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials } = useData();
+  const { courses, course_materials } = useData()
 
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(16).replace(regex, " ")
-
 
   useEffect(() => {
     if (courses) {
@@ -146,32 +114,30 @@ export default function Page() {
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses
         </Link>
-        {selectedCourse && <Typography color="text.primary">{selectedCourse.name}</Typography>}
+        {selectedCourse && (
+          <Typography color="text.primary">{selectedCourse.name}</Typography>
+        )}
       </BreadcrumbRow>
 
-      {
-        selectedCourse && selectedCourse.visibility === false ?
-          <Alert
-            iconMapping={{
-              warning: <VisibilityOffIcon fontSize="inherit" />,
-            }}
-            severity="warning"
-            className="container"
-          >
-            This course is hidden.{" "}
-            <a onClick={() => handleOpenCourse()} className={styles.alert}>
-              Edit the course settings
-            </a>{" "}
-            to make it visible.
-          </Alert>
-          :
-          null
-      }
+      {selectedCourse && selectedCourse.visibility === false ? (
+        <Alert
+          iconMapping={{
+            warning: <VisibilityOffIcon fontSize="inherit" />,
+          }}
+          severity="warning"
+          className="container"
+        >
+          This course is hidden.{" "}
+          <a onClick={() => handleOpenCourse()} className={styles.alert}>
+            Edit the course settings
+          </a>{" "}
+          to make it visible.
+        </Alert>
+      ) : null}
 
       <section className="container">
         <div className="header-row">
           <h1>{selectedCourse && selectedCourse.name}</h1>
-          {/* TODO: This button should only be visible to super admin users */}
           <IconButton
             color="primary"
             size="large"
@@ -181,11 +147,7 @@ export default function Page() {
             <EditIcon fontSize="inherit" />
           </IconButton>
         </div>
-        <p>
-          {
-            selectedCourse && selectedCourse.description
-          }
-        </p>
+        <p>{selectedCourse && selectedCourse.description}</p>
       </section>
       <section className="container">
         <div className="header-row">
@@ -200,29 +162,28 @@ export default function Page() {
           </IconButton>
         </div>
         <div className="data-grid">
-          {
-            selectedMaterials && 
-              <DataGrid
-                rows={selectedMaterials}
-                columns={columns.map((column) =>
-                  column.field === "name"
-                    ? { ...column, renderCell: handleRowClick }
-                    : column
-                )}
-                initialState={{
-                  pagination: {
-                    paginationModel: { pageSize: 20 },
-                  },
-                }}
-                pageSizeOptions={[20]}
-                slots={{
-                  noRowsOverlay: NoRowsOverlay,
-                }}
-                autoHeight={true}
-                sx={{ "--DataGrid-overlayHeight": "300px" }}
-                aria-label="Data grid of course materials"
-              />
-          }
+          {selectedMaterials && (
+            <DataGrid
+              rows={selectedMaterials}
+              columns={columns.map((column) =>
+                column.field === "name"
+                  ? { ...column, renderCell: handleRowClick }
+                  : column
+              )}
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 20 },
+                },
+              }}
+              pageSizeOptions={[20]}
+              slots={{
+                noRowsOverlay: NoRowsOverlay,
+              }}
+              autoHeight={true}
+              sx={{ "--DataGrid-overlayHeight": "300px" }}
+              aria-label="Data grid of course materials"
+            />
+          )}
         </div>
       </section>
 

@@ -55,12 +55,14 @@ export default function Page() {
 
   const handleRowClick = (params) => {
     // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
-    const { id } = params.row
+    const { name } = params.row
+    const regex = /( |%20)/g
 
     return (
       <Link
         underline="always"
-        href={`/portal/chapters/${id}`}
+        // href={`/portal/chapters/${id}`}
+        href={`/portal/chapters/${name.toLowerCase().replace(regex, "-")}`}
         aria-label={`Open chapter detail page for ${params.value}`}
       >
         {params.value}
