@@ -57,6 +57,13 @@ const columns = [
   },
 ]
 
+const initialState = {
+  material_link: "",
+  name: "",
+  material_type: "",
+  description: "",
+}
+
 export default function Page() {
   // Course EDIT modal
   const [openCourse, setOpenCourse] = useState(false)
@@ -67,6 +74,7 @@ export default function Page() {
   // Selected Course Data
   const [selectedCourse, setSelectedCourse] = useState(null)
   const [selectedMaterials, setSelectedMaterials] = useState(null)
+  const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
   const { courses, course_materials } = useData();
@@ -74,6 +82,10 @@ export default function Page() {
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(16).replace(regex, " ")
+
+  const handleSubmitForm = () => {
+    console.log(formState)
+  }
 
 
   useEffect(() => {
@@ -206,8 +218,12 @@ export default function Page() {
         title="Add Material"
         open={openMaterialNew}
         handleClose={handleCloseMaterialNew}
+        handleSubmit={handleSubmitForm}
       >
-        <NewMaterial />
+        <NewMaterial
+          formState={formState}
+          setFormState={setFormState}
+        />
       </Modal>
     </main>
   )
