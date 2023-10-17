@@ -84,8 +84,9 @@ export default function Page() {
   const handleOpenCourseLink = () => setOpenCourseLink(true)
   const handleCloseCourseLink = () => setOpenCourseLink(false)
   // Selected Chapter Data
-  const { chapters } = useData()
+  const { chapters, course_permissions } = useData()
   const [selectedChapter, setSelectedChapter] = useState(null)
+  const [selectedCourses, setSelectedCourses] = useState(null)
   // Member NEW modal
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
@@ -94,13 +95,25 @@ export default function Page() {
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(17).replace(regex, " ")
-  console.log(newStr, "-original")
 
   useEffect(() => {
     if (chapters) {
       chapters.some((obj) => {
         if (obj.name.toLowerCase() === newStr) {
           setSelectedChapter(obj)
+        }
+      })
+    }
+    if (course_permissions) {
+      course_permissions.some((obj) => {
+        if (selectedChapter && obj.course_id === selectedChapter.id) {
+          if (selectedCourses && selectedCourses.includes(obj)) {
+            return
+          } else if (selectedCourses === null) {
+            setSelectedCourses([obj])
+          } else if (selectedCourses) {
+            setSelectedCourses([obj, ...selectedCourses])
+          }
         }
       })
     }
