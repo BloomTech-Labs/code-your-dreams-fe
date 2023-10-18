@@ -17,6 +17,7 @@ import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
 import { usePathname } from 'next/navigation'
 import { useData } from "@/context/appContext"
+import AxiosWithAuth from "@/utils/axiosWithAuth"
 
 const showLinkButton = (url) => {
   return (
@@ -78,13 +79,105 @@ export default function Page() {
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
   const { courses, course_materials } = useData();
+  const axiosInstance = AxiosWithAuth()
 
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(16).replace(regex, " ")
 
+  const getMaterialType = (material) => {
+    switch (material.material_type_id) {
+      case 1:
+        material.material_type = "Document"
+        break;
+      case 2:
+        material.material_type = "Presentation"
+        break;
+      case 3:
+        material.material_type = "Quiz"
+        break;
+      case 4:
+        material.material_type = "Video"
+        break;
+      default:
+        console.log('No Material Type detected')
+    }
+    return material
+  }
+
+  const sendNewMaterialData = (materialData) => {
+    axiosInstance
+      .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/create`, materialData)
+      .then((res) => {
+        console.log(res)
+        setSelectedMaterials([
+          ...selectedMaterials,
+          getMaterialType(res.data[0])
+        ])
+        setOpenMaterialNew(false)
+        setFormState(initialState)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  // "Document" - 1,
+  // "Presentation" - 2,
+  // "Quiz" - 3,
+  // "Video" - 4,
+
+  /*
+    name,
+    course_id,
+    material_type_id,
+    description,
+    material_link
+  */
+
   const handleSubmitForm = () => {
-    console.log(formState)
+    // TODO: Ensure formData gets added to local selectedMaterials list after submission
+    const type = formState.material_type
+    switch (type) {
+      case "Document":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 1
+        })
+        break;
+      case "Presentation":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 2
+        })
+        break;
+      case "Quiz":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 3
+        })
+        break;
+      case "Video":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 4
+        })
+        break;
+      default:
+        console.log('No Material Type detected')
+    }
   }
 
 
