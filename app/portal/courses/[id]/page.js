@@ -74,7 +74,7 @@ export default function Page() {
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
   // Selected Course Data
   const [selectedCourse, setSelectedCourse] = useState(null)
-  const [selectedMaterials, setSelectedMaterials] = useState(null)
+  const [selectedMaterials, setSelectedMaterials] = useState([])
   const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
