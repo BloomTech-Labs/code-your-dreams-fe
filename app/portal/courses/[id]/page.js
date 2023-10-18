@@ -17,10 +17,11 @@ import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
 import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
+import AxiosWithAuth from "@/utils/axiosWithAuth"
 
 const showLinkButton = (url) => {
   return (
-    <IconButton color="primary" href={url} target="_new">
+    <IconButton color="primary" href={`//${url}`} target="_new">
       {<OpenInNewIcon />}
     </IconButton>
   )
@@ -57,6 +58,13 @@ const columns = [
   },
 ]
 
+const initialState = {
+  material_link: "",
+  name: "",
+  material_type: "",
+  description: "",
+}
+
 export default function Page() {
   // Course EDIT modal
   const [openCourse, setOpenCourse] = useState(false)
@@ -67,13 +75,95 @@ export default function Page() {
   // Selected Course Data
   const [selectedCourse, setSelectedCourse] = useState(null)
   const [selectedMaterials, setSelectedMaterials] = useState(null)
+  const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials } = useData()
+  const { courses, course_materials } = useData();
+  const axiosInstance = AxiosWithAuth()
 
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(16).replace(regex, " ")
+
+  const getMaterialType = (material) => {
+    switch (material.material_type_id) {
+      case 1:
+        material.material_type = "Document"
+        break;
+      case 2:
+        material.material_type = "Presentation"
+        break;
+      case 3:
+        material.material_type = "Quiz"
+        break;
+      case 4:
+        material.material_type = "Video"
+        break;
+      default:
+        console.log('No Material Type detected')
+    }
+    return material
+  }
+
+  const sendNewMaterialData = (materialData) => {
+    axiosInstance
+      .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/create`, materialData)
+      .then((res) => {
+        setSelectedMaterials([
+          ...selectedMaterials,
+          getMaterialType(res.data[0])
+        ])
+        setOpenMaterialNew(false)
+        setFormState(initialState)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const handleSubmitForm = () => {
+    const type = formState.material_type
+    switch (type) {
+      case "Document":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 1
+        })
+        break;
+      case "Presentation":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 2
+        })
+        break;
+      case "Quiz":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 3
+        })
+        break;
+      case "Video":
+        sendNewMaterialData({
+          material_link: formState.material_link,
+          name: formState.name,
+          description: formState.description,
+          course_id: selectedCourse.id,
+          material_type_id: 4
+        })
+        break;
+      default:
+        console.log('No Material Type detected')
+    }
+  }
 
   useEffect(() => {
     if (courses) {
@@ -99,10 +189,10 @@ export default function Page() {
   })
 
   const handleRowClick = (params) => {
-    const { url, name } = params.row
+    const { material_link, name } = params.row
 
     return (
-      <Link underline="always" href={`${url}`} target="_new">
+      <Link underline="always" href={`//${material_link}`} target="_new">
         {name}
       </Link>
     )
@@ -198,8 +288,12 @@ export default function Page() {
         title="Add Material"
         open={openMaterialNew}
         handleClose={handleCloseMaterialNew}
+        handleSubmit={handleSubmitForm}
       >
-        <NewMaterial />
+        <NewMaterial
+          formState={formState}
+          setFormState={setFormState}
+        />
       </Modal>
     </main>
   )
