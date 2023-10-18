@@ -109,7 +109,6 @@ export default function Page() {
     axiosInstance
       .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/create`, materialData)
       .then((res) => {
-        console.log(res)
         setSelectedMaterials([
           ...selectedMaterials,
           getMaterialType(res.data[0])
@@ -122,21 +121,7 @@ export default function Page() {
       })
   }
 
-  // "Document" - 1,
-  // "Presentation" - 2,
-  // "Quiz" - 3,
-  // "Video" - 4,
-
-  /*
-    name,
-    course_id,
-    material_type_id,
-    description,
-    material_link
-  */
-
   const handleSubmitForm = () => {
-    // TODO: Ensure formData gets added to local selectedMaterials list after submission
     const type = formState.material_type
     switch (type) {
       case "Document":
