@@ -186,7 +186,7 @@ export default function Page() {
         }
       })
     }
-  })
+  }, [])
 
   const handleRowClick = (params) => {
     const { material_link, name } = params.row
@@ -282,7 +282,10 @@ export default function Page() {
         open={openCourse}
         handleClose={handleCloseCourse}
       >
-        <EditCourse selectedCourse={selectedCourse} />
+        <EditCourse 
+          selectedCourse={selectedCourse}
+          setSelectedCourse={setSelectedCourse}
+        />
       </Modal>
       <Modal
         title="Add Material"

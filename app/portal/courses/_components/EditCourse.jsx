@@ -12,13 +12,20 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditCourse({ selectedCourse }) {
-  console.log(selectedCourse)
+export default function EditCourse({ selectedCourse, setSelectedCourse }) {
+  const handleChange = (e) => {
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value
+      console.log(value)
+      setSelectedCourse({
+      ...selectedCourse,
+      [e.target.name]: value,
+    })
+  }
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
       Link form to update that project when saved. */}
-      {/* TODO: Fill in all details in form from DB. */}
       <TextField
         required
         id="course-name"
@@ -26,6 +33,8 @@ export default function EditCourse({ selectedCourse }) {
         variant="outlined"
         inputlabelprops={{ shrink: true }}
         value={selectedCourse.name}
+        name="name"
+        onChange={handleChange}
       />
       <TextField
         required
@@ -33,9 +42,10 @@ export default function EditCourse({ selectedCourse }) {
         label="Description"
         inputlabelprops={{ shrink: true }}
         value={selectedCourse.description}
+        name="description"
+        onChange={handleChange}
       />
       <Card variant="outlined" className="modal-card">
-        {/* TODO: Connect the checkbox to the form and select checked/not-checked based on course data */}
         <FormControlLabel
           label="Published"
           control={
@@ -43,7 +53,7 @@ export default function EditCourse({ selectedCourse }) {
               name="visibility"
               color="primary"
               checked={selectedCourse.visibility}
-              onChange=""
+              onChange={handleChange}
             />
           }
         />
