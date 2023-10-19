@@ -16,7 +16,7 @@ import AxiosWithAuth from "@/utils/axiosWithAuth"
 
 const handleRowClick = (params) => {
   const { name } = params.row
-  const regex = /( |%20)/g;
+  const regex = /( |%20)/g
 
   return (
     <Link
@@ -142,17 +142,6 @@ export default function Page() {
 
   return (
     <main>
-      <aside className="TODO">
-        TODO:
-        <ul>
-          <li>
-            Add a page loading component as the forwarding process causes the
-            page hang for a moment with only the footer visible and/or figure
-            out why it happens.
-          </li>
-        </ul>
-      </aside>
-
       <section className={`container ${styles.courses}`}>
         <div className="header-row">
           <h1>Courses</h1>
