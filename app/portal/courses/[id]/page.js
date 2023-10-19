@@ -282,7 +282,7 @@ export default function Page() {
         open={openCourse}
         handleClose={handleCloseCourse}
       >
-        <EditCourse />
+        <EditCourse selectedCourse={selectedCourse} />
       </Modal>
       <Modal
         title="Add Material"

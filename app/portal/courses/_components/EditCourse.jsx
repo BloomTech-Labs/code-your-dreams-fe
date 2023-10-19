@@ -12,7 +12,8 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditCourse() {
+export default function EditCourse({ selectedCourse }) {
+  console.log(selectedCourse)
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
@@ -23,8 +24,16 @@ export default function EditCourse() {
         id="course-name"
         label="Course Name"
         variant="outlined"
+        inputlabelprops={{ shrink: true }}
+        value={selectedCourse.name}
       />
-      <TextField required id="course-description" label="Description" />
+      <TextField
+        required
+        id="course-description"
+        label="Description"
+        inputlabelprops={{ shrink: true }}
+        value={selectedCourse.description}
+      />
       <Card variant="outlined" className="modal-card">
         {/* TODO: Connect the checkbox to the form and select checked/not-checked based on course data */}
         <FormControlLabel
@@ -33,7 +42,7 @@ export default function EditCourse() {
             <Checkbox
               name="visibility"
               color="primary"
-              checked=""
+              checked={selectedCourse.visibility}
               onChange=""
             />
           }
