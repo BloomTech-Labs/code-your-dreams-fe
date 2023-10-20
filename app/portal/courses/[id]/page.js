@@ -80,6 +80,7 @@ export default function Page() {
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
   const { courses, course_materials } = useData();
   const axiosInstance = AxiosWithAuth()
+  const [editCourseDetails, setEditCourseDetails] = useState(null);
 
   const pathname = usePathname()
   const regex = /-/g
@@ -119,6 +120,10 @@ export default function Page() {
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  const handleSubmitEditCourse = () => {
+    console.log(editCourseDetails)
   }
 
   const handleSubmitForm = () => {
@@ -186,7 +191,7 @@ export default function Page() {
         }
       })
     }
-  }, [])
+  }, [courses, course_materials, selectedMaterials, selectedCourse])
 
   const handleRowClick = (params) => {
     const { material_link, name } = params.row
@@ -281,10 +286,12 @@ export default function Page() {
         title="Edit Course"
         open={openCourse}
         handleClose={handleCloseCourse}
+        handleSubmit={handleSubmitEditCourse}
       >
         <EditCourse 
           selectedCourse={selectedCourse}
-          setSelectedCourse={setSelectedCourse}
+          editCourseDetails={editCourseDetails}
+          setEditCourseDetails={setEditCourseDetails}
         />
       </Modal>
       <Modal

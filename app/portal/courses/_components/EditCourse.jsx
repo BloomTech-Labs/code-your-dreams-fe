@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from 'react';
 import {
   Card,
   Checkbox,
@@ -12,13 +13,24 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditCourse({ selectedCourse, setSelectedCourse }) {
+export default function EditCourse({ selectedCourse, editCourseDetails, setEditCourseDetails }) {
+  /*
+    When we edit a course's name, it may mess with the ability to actually render the course's info on the details page.
+    Options: 
+    When a course's new info is submitted, also adjust the course's object in Context & then change the URL. Ideally, the page will refresh, seek the new URL stub in Context, and display the course's new information.
+  */
+  useEffect(() => {
+    if (editCourseDetails === null) {
+      console.log('useEffect/setEditCourseDetails run')
+      setEditCourseDetails(selectedCourse)
+    }
+  }, [])
+
   const handleChange = (e) => {
-    const value =
-      e.target.type === "checkbox" ? e.target.checked : e.target.value
+    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
       console.log(value)
-      setSelectedCourse({
-      ...selectedCourse,
+      setEditCourseDetails({
+      ...editCourseDetails,
       [e.target.name]: value,
     })
   }
@@ -26,37 +38,43 @@ export default function EditCourse({ selectedCourse, setSelectedCourse }) {
     <>
       {/* TODO: Take in prop for database entry to be edited.
       Link form to update that project when saved. */}
-      <TextField
-        required
-        id="course-name"
-        label="Course Name"
-        variant="outlined"
-        inputlabelprops={{ shrink: true }}
-        value={selectedCourse.name}
-        name="name"
-        onChange={handleChange}
-      />
-      <TextField
-        required
-        id="course-description"
-        label="Description"
-        inputlabelprops={{ shrink: true }}
-        value={selectedCourse.description}
-        name="description"
-        onChange={handleChange}
-      />
-      <Card variant="outlined" className="modal-card">
-        <FormControlLabel
-          label="Published"
-          control={
-            <Checkbox
-              name="visibility"
-              color="primary"
-              checked={selectedCourse.visibility}
-              onChange={handleChange}
-            />
-          }
+      {editCourseDetails &&
+        <TextField
+          required
+          id="course-name"
+          label="Course Name"
+          variant="outlined"
+          inputlabelprops={{ shrink: true }}
+          value={editCourseDetails.name}
+          name="name"
+          onChange={handleChange}
         />
+      }
+      {editCourseDetails &&
+        <TextField
+          required
+          id="course-description"
+          label="Description"
+          inputlabelprops={{ shrink: true }}
+          value={editCourseDetails.description}
+          name="description"
+          onChange={handleChange}
+        />
+      }
+      <Card variant="outlined" className="modal-card">
+        {editCourseDetails && 
+          <FormControlLabel
+            label="Published"
+            control={
+              <Checkbox
+                name="visibility"
+                color="primary"
+                checked={editCourseDetails.visibility}
+                onChange={handleChange}
+              />
+            }
+          />
+        }
         <FormHelperText>
           If unselected, the course is in draft and not visible to users.
         </FormHelperText>
