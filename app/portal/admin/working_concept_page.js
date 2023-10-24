@@ -79,22 +79,7 @@ const AdminPage = () => {
   useCheckTokenExpired()
   const { current_user } = useData()
 
-  const isSuperAdmin = () => {
-    if (current_user?.role === "super_admin") {
-      console.log("True", current_user.role)
-      return true
-    }
-    console.log("False", current_user.role)
-    return false
-  }
-
-  if (isSuperAdmin !== true) {
-    return (
-      <main>
-        <h1>Hello non super admin!</h1>
-      </main>
-    )
-  } else {
+  if (current_user?.role === "super_admin") {
     return (
       <main>
         <section className="container">
