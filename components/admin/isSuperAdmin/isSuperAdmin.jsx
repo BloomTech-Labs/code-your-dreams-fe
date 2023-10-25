@@ -4,9 +4,9 @@ import { useEffect } from "react"
 import { redirect } from "next/navigation"
 import { useData } from "@/context/appContext"
 
-async function hasSARole() {
+function hasSARole() {
   const { current_user } = useData()
-  const data = await current_user?.role
+  const data = current_user?.role
   console.log("role: ", data)
 
   if (data !== "super_admin") {
