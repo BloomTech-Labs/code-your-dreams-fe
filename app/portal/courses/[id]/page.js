@@ -15,7 +15,7 @@ import NewMaterial from "../_components/NewMaterial"
 import EditMaterial from "../_components/EditMaterial"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useData } from "@/context/appContext"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
 
@@ -78,8 +78,10 @@ export default function Page() {
   const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials } = useData();
+  const { courses, course_materials, setCourses } = useData();
   const axiosInstance = AxiosWithAuth()
+  const [editCourseDetails, setEditCourseDetails] = useState(null);
+  const router = useRouter()
 
   const pathname = usePathname()
   const regex = /-/g
@@ -119,6 +121,34 @@ export default function Page() {
       .catch((err) => {
         console.log(err)
       })
+  }
+
+  const handleSubmitEditCourse = () => {
+    /*
+      1. When form submitted, send user back to /courses
+    */
+   const editCourseData = {
+    id: editCourseDetails.id,
+    name: editCourseDetails.name,
+    description: editCourseDetails.description,
+    visibility: editCourseDetails.visibility
+   }
+   axiosInstance.post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/update/${selectedCourse.id}`, editCourseData)
+   .then((res) => {
+    setOpenCourse(false)
+    setEditCourseDetails(null)
+    setCourses(courses.map((i) => {
+      if (i.id === editCourseData.id) {
+        return editCourseDetails
+      } else {
+        return i
+      }
+    }))
+    router.push('/portal/courses')
+   })
+   .catch((err) => {
+    console.log(err)
+   })
   }
 
   const handleSubmitForm = () => {
@@ -168,7 +198,7 @@ export default function Page() {
   useEffect(() => {
     if (courses) {
       courses.some((obj) => {
-        if (obj.name.toLowerCase() === newStr) {
+        if (obj.name.toLowerCase().replace(/-/g, " ") === newStr) {
           setSelectedCourse(obj)
         }
       })
@@ -186,7 +216,7 @@ export default function Page() {
         }
       })
     }
-  })
+  }, [courses, course_materials, selectedMaterials, selectedCourse])
 
   const handleRowClick = (params) => {
     const { material_link, name } = params.row
@@ -281,8 +311,13 @@ export default function Page() {
         title="Edit Course"
         open={openCourse}
         handleClose={handleCloseCourse}
+        handleSubmit={handleSubmitEditCourse}
       >
-        <EditCourse />
+        <EditCourse 
+          selectedCourse={selectedCourse}
+          editCourseDetails={editCourseDetails}
+          setEditCourseDetails={setEditCourseDetails}
+        />
       </Modal>
       <Modal
         title="Add Material"
