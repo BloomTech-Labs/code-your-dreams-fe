@@ -78,7 +78,7 @@ export default function Page() {
   const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials } = useData();
+  const { courses, course_materials, setCourses } = useData();
   const axiosInstance = AxiosWithAuth()
   const [editCourseDetails, setEditCourseDetails] = useState(null);
   const router = useRouter()
@@ -137,6 +137,13 @@ export default function Page() {
    .then((res) => {
     setOpenCourse(false)
     setEditCourseDetails(null)
+    setCourses(courses.map((i) => {
+      if (i.id === editCourseData.id) {
+        return editCourseData
+      } else {
+        return i
+      }
+    }))
     router.push('/portal/courses')
    })
    .catch((err) => {
