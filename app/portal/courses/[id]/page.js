@@ -27,10 +27,10 @@ const showLinkButton = (url) => {
   )
 }
 
-const showEditButton = () => {
+const showEditButton = (material) => {
   return (
     <EditButton title="Edit Material">
-      <EditMaterial />
+      <EditMaterial material={material} />
     </EditButton>
   )
 }
@@ -54,7 +54,7 @@ const columns = [
     headerAlign: "center",
     align: "center",
     width: 100,
-    renderCell: (params) => showEditButton(params.value),
+    renderCell: (params) => showEditButton(params.row),
   },
 ]
 

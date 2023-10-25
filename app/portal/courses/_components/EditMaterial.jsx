@@ -18,7 +18,8 @@ const typeList = [
   { label: "Video" },
 ]
 
-export default function EditMaterial() {
+export default function EditMaterial({ material }) {
+  console.log(material)
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
@@ -32,6 +33,7 @@ export default function EditMaterial() {
         id="material-name"
         label="Material Name"
         variant="outlined"
+        value={material.name}
       />
       <Autocomplete
         disablePortal
@@ -43,11 +45,24 @@ export default function EditMaterial() {
             required
             label="Material Type"
             variant="outlined"
+            name="material_type"
+            value={material.material_type}
           />
         )}
       />
-      <TextField required id="material-details" label="Details" />
-      <TextField required id="material-source" type="url" label="Source URL" />
+      <TextField 
+        required 
+        id="material-details" 
+        label="Details"
+        value={material.description}
+      />
+      <TextField 
+        required 
+        id="material-source" 
+        type="url" 
+        label="Source URL"
+        value={material.material_link}
+      />
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
