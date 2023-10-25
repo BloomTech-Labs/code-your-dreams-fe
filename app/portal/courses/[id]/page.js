@@ -123,7 +123,23 @@ export default function Page() {
   }
 
   const handleSubmitEditCourse = () => {
-    console.log(editCourseDetails)
+    /*
+      1. When form submitted, send user back to /courses
+    */
+   const editCourseData = {
+    id: editCourseDetails.id,
+    name: editCourseDetails.name,
+    description: editCourseDetails.description,
+    visibility: editCourseDetails.visibility
+   }
+   axiosInstance.post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/update/${selectedCourse.id}`, editCourseData)
+   .then((res) => {
+    setOpenCourse(false)
+    setEditCourseDetails(null)
+   })
+   .catch((err) => {
+    console.log(err)
+   })
   }
 
   const handleSubmitForm = () => {
