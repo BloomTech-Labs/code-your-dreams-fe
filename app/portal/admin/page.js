@@ -21,7 +21,7 @@ import EditSuperAdmin from "./_components/EditSuperAdmin"
 import EditMaterialType from "./_components/EditMaterialType"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
-import { useData } from "@/context/appContext"
+import isSuperAdmin from "@/components/admin/isSuperAdmin/isSuperAdmin"
 
 const showEditButton = () => {
   return (
@@ -77,129 +77,111 @@ const AdminPage = () => {
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
 
   useCheckTokenExpired()
-  const { current_user } = useData()
 
-  const isSuperAdmin = () => {
-    if (current_user?.role === "super_admin") {
-      console.log("True", current_user.role)
-      return true
-    }
-    console.log("False", current_user.role)
-    return false
-  }
-
-  if (isSuperAdmin !== true) {
-    return (
-      <main>
-        <h1>Hello non super admin!</h1>
-      </main>
-    )
-  } else {
-    return (
-      <main>
-        <section className="container">
-          <h1>Admin Settings</h1>
-          <div className="header-row">
-            <h2>Super admins</h2>
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenSuperAdminNew()}
-              aria-label="Add a super admin"
-            >
-              <PersonAddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
-          <p className="italic">
-            Super admins will have the ability to manage settings and users for
-            the entire application.
-          </p>
-          {/* TODO: We need to send the selected user over to the edit modal */}
-          <div className="data-grid">
-            <DataGrid
-              rows={rows}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 20 },
-                },
-              }}
-              pageSizeOptions={[20]}
-              slots={{
-                noRowsOverlay: NoRowsOverlay,
-              }}
-              autoHeight={true}
-              sx={{ "--DataGrid-overlayHeight": "300px" }}
-              aria-label="Data grid of super admins"
-            />
-          </div>
-        </section>
-        <section className="container">
-          <div className="header-row">
-            <h2>Materials types</h2>
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenMaterialNew()}
-              aria-label="Add a materials type"
-            >
-              <AddIcon fontSize="inherit" />
-            </IconButton>
-          </div>
-          <p className="italic">
-            A materials type can only be removed if there are zero instances of
-            it being used&mdash;you must change the type for each file for all
-            files before you can delete a type.
-          </p>
-          {/* TODO: We need to send the selected material type over to the edit modal */}
-          {/* TODO: Add in logic to show the following if the table data is empty
+  return (
+    <main>
+      <section className="container">
+        <h1>Admin Settings</h1>
+        <div className="header-row">
+          <h2>Super admins</h2>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenSuperAdminNew()}
+            aria-label="Add a super admin"
+          >
+            <PersonAddIcon fontSize="inherit" />
+          </IconButton>
+        </div>
+        <p className="italic">
+          Super admins will have the ability to manage settings and users for
+          the entire application.
+        </p>
+        {/* TODO: We need to send the selected user over to the edit modal */}
+        <div className="data-grid">
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: { pageSize: 20 },
+              },
+            }}
+            pageSizeOptions={[20]}
+            slots={{
+              noRowsOverlay: NoRowsOverlay,
+            }}
+            autoHeight={true}
+            sx={{ "--DataGrid-overlayHeight": "300px" }}
+            aria-label="Data grid of super admins"
+          />
+        </div>
+      </section>
+      <section className="container">
+        <div className="header-row">
+          <h2>Materials types</h2>
+          <IconButton
+            color="primary"
+            size="large"
+            onClick={() => handleOpenMaterialNew()}
+            aria-label="Add a materials type"
+          >
+            <AddIcon fontSize="inherit" />
+          </IconButton>
+        </div>
+        <p className="italic">
+          A materials type can only be removed if there are zero instances of it
+          being used&mdash;you must change the type for each file for all files
+          before you can delete a type.
+        </p>
+        {/* TODO: We need to send the selected material type over to the edit modal */}
+        {/* TODO: Add in logic to show the following if the table data is empty
             {data.length === 0 && (<TableRow><TableCell colSpan={3}>no records found</TableCell></TableRow>)} */}
-          <TableContainer>
-            <Table size="small" aria-label="simple table" className="min-width">
-              <caption>Admin table for materials types</caption>
-              <TableHead>
-                <TableRow>
-                  <TableCell>Types</TableCell>
-                  <TableCell align="right">Count</TableCell>
-                  <TableCell>Edit</TableCell>
+        <TableContainer>
+          <Table size="small" aria-label="simple table" className="min-width">
+            <caption>Admin table for materials types</caption>
+            <TableHead>
+              <TableRow>
+                <TableCell>Types</TableCell>
+                <TableCell align="right">Count</TableCell>
+                <TableCell>Edit</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {demoData.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell align="center">{row.quantity}</TableCell>
+                  <TableCell align="center">
+                    {row.showButton && (
+                      <EditButton title="Edit Material Type">
+                        <EditMaterialType />
+                      </EditButton>
+                    )}
+                  </TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {demoData.map((row) => (
-                  <TableRow key={row.id}>
-                    <TableCell>{row.name}</TableCell>
-                    <TableCell align="center">{row.quantity}</TableCell>
-                    <TableCell align="center">
-                      {row.showButton && (
-                        <EditButton title="Edit Material Type">
-                          <EditMaterialType />
-                        </EditButton>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </section>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </section>
 
-        <Modal
-          title="Add a New Super Admin"
-          open={openSuperAdminNew}
-          handleClose={handleCloseSuperAdminNew}
-        >
-          <NewSuperAdmin />
-        </Modal>
-        <Modal
-          title="Create a New Materials Type"
-          open={openMaterialNew}
-          handleClose={handleCloseMaterialNew}
-        >
-          <NewMaterialType />
-        </Modal>
-      </main>
-    )
-  }
+      <Modal
+        title="Add a New Super Admin"
+        open={openSuperAdminNew}
+        handleClose={handleCloseSuperAdminNew}
+      >
+        <NewSuperAdmin />
+      </Modal>
+      <Modal
+        title="Create a New Materials Type"
+        open={openMaterialNew}
+        handleClose={handleCloseMaterialNew}
+      >
+        <NewMaterialType />
+      </Modal>
+    </main>
+  )
 }
 
-export default AdminPage
+export default isSuperAdmin(AdminPage)
