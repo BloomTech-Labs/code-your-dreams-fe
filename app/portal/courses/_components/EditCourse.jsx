@@ -21,14 +21,12 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
   */
   useEffect(() => {
     if (editCourseDetails === null) {
-      console.log('useEffect/setEditCourseDetails run')
       setEditCourseDetails(selectedCourse)
     }
   }, [])
 
   const handleChange = (e) => {
     const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
-      console.log(value)
       setEditCourseDetails({
       ...editCourseDetails,
       [e.target.name]: value,

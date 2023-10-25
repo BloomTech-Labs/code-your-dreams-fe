@@ -139,7 +139,7 @@ export default function Page() {
     setEditCourseDetails(null)
     setCourses(courses.map((i) => {
       if (i.id === editCourseData.id) {
-        return editCourseData
+        return editCourseDetails
       } else {
         return i
       }
