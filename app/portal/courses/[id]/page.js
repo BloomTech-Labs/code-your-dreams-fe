@@ -15,7 +15,7 @@ import NewMaterial from "../_components/NewMaterial"
 import EditMaterial from "../_components/EditMaterial"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useData } from "@/context/appContext"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
 
@@ -81,6 +81,7 @@ export default function Page() {
   const { courses, course_materials } = useData();
   const axiosInstance = AxiosWithAuth()
   const [editCourseDetails, setEditCourseDetails] = useState(null);
+  const router = useRouter()
 
   const pathname = usePathname()
   const regex = /-/g
@@ -136,6 +137,7 @@ export default function Page() {
    .then((res) => {
     setOpenCourse(false)
     setEditCourseDetails(null)
+    router.push('/portal/courses')
    })
    .catch((err) => {
     console.log(err)
@@ -189,7 +191,7 @@ export default function Page() {
   useEffect(() => {
     if (courses) {
       courses.some((obj) => {
-        if (obj.name.toLowerCase() === newStr) {
+        if (obj.name.toLowerCase().replace(/-/g, " ") === newStr) {
           setSelectedCourse(obj)
         }
       })
