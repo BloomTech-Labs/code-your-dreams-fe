@@ -53,9 +53,13 @@ export default function Page() {
   const [editMaterialDetails, setEditMaterialDetails] = useState(null);
   const router = useRouter()
 
+  const handleSubmitEditMaterial = () => {
+    console.log(editMaterialDetails)
+  }
+
   const showEditButton = (material) => {
     return (
-      <EditButton title="Edit Material">
+      <EditButton title="Edit Material" handleSubmit={handleSubmitEditMaterial}>
         <EditMaterial 
           material={material}
           editMaterialDetails={editMaterialDetails}
