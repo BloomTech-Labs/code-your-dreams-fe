@@ -27,37 +27,6 @@ const showLinkButton = (url) => {
   )
 }
 
-const showEditButton = (material) => {
-  return (
-    <EditButton title="Edit Material">
-      <EditMaterial material={material} />
-    </EditButton>
-  )
-}
-
-const columns = [
-  { field: "id", headerName: "ID", width: 100 },
-  {
-    field: "material_link",
-    headerName: "Link",
-    headerAlign: "center",
-    align: "center",
-    width: 100,
-    renderCell: (params) => showLinkButton(params.value),
-  },
-  { field: "name", headerName: "Name", width: 250 },
-  { field: "material_type", headerName: "Type", width: 150 },
-  { field: "description", headerName: "Details", width: 450 },
-  {
-    field: "edit",
-    headerName: "Edit",
-    headerAlign: "center",
-    align: "center",
-    width: 100,
-    renderCell: (params) => showEditButton(params.row),
-  },
-]
-
 const initialState = {
   material_link: "",
   name: "",
@@ -81,7 +50,43 @@ export default function Page() {
   const { courses, course_materials, setCourses } = useData();
   const axiosInstance = AxiosWithAuth()
   const [editCourseDetails, setEditCourseDetails] = useState(null);
+  const [editMaterialDetails, setEditMaterialDetails] = useState(null);
   const router = useRouter()
+
+  const showEditButton = (material) => {
+    return (
+      <EditButton title="Edit Material">
+        <EditMaterial 
+          material={material}
+          editMaterialDetails={editMaterialDetails}
+          setEditMaterialDetails={setEditMaterialDetails}
+        />
+      </EditButton>
+    )
+  }
+  
+  const columns = [
+    { field: "id", headerName: "ID", width: 100 },
+    {
+      field: "material_link",
+      headerName: "Link",
+      headerAlign: "center",
+      align: "center",
+      width: 100,
+      renderCell: (params) => showLinkButton(params.value),
+    },
+    { field: "name", headerName: "Name", width: 250 },
+    { field: "material_type", headerName: "Type", width: 150 },
+    { field: "description", headerName: "Details", width: 450 },
+    {
+      field: "edit",
+      headerName: "Edit",
+      headerAlign: "center",
+      align: "center",
+      width: 100,
+      renderCell: (params) => showEditButton(params.row),
+    },
+  ]
 
   const pathname = usePathname()
   const regex = /-/g
