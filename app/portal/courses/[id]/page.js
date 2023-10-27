@@ -51,15 +51,23 @@ export default function Page() {
   const axiosInstance = AxiosWithAuth()
   const [editCourseDetails, setEditCourseDetails] = useState(null);
   const [editMaterialDetails, setEditMaterialDetails] = useState(null);
+  const [openEditMaterial, setOpenEditMaterial] = useState(false)
   const router = useRouter()
 
   const handleSubmitEditMaterial = () => {
     console.log(editMaterialDetails)
+    setEditMaterialDetails(null)
+    setOpenEditMaterial(false)
   }
 
   const showEditButton = (material) => {
     return (
-      <EditButton title="Edit Material" handleSubmit={handleSubmitEditMaterial}>
+      <EditButton
+        title="Edit Material"
+        handleSubmit={handleSubmitEditMaterial}
+        open={openEditMaterial}
+        setOpen={setOpenEditMaterial}
+      >
         <EditMaterial 
           material={material}
           editMaterialDetails={editMaterialDetails}
