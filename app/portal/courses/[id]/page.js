@@ -36,7 +36,6 @@ const showEditButton = () => {
 }
 
 const columns = [
-  { field: "id", headerName: "ID", width: 100 },
   {
     field: "material_link",
     headerName: "Link",
@@ -78,9 +77,9 @@ export default function Page() {
   const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials, setCourses } = useData();
+  const { courses, course_materials, setCourses } = useData()
   const axiosInstance = AxiosWithAuth()
-  const [editCourseDetails, setEditCourseDetails] = useState(null);
+  const [editCourseDetails, setEditCourseDetails] = useState(null)
   const router = useRouter()
 
   const pathname = usePathname()
@@ -91,29 +90,32 @@ export default function Page() {
     switch (material.material_type_id) {
       case 1:
         material.material_type = "Document"
-        break;
+        break
       case 2:
         material.material_type = "Presentation"
-        break;
+        break
       case 3:
         material.material_type = "Quiz"
-        break;
+        break
       case 4:
         material.material_type = "Video"
-        break;
+        break
       default:
-        console.log('No Material Type detected')
+        console.log("No Material Type detected")
     }
     return material
   }
 
   const sendNewMaterialData = (materialData) => {
     axiosInstance
-      .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/create`, materialData)
+      .post(
+        `${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/create`,
+        materialData
+      )
       .then((res) => {
         setSelectedMaterials([
           ...selectedMaterials,
-          getMaterialType(res.data[0])
+          getMaterialType(res.data[0]),
         ])
         setOpenMaterialNew(false)
         setFormState(initialState)
@@ -127,28 +129,34 @@ export default function Page() {
     /*
       1. When form submitted, send user back to /courses
     */
-   const editCourseData = {
-    id: editCourseDetails.id,
-    name: editCourseDetails.name,
-    description: editCourseDetails.description,
-    visibility: editCourseDetails.visibility
-   }
-   axiosInstance.post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/update/${selectedCourse.id}`, editCourseData)
-   .then((res) => {
-    setOpenCourse(false)
-    setEditCourseDetails(null)
-    setCourses(courses.map((i) => {
-      if (i.id === editCourseData.id) {
-        return editCourseDetails
-      } else {
-        return i
-      }
-    }))
-    router.push('/portal/courses')
-   })
-   .catch((err) => {
-    console.log(err)
-   })
+    const editCourseData = {
+      id: editCourseDetails.id,
+      name: editCourseDetails.name,
+      description: editCourseDetails.description,
+      visibility: editCourseDetails.visibility,
+    }
+    axiosInstance
+      .post(
+        `${process.env.NEXT_PUBLIC_BE_API_URL}/courses/update/${selectedCourse.id}`,
+        editCourseData
+      )
+      .then((res) => {
+        setOpenCourse(false)
+        setEditCourseDetails(null)
+        setCourses(
+          courses.map((i) => {
+            if (i.id === editCourseData.id) {
+              return editCourseDetails
+            } else {
+              return i
+            }
+          })
+        )
+        router.push("/portal/courses")
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   const handleSubmitForm = () => {
@@ -160,38 +168,38 @@ export default function Page() {
           name: formState.name,
           description: formState.description,
           course_id: selectedCourse.id,
-          material_type_id: 1
+          material_type_id: 1,
         })
-        break;
+        break
       case "Presentation":
         sendNewMaterialData({
           material_link: formState.material_link,
           name: formState.name,
           description: formState.description,
           course_id: selectedCourse.id,
-          material_type_id: 2
+          material_type_id: 2,
         })
-        break;
+        break
       case "Quiz":
         sendNewMaterialData({
           material_link: formState.material_link,
           name: formState.name,
           description: formState.description,
           course_id: selectedCourse.id,
-          material_type_id: 3
+          material_type_id: 3,
         })
-        break;
+        break
       case "Video":
         sendNewMaterialData({
           material_link: formState.material_link,
           name: formState.name,
           description: formState.description,
           course_id: selectedCourse.id,
-          material_type_id: 4
+          material_type_id: 4,
         })
-        break;
+        break
       default:
-        console.log('No Material Type detected')
+        console.log("No Material Type detected")
     }
   }
 
@@ -313,7 +321,7 @@ export default function Page() {
         handleClose={handleCloseCourse}
         handleSubmit={handleSubmitEditCourse}
       >
-        <EditCourse 
+        <EditCourse
           selectedCourse={selectedCourse}
           editCourseDetails={editCourseDetails}
           setEditCourseDetails={setEditCourseDetails}
@@ -325,10 +333,7 @@ export default function Page() {
         handleClose={handleCloseMaterialNew}
         handleSubmit={handleSubmitForm}
       >
-        <NewMaterial
-          formState={formState}
-          setFormState={setFormState}
-        />
+        <NewMaterial formState={formState} setFormState={setFormState} />
       </Modal>
     </main>
   )

@@ -39,7 +39,6 @@ const showEditButton = () => {
 
 // TODO: Replace demo data with actual data from the chapters table.
 const columns = [
-  { field: "id", headerName: "ID", width: 100 },
   { field: "memberName", headerName: "Name", width: 250 },
   { field: "emailAddress", headerName: "Email", width: 300 },
   { field: "adminFlag", headerName: "Admin?", width: 120 },
