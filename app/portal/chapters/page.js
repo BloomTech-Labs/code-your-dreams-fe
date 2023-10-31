@@ -10,6 +10,7 @@ import NewChapter from "./_components/NewChapter"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import { useData } from "@/context/appContext"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
+import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 
 const columns = [
   { field: "name", headerName: "Chapter name", width: 250 },
@@ -25,7 +26,7 @@ const initialState = {
   name: "",
 }
 
-export default function Page() {
+const ChaptersPage = () => {
   const [localChapters, setLocalChapters] = useState(null)
   const [open, setOpen] = useState(false)
   const [formState, setFormState] = useState(initialState)
@@ -54,14 +55,12 @@ export default function Page() {
   const { chapters, current_user } = useData()
 
   const handleRowClick = (params) => {
-    // TODO: we'll want to add a descriptive ID like a URL slug instead of an id string
     const { name } = params.row
     const regex = /( |%20)/g
 
     return (
       <Link
         underline="always"
-        // href={`/portal/chapters/${id}`}
         href={`/portal/chapters/${name.toLowerCase().replace(regex, "-")}`}
         aria-label={`Open chapter detail page for ${params.value}`}
       >
@@ -78,7 +77,6 @@ export default function Page() {
   }, [chapters])
 
   return (
-    // TODO: Limit this page only to CYD super admins.
     <main>
       <section className="container">
         <div className="header-row">
@@ -139,3 +137,5 @@ export default function Page() {
     </main>
   )
 }
+
+export default isSuperAdmin(ChaptersPage)

@@ -21,7 +21,7 @@ import EditSuperAdmin from "./_components/EditSuperAdmin"
 import EditMaterialType from "./_components/EditMaterialType"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
-import isSuperAdmin from "@/components/admin/isSuperAdmin/isSuperAdmin"
+import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 
 const showEditButton = () => {
   return (
