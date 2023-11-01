@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from 'react'
 import {
   TextField,
   Autocomplete,
@@ -18,7 +19,26 @@ const typeList = [
   { label: "Video" },
 ]
 
-export default function EditMaterial() {
+export default function EditMaterial({ material, editMaterialDetails, setEditMaterialDetails }) {
+
+  const handleChange = (e) => {
+    setEditMaterialDetails({
+      ...editMaterialDetails,
+      [e.target.name]: e.target.value
+    })
+  }
+  const handleAutoCompleteChange = (_, newValue) => {
+    setEditMaterialDetails(prev => ({
+      ...prev,
+      material_type: newValue.label,
+    }));
+  };
+
+  useEffect(() => {
+    if (editMaterialDetails === null) {
+      setEditMaterialDetails(material)
+    }
+  }, [])
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
@@ -27,27 +47,63 @@ export default function EditMaterial() {
       <div className="italic">
         Edit the linked source material and click save to continue.
       </div>
-      <TextField
-        required
-        id="material-name"
-        label="Material Name"
-        variant="outlined"
-      />
-      <Autocomplete
-        disablePortal
-        id="material-type"
-        options={typeList}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            required
-            label="Material Type"
-            variant="outlined"
-          />
-        )}
-      />
-      <TextField required id="material-details" label="Details" />
-      <TextField required id="material-source" type="url" label="Source URL" />
+      {
+        editMaterialDetails &&
+        <TextField
+          required
+          id="material-name"
+          label="Material Name"
+          variant="outlined"
+          name="name"
+          value={editMaterialDetails.name}
+          onChange={handleChange}
+        />
+      }
+      {
+        editMaterialDetails &&
+        <Autocomplete
+          disablePortal
+          id="material-type"
+          options={typeList}
+          value={{label: editMaterialDetails.material_type}}
+          onChange={handleAutoCompleteChange}
+          isOptionEqualToValue={(option, value) => option.id === value.id}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              required
+              label="Material Type"
+              variant="outlined"
+              name="material_type"
+              value={editMaterialDetails.material_type}
+              onChange={handleAutoCompleteChange}
+            />
+          )}
+        />
+      }
+      {
+        editMaterialDetails &&
+        <TextField 
+          required 
+          id="material-details" 
+          label="Details"
+          name="description"
+          value={editMaterialDetails.description}
+          onChange={handleChange}
+        />
+      }
+      {
+        editMaterialDetails &&
+        <TextField 
+          required 
+          id="material-source" 
+          type="url" 
+          label="Source URL"
+          name="material_link"
+          value={editMaterialDetails.material_link}
+          onChange={handleChange}
+        />
+      }
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
