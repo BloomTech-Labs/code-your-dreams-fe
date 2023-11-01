@@ -37,7 +37,6 @@ const showEditButton = () => {
   )
 }
 
-// TODO: Replace demo data with actual data from the chapters table.
 const columns = [
   { field: "memberName", headerName: "Name", width: 250 },
   { field: "emailAddress", headerName: "Email", width: 300 },
@@ -50,6 +49,8 @@ const columns = [
     renderCell: () => showEditButton(),
   },
 ]
+
+// TODO: Replace demo data with actual data from the chapters table.
 const rows = [
   {
     id: 1,
@@ -72,6 +73,42 @@ const demoData = [
   { id: 1, name: "Python", showButton: true },
   { id: 2, name: "App Inventor", showButton: true },
 ]
+
+const showDataTable = (data) => {
+  const tableLength = Object.keys(data).length
+
+  if (tableLength === 0) {
+    return <NoRowsOverlay />
+  } else {
+    return (
+      <TableContainer>
+        <Table size="small" aria-label="simple table" className="min-width">
+          <caption>Admin table for linked courses</caption>
+          <TableHead>
+            <TableRow>
+              <TableCell>Course Name</TableCell>
+              <TableCell>Unlink Course?</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.name}</TableCell>
+                <TableCell align="center">
+                  {row.showButton && (
+                    <DestroyButton action="unlink">
+                      <RemoveCircleOutlineIcon />
+                    </DestroyButton>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )
+  }
+}
 
 export default function Page() {
   // Chapter EDIT modal
@@ -188,40 +225,14 @@ export default function Page() {
             <AddIcon fontSize="inherit" />
           </IconButton>
         </div>
-        {/* TODO: Add in logic to show the following if the table data is empty
-          {data.length === 0 && (<TableRow><TableCell colSpan={2}>no records found</TableCell></TableRow>)} */}
-        <TableContainer>
-          <Table size="small" aria-label="simple table" className="min-width">
-            <caption>Admin table for linked courses</caption>
-            <TableHead>
-              <TableRow>
-                <TableCell>Course Name</TableCell>
-                <TableCell>Unlink Course?</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {demoData.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell align="center">
-                    {row.showButton && (
-                      <DestroyButton action="unlink">
-                        <RemoveCircleOutlineIcon />
-                      </DestroyButton>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {/* TODO: Change the name of the variable for data source here */}
+        {showDataTable(demoData)}
         <div className="italic">
           <Link underline="hover" href="/portal/courses">
             Visit the Courses page to access course materials.
           </Link>
         </div>
       </section>
-      <NoRowsOverlay />
 
       <Modal
         title="Edit Chapter"
