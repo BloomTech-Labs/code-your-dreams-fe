@@ -21,6 +21,7 @@ import EditSuperAdmin from "./_components/EditSuperAdmin"
 import EditMaterialType from "./_components/EditMaterialType"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
+import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 
 const showEditButton = () => {
   return (
@@ -64,7 +65,7 @@ const demoData = [
   { id: 5, name: "Test", quantity: 0, showButton: true },
 ]
 
-export default function Page() {
+const AdminPage = () => {
   // Super admin NEW modal
   const [openSuperAdminNew, setOpenSuperAdminNew] = useState(false)
   const handleOpenSuperAdminNew = () => setOpenSuperAdminNew(true)
@@ -134,7 +135,7 @@ export default function Page() {
         </p>
         {/* TODO: We need to send the selected material type over to the edit modal */}
         {/* TODO: Add in logic to show the following if the table data is empty
-          {data.length === 0 && (<TableRow><TableCell colSpan={3}>no records found</TableCell></TableRow>)} */}
+            {data.length === 0 && (<TableRow><TableCell colSpan={3}>no records found</TableCell></TableRow>)} */}
         <TableContainer>
           <Table size="small" aria-label="simple table" className="min-width">
             <caption>Admin table for materials types</caption>
@@ -181,3 +182,5 @@ export default function Page() {
     </main>
   )
 }
+
+export default isSuperAdmin(AdminPage)
