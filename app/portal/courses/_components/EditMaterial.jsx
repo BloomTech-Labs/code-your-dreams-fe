@@ -22,14 +22,12 @@ const typeList = [
 export default function EditMaterial({ material, editMaterialDetails, setEditMaterialDetails }) {
 
   const handleChange = (e) => {
-    console.log(`${e.target.name}: ${e.target.value}`)
     setEditMaterialDetails({
       ...editMaterialDetails,
       [e.target.name]: e.target.value
     })
   }
   const handleAutoCompleteChange = (_, newValue) => {
-    console.log(newValue)
     setEditMaterialDetails(prev => ({
       ...prev,
       material_type: newValue.label,
