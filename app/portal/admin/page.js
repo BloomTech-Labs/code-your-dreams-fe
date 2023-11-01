@@ -21,6 +21,7 @@ import EditSuperAdmin from "./_components/EditSuperAdmin"
 import EditMaterialType from "./_components/EditMaterialType"
 import EditButton from "@/components/admin/EditButton/EditButton"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
+import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 
 const showEditButton = () => {
   return (
@@ -103,7 +104,7 @@ const showDataTable = (data) => {
   }
 }
 
-export default function Page() {
+const AdminPage = () => {
   // Super admin NEW modal
   const [openSuperAdminNew, setOpenSuperAdminNew] = useState(false)
   const handleOpenSuperAdminNew = () => setOpenSuperAdminNew(true)
@@ -193,3 +194,5 @@ export default function Page() {
     </main>
   )
 }
+
+export default isSuperAdmin(AdminPage)

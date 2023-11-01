@@ -11,6 +11,7 @@ import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
 import { useData } from "@/context/appContext"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
+import isAdmin from "@/components/admin/isRole/isAdmin"
 
 const showEditButton = () => {
   return (
@@ -20,7 +21,7 @@ const showEditButton = () => {
   )
 }
 
-export default function Page() {
+const MembersPage = () => {
   const [members, setMembers] = useState(null)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
@@ -140,3 +141,5 @@ export default function Page() {
     </main>
   )
 }
+
+export default isAdmin(MembersPage)
