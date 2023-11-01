@@ -31,7 +31,6 @@ const showEditButton = () => {
   )
 }
 
-// TODO: Replace demo data with actual data from the users table.
 const columns = [
   { field: "memberName", headerName: "Name", width: 250 },
   { field: "emailAddress", headerName: "Email", width: 300 },
@@ -43,6 +42,8 @@ const columns = [
     renderCell: (params) => showEditButton(params.value),
   },
 ]
+
+// TODO: Replace demo data with actual data from the users table.
 const rows = [
   {
     id: 1,
@@ -64,6 +65,44 @@ const demoData = [
   { id: 4, name: "Quiz", quantity: 8, showButton: true },
   { id: 5, name: "Test", quantity: 0, showButton: true },
 ]
+
+const showDataTable = (data) => {
+  const tableLength = Object.keys(data).length
+
+  if (tableLength === 0) {
+    return <NoRowsOverlay />
+  } else {
+    return (
+      <TableContainer>
+        <Table size="small" aria-label="simple table" className="min-width">
+          <caption>Admin table for materials types</caption>
+          <TableHead>
+            <TableRow>
+              <TableCell>Types</TableCell>
+              <TableCell align="right">Count</TableCell>
+              <TableCell>Edit</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell>{row.name}</TableCell>
+                <TableCell align="center">{row.quantity}</TableCell>
+                <TableCell align="center">
+                  {row.showButton && (
+                    <EditButton title="Edit Material Type">
+                      <EditMaterialType />
+                    </EditButton>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )
+  }
+}
 
 const AdminPage = () => {
   // Super admin NEW modal
@@ -134,35 +173,8 @@ const AdminPage = () => {
           before you can delete a type.
         </p>
         {/* TODO: We need to send the selected material type over to the edit modal */}
-        {/* TODO: Add in logic to show the following if the table data is empty
-            {data.length === 0 && (<TableRow><TableCell colSpan={3}>no records found</TableCell></TableRow>)} */}
-        <TableContainer>
-          <Table size="small" aria-label="simple table" className="min-width">
-            <caption>Admin table for materials types</caption>
-            <TableHead>
-              <TableRow>
-                <TableCell>Types</TableCell>
-                <TableCell align="right">Count</TableCell>
-                <TableCell>Edit</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {demoData.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell align="center">{row.quantity}</TableCell>
-                  <TableCell align="center">
-                    {row.showButton && (
-                      <EditButton title="Edit Material Type">
-                        <EditMaterialType />
-                      </EditButton>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        {/* TODO: Change the name of the variable for data source here */}
+        {showDataTable(demoData)}
       </section>
 
       <Modal
