@@ -6,8 +6,7 @@ import EditIcon from "@mui/icons-material/Edit"
 import Modal from "@/components/Modal/Modal"
 
 // TODO: Pass along a function into this component to edit the object
-const EditButton = ({ title, isFullButton, children }) => {
-  const [open, setOpen] = React.useState(false)
+const EditButton = ({ title, handleSubmit, isFullButton, children, open, setOpen }) => {
   const handleOpen = () => {
     setOpen(true)
   }
@@ -35,7 +34,7 @@ const EditButton = ({ title, isFullButton, children }) => {
           {<EditIcon />}
         </IconButton>
       )}
-      <Modal title={title} open={open} handleClose={handleClose}>
+      <Modal title={title} open={open} handleClose={handleClose} handleSubmit={handleSubmit}>
         {children}
       </Modal>
     </>

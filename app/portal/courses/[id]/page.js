@@ -27,36 +27,6 @@ const showLinkButton = (url) => {
   )
 }
 
-const showEditButton = () => {
-  return (
-    <EditButton title="Edit Material">
-      <EditMaterial />
-    </EditButton>
-  )
-}
-
-const columns = [
-  {
-    field: "material_link",
-    headerName: "Link",
-    headerAlign: "center",
-    align: "center",
-    width: 100,
-    renderCell: (params) => showLinkButton(params.value),
-  },
-  { field: "name", headerName: "Name", width: 250 },
-  { field: "material_type", headerName: "Type", width: 150 },
-  { field: "description", headerName: "Details", width: 450 },
-  {
-    field: "edit",
-    headerName: "Edit",
-    headerAlign: "center",
-    align: "center",
-    width: 100,
-    renderCell: (params) => showEditButton(params.value),
-  },
-]
-
 const initialState = {
   material_link: "",
   name: "",
@@ -77,14 +47,82 @@ export default function Page() {
   const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials, setCourses } = useData()
+  const { courses, course_materials, setCourses } = useData();
+  const [editCourseDetails, setEditCourseDetails] = useState(null);
+  const [editMaterialDetails, setEditMaterialDetails] = useState(null);
+  const [openEditMaterial, setOpenEditMaterial] = useState(false)
   const axiosInstance = AxiosWithAuth()
-  const [editCourseDetails, setEditCourseDetails] = useState(null)
   const router = useRouter()
 
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(16).replace(regex, " ")
+
+  const handleSubmitEditMaterial = () => {
+    let editMaterialData = {
+      id: editMaterialDetails.id,
+      name: editMaterialDetails.name,
+      description: editMaterialDetails.description,
+      course_id: editMaterialDetails.course_id,
+      material_link: editMaterialDetails.material_link,
+      material_type_id: editMaterialDetails.material_type_id,
+    }
+    axiosInstance.post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/update/${editMaterialDetails.id}`, editMaterialData)
+    .then((res) => {
+      setEditMaterialDetails(null)
+      setOpenEditMaterial(false)
+      const newSelectedMaterials = []
+      selectedMaterials.map((i) => {
+        if (i.id === res.data[0].id && !selectedMaterials.includes(res.data[0])) {
+          newSelectedMaterials.push({...res.data[0]})
+        } else if (i.id !== res.data[0].id) {
+          newSelectedMaterials.push(i)
+        }
+      })
+      setSelectedMaterials(newSelectedMaterials)
+      router.push("/portal/courses")
+      })
+  }
+
+  const showEditButton = (material) => {
+    return (
+      <EditButton
+        title="Edit Material"
+        handleSubmit={handleSubmitEditMaterial}
+        open={openEditMaterial}
+        setOpen={setOpenEditMaterial}
+      >
+        <EditMaterial 
+          material={material}
+          editMaterialDetails={editMaterialDetails}
+          setEditMaterialDetails={setEditMaterialDetails}
+        />
+      </EditButton>
+    )
+  }
+  
+  const columns = [
+    { field: "id", headerName: "ID", width: 100 },
+    {
+      field: "material_link",
+      headerName: "Link",
+      headerAlign: "center",
+      align: "center",
+      width: 100,
+      renderCell: (params) => showLinkButton(params.value),
+    },
+    { field: "name", headerName: "Name", width: 250 },
+    { field: "material_type", headerName: "Type", width: 150 },
+    { field: "description", headerName: "Details", width: 450 },
+    {
+      field: "edit",
+      headerName: "Edit",
+      headerAlign: "center",
+      align: "center",
+      width: 100,
+      renderCell: (params) => showEditButton(params.row),
+    },
+  ]
 
   const getMaterialType = (material) => {
     switch (material.material_type_id) {
