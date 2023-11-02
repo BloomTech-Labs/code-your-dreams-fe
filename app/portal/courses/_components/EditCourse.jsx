@@ -20,6 +20,7 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
     When a course's new info is submitted, also adjust the course's object in Context & then change the URL. Ideally, the page will refresh, seek the new URL stub in Context, and display the course's new information.
   */
   useEffect(() => {
+    console.log(selectedCourse)
     if (editCourseDetails === null) {
       setEditCourseDetails(selectedCourse)
     }
@@ -91,7 +92,7 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
         </p>
         {/* TODO: This button should be disabled if there are >0 materials
           linked to the chapter. */}
-        <DestroyButton action="delete" isFullButton={true}>
+        <DestroyButton action="delete" isFullButton={true} selectedCourse={selectedCourse}>
           <DeleteForeverIcon />
         </DestroyButton>
       </Card>

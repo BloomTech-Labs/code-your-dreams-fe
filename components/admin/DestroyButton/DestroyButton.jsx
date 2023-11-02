@@ -9,16 +9,32 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Typography
 } from "@mui/material"
+import AxiosWithAuth from "@/utils/axiosWithAuth"
+import { useRouter } from "next/navigation"
 
 // TODO: Pass along a function into this component to destroy the object
-const DestroyButton = ({ action, isFullButton, children }) => {
+const DestroyButton = ({ action, isFullButton, children, selectedCourse }) => {
   const [open, setOpen] = React.useState(false)
+  const router = useRouter()
+  const axiosInstance = AxiosWithAuth()
   const handleClickOpen = () => {
     setOpen(true)
   }
   const handleClose = () => {
     setOpen(false)
+  }
+
+  const handleDelete = () => {
+    axiosInstance.delete(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/delete/${selectedCourse.id}`)
+    .then((res) => {
+      console.log(res)
+      router.push("/portal/courses")
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   return (
@@ -51,16 +67,28 @@ const DestroyButton = ({ action, isFullButton, children }) => {
           {action + " confirmation"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Are you sure you want to {action} the entry?
-          </DialogContentText>
+          {
+            selectedCourse && selectedCourse.materialsCount === 0 ?
+            <DialogContentText id="alert-dialog-description">
+              Are you sure you want to {action} the entry?
+            </DialogContentText>
+            :
+            <Typography color="error">Warning: Delete all course materials before deleting a course.</Typography>
+          }
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           {/* TODO: Trigger the destroy function if the user clicks the continue button */}
-          <Button onClick={handleClose} autoFocus color="error">
-            Continue
-          </Button>
+          {
+            selectedCourse && selectedCourse.materialsCount === 0 ?
+            <Button onClick={handleDelete} autoFocus color="error">
+              Continue
+            </Button>
+            :
+            <Button onClick={handleClose} autoFocus color="error" disabled={true}>
+              Continue
+            </Button>
+          }
         </DialogActions>
       </Dialog>
     </>
