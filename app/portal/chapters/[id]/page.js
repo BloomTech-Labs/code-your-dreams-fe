@@ -28,6 +28,7 @@ import EditMember from "../_components/EditMember"
 import LinkCourse from "../_components/LinkCourse"
 import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
+import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 
 const showEditButton = () => {
   return (
@@ -110,7 +111,7 @@ const showDataTable = (data) => {
   }
 }
 
-export default function Page() {
+const ChapterDetailPage = () => {
   // Chapter EDIT modal
   const [openChapterEdit, setOpenChapterEdit] = useState(false)
   const handleOpenChapterEdit = () => setOpenChapterEdit(true)
@@ -258,3 +259,5 @@ export default function Page() {
     </main>
   )
 }
+
+export default isSuperAdmin(ChapterDetailPage)
