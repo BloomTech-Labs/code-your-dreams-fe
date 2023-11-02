@@ -47,9 +47,9 @@ export default function Page() {
   const [formState, setFormState] = useState(initialState)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
-  const { courses, course_materials, setCourses } = useData();
-  const [editCourseDetails, setEditCourseDetails] = useState(null);
-  const [editMaterialDetails, setEditMaterialDetails] = useState(null);
+  const { courses, course_materials, setCourses } = useData()
+  const [editCourseDetails, setEditCourseDetails] = useState(null)
+  const [editMaterialDetails, setEditMaterialDetails] = useState(null)
   const [openEditMaterial, setOpenEditMaterial] = useState(false)
   const axiosInstance = AxiosWithAuth()
   const router = useRouter()
@@ -67,20 +67,27 @@ export default function Page() {
       material_link: editMaterialDetails.material_link,
       material_type_id: editMaterialDetails.material_type_id,
     }
-    axiosInstance.post(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/update/${editMaterialDetails.id}`, editMaterialData)
-    .then((res) => {
-      setEditMaterialDetails(null)
-      setOpenEditMaterial(false)
-      const newSelectedMaterials = []
-      selectedMaterials.map((i) => {
-        if (i.id === res.data[0].id && !selectedMaterials.includes(res.data[0])) {
-          newSelectedMaterials.push({...res.data[0]})
-        } else if (i.id !== res.data[0].id) {
-          newSelectedMaterials.push(i)
-        }
-      })
-      setSelectedMaterials(newSelectedMaterials)
-      router.push("/portal/courses")
+    axiosInstance
+      .post(
+        `${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/update/${editMaterialDetails.id}`,
+        editMaterialData
+      )
+      .then((res) => {
+        setEditMaterialDetails(null)
+        setOpenEditMaterial(false)
+        const newSelectedMaterials = []
+        selectedMaterials.map((i) => {
+          if (
+            i.id === res.data[0].id &&
+            !selectedMaterials.includes(res.data[0])
+          ) {
+            newSelectedMaterials.push({ ...res.data[0] })
+          } else if (i.id !== res.data[0].id) {
+            newSelectedMaterials.push(i)
+          }
+        })
+        setSelectedMaterials(newSelectedMaterials)
+        router.push("/portal/courses")
       })
   }
 
@@ -92,7 +99,7 @@ export default function Page() {
         open={openEditMaterial}
         setOpen={setOpenEditMaterial}
       >
-        <EditMaterial 
+        <EditMaterial
           material={material}
           editMaterialDetails={editMaterialDetails}
           setEditMaterialDetails={setEditMaterialDetails}
@@ -100,9 +107,8 @@ export default function Page() {
       </EditButton>
     )
   }
-  
+
   const columns = [
-    { field: "id", headerName: "ID", width: 100 },
     {
       field: "material_link",
       headerName: "Link",
