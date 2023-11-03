@@ -91,7 +91,7 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
         </p>
         {/* TODO: This button should be disabled if there are >0 materials
           linked to the chapter. */}
-        <DestroyButton action="delete" isFullButton={true}>
+        <DestroyButton action="delete" isFullButton={true} selectedCourse={selectedCourse} target="course">
           <DeleteForeverIcon />
         </DestroyButton>
       </Card>
