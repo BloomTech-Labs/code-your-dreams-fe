@@ -15,7 +15,7 @@ import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useRouter } from "next/navigation"
 
 // TODO: Pass along a function into this component to destroy the object
-const DestroyButton = ({ action, isFullButton, children, selectedCourse }) => {
+const DestroyButton = ({ action, isFullButton, children, selectedCourse, selectedMaterial, target }) => {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
   const axiosInstance = AxiosWithAuth()
@@ -27,14 +27,25 @@ const DestroyButton = ({ action, isFullButton, children, selectedCourse }) => {
   }
 
   const handleDelete = () => {
-    axiosInstance.delete(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/delete/${selectedCourse.id}`)
-    .then((res) => {
-      console.log(res)
-      router.push("/portal/courses")
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+
+    if (target === "course") {
+      axiosInstance.delete(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/delete/${selectedCourse.id}`)
+      .then((res) => {
+        router.push("/portal/courses")
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    } else if (target === "material") {
+        axiosInstance.delete(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/delete/${selectedMaterial.id}`)
+        .then((res) => {
+          // TODO: Keep user on course details page, just remove deleted material from local state list?
+          router.push("/portal/courses")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
 
   return (
@@ -68,7 +79,7 @@ const DestroyButton = ({ action, isFullButton, children, selectedCourse }) => {
         </DialogTitle>
         <DialogContent>
           {
-            selectedCourse && selectedCourse.materialsCount === 0 ?
+            selectedCourse && selectedCourse.materialsCount === 0 || target === "material" ?
             <DialogContentText id="alert-dialog-description">
               Are you sure you want to {action} the entry?
             </DialogContentText>
@@ -80,7 +91,7 @@ const DestroyButton = ({ action, isFullButton, children, selectedCourse }) => {
           <Button onClick={handleClose}>Cancel</Button>
           {/* TODO: Trigger the destroy function if the user clicks the continue button */}
           {
-            selectedCourse && selectedCourse.materialsCount === 0 ?
+            selectedCourse && selectedCourse.materialsCount === 0 || target === "material" ?
             <Button onClick={handleDelete} autoFocus color="error">
               Continue
             </Button>

@@ -112,7 +112,7 @@ export default function EditMaterial({ material, editMaterialDetails, setEditMat
           Deleting the material will only remove the record entry in this app.
           The source file will NOT be deleted from its cloud storage location.
         </p>
-        <DestroyButton action="delete" isFullButton={true}>
+        <DestroyButton action="delete" isFullButton={true} selectedMaterial={material} target="material">
           <DeleteForeverIcon />
         </DestroyButton>
       </Card>
