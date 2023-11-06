@@ -286,9 +286,9 @@ export default function Page() {
         <Link underline="hover" color="inherit" href="/portal/courses">
           Courses
         </Link>
-        {selectedCourse && (
-          <Typography color="text.primary">{selectedCourse.name}</Typography>
-        )}
+        <Typography color="text.primary">
+          {selectedCourse ? selectedCourse.name : ""}
+        </Typography>
       </BreadcrumbRow>
 
       {selectedCourse && selectedCourse.visibility === false ? (
