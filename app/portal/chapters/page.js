@@ -15,7 +15,7 @@ import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 const columns = [
   { field: "name", headerName: "Chapter name", width: 250 },
   {
-    field: "members",
+    field: "member_count",
     headerName: "Members",
     type: "number",
     width: 150,
@@ -52,7 +52,7 @@ const ChaptersPage = () => {
   }
 
   useCheckTokenExpired()
-  const { chapters, current_user } = useData()
+  const { chapters, current_user, users } = useData()
 
   const handleRowClick = (params) => {
     const { name } = params.row
@@ -69,8 +69,21 @@ const ChaptersPage = () => {
     )
   }
 
+  const getMemberCounts = () => {
+    chapters.map((i) => {
+      if (!i.member_count) {
+        i.member_count = 0
+      }
+      users.forEach((user) => {
+        if (user.chapter_id === i.id) {
+          i.member_count++
+        }
+      })
+    })
+  }
+
   useEffect(() => {
-    console.log(chapters)
+    getMemberCounts()
     if (chapters) {
       setLocalChapters(chapters)
     }
