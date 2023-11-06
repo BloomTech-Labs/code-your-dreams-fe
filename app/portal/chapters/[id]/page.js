@@ -157,22 +157,19 @@ const ChapterDetailPage = () => {
   })
 
   return (
-    // TODO: Restrict page to chapter admins and CYD users
     <main>
       <BreadcrumbRow>
         <Link underline="hover" color="inherit" href="/portal/chapters">
           Chapters
         </Link>
-        {/* TODO: Insert course name from database for current page */}
-        {selectedChapter && (
-          <Typography color="text.primary">{selectedChapter.name}</Typography>
-        )}
+        <Typography color="text.primary">
+          {selectedChapter ? selectedChapter.name : ""}
+        </Typography>
       </BreadcrumbRow>
 
       <section className="container">
         <div className="header-row">
           <h1>{selectedChapter && selectedChapter.name}</h1>
-          {/* TODO: This button should only be visible to super admin users */}
           <IconButton
             color="primary"
             size="large"
@@ -184,7 +181,6 @@ const ChapterDetailPage = () => {
         </div>
         <div className="header-row">
           <h2>Members</h2>
-          {/* TODO: This button should only be visible to super admin users */}
           <IconButton
             color="primary"
             size="large"
@@ -213,7 +209,6 @@ const ChapterDetailPage = () => {
           />
         </div>
       </section>
-      {/* TODO: Restrict the following section to only super admin users */}
       <section className="container">
         <div className="header-row">
           <h2>Available Courses</h2>
