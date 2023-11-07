@@ -124,6 +124,8 @@ const ChapterDetailPage = () => {
   const { chapters, course_permissions } = useData()
   const [selectedChapter, setSelectedChapter] = useState(null)
   const [selectedCourses, setSelectedCourses] = useState(null)
+  // Edit Chapter Data
+  const [editChapterData, setEditChapterData] = useState(null)
   // Member NEW modal
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
@@ -155,6 +157,10 @@ const ChapterDetailPage = () => {
       })
     }
   })
+
+  const handleSubmitEditChapter = () => {
+    console.log(editChapterData)
+  }
 
   return (
     <main>
@@ -234,8 +240,13 @@ const ChapterDetailPage = () => {
         title="Edit Chapter"
         open={openChapterEdit}
         handleClose={handleCloseChapterEdit}
+        handleSubmit={handleSubmitEditChapter}
       >
-        <EditChapter />
+        <EditChapter
+          selectedChapter={selectedChapter}
+          editChapterData={editChapterData}
+          setEditChapterData={setEditChapterData}
+        />
       </Modal>
       <Modal
         title="Link a Course"
