@@ -13,19 +13,29 @@ import { useData } from "@/context/appContext"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import isAdmin from "@/components/admin/isRole/isAdmin"
 
-const showEditButton = () => {
-  return (
-    <EditButton title="Edit Member">
-      <EditMember />
-    </EditButton>
-  )
-}
-
 const MembersPage = () => {
   const [members, setMembers] = useState(null)
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
+
+  const handleSubmitEditMember = () => {
+    // TODO: Complete the edit processing here
+    console.log("handleSubmitEditMember")
+  }
+
+  const showEditButton = () => {
+    return (
+      <EditButton
+        title="Edit Member"
+        handleSubmit={handleSubmitEditMember}
+        open={open}
+        setOpen={setOpen}
+      >
+        <EditMember />
+      </EditButton>
+    )
+  }
 
   useCheckTokenExpired()
 
@@ -135,7 +145,12 @@ const MembersPage = () => {
         </div>
       </section>
 
-      <Modal title="Add a New Member" open={open} handleClose={handleClose}>
+      <Modal
+        title="Add a New Member"
+        open={open}
+        handleClose={handleClose}
+        handleSubmit={handleSubmitEditMember}
+      >
         <NewMember />
       </Modal>
     </main>

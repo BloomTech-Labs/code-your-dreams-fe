@@ -23,26 +23,6 @@ import EditButton from "@/components/admin/EditButton/EditButton"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 
-const showEditButton = () => {
-  return (
-    <EditButton title="Edit Super Admin">
-      <EditSuperAdmin />
-    </EditButton>
-  )
-}
-
-const columns = [
-  { field: "memberName", headerName: "Name", width: 250 },
-  { field: "emailAddress", headerName: "Email", width: 300 },
-  {
-    field: "edit",
-    headerName: "Edit",
-    align: "center",
-    width: 100,
-    renderCell: (params) => showEditButton(params.value),
-  },
-]
-
 // TODO: Replace demo data with actual data from the users table.
 const rows = [
   {
@@ -66,55 +46,99 @@ const demoData = [
   { id: 5, name: "Test", quantity: 0, showButton: true },
 ]
 
-const showDataTable = (data) => {
-  const tableLength = Object.keys(data).length
-
-  if (tableLength === 0) {
-    return <NoRowsOverlay />
-  } else {
-    return (
-      <TableContainer>
-        <Table size="small" aria-label="simple table" className="min-width">
-          <caption>Admin table for materials types</caption>
-          <TableHead>
-            <TableRow>
-              <TableCell>Types</TableCell>
-              <TableCell align="right">Count</TableCell>
-              <TableCell>Edit</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row) => (
-              <TableRow key={row.id}>
-                <TableCell>{row.name}</TableCell>
-                <TableCell align="center">{row.quantity}</TableCell>
-                <TableCell align="center">
-                  {row.showButton && (
-                    <EditButton title="Edit Material Type">
-                      <EditMaterialType />
-                    </EditButton>
-                  )}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    )
-  }
-}
-
 const AdminPage = () => {
   // Super admin NEW modal
   const [openSuperAdminNew, setOpenSuperAdminNew] = useState(false)
   const handleOpenSuperAdminNew = () => setOpenSuperAdminNew(true)
   const handleCloseSuperAdminNew = () => setOpenSuperAdminNew(false)
+  // Super admin EDIT modal
+  const [openSuperAdminEdit, setOpenSuperAdminEdit] = useState(false)
   // Material type NEW modal
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
   const handleOpenMaterialNew = () => setOpenMaterialNew(true)
   const handleCloseMaterialNew = () => setOpenMaterialNew(false)
+  // Material type EDIT modal
+  const [openMaterialEdit, setOpenMaterialEdit] = useState(false)
+
+  const handleSubmitEditSuperAdmin = () => {
+    // TODO: Complete the edit processing here
+    console.log("handleSubmitEditSuperAdmin")
+  }
+
+  const showSuperAdminEditButton = () => {
+    return (
+      <EditButton
+        title="Edit Super Admin"
+        handleSubmit={handleSubmitEditSuperAdmin}
+        open={openSuperAdminEdit}
+        setOpen={setOpenSuperAdminEdit}
+      >
+        <EditSuperAdmin />
+      </EditButton>
+    )
+  }
+
+  const handleSubmitEditMaterials = () => {
+    // TODO: Complete the edit processing here
+    console.log("handleSubmitEditMaterials")
+  }
 
   useCheckTokenExpired()
+
+  const columns = [
+    { field: "memberName", headerName: "Name", width: 250 },
+    { field: "emailAddress", headerName: "Email", width: 300 },
+    {
+      field: "edit",
+      headerName: "Edit",
+      align: "center",
+      width: 100,
+      renderCell: (params) => showSuperAdminEditButton(params.value),
+    },
+  ]
+
+  const showDataTable = (data) => {
+    const tableLength = Object.keys(data).length
+
+    if (tableLength === 0) {
+      return <NoRowsOverlay />
+    } else {
+      return (
+        <TableContainer>
+          <Table size="small" aria-label="simple table" className="min-width">
+            <caption>Admin table for materials types</caption>
+            <TableHead>
+              <TableRow>
+                <TableCell>Types</TableCell>
+                <TableCell align="right">Count</TableCell>
+                <TableCell>Edit</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((row) => (
+                <TableRow key={row.id}>
+                  <TableCell>{row.name}</TableCell>
+                  <TableCell align="center">{row.quantity}</TableCell>
+                  <TableCell align="center">
+                    {row.showButton && (
+                      <EditButton
+                        title="Edit Material"
+                        handleSubmit={handleSubmitEditMaterials}
+                        open={openMaterialEdit}
+                        setOpen={setOpenMaterialEdit}
+                      >
+                        <EditSuperAdmin />
+                      </EditButton>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )
+    }
+  }
 
   return (
     <main>
