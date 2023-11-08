@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import styles from "./page.module.scss"
 import { SignOutBtn } from "@/components/auth/AuthButtons"
 import { Card } from "@mui/material"
@@ -11,6 +12,12 @@ import { useData } from "@/context/appContext"
 export default function Page() {
   /* TODO: (delete comment when no longer needed) Can pull user name, email, and "image" (avatar) using "session.user.*"
   Everything else will need to be stored and retrieved from our own database. */
+  const [open, setOpen] = useState(false)
+
+  const handleSubmitEditUser = () => {
+    // TODO: Complete the edit processing here
+    console.log("handleSubmitEditUser")
+  }
 
   const { current_user } = useData()
   useCheckTokenExpired()
@@ -33,7 +40,13 @@ export default function Page() {
             <br />
             Email: {current_user ? current_user.email : "unknown"}
           </p>
-          <EditButton title="Edit Account Details" isFullButton={true}>
+          <EditButton
+            title="Edit Account Details"
+            isFullButton={true}
+            handleSubmit={handleSubmitEditUser}
+            open={open}
+            setOpen={setOpen}
+          >
             <EditMember />
           </EditButton>
         </Card>
