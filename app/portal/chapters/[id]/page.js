@@ -177,10 +177,12 @@ const ChapterDetailPage = () => {
             return i
           }
         })
+        console.log(newChapters)
         setChapters(newChapters)
         handleCloseChapterEdit()
         setEditChapterData(null)
-        router.push('/portal/chapters')
+        // router.push('/portal/chapters')
+        window.location = '/portal/chapters'
       })
   }
 
