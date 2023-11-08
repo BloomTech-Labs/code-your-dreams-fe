@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { useEffect } from "react"
 import {
   Card,
   Checkbox,
@@ -13,7 +13,11 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditCourse({ selectedCourse, editCourseDetails, setEditCourseDetails }) {
+export default function EditCourse({
+  selectedCourse,
+  editCourseDetails,
+  setEditCourseDetails,
+}) {
   /*
     When we edit a course's name, it may mess with the ability to actually render the course's info on the details page.
     Options: 
@@ -26,8 +30,9 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
   }, [])
 
   const handleChange = (e) => {
-    const value = e.target.type === "checkbox" ? e.target.checked : e.target.value
-      setEditCourseDetails({
+    const value =
+      e.target.type === "checkbox" ? e.target.checked : e.target.value
+    setEditCourseDetails({
       ...editCourseDetails,
       [e.target.name]: value,
     })
@@ -36,7 +41,7 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
     <>
       {/* TODO: Take in prop for database entry to be edited.
       Link form to update that project when saved. */}
-      {editCourseDetails &&
+      {editCourseDetails && (
         <TextField
           required
           id="course-name"
@@ -47,8 +52,8 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
           name="name"
           onChange={handleChange}
         />
-      }
-      {editCourseDetails &&
+      )}
+      {editCourseDetails && (
         <TextField
           required
           id="course-description"
@@ -58,9 +63,9 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
           name="description"
           onChange={handleChange}
         />
-      }
+      )}
       <Card variant="outlined" className="modal-card">
-        {editCourseDetails && 
+        {editCourseDetails && (
           <FormControlLabel
             label="Published"
             control={
@@ -72,7 +77,7 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
               />
             }
           />
-        }
+        )}
         <FormHelperText>
           If unselected, the course is in draft and not visible to users.
         </FormHelperText>
@@ -91,7 +96,12 @@ export default function EditCourse({ selectedCourse, editCourseDetails, setEditC
         </p>
         {/* TODO: This button should be disabled if there are >0 materials
           linked to the chapter. */}
-        <DestroyButton action="delete" isFullButton={true} selectedCourse={selectedCourse} target="course">
+        <DestroyButton
+          action="delete"
+          isFullButton={true}
+          selectedCourse={selectedCourse}
+          target="course"
+        >
           <DeleteForeverIcon />
         </DestroyButton>
       </Card>
