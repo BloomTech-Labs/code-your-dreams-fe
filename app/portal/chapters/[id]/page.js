@@ -29,6 +29,8 @@ import LinkCourse from "../_components/LinkCourse"
 import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
 import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
+import AxiosWithAuth from "@/utils/axiosWithAuth"
+import { useRouter } from "next/navigation"
 
 const showEditButton = () => {
   return (
@@ -121,7 +123,7 @@ const ChapterDetailPage = () => {
   const handleOpenCourseLink = () => setOpenCourseLink(true)
   const handleCloseCourseLink = () => setOpenCourseLink(false)
   // Selected Chapter Data
-  const { chapters, course_permissions } = useData()
+  const { chapters, course_permissions, setChapters } = useData()
   const [selectedChapter, setSelectedChapter] = useState(null)
   const [selectedCourses, setSelectedCourses] = useState(null)
   // Edit Chapter Data
@@ -130,6 +132,10 @@ const ChapterDetailPage = () => {
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
   const handleCloseMemberNew = () => setOpenMemberNew(false)
+  // Axios
+  const axiosInstance = AxiosWithAuth()
+  // Router
+  const router = useRouter()
 
   const pathname = usePathname()
   const regex = /-/g
@@ -160,6 +166,22 @@ const ChapterDetailPage = () => {
 
   const handleSubmitEditChapter = () => {
     console.log(editChapterData)
+    axiosInstance
+      .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/update/${editChapterData.id}`, editChapterData)
+      .then((res) => {
+        console.log(res)
+        let newChapters = chapters.map((i) => {
+          if (i.id === res.data.id) {
+            return res.data
+          } else {
+            return i
+          }
+        })
+        setChapters(newChapters)
+        handleCloseChapterEdit()
+        setEditChapterData(null)
+        router.push('/portal/chapters')
+      })
   }
 
   return (

@@ -54,6 +54,10 @@ const ChaptersPage = () => {
   useCheckTokenExpired()
   const { chapters, current_user, users } = useData()
 
+  useEffect(() => {
+    setLocalChapters(chapters)
+  }, [chapters])
+
   const handleRowClick = (params) => {
     const { name } = params.row
     const regex = /( |%20)/g
@@ -70,7 +74,7 @@ const ChaptersPage = () => {
   }
 
   const getMemberCounts = () => {
-    chapters.map((i) => {
+    chapters && chapters.map((i) => {
       if (!i.member_count) {
         i.member_count = 0
       }
