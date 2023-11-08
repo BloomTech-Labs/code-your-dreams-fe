@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styles from "./page.module.scss"
 import { SignOutBtn } from "@/components/auth/AuthButtons"
 import { Card } from "@mui/material"
@@ -21,6 +21,10 @@ export default function Page() {
 
   const { current_user } = useData()
   useCheckTokenExpired()
+
+  // useEffect(() => {
+  //   console.log([current_user])
+  // })
 
   return (
     <main className={styles.account}>
