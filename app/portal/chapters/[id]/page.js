@@ -29,6 +29,7 @@ import LinkCourse from "../_components/LinkCourse"
 import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
 import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
+import AxiosWithAuth from "@/utils/axiosWithAuth"
 
 const showEditButton = () => {
   return (
@@ -121,14 +122,18 @@ const ChapterDetailPage = () => {
   const handleOpenCourseLink = () => setOpenCourseLink(true)
   const handleCloseCourseLink = () => setOpenCourseLink(false)
   // Selected Chapter Data
-  const { chapters, course_permissions } = useData()
+  const { chapters, course_permissions, setChapters } = useData()
   const [selectedChapter, setSelectedChapter] = useState(null)
   const [selectedCourses, setSelectedCourses] = useState(null)
+  // Edit Chapter Data
+  const [editChapterData, setEditChapterData] = useState(null)
   // Member NEW modal
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
   const handleCloseMemberNew = () => setOpenMemberNew(false)
-
+  // Axios
+  const axiosInstance = AxiosWithAuth()
+  
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(17).replace(regex, " ")
@@ -155,6 +160,27 @@ const ChapterDetailPage = () => {
       })
     }
   })
+
+  const handleSubmitEditChapter = () => {
+    console.log(editChapterData)
+    axiosInstance
+      .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/update/${editChapterData.id}`, editChapterData)
+      .then((res) => {
+        console.log(res)
+        let newChapters = chapters.map((i) => {
+          if (i.id === res.data.id) {
+            return res.data
+          } else {
+            return i
+          }
+        })
+        console.log(newChapters)
+        setChapters(newChapters)
+        handleCloseChapterEdit()
+        setEditChapterData(null)
+        window.location = '/portal/chapters'
+      })
+  }
 
   return (
     <main>
@@ -234,8 +260,13 @@ const ChapterDetailPage = () => {
         title="Edit Chapter"
         open={openChapterEdit}
         handleClose={handleCloseChapterEdit}
+        handleSubmit={handleSubmitEditChapter}
       >
-        <EditChapter />
+        <EditChapter
+          selectedChapter={selectedChapter}
+          editChapterData={editChapterData}
+          setEditChapterData={setEditChapterData}
+        />
       </Modal>
       <Modal
         title="Link a Course"

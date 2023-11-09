@@ -1,10 +1,25 @@
 "use client"
 
+import { useEffect } from "react"
 import { TextField, Divider, Typography, Card } from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
+import ChaptersButton from "@/components/layout/Navigation/ChaptersButton"
 
-export default function EditChapter() {
+export default function EditChapter({ selectedChapter, editChapterData, setEditChapterData }) {
+
+  useEffect(() => {
+    console.log(selectedChapter)
+    setEditChapterData(selectedChapter)
+  }, [selectedChapter])
+
+  const handleChange = (e) => {
+      setEditChapterData({
+      ...editChapterData,
+      [e.target.name]: e.target.value,
+    })
+  }
+
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
@@ -13,12 +28,17 @@ export default function EditChapter() {
       <div className="italic">
         Update the chapter name here and click the save button to continue.
       </div>
-      <TextField
-        required
-        id="chapter-name"
-        label="Chapter Name"
-        variant="outlined"
-      />
+      {editChapterData && 
+        <TextField
+          required
+          id="chapter-name"
+          label="Chapter Name"
+          variant="outlined"
+          name="name"
+          value={editChapterData.name}
+          onChange={handleChange}
+        />
+      }
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>

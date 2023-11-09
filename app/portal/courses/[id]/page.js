@@ -196,7 +196,7 @@ export default function Page() {
             }
           })
         )
-        router.push("/portal/courses")
+        window.location = "/portal/courses"
       })
       .catch((err) => {
         console.log(err)

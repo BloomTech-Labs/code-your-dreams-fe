@@ -112,7 +112,8 @@ export const AppProvider = ({ children }) => {
         course_materials,
         material_types,
         course_permissions,
-        setCourses
+        setCourses,
+        setChapters
     }}>
       {children}
     </AppContext.Provider>
