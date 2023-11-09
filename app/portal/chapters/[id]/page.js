@@ -133,9 +133,7 @@ const ChapterDetailPage = () => {
   const handleCloseMemberNew = () => setOpenMemberNew(false)
   // Axios
   const axiosInstance = AxiosWithAuth()
-  // Router
-  const router = useRouter()
-
+  
   const pathname = usePathname()
   const regex = /-/g
   const newStr = pathname.slice(17).replace(regex, " ")
@@ -180,7 +178,6 @@ const ChapterDetailPage = () => {
         setChapters(newChapters)
         handleCloseChapterEdit()
         setEditChapterData(null)
-        // router.push('/portal/chapters')
         window.location = '/portal/chapters'
       })
   }
