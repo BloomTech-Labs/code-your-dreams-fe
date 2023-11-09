@@ -30,7 +30,6 @@ import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
 import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
-import { useRouter } from "next/navigation"
 
 const showEditButton = () => {
   return (
