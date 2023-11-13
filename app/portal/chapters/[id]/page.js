@@ -40,8 +40,8 @@ const showEditButton = () => {
 }
 
 const columns = [
-  { field: "memberName", headerName: "Name", width: 250 },
-  { field: "emailAddress", headerName: "Email", width: 300 },
+  { field: "name", headerName: "Name", width: 250 },
+  { field: "email", headerName: "Email", width: 300 },
   { field: "adminFlag", headerName: "Admin?", width: 120 },
   {
     field: "edit",
@@ -122,7 +122,7 @@ const ChapterDetailPage = () => {
   const handleOpenCourseLink = () => setOpenCourseLink(true)
   const handleCloseCourseLink = () => setOpenCourseLink(false)
   // Selected Chapter Data
-  const { chapters, course_permissions, setChapters } = useData()
+  const { chapters, course_permissions, setChapters, users } = useData()
   const [selectedChapter, setSelectedChapter] = useState(null)
   const [selectedCourses, setSelectedCourses] = useState(null)
   // Edit Chapter Data
@@ -131,6 +131,8 @@ const ChapterDetailPage = () => {
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
   const handleCloseMemberNew = () => setOpenMemberNew(false)
+  // Chapter Members
+  const [members, setMembers] = useState(null)
   // Axios
   const axiosInstance = AxiosWithAuth()
   
@@ -138,6 +140,13 @@ const ChapterDetailPage = () => {
   const regex = /-/g
   const newStr = pathname.slice(17).replace(regex, " ")
 
+  const checkIfNull = (i) => {
+    if (i !== null) {
+      return i
+    }
+  }
+
+  let count = 0
   useEffect(() => {
     if (chapters) {
       chapters.some((obj) => {
@@ -159,14 +168,30 @@ const ChapterDetailPage = () => {
         }
       })
     }
-  })
+    if (users) {
+      const membersList = users.map((i) => {
+        if (selectedChapter && i.chapter_id === selectedChapter.id) {
+          count++
+          let newI = {
+            id: count,
+            name: i.name,
+            email: i.email,
+            adminFlag: i.role_id === 1 || i.role_id === 2 ? true : false,
+            edit: ""
+          }
+          return newI
+        } else {
+          return null
+        }
+      })
+      setMembers(membersList.filter(checkIfNull))
+    }
+  }, [users, selectedChapter])
 
   const handleSubmitEditChapter = () => {
-    console.log(editChapterData)
     axiosInstance
       .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/update/${editChapterData.id}`, editChapterData)
       .then((res) => {
-        console.log(res)
         let newChapters = chapters.map((i) => {
           if (i.id === res.data.id) {
             return res.data
@@ -174,7 +199,6 @@ const ChapterDetailPage = () => {
             return i
           }
         })
-        console.log(newChapters)
         setChapters(newChapters)
         handleCloseChapterEdit()
         setEditChapterData(null)
@@ -217,22 +241,24 @@ const ChapterDetailPage = () => {
           </IconButton>
         </div>
         <div className="data-grid">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { pageSize: 20 },
-              },
-            }}
-            pageSizeOptions={[20]}
-            slots={{
-              noRowsOverlay: NoRowsOverlay,
-            }}
-            autoHeight={true}
-            sx={{ "--DataGrid-overlayHeight": "300px" }}
-            aria-label="Data grid of chapter members"
-          />
+          {members &&
+            <DataGrid
+              rows={members}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 20 },
+                },
+              }}
+              pageSizeOptions={[20]}
+              slots={{
+                noRowsOverlay: NoRowsOverlay,
+              }}
+              autoHeight={true}
+              sx={{ "--DataGrid-overlayHeight": "300px" }}
+              aria-label="Data grid of chapter members"
+            />
+          }
         </div>
       </section>
       <section className="container">
