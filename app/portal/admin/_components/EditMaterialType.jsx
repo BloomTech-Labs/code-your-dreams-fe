@@ -4,7 +4,7 @@ import { TextField, Divider, Typography, Card } from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditMaterialType() {
+export default function EditMaterialType(selectedMaterial) {
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.

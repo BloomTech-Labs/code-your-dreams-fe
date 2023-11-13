@@ -1,6 +1,7 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useData } from "@/context/appContext"
 import { DataGrid } from "@mui/x-data-grid"
 import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import {
@@ -37,16 +38,10 @@ const rows = [
   },
 ]
 
-// TODO: Replace demo data with actual data from the materials type table.
-const demoData = [
-  { id: 1, name: "Document", quantity: 52, showButton: true },
-  { id: 2, name: "Presentation", quantity: 64, showButton: true },
-  { id: 3, name: "Video", quantity: 16, showButton: true },
-  { id: 4, name: "Quiz", quantity: 8, showButton: true },
-  { id: 5, name: "Test", quantity: 0, showButton: true },
-]
-
 const AdminPage = () => {
+  const { material_types } = useData()
+  const [localMaterials, setLocalMaterials] = useState(null)
+
   // Super admin NEW modal
   const [openSuperAdminNew, setOpenSuperAdminNew] = useState(false)
   const handleOpenSuperAdminNew = () => setOpenSuperAdminNew(true)
@@ -85,6 +80,13 @@ const AdminPage = () => {
 
   useCheckTokenExpired()
 
+  useEffect(() => {
+    console.log(material_types)
+    if (material_types) {
+      setLocalMaterials(material_types)
+    }
+  }, [material_types])
+
   const columns = [
     { field: "memberName", headerName: "Name", width: 250 },
     { field: "emailAddress", headerName: "Email", width: 300 },
@@ -97,46 +99,50 @@ const AdminPage = () => {
     },
   ]
 
-  const showDataTable = (data) => {
-    const tableLength = Object.keys(data).length
-
-    if (tableLength === 0) {
-      return <NoRowsOverlay />
+  const showDataTable = () => {
+    // if localMaterials is not available from context yet render nothing
+    if (localMaterials === null) {
+      return null
     } else {
-      return (
-        <TableContainer>
-          <Table size="small" aria-label="simple table" className="min-width">
-            <caption>Admin table for materials types</caption>
-            <TableHead>
-              <TableRow>
-                <TableCell>Types</TableCell>
-                <TableCell align="right">Count</TableCell>
-                <TableCell>Edit</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {data.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.name}</TableCell>
-                  <TableCell align="center">{row.quantity}</TableCell>
-                  <TableCell align="center">
-                    {row.showButton && (
+      const tableLength = Object.keys(localMaterials).length
+
+      if (tableLength === 0) {
+        return <NoRowsOverlay />
+      } else {
+        return (
+          <TableContainer>
+            <Table size="small" aria-label="simple table" className="min-width">
+              <caption>Admin table for materials types</caption>
+              <TableHead>
+                <TableRow>
+                  <TableCell>Types</TableCell>
+                  <TableCell align="right">Count</TableCell>
+                  <TableCell>Edit</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {localMaterials.map((row) => (
+                  <TableRow key={row.id}>
+                    <TableCell>{row.material_type}</TableCell>
+                    <TableCell align="center">{row.quantity}</TableCell>
+                    <TableCell align="center">
+                      {/* TODO: Fix this function so it only opens up a single modal for the row selected */}
                       <EditButton
                         title="Edit Material"
                         handleSubmit={handleSubmitEditMaterials}
                         open={openMaterialEdit}
                         setOpen={setOpenMaterialEdit}
                       >
-                        <EditSuperAdmin />
+                        <EditMaterialType />
                       </EditButton>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )
+      }
     }
   }
 
@@ -198,7 +204,7 @@ const AdminPage = () => {
         </p>
         {/* TODO: We need to send the selected material type over to the edit modal */}
         {/* TODO: Change the name of the variable for data source here */}
-        {showDataTable(demoData)}
+        {showDataTable()}
       </section>
 
       <Modal
