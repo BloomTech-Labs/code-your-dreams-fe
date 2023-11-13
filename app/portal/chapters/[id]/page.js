@@ -52,24 +52,6 @@ const columns = [
   },
 ]
 
-// TODO: Replace demo data with actual data from the chapters table.
-const rows = [
-  {
-    id: 1,
-    memberName: "Brianne Caplan",
-    emailAddress: "brianne@codeyourdreams.org",
-    adminFlag: "Yes",
-    edit: "",
-  },
-  {
-    id: 2,
-    memberName: "John Dodson",
-    emailAddress: "john.dodson@bloomtech.com",
-    adminFlag: "",
-    edit: "",
-  },
-]
-
 // TODO: Replace demo data with actual data from the courses table.
 const demoData = [
   { id: 1, name: "Python", showButton: true },
@@ -137,8 +119,7 @@ const ChapterDetailPage = () => {
   const axiosInstance = AxiosWithAuth()
   
   const pathname = usePathname()
-  const regex = /-/g
-  const newStr = pathname.slice(17).replace(regex, " ")
+  const regex = /( |%20)/g
 
   const checkIfNull = (i) => {
     if (i !== null) {
@@ -150,7 +131,7 @@ const ChapterDetailPage = () => {
   useEffect(() => {
     if (chapters) {
       chapters.some((obj) => {
-        if (obj.name.toLowerCase() === newStr) {
+        if (obj.name.toLowerCase().replace(regex, "-") === pathname.slice(17)) {
           setSelectedChapter(obj)
         }
       })
