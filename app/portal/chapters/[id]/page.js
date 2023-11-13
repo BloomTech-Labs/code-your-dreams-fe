@@ -40,7 +40,6 @@ const showEditButton = () => {
 }
 
 const columns = [
-  { field: "id", headerName: "ID", width: 120 },
   { field: "name", headerName: "Name", width: 250 },
   { field: "email", headerName: "Email", width: 300 },
   { field: "adminFlag", headerName: "Admin?", width: 120 },
