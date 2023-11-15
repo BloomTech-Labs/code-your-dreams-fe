@@ -74,6 +74,9 @@ const ChaptersPage = () => {
   }
 
   const getMemberCounts = () => {
+    // TODO: We need to store this in the chapter table to restrict deletion of a chapter
+    // when there are members linked to the chapter. This will prevent orphan users from
+    // being created in the app upon chapter deletion.
     chapters &&
       chapters.map((i) => {
         if (!i.member_count) {

@@ -21,6 +21,7 @@ const DestroyButton = ({
   children,
   selectedCourse,
   selectedMaterial,
+  selectedChapter,
   selectedCoursePermission,
   target,
 }) => {
@@ -58,6 +59,9 @@ const DestroyButton = ({
         .catch((err) => {
           console.log(err)
         })
+    } else if (target === "chapter") {
+      // TODO: connect to course_premissions API
+      console.log(selectedChapter)
     } else if (target === "course_permission") {
       // TODO: connect to course_premissions API
       console.log(selectedCoursePermission)
@@ -97,6 +101,8 @@ const DestroyButton = ({
           {action + " confirmation"}
         </DialogTitle>
         <DialogContent>
+          {/* TODO: Add logic to alert for chapter deletion if members are linked */}
+          {/* TODO [cont]: (selectedChapter && selectedChapter.membersCount === 0) */}
           {(selectedCourse && selectedCourse.materialsCount === 0) ||
           noAlertTarget.includes(target) ? (
             <DialogContentText id="alert-dialog-description">

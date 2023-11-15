@@ -6,15 +6,18 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 import ChaptersButton from "@/components/layout/Navigation/ChaptersButton"
 
-export default function EditChapter({ selectedChapter, editChapterData, setEditChapterData }) {
-
+export default function EditChapter({
+  selectedChapter,
+  editChapterData,
+  setEditChapterData,
+}) {
   useEffect(() => {
     console.log(selectedChapter)
     setEditChapterData(selectedChapter)
   }, [selectedChapter])
 
   const handleChange = (e) => {
-      setEditChapterData({
+    setEditChapterData({
       ...editChapterData,
       [e.target.name]: e.target.value,
     })
@@ -28,7 +31,7 @@ export default function EditChapter({ selectedChapter, editChapterData, setEditC
       <div className="italic">
         Update the chapter name here and click the save button to continue.
       </div>
-      {editChapterData && 
+      {editChapterData && (
         <TextField
           required
           id="chapter-name"
@@ -38,7 +41,7 @@ export default function EditChapter({ selectedChapter, editChapterData, setEditC
           value={editChapterData.name}
           onChange={handleChange}
         />
-      }
+      )}
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
@@ -53,7 +56,12 @@ export default function EditChapter({ selectedChapter, editChapterData, setEditC
         </p>
         {/* TODO: This button should be disabled if there are >0 members
             linked to the chapter. */}
-        <DestroyButton action="delete" isFullButton={true}>
+        <DestroyButton
+          action="delete"
+          isFullButton={true}
+          selectedChapter={selectedChapter}
+          target="chapter"
+        >
           <DeleteForeverIcon />
         </DestroyButton>
       </Card>
