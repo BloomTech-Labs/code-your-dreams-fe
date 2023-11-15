@@ -74,16 +74,17 @@ const ChaptersPage = () => {
   }
 
   const getMemberCounts = () => {
-    chapters && chapters.map((i) => {
-      if (!i.member_count) {
-        i.member_count = 0
-      }
-      users.forEach((user) => {
-        if (user.chapter_id === i.id) {
-          i.member_count++
+    chapters &&
+      chapters.map((i) => {
+        if (!i.member_count) {
+          i.member_count = 0
         }
+        users.forEach((user) => {
+          if (user.chapter_id === i.id) {
+            i.member_count++
+          }
+        })
       })
-    })
   }
 
   useEffect(() => {

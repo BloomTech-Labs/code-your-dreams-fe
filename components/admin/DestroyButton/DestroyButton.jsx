@@ -9,13 +9,21 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Typography
+  Typography,
 } from "@mui/material"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
 import { useRouter } from "next/navigation"
 
 // TODO: Pass along a function into this component to destroy the object
-const DestroyButton = ({ action, isFullButton, children, selectedCourse, selectedMaterial, target }) => {
+const DestroyButton = ({
+  action,
+  isFullButton,
+  children,
+  selectedCourse,
+  selectedMaterial,
+  selectedCoursePermission,
+  target,
+}) => {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
   const axiosInstance = AxiosWithAuth()
@@ -27,17 +35,22 @@ const DestroyButton = ({ action, isFullButton, children, selectedCourse, selecte
   }
 
   const handleDelete = () => {
-
     if (target === "course") {
-      axiosInstance.delete(`${process.env.NEXT_PUBLIC_BE_API_URL}/courses/delete/${selectedCourse.id}`)
-      .then((res) => {
-        router.push("/portal/courses")
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+      axiosInstance
+        .delete(
+          `${process.env.NEXT_PUBLIC_BE_API_URL}/courses/delete/${selectedCourse.id}`
+        )
+        .then((res) => {
+          router.push("/portal/courses")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     } else if (target === "material") {
-        axiosInstance.delete(`${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/delete/${selectedMaterial.id}`)
+      axiosInstance
+        .delete(
+          `${process.env.NEXT_PUBLIC_BE_API_URL}/courseMaterials/delete/${selectedMaterial.id}`
+        )
         .then((res) => {
           // TODO: Keep user on course details page, just remove deleted material from local state list?
           router.push("/portal/courses")
@@ -45,8 +58,14 @@ const DestroyButton = ({ action, isFullButton, children, selectedCourse, selecte
         .catch((err) => {
           console.log(err)
         })
+    } else if (target === "course_permission") {
+      // TODO: connect to course_premissions API
+      console.log(selectedCoursePermission)
     }
   }
+
+  // Array storing non-warning target types (from handleDelete options)
+  const noAlertTarget = ["material", "course_permission"]
 
   return (
     <>
@@ -78,28 +97,35 @@ const DestroyButton = ({ action, isFullButton, children, selectedCourse, selecte
           {action + " confirmation"}
         </DialogTitle>
         <DialogContent>
-          {
-            selectedCourse && selectedCourse.materialsCount === 0 || target === "material" ?
+          {(selectedCourse && selectedCourse.materialsCount === 0) ||
+          noAlertTarget.includes(target) ? (
             <DialogContentText id="alert-dialog-description">
               Are you sure you want to {action} the entry?
             </DialogContentText>
-            :
-            <Typography color="error">Warning: Delete all course materials before deleting a course.</Typography>
-          }
+          ) : (
+            <Typography color="error">
+              Warning: Delete all course materials before deleting a course.
+            </Typography>
+          )}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           {/* TODO: Trigger the destroy function if the user clicks the continue button */}
-          {
-            selectedCourse && selectedCourse.materialsCount === 0 || target === "material" ?
+          {(selectedCourse && selectedCourse.materialsCount === 0) ||
+          noAlertTarget.includes(target) ? (
             <Button onClick={handleDelete} autoFocus color="error">
               Continue
             </Button>
-            :
-            <Button onClick={handleClose} autoFocus color="error" disabled={true}>
+          ) : (
+            <Button
+              onClick={handleClose}
+              autoFocus
+              color="error"
+              disabled={true}
+            >
               Continue
             </Button>
-          }
+          )}
         </DialogActions>
       </Dialog>
     </>

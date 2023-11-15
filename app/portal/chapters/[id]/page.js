@@ -80,7 +80,11 @@ const showDataTable = (data) => {
                 <TableCell>{row.name}</TableCell>
                 <TableCell align="center">
                   {row.showButton && (
-                    <DestroyButton action="unlink">
+                    <DestroyButton
+                      action="unlink"
+                      selectedCoursePermission={row}
+                      target="course_permission"
+                    >
                       <RemoveCircleOutlineIcon />
                     </DestroyButton>
                   )}
@@ -117,7 +121,7 @@ const ChapterDetailPage = () => {
   const [members, setMembers] = useState(null)
   // Axios
   const axiosInstance = AxiosWithAuth()
-  
+
   const pathname = usePathname()
   const regex = /( |%20)/g
 
@@ -158,7 +162,7 @@ const ChapterDetailPage = () => {
             name: i.name,
             email: i.email,
             adminFlag: i.role_id === 1 || i.role_id === 2 ? true : false,
-            edit: ""
+            edit: "",
           }
           return newI
         } else {
@@ -171,7 +175,10 @@ const ChapterDetailPage = () => {
 
   const handleSubmitEditChapter = () => {
     axiosInstance
-      .post(`${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/update/${editChapterData.id}`, editChapterData)
+      .post(
+        `${process.env.NEXT_PUBLIC_BE_API_URL}/chapters/update/${editChapterData.id}`,
+        editChapterData
+      )
       .then((res) => {
         let newChapters = chapters.map((i) => {
           if (i.id === res.data.id) {
@@ -183,7 +190,7 @@ const ChapterDetailPage = () => {
         setChapters(newChapters)
         handleCloseChapterEdit()
         setEditChapterData(null)
-        window.location = '/portal/chapters'
+        window.location = "/portal/chapters"
       })
   }
 
@@ -222,7 +229,7 @@ const ChapterDetailPage = () => {
           </IconButton>
         </div>
         <div className="data-grid">
-          {members &&
+          {members && (
             <DataGrid
               rows={members}
               columns={columns}
@@ -239,7 +246,7 @@ const ChapterDetailPage = () => {
               sx={{ "--DataGrid-overlayHeight": "300px" }}
               aria-label="Data grid of chapter members"
             />
-          }
+          )}
         </div>
       </section>
       <section className="container">
