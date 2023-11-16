@@ -91,7 +91,6 @@ export default function Page() {
   }
 
   const showEditButton = (material) => {
-    // Should return a button that simply adds row data to form state and sets the modal to "open"
     return (
       <IconButton
         color="primary"
