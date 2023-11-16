@@ -74,16 +74,20 @@ const ChaptersPage = () => {
   }
 
   const getMemberCounts = () => {
-    chapters && chapters.map((i) => {
-      if (!i.member_count) {
-        i.member_count = 0
-      }
-      users.forEach((user) => {
-        if (user.chapter_id === i.id) {
-          i.member_count++
+    // TODO: We need to store this in the chapter table to restrict deletion of a chapter
+    // when there are members linked to the chapter. This will prevent orphan users from
+    // being created in the app upon chapter deletion.
+    chapters &&
+      chapters.map((i) => {
+        if (!i.member_count) {
+          i.member_count = 0
         }
+        users.forEach((user) => {
+          if (user.chapter_id === i.id) {
+            i.member_count++
+          }
+        })
       })
-    })
   }
 
   useEffect(() => {
