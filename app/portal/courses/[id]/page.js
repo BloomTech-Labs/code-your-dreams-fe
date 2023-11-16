@@ -13,7 +13,6 @@ import Modal from "@/components/Modal/Modal"
 import EditCourse from "../_components/EditCourse"
 import NewMaterial from "../_components/NewMaterial"
 import EditMaterial from "../_components/EditMaterial"
-import EditButton from "@/components/admin/EditButton/EditButton"
 import styles from "./page.module.scss"
 import { usePathname, useRouter } from "next/navigation"
 import { useData } from "@/context/appContext"
@@ -92,19 +91,18 @@ export default function Page() {
   }
 
   const showEditButton = (material) => {
+    // Should return a button that simply adds row data to form state and sets the modal to "open"
     return (
-      <EditButton
-        title="Edit Material"
-        handleSubmit={handleSubmitEditMaterial}
-        open={openEditMaterial}
-        setOpen={setOpenEditMaterial}
+      <IconButton
+        color="primary"
+        onClick={() => {
+          setEditMaterialDetails(material)
+          setOpenEditMaterial(true)
+        }}
+        aria-label="Edit button"
       >
-        <EditMaterial
-          material={material}
-          editMaterialDetails={editMaterialDetails}
-          setEditMaterialDetails={setEditMaterialDetails}
-        />
-      </EditButton>
+        {<EditIcon />}
+      </IconButton>
     )
   }
 
@@ -378,6 +376,17 @@ export default function Page() {
         handleSubmit={handleSubmitForm}
       >
         <NewMaterial formState={formState} setFormState={setFormState} />
+      </Modal>
+      <Modal
+        title="Edit Material"
+        handleSubmit={handleSubmitEditMaterial}
+        open={openEditMaterial}
+        handleClose={() => {setOpenEditMaterial(false)}}
+      >
+        <EditMaterial
+          editMaterialDetails={editMaterialDetails}
+          setEditMaterialDetails={setEditMaterialDetails}
+        />
       </Modal>
     </main>
   )
