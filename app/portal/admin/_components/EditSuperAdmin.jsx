@@ -5,6 +5,9 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
 export default function EditSuperAdmin() {
+  // TODO: Delete when done, temp for testing
+  const temp = "Pretend selected user!"
+
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
@@ -35,7 +38,12 @@ export default function EditSuperAdmin() {
           Deleting the super admin will permanently remove them from the
           database.
         </p>
-        <DestroyButton action="delete" isFullButton={true}>
+        <DestroyButton
+          action="delete"
+          isFullButton={true}
+          selectedUser={temp}
+          target="user"
+        >
           <DeleteForeverIcon />
         </DestroyButton>
       </Card>

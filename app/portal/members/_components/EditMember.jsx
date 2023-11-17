@@ -21,6 +21,9 @@ const chapterList = [
 ]
 
 export default function EditMember() {
+  // TODO: Delete when done, temp for testing
+  const temp = "Pretend selected user!"
+
   return (
     <>
       {/* TODO: Take in prop for database entry to be edited.
@@ -66,7 +69,12 @@ export default function EditMember() {
         <p className="italic">
           Deleting the member will permanently remove them from the database.
         </p>
-        <DestroyButton action="delete" isFullButton={true}>
+        <DestroyButton
+          action="delete"
+          isFullButton={true}
+          selectedUser={temp}
+          target="user"
+        >
           <DeleteForeverIcon />
         </DestroyButton>
       </Card>
