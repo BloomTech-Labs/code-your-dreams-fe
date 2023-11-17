@@ -23,6 +23,7 @@ const DestroyButton = ({
   selectedMaterial,
   selectedChapter,
   selectedCoursePermission,
+  selectedUser,
   target,
 }) => {
   const [open, setOpen] = React.useState(false)
@@ -65,11 +66,14 @@ const DestroyButton = ({
     } else if (target === "course_permission") {
       // TODO: connect to course_premissions API
       console.log(selectedCoursePermission)
+    } else if (target === "user") {
+      // TODO: connect to course_premissions API
+      console.log(selectedUser)
     }
   }
 
   // Array storing non-warning target types (from handleDelete options)
-  const noAlertTarget = ["material", "course_permission"]
+  const noAlertTarget = ["material", "course_permission", "user"]
 
   return (
     <>

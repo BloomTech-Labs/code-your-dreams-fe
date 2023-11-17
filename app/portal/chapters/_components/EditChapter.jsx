@@ -4,7 +4,6 @@ import { useEffect } from "react"
 import { TextField, Divider, Typography, Card } from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
-import ChaptersButton from "@/components/layout/Navigation/ChaptersButton"
 
 export default function EditChapter({
   selectedChapter,
