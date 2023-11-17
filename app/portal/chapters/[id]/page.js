@@ -19,7 +19,7 @@ import AddIcon from "@mui/icons-material/Add"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import BreadcrumbRow from "@/components/layout/BreadcrumbRow/BreadcrumbRow"
-import EditButton from "@/components/admin/EditButton/EditButton"
+// import EditButton from "@/components/admin/EditButton/EditButton"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 import Modal from "@/components/Modal/Modal"
 import EditChapter from "../_components/EditChapter"
@@ -30,27 +30,6 @@ import { usePathname } from "next/navigation"
 import { useData } from "@/context/appContext"
 import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 import AxiosWithAuth from "@/utils/axiosWithAuth"
-
-const showEditButton = () => {
-  return (
-    <EditButton title="Edit Member">
-      <EditMember />
-    </EditButton>
-  )
-}
-
-const columns = [
-  { field: "name", headerName: "Name", width: 250 },
-  { field: "email", headerName: "Email", width: 300 },
-  { field: "adminFlag", headerName: "Admin?", width: 120 },
-  {
-    field: "edit",
-    headerName: "Edit",
-    align: "center",
-    width: 100,
-    renderCell: () => showEditButton(),
-  },
-]
 
 // TODO: Replace demo data with actual data from the courses table.
 const demoData = [
@@ -117,6 +96,10 @@ const ChapterDetailPage = () => {
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
   const handleCloseMemberNew = () => setOpenMemberNew(false)
+  // Member EDIT modal
+  const [openMemberEdit, setOpenMemberEdit] = useState(false)
+  // const handleOpenMemberEdit = () => setOpenMemberEdit(true)
+  // const handleCloseMemberEdit = () => setOpenMemberEdit(false)
   // Chapter Members
   const [members, setMembers] = useState(null)
   // Axios
@@ -130,6 +113,36 @@ const ChapterDetailPage = () => {
       return i
     }
   }
+
+  const showEditButton = () => {
+    return (
+      // <EditButton title="Edit Member">
+      // </EditButton>
+      <IconButton
+        color="primary"
+        onClick={() => {
+          // setEditMaterialDetails(material)
+          setOpenMemberEdit(true)
+        }}
+        aria-label="Edit button"
+      >
+        <EditIcon />
+      </IconButton>
+    )
+  }
+
+  const columns = [
+    { field: "name", headerName: "Name", width: 250 },
+    { field: "email", headerName: "Email", width: 300 },
+    { field: "adminFlag", headerName: "Admin?", width: 120 },
+    {
+      field: "edit",
+      headerName: "Edit",
+      align: "center",
+      width: 100,
+      renderCell: () => showEditButton(),
+    },
+  ]
 
   let count = 0
   useEffect(() => {
@@ -295,6 +308,19 @@ const ChapterDetailPage = () => {
         handleClose={handleCloseMemberNew}
       >
         <NewMember />
+      </Modal>
+      <Modal
+        title="Edit Member"
+        // handleSubmit={handleSubmitEditMaterial}
+        open={openMemberEdit}
+        handleClose={() => {
+          setOpenMemberEdit(false)
+        }}
+      >
+        <EditMember
+        // editMaterialDetails={editMaterialDetails}
+        // setEditMaterialDetails={setEditMaterialDetails}
+        />
       </Modal>
     </main>
   )
