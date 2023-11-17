@@ -92,16 +92,12 @@ const ChapterDetailPage = () => {
   const [selectedCourses, setSelectedCourses] = useState(null)
   // Edit Chapter Data
   const [editChapterData, setEditChapterData] = useState(null)
-  // Member NEW modal
+  // Chapter Members
+  const [members, setMembers] = useState(null)
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
   const handleCloseMemberNew = () => setOpenMemberNew(false)
-  // Member EDIT modal
   const [openMemberEdit, setOpenMemberEdit] = useState(false)
-  // const handleOpenMemberEdit = () => setOpenMemberEdit(true)
-  // const handleCloseMemberEdit = () => setOpenMemberEdit(false)
-  // Chapter Members
-  const [members, setMembers] = useState(null)
   // Axios
   const axiosInstance = AxiosWithAuth()
 
@@ -116,11 +112,10 @@ const ChapterDetailPage = () => {
 
   const showEditButton = () => {
     return (
-      // <EditButton title="Edit Member">
-      // </EditButton>
       <IconButton
         color="primary"
         onClick={() => {
+          // TODO: Replicate material function below for chapter members
           // setEditMaterialDetails(material)
           setOpenMemberEdit(true)
         }}
@@ -311,6 +306,7 @@ const ChapterDetailPage = () => {
       </Modal>
       <Modal
         title="Edit Member"
+        // TODO: Replicate material function below for chapter members
         // handleSubmit={handleSubmitEditMaterial}
         open={openMemberEdit}
         handleClose={() => {
@@ -318,6 +314,7 @@ const ChapterDetailPage = () => {
         }}
       >
         <EditMember
+        // TODO: Replicate material function below for chapter members
         // editMaterialDetails={editMaterialDetails}
         // setEditMaterialDetails={setEditMaterialDetails}
         />
