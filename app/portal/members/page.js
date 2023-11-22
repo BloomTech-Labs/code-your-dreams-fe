@@ -2,12 +2,12 @@
 
 import React, { useState, useEffect } from "react"
 import { IconButton } from "@mui/material"
+import EditIcon from "@mui/icons-material/Edit"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import { DataGrid } from "@mui/x-data-grid"
 import NoRowsOverlay from "@/components/NoRowsOverlay/NoRowsOverlay"
 import Modal from "@/components/Modal/Modal"
 import NewMember from "./_components/NewMember"
-import EditButton from "@/components/admin/EditButton/EditButton"
 import EditMember from "./_components/EditMember"
 import { useData } from "@/context/appContext"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
@@ -15,9 +15,16 @@ import isAdmin from "@/components/admin/isRole/isAdmin"
 
 const MembersPage = () => {
   const [members, setMembers] = useState(null)
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const [openNewMember, setOpenNewMember] = useState(false)
+  const handleOpenNewMember = () => setOpenNewMember(true)
+  const handleCloseNewMember = () => setOpenNewMember(false)
+  const [openEditMember, setOpenEditMember] = useState(false)
+  const handleCloseEditMember = () => setOpenEditMember(false)
+
+  const handleSubmitNewMember = () => {
+    // TODO: Complete the new processing here
+    console.log("handleSubmitNewMember")
+  }
 
   const handleSubmitEditMember = () => {
     // TODO: Complete the edit processing here
@@ -26,14 +33,15 @@ const MembersPage = () => {
 
   const showEditButton = () => {
     return (
-      <EditButton
-        title="Edit Member"
-        handleSubmit={handleSubmitEditMember}
-        open={open}
-        setOpen={setOpen}
+      <IconButton
+        color="primary"
+        onClick={() => {
+          setOpenEditMember(true)
+        }}
+        aria-label="Edit button"
       >
-        <EditMember />
-      </EditButton>
+        {<EditIcon />}
+      </IconButton>
     )
   }
 
@@ -113,7 +121,7 @@ const MembersPage = () => {
             <IconButton
               color="primary"
               size="large"
-              onClick={() => handleOpen()}
+              onClick={() => handleOpenNewMember()}
               aria-label="Add a new member"
             >
               <PersonAddIcon fontSize="inherit" />
@@ -147,11 +155,19 @@ const MembersPage = () => {
 
       <Modal
         title="Add a New Member"
-        open={open}
-        handleClose={handleClose}
-        handleSubmit={handleSubmitEditMember}
+        open={openNewMember}
+        handleClose={handleCloseNewMember}
+        handleSubmit={handleSubmitNewMember}
       >
         <NewMember />
+      </Modal>
+      <Modal
+        title="Edit Member"
+        open={openEditMember}
+        handleClose={handleCloseEditMember}
+        handleSubmit={handleSubmitEditMember}
+      >
+        <EditMember />
       </Modal>
     </main>
   )
