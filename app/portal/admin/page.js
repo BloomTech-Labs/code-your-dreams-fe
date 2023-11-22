@@ -14,13 +14,13 @@ import {
   TableRow,
 } from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
+import EditIcon from "@mui/icons-material/Edit"
 import PersonAddIcon from "@mui/icons-material/PersonAdd"
 import Modal from "@/components/Modal/Modal"
 import NewSuperAdmin from "./_components/NewSuperAdmin"
 import NewMaterialType from "./_components/NewMaterialType"
 import EditSuperAdmin from "./_components/EditSuperAdmin"
 import EditMaterialType from "./_components/EditMaterialType"
-import EditButton from "@/components/admin/EditButton/EditButton"
 import useCheckTokenExpired from "@/utils/useCheckTokenExpired"
 import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 
@@ -62,14 +62,15 @@ const AdminPage = () => {
 
   const showSuperAdminEditButton = () => {
     return (
-      <EditButton
-        title="Edit Super Admin"
-        handleSubmit={handleSubmitEditSuperAdmin}
-        open={openSuperAdminEdit}
-        setOpen={setOpenSuperAdminEdit}
+      <IconButton
+        color="primary"
+        onClick={() => {
+          setOpenSuperAdminEdit(true)
+        }}
+        aria-label="Edit button"
       >
-        <EditSuperAdmin />
-      </EditButton>
+        {<EditIcon />}
+      </IconButton>
     )
   }
 
@@ -126,15 +127,15 @@ const AdminPage = () => {
                     <TableCell>{row.material_type}</TableCell>
                     <TableCell align="center">{row.quantity}</TableCell>
                     <TableCell align="center">
-                      {/* TODO: Fix this function so it only opens up a single modal for the row selected */}
-                      <EditButton
-                        title="Edit Material"
-                        handleSubmit={handleSubmitEditMaterials}
-                        open={openMaterialEdit}
-                        setOpen={setOpenMaterialEdit}
+                      <IconButton
+                        color="primary"
+                        onClick={() => {
+                          setOpenMaterialEdit(true)
+                        }}
+                        aria-label="Edit button"
                       >
-                        <EditMaterialType />
-                      </EditButton>
+                        {<EditIcon />}
+                      </IconButton>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -215,11 +216,31 @@ const AdminPage = () => {
         <NewSuperAdmin />
       </Modal>
       <Modal
+        title="Edit Super Admin"
+        handleSubmit={handleSubmitEditSuperAdmin}
+        open={openSuperAdminEdit}
+        handleClose={() => {
+          setOpenSuperAdminEdit(false)
+        }}
+      >
+        <EditSuperAdmin />
+      </Modal>
+      <Modal
         title="Create a New Materials Type"
         open={openMaterialNew}
         handleClose={handleCloseMaterialNew}
       >
         <NewMaterialType />
+      </Modal>
+      <Modal
+        title="Edit Material Type"
+        handleSubmit={handleSubmitEditMaterials}
+        open={openMaterialEdit}
+        handleClose={() => {
+          setOpenMaterialEdit(false)
+        }}
+      >
+        <EditMaterialType />
       </Modal>
     </main>
   )
