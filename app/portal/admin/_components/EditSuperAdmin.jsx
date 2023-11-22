@@ -1,12 +1,23 @@
 "use client"
 
+import { useEffect } from "react"
 import { TextField, Divider, Typography, Card } from "@mui/material"
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditSuperAdmin() {
+export default function EditSuperAdmin({
+  super_admin,
+  editSuperAdminDetails,
+  setEditSuperAdminDetails,
+}) {
   // TODO: Delete when done, temp for testing
   const temp = "Pretend selected user!"
+
+  useEffect(() => {
+    if (editSuperAdminDetails === null) {
+      setEditSuperAdminDetails(super_admin)
+    }
+  }, [])
 
   return (
     <>
@@ -17,18 +28,28 @@ export default function EditSuperAdmin() {
         Edit super admin details by updating any of the fields and clicking the
         save button.
       </div>
-      <TextField
-        required
-        id="super-admin-name"
-        label="Name"
-        variant="outlined"
-      />
-      <TextField
-        required
-        id="super-admin-email"
-        type="email"
-        label="Email Address"
-      />
+      {editSuperAdminDetails && (
+        <TextField
+          required
+          id="super-admin-name"
+          label="Name"
+          variant="outlined"
+          name="name"
+          value={editSuperAdminDetails.name}
+          // onChange={handleChange}
+        />
+      )}
+      {editSuperAdminDetails && (
+        <TextField
+          required
+          id="super-admin-email"
+          type="email"
+          label="Email Address"
+          name="email"
+          value={editSuperAdminDetails.email}
+          // onChange={handleChange}
+        />
+      )}
       <Divider>
         <Typography color="error">Danger Zone</Typography>
       </Divider>
