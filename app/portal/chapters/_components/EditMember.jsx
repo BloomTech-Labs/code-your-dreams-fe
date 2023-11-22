@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import {
   TextField,
   FormGroup,
@@ -12,36 +13,62 @@ import {
 import DeleteForeverIcon from "@mui/icons-material/DeleteForeverOutlined"
 import DestroyButton from "@/components/admin/DestroyButton/DestroyButton"
 
-export default function EditMember() {
+export default function EditMember({
+  member,
+  editMemberDetails,
+  setEditMemberDetails,
+}) {
+  useEffect(() => {
+    if (editMemberDetails === null) {
+      setEditMemberDetails(member)
+    }
+  }, [])
+
+  console.log(editMemberDetails)
   return (
     <>
-      {/* TODO: Take in prop for database entry to be edited.
-      Link form to update that project when saved. */}
+      {/* TODO: Link form to update that project when saved. */}
       {/* TODO: Fill in all details in form from DB. */}
       <div className="italic">
         Edit member details by updating any of the fields and clicking the save
         button.
       </div>
-      <TextField
-        required
-        id="member-name"
-        label="Member Name"
-        variant="outlined"
-      />
-      <TextField
-        required
-        id="member-email"
-        type="email"
-        label="Email Address"
-      />
+      {editMemberDetails && (
+        <TextField
+          required
+          id="member-name"
+          label="Member Name"
+          variant="outlined"
+          name="name"
+          value={editMemberDetails.name}
+          // onChange={handleChange}
+        />
+      )}
+      {editMemberDetails && (
+        <TextField
+          required
+          id="member-email"
+          type="email"
+          label="Email Address"
+          variant="outlined"
+          name="email"
+          value={editMemberDetails.email}
+          // onChange={handleChange}
+        />
+      )}
       {/* TODO: Fill in chapter name from DB for current user */}
-      <TextField
-        disabled
-        id="chapter-name"
-        label="Chapter"
-        defaultValue="{TODO:current_chapter_name}"
-        variant="outlined"
-      />
+      {editMemberDetails && (
+        <TextField
+          disabled
+          id="chapter-name"
+          label="Chapter"
+          variant="outlined"
+          name="chapter_name"
+          defaultValue="{TODO:current_chapter_name}"
+          // TODO: Add in chapter_name field for user
+          // value={editMemberDetails.chapter_name}
+        />
+      )}
       <Card variant="outlined" className="modal-card">
         <FormGroup>
           <FormControlLabel
