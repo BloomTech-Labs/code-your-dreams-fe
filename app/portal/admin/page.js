@@ -28,13 +28,13 @@ import isSuperAdmin from "@/components/admin/isRole/isSuperAdmin"
 const rows = [
   {
     id: 1,
-    memberName: "Brianne Caplan",
-    emailAddress: "brianne@codeyourdreams.org",
+    name: "Brianne Caplan",
+    email: "brianne@codeyourdreams.org",
   },
   {
     id: 2,
-    memberName: "John Dodson",
-    emailAddress: "john@codeyourdreams.org",
+    name: "John Dodson",
+    email: "john@codeyourdreams.org",
   },
 ]
 
@@ -47,6 +47,7 @@ const AdminPage = () => {
   const handleOpenSuperAdminNew = () => setOpenSuperAdminNew(true)
   const handleCloseSuperAdminNew = () => setOpenSuperAdminNew(false)
   // Super admin EDIT modal
+  const [editSuperAdminDetails, setEditSuperAdminDetails] = useState(null)
   const [openSuperAdminEdit, setOpenSuperAdminEdit] = useState(false)
   // Material type NEW modal
   const [openMaterialNew, setOpenMaterialNew] = useState(false)
@@ -60,11 +61,12 @@ const AdminPage = () => {
     console.log("handleSubmitEditSuperAdmin")
   }
 
-  const showSuperAdminEditButton = () => {
+  const showSuperAdminEditButton = (super_admin) => {
     return (
       <IconButton
         color="primary"
         onClick={() => {
+          setEditSuperAdminDetails(super_admin)
           setOpenSuperAdminEdit(true)
         }}
         aria-label="Edit button"
@@ -89,14 +91,14 @@ const AdminPage = () => {
   }, [material_types])
 
   const columns = [
-    { field: "memberName", headerName: "Name", width: 250 },
-    { field: "emailAddress", headerName: "Email", width: 300 },
+    { field: "name", headerName: "Name", width: 250 },
+    { field: "email", headerName: "Email", width: 300 },
     {
       field: "edit",
       headerName: "Edit",
       align: "center",
       width: 100,
-      renderCell: (params) => showSuperAdminEditButton(params.value),
+      renderCell: (params) => showSuperAdminEditButton(params.row),
     },
   ]
 
@@ -223,7 +225,10 @@ const AdminPage = () => {
           setOpenSuperAdminEdit(false)
         }}
       >
-        <EditSuperAdmin />
+        <EditSuperAdmin
+          editSuperAdminDetails={editSuperAdminDetails}
+          setEditSuperAdminDetails={setEditSuperAdminDetails}
+        />
       </Modal>
       <Modal
         title="Create a New Materials Type"

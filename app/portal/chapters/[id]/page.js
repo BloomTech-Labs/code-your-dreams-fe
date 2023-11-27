@@ -96,6 +96,7 @@ const ChapterDetailPage = () => {
   const [openMemberNew, setOpenMemberNew] = useState(false)
   const handleOpenMemberNew = () => setOpenMemberNew(true)
   const handleCloseMemberNew = () => setOpenMemberNew(false)
+  const [editMemberDetails, setEditMemberDetails] = useState(null)
   const [openMemberEdit, setOpenMemberEdit] = useState(false)
   // Axios
   const axiosInstance = AxiosWithAuth()
@@ -109,13 +110,12 @@ const ChapterDetailPage = () => {
     }
   }
 
-  const showEditButton = () => {
+  const showEditButton = (member) => {
     return (
       <IconButton
         color="primary"
         onClick={() => {
-          // TODO: Replicate material function below for chapter members
-          // setEditMaterialDetails(material)
+          setEditMemberDetails(member)
           setOpenMemberEdit(true)
         }}
         aria-label="Edit button"
@@ -134,7 +134,7 @@ const ChapterDetailPage = () => {
       headerName: "Edit",
       align: "center",
       width: 100,
-      renderCell: () => showEditButton(),
+      renderCell: (params) => showEditButton(params.row),
     },
   ]
 
@@ -313,9 +313,8 @@ const ChapterDetailPage = () => {
         }}
       >
         <EditMember
-        // TODO: Replicate material function below for chapter members
-        // editMaterialDetails={editMaterialDetails}
-        // setEditMaterialDetails={setEditMaterialDetails}
+          editMemberDetails={editMemberDetails}
+          setEditMemberDetails={setEditMemberDetails}
         />
       </Modal>
     </main>

@@ -18,6 +18,7 @@ const MembersPage = () => {
   const [openNewMember, setOpenNewMember] = useState(false)
   const handleOpenNewMember = () => setOpenNewMember(true)
   const handleCloseNewMember = () => setOpenNewMember(false)
+  const [editMemberDetails, setEditMemberDetails] = useState(null)
   const [openEditMember, setOpenEditMember] = useState(false)
   const handleCloseEditMember = () => setOpenEditMember(false)
 
@@ -31,11 +32,12 @@ const MembersPage = () => {
     console.log("handleSubmitEditMember")
   }
 
-  const showEditButton = () => {
+  const showEditButton = (member) => {
     return (
       <IconButton
         color="primary"
         onClick={() => {
+          setEditMemberDetails(member)
           setOpenEditMember(true)
         }}
         aria-label="Edit button"
@@ -80,7 +82,7 @@ const MembersPage = () => {
       headerName: "Edit",
       align: "center",
       width: 80,
-      renderCell: () => showEditButton(),
+      renderCell: (params) => showEditButton(params.row),
     },
   ]
 
@@ -167,7 +169,10 @@ const MembersPage = () => {
         handleClose={handleCloseEditMember}
         handleSubmit={handleSubmitEditMember}
       >
-        <EditMember />
+        <EditMember
+          editMemberDetails={editMemberDetails}
+          setEditMemberDetails={setEditMemberDetails}
+        />
       </Modal>
     </main>
   )

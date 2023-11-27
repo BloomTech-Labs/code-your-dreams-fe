@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect } from "react"
 import {
   TextField,
   Autocomplete,
@@ -20,9 +21,19 @@ const chapterList = [
   { label: "BloomTech" },
 ]
 
-export default function EditMember() {
+export default function EditMember({
+  member,
+  editMemberDetails,
+  setEditMemberDetails,
+}) {
   // TODO: Delete when done, temp for testing
   const temp = "Pretend selected user!"
+
+  useEffect(() => {
+    if (editMemberDetails === null) {
+      setEditMemberDetails(member)
+    }
+  }, [])
 
   return (
     <>
@@ -33,19 +44,30 @@ export default function EditMember() {
         Edit member details by updating any of the fields and clicking the save
         button.
       </div>
-      <TextField
-        required
-        id="member-name"
-        label="Member Name"
-        variant="outlined"
-      />
-      <TextField
-        required
-        id="member-email"
-        type="email"
-        label="Email Address"
-      />
+      {editMemberDetails && (
+        <TextField
+          required
+          id="member-name"
+          label="Member Name"
+          variant="outlined"
+          name="name"
+          value={editMemberDetails.name}
+          // onChange={handleChange}
+        />
+      )}
+      {editMemberDetails && (
+        <TextField
+          required
+          id="member-email"
+          type="email"
+          label="Email Address"
+          name="email"
+          value={editMemberDetails.email}
+          // onChange={handleChange}
+        />
+      )}
       {/* TODO: For a chapter admin, this should be a fixed field. For a super admin they should see a dropdown. */}
+      {/* Code: if super_admin (show dropdown list) else (show disabled button with current-chapter text) */}
       <Autocomplete
         disablePortal
         id="chapter-name"
@@ -55,6 +77,7 @@ export default function EditMember() {
         )}
       />
       <Card variant="outlined" className="modal-card">
+        {/* TODO: Make pre-checked if user has admin role */}
         <FormGroup>
           <FormControlLabel
             control={<Checkbox />}
