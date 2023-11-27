@@ -113,68 +113,70 @@ const MembersPage = () => {
   ])
 
   return (
-    <main>
-      <section className="container">
-        <div className="header-row">
-          <h1>Members</h1>
-          {current_user &&
-          current_user.role_id === 1 &&
-          current_user.chapter_id === 1 ? (
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpenNewMember()}
-              aria-label="Add a new member"
-            >
-              <PersonAddIcon fontSize="inherit" />
-            </IconButton>
-          ) : null}
-        </div>
-        <div className="data-grid">
-          {/* TODO: We need to send the selected user over to the edit modal */}
-          {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
-          {members && (
-            <DataGrid
-              rows={members}
-              getRowId={(row) => row.auth0_id}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 20 },
-                },
-              }}
-              pageSizeOptions={[20]}
-              slots={{
-                noRowsOverlay: NoRowsOverlay,
-              }}
-              autoHeight={true}
-              sx={{ "--DataGrid-overlayHeight": "300px" }}
-              aria-label="Data grid of members"
-            />
-          )}
-        </div>
-      </section>
+    members && (
+      <main>
+        <section className="container">
+          <div className="header-row">
+            <h1>Members</h1>
+            {current_user &&
+            current_user.role_id === 1 &&
+            current_user.chapter_id === 1 ? (
+              <IconButton
+                color="primary"
+                size="large"
+                onClick={() => handleOpenNewMember()}
+                aria-label="Add a new member"
+              >
+                <PersonAddIcon fontSize="inherit" />
+              </IconButton>
+            ) : null}
+          </div>
+          <div className="data-grid">
+            {/* TODO: We need to send the selected user over to the edit modal */}
+            {/* TODO: For chapter admins, the respective chapter filter should be on, so they see only their chapter members */}
+            {members && (
+              <DataGrid
+                rows={members}
+                getRowId={(row) => row.auth0_id}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 20 },
+                  },
+                }}
+                pageSizeOptions={[20]}
+                slots={{
+                  noRowsOverlay: NoRowsOverlay,
+                }}
+                autoHeight={true}
+                sx={{ "--DataGrid-overlayHeight": "300px" }}
+                aria-label="Data grid of members"
+              />
+            )}
+          </div>
+        </section>
 
-      <Modal
-        title="Add a New Member"
-        open={openNewMember}
-        handleClose={handleCloseNewMember}
-        handleSubmit={handleSubmitNewMember}
-      >
-        <NewMember />
-      </Modal>
-      <Modal
-        title="Edit Member"
-        open={openEditMember}
-        handleClose={handleCloseEditMember}
-        handleSubmit={handleSubmitEditMember}
-      >
-        <EditMember
-          editMemberDetails={editMemberDetails}
-          setEditMemberDetails={setEditMemberDetails}
-        />
-      </Modal>
-    </main>
+        <Modal
+          title="Add a New Member"
+          open={openNewMember}
+          handleClose={handleCloseNewMember}
+          handleSubmit={handleSubmitNewMember}
+        >
+          <NewMember />
+        </Modal>
+        <Modal
+          title="Edit Member"
+          open={openEditMember}
+          handleClose={handleCloseEditMember}
+          handleSubmit={handleSubmitEditMember}
+        >
+          <EditMember
+            editMemberDetails={editMemberDetails}
+            setEditMemberDetails={setEditMemberDetails}
+          />
+        </Modal>
+      </main>
+    )
   )
 }
 

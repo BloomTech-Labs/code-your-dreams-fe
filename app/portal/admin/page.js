@@ -39,7 +39,7 @@ const rows = [
 ]
 
 const AdminPage = () => {
-  const { material_types } = useData()
+  const { current_user, material_types } = useData()
   const [localMaterials, setLocalMaterials] = useState(null)
 
   // Super admin NEW modal
@@ -150,104 +150,106 @@ const AdminPage = () => {
   }
 
   return (
-    <main>
-      <section className="container">
-        <h1>Admin Settings</h1>
-        <div className="header-row">
-          <h2>Super admins</h2>
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpenSuperAdminNew()}
-            aria-label="Add a super admin"
-          >
-            <PersonAddIcon fontSize="inherit" />
-          </IconButton>
-        </div>
-        <p className="italic">
-          Super admins will have the ability to manage settings and users for
-          the entire application.
-        </p>
-        {/* TODO: We need to send the selected user over to the edit modal */}
-        <div className="data-grid">
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: { pageSize: 20 },
-              },
-            }}
-            pageSizeOptions={[20]}
-            slots={{
-              noRowsOverlay: NoRowsOverlay,
-            }}
-            autoHeight={true}
-            sx={{ "--DataGrid-overlayHeight": "300px" }}
-            aria-label="Data grid of super admins"
-          />
-        </div>
-      </section>
-      <section className="container">
-        <div className="header-row">
-          <h2>Materials types</h2>
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpenMaterialNew()}
-            aria-label="Add a materials type"
-          >
-            <AddIcon fontSize="inherit" />
-          </IconButton>
-        </div>
-        <p className="italic">
-          A materials type can only be removed if there are zero instances of it
-          being used&mdash;you must change the type for each file for all files
-          before you can delete a type.
-        </p>
-        {/* TODO: We need to send the selected material type over to the edit modal */}
-        {/* TODO: Change the name of the variable for data source here */}
-        {showDataTable()}
-      </section>
+    current_user && (
+      <main>
+        <section className="container">
+          <h1>Admin Settings</h1>
+          <div className="header-row">
+            <h2>Super admins</h2>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpenSuperAdminNew()}
+              aria-label="Add a super admin"
+            >
+              <PersonAddIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+          <p className="italic">
+            Super admins will have the ability to manage settings and users for
+            the entire application.
+          </p>
+          {/* TODO: We need to send the selected user over to the edit modal */}
+          <div className="data-grid">
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { pageSize: 20 },
+                },
+              }}
+              pageSizeOptions={[20]}
+              slots={{
+                noRowsOverlay: NoRowsOverlay,
+              }}
+              autoHeight={true}
+              sx={{ "--DataGrid-overlayHeight": "300px" }}
+              aria-label="Data grid of super admins"
+            />
+          </div>
+        </section>
+        <section className="container">
+          <div className="header-row">
+            <h2>Materials types</h2>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpenMaterialNew()}
+              aria-label="Add a materials type"
+            >
+              <AddIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+          <p className="italic">
+            A materials type can only be removed if there are zero instances of
+            it being used&mdash;you must change the type for each file for all
+            files before you can delete a type.
+          </p>
+          {/* TODO: We need to send the selected material type over to the edit modal */}
+          {/* TODO: Change the name of the variable for data source here */}
+          {showDataTable()}
+        </section>
 
-      <Modal
-        title="Add a New Super Admin"
-        open={openSuperAdminNew}
-        handleClose={handleCloseSuperAdminNew}
-      >
-        <NewSuperAdmin />
-      </Modal>
-      <Modal
-        title="Edit Super Admin"
-        handleSubmit={handleSubmitEditSuperAdmin}
-        open={openSuperAdminEdit}
-        handleClose={() => {
-          setOpenSuperAdminEdit(false)
-        }}
-      >
-        <EditSuperAdmin
-          editSuperAdminDetails={editSuperAdminDetails}
-          setEditSuperAdminDetails={setEditSuperAdminDetails}
-        />
-      </Modal>
-      <Modal
-        title="Create a New Materials Type"
-        open={openMaterialNew}
-        handleClose={handleCloseMaterialNew}
-      >
-        <NewMaterialType />
-      </Modal>
-      <Modal
-        title="Edit Material Type"
-        handleSubmit={handleSubmitEditMaterials}
-        open={openMaterialEdit}
-        handleClose={() => {
-          setOpenMaterialEdit(false)
-        }}
-      >
-        <EditMaterialType />
-      </Modal>
-    </main>
+        <Modal
+          title="Add a New Super Admin"
+          open={openSuperAdminNew}
+          handleClose={handleCloseSuperAdminNew}
+        >
+          <NewSuperAdmin />
+        </Modal>
+        <Modal
+          title="Edit Super Admin"
+          handleSubmit={handleSubmitEditSuperAdmin}
+          open={openSuperAdminEdit}
+          handleClose={() => {
+            setOpenSuperAdminEdit(false)
+          }}
+        >
+          <EditSuperAdmin
+            editSuperAdminDetails={editSuperAdminDetails}
+            setEditSuperAdminDetails={setEditSuperAdminDetails}
+          />
+        </Modal>
+        <Modal
+          title="Create a New Materials Type"
+          open={openMaterialNew}
+          handleClose={handleCloseMaterialNew}
+        >
+          <NewMaterialType />
+        </Modal>
+        <Modal
+          title="Edit Material Type"
+          handleSubmit={handleSubmitEditMaterials}
+          open={openMaterialEdit}
+          handleClose={() => {
+            setOpenMaterialEdit(false)
+          }}
+        >
+          <EditMaterialType />
+        </Modal>
+      </main>
+    )
   )
 }
 

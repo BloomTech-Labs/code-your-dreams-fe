@@ -23,34 +23,35 @@ export default function Page() {
   useCheckTokenExpired()
 
   return (
-    <main className={styles.account}>
-      <section className={`container ${styles["content-body"]}`}>
-        <h1>Account</h1>
-        <p>
-          {current_user &&
-            `This account is associated with ${current_user.chapter_name}.`}
-        </p>
-        <Card variant="outlined" className={styles["action-group"]}>
-          <p>Sign out from the app.</p>
-          <SignOutBtn className="secondary">Sign Out</SignOutBtn>
-        </Card>
-        <Card variant="outlined" className={styles["action-group"]}>
+    current_user && (
+      <main className={styles.account}>
+        <section className={`container ${styles["content-body"]}`}>
+          <h1>Account</h1>
           <p>
-            Name: {current_user ? current_user.name : "unknown"}
-            <br />
-            Email: {current_user ? current_user.email : "unknown"}
+            {`This account is associated with ${current_user.chapter_name}.`}
           </p>
-          <EditButton
-            title="Edit Account Details"
-            isFullButton={true}
-            handleSubmit={handleSubmitEditUser}
-            open={open}
-            setOpen={setOpen}
-          >
-            <EditMember />
-          </EditButton>
-        </Card>
-      </section>
-    </main>
+          <Card variant="outlined" className={styles["action-group"]}>
+            <p>Sign out from the app.</p>
+            <SignOutBtn className="secondary">Sign Out</SignOutBtn>
+          </Card>
+          <Card variant="outlined" className={styles["action-group"]}>
+            <p>
+              Name: {current_user ? current_user.name : "unknown"}
+              <br />
+              Email: {current_user ? current_user.email : "unknown"}
+            </p>
+            <EditButton
+              title="Edit Account Details"
+              isFullButton={true}
+              handleSubmit={handleSubmitEditUser}
+              open={open}
+              setOpen={setOpen}
+            >
+              <EditMember />
+            </EditButton>
+          </Card>
+        </section>
+      </main>
+    )
   )
 }

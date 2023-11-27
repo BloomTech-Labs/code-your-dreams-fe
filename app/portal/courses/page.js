@@ -141,69 +141,71 @@ export default function Page() {
   }, [courses])
 
   return (
-    <main>
-      <section className={`container ${styles.courses}`}>
-        <div className="header-row">
-          <h1>Courses</h1>
-          {current_user &&
-          current_user.role_id === 1 &&
-          current_user.chapter_id === 1 ? (
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpen()}
-              aria-label="Add a new course"
-            >
-              <AddIcon fontSize="inherit" />
-            </IconButton>
-          ) : null}
-        </div>
+    localCourses && (
+      <main>
+        <section className={`container ${styles.courses}`}>
+          <div className="header-row">
+            <h1>Courses</h1>
+            {current_user &&
+            current_user.role_id === 1 &&
+            current_user.chapter_id === 1 ? (
+              <IconButton
+                color="primary"
+                size="large"
+                onClick={() => handleOpen()}
+                aria-label="Add a new course"
+              >
+                <AddIcon fontSize="inherit" />
+              </IconButton>
+            ) : null}
+          </div>
 
-        <div className={styles.table}>
-          <div className={styles["table-container"]}>
-            <div className="data-grid">
-              {localCourses && (
-                <DataGrid
-                  rows={localCourses}
-                  getRowId={(row) => row.id}
-                  columns={columns.filter(columnVisibility)}
-                  initialState={{
-                    pagination: {
-                      paginationModel: { pageSize: 20 },
-                    },
-                  }}
-                  pageSizeOptions={[20]}
-                  slots={{
-                    noRowsOverlay: NoRowsOverlay,
-                  }}
-                  autoHeight={true}
-                  sx={{ "--DataGrid-overlayHeight": "300px" }}
-                  aria-label="Data grid of courses"
-                />
-              )}
+          <div className={styles.table}>
+            <div className={styles["table-container"]}>
+              <div className="data-grid">
+                {localCourses && (
+                  <DataGrid
+                    rows={localCourses}
+                    getRowId={(row) => row.id}
+                    columns={columns.filter(columnVisibility)}
+                    initialState={{
+                      pagination: {
+                        paginationModel: { pageSize: 20 },
+                      },
+                    }}
+                    pageSizeOptions={[20]}
+                    slots={{
+                      noRowsOverlay: NoRowsOverlay,
+                    }}
+                    autoHeight={true}
+                    sx={{ "--DataGrid-overlayHeight": "300px" }}
+                    aria-label="Data grid of courses"
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
 
-        {current_user && current_user.role_id === 3 && (
-          <p className="italic">
-            Contact Code Your Dreams for access to more courses.
-          </p>
-        )}
-      </section>
+          {current_user && current_user.role_id === 3 && (
+            <p className="italic">
+              Contact Code Your Dreams for access to more courses.
+            </p>
+          )}
+        </section>
 
-      <Modal
-        title="Create a New Course"
-        open={open}
-        handleClose={handleClose}
-        handleSubmit={handleSubmitForm}
-      >
-        <NewCourse
-          formState={formState}
-          setFormState={setFormState}
-          onSubmit={handleSubmitForm}
-        />
-      </Modal>
-    </main>
+        <Modal
+          title="Create a New Course"
+          open={open}
+          handleClose={handleClose}
+          handleSubmit={handleSubmitForm}
+        >
+          <NewCourse
+            formState={formState}
+            setFormState={setFormState}
+            onSubmit={handleSubmitForm}
+          />
+        </Modal>
+      </main>
+    )
   )
 }
