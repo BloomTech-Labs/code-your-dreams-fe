@@ -13,6 +13,7 @@ export default function SiteLogo() {
         alt="Code Your Dreams logo"
         width={105}
         height={60}
+        priority={true}
       />
     </Link>
   )
