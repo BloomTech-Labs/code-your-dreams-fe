@@ -278,115 +278,119 @@ export default function Page() {
   }
 
   return (
-    <main className={styles.course}>
-      <BreadcrumbRow>
-        <Link underline="hover" color="inherit" href="/portal/courses">
-          Courses
-        </Link>
-        <Typography color="text.primary">
-          {selectedCourse ? selectedCourse.name : ""}
-        </Typography>
-      </BreadcrumbRow>
+    selectedCourse && (
+      <main className={styles.course}>
+        <BreadcrumbRow>
+          <Link underline="hover" color="inherit" href="/portal/courses">
+            Courses
+          </Link>
+          <Typography color="text.primary">
+            {selectedCourse ? selectedCourse.name : ""}
+          </Typography>
+        </BreadcrumbRow>
 
-      {selectedCourse && selectedCourse.visibility === false ? (
-        <Alert
-          iconMapping={{
-            warning: <VisibilityOffIcon fontSize="inherit" />,
-          }}
-          severity="warning"
-          className="container"
+        {selectedCourse && selectedCourse.visibility === false ? (
+          <Alert
+            iconMapping={{
+              warning: <VisibilityOffIcon fontSize="inherit" />,
+            }}
+            severity="warning"
+            className="container"
+          >
+            This course is hidden.{" "}
+            <a onClick={() => handleOpenCourse()} className={styles.alert}>
+              Edit the course settings
+            </a>{" "}
+            to make it visible.
+          </Alert>
+        ) : null}
+
+        <section className="container">
+          <div className="header-row">
+            <h1>{selectedCourse && selectedCourse.name}</h1>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpenCourse()}
+              aria-label="Edit course details"
+            >
+              <EditIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+          <p>{selectedCourse && selectedCourse.description}</p>
+        </section>
+        <section className="container">
+          <div className="header-row">
+            <h2>Materials</h2>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpenMaterialNew()}
+              aria-label="Add a course material"
+            >
+              <AddIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+          <div className="data-grid">
+            {selectedMaterials && (
+              <DataGrid
+                rows={selectedMaterials}
+                columns={columns.map((column) =>
+                  column.field === "name"
+                    ? { ...column, renderCell: handleRowClick }
+                    : column
+                )}
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 20 },
+                  },
+                }}
+                pageSizeOptions={[20]}
+                slots={{
+                  noRowsOverlay: NoRowsOverlay,
+                }}
+                autoHeight={true}
+                sx={{ "--DataGrid-overlayHeight": "300px" }}
+                aria-label="Data grid of course materials"
+              />
+            )}
+          </div>
+        </section>
+
+        <Modal
+          title="Edit Course"
+          open={openCourse}
+          handleClose={handleCloseCourse}
+          handleSubmit={handleSubmitEditCourse}
         >
-          This course is hidden.{" "}
-          <a onClick={() => handleOpenCourse()} className={styles.alert}>
-            Edit the course settings
-          </a>{" "}
-          to make it visible.
-        </Alert>
-      ) : null}
-
-      <section className="container">
-        <div className="header-row">
-          <h1>{selectedCourse && selectedCourse.name}</h1>
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpenCourse()}
-            aria-label="Edit course details"
-          >
-            <EditIcon fontSize="inherit" />
-          </IconButton>
-        </div>
-        <p>{selectedCourse && selectedCourse.description}</p>
-      </section>
-      <section className="container">
-        <div className="header-row">
-          <h2>Materials</h2>
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpenMaterialNew()}
-            aria-label="Add a course material"
-          >
-            <AddIcon fontSize="inherit" />
-          </IconButton>
-        </div>
-        <div className="data-grid">
-          {selectedMaterials && (
-            <DataGrid
-              rows={selectedMaterials}
-              columns={columns.map((column) =>
-                column.field === "name"
-                  ? { ...column, renderCell: handleRowClick }
-                  : column
-              )}
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 20 },
-                },
-              }}
-              pageSizeOptions={[20]}
-              slots={{
-                noRowsOverlay: NoRowsOverlay,
-              }}
-              autoHeight={true}
-              sx={{ "--DataGrid-overlayHeight": "300px" }}
-              aria-label="Data grid of course materials"
-            />
-          )}
-        </div>
-      </section>
-
-      <Modal
-        title="Edit Course"
-        open={openCourse}
-        handleClose={handleCloseCourse}
-        handleSubmit={handleSubmitEditCourse}
-      >
-        <EditCourse
-          selectedCourse={selectedCourse}
-          editCourseDetails={editCourseDetails}
-          setEditCourseDetails={setEditCourseDetails}
-        />
-      </Modal>
-      <Modal
-        title="Add Material"
-        open={openMaterialNew}
-        handleClose={handleCloseMaterialNew}
-        handleSubmit={handleSubmitForm}
-      >
-        <NewMaterial formState={formState} setFormState={setFormState} />
-      </Modal>
-      <Modal
-        title="Edit Material"
-        handleSubmit={handleSubmitEditMaterial}
-        open={openEditMaterial}
-        handleClose={() => {setOpenEditMaterial(false)}}
-      >
-        <EditMaterial
-          editMaterialDetails={editMaterialDetails}
-          setEditMaterialDetails={setEditMaterialDetails}
-        />
-      </Modal>
-    </main>
+          <EditCourse
+            selectedCourse={selectedCourse}
+            editCourseDetails={editCourseDetails}
+            setEditCourseDetails={setEditCourseDetails}
+          />
+        </Modal>
+        <Modal
+          title="Add Material"
+          open={openMaterialNew}
+          handleClose={handleCloseMaterialNew}
+          handleSubmit={handleSubmitForm}
+        >
+          <NewMaterial formState={formState} setFormState={setFormState} />
+        </Modal>
+        <Modal
+          title="Edit Material"
+          handleSubmit={handleSubmitEditMaterial}
+          open={openEditMaterial}
+          handleClose={() => {
+            setOpenEditMaterial(false)
+          }}
+        >
+          <EditMaterial
+            editMaterialDetails={editMaterialDetails}
+            setEditMaterialDetails={setEditMaterialDetails}
+          />
+        </Modal>
+      </main>
+    )
   )
 }

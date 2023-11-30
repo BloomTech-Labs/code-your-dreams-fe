@@ -202,122 +202,124 @@ const ChapterDetailPage = () => {
   }
 
   return (
-    <main>
-      <BreadcrumbRow>
-        <Link underline="hover" color="inherit" href="/portal/chapters">
-          Chapters
-        </Link>
-        <Typography color="text.primary">
-          {selectedChapter ? selectedChapter.name : ""}
-        </Typography>
-      </BreadcrumbRow>
-
-      <section className="container">
-        <div className="header-row">
-          <h1>{selectedChapter && selectedChapter.name}</h1>
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpenChapterEdit()}
-            aria-label="edit"
-          >
-            <EditIcon fontSize="inherit" />
-          </IconButton>
-        </div>
-        <div className="header-row">
-          <h2>Members</h2>
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpenMemberNew()}
-            aria-label="Add a new chapter member"
-          >
-            <PersonAddIcon fontSize="inherit" />
-          </IconButton>
-        </div>
-        <div className="data-grid">
-          {members && (
-            <DataGrid
-              rows={members}
-              columns={columns}
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 20 },
-                },
-              }}
-              pageSizeOptions={[20]}
-              slots={{
-                noRowsOverlay: NoRowsOverlay,
-              }}
-              autoHeight={true}
-              sx={{ "--DataGrid-overlayHeight": "300px" }}
-              aria-label="Data grid of chapter members"
-            />
-          )}
-        </div>
-      </section>
-      <section className="container">
-        <div className="header-row">
-          <h2>Available Courses</h2>
-          <IconButton
-            color="primary"
-            size="large"
-            onClick={() => handleOpenCourseLink()}
-            aria-label="Link a course to the chapter"
-          >
-            <AddIcon fontSize="inherit" />
-          </IconButton>
-        </div>
-        {/* TODO: Change the name of the variable for data source here */}
-        {showDataTable(demoData)}
-        <div className="italic">
-          <Link underline="hover" href="/portal/courses">
-            Visit the Courses page to access course materials.
+    selectedChapter && (
+      <main>
+        <BreadcrumbRow>
+          <Link underline="hover" color="inherit" href="/portal/chapters">
+            Chapters
           </Link>
-        </div>
-      </section>
+          <Typography color="text.primary">
+            {selectedChapter ? selectedChapter.name : ""}
+          </Typography>
+        </BreadcrumbRow>
 
-      <Modal
-        title="Edit Chapter"
-        open={openChapterEdit}
-        handleClose={handleCloseChapterEdit}
-        handleSubmit={handleSubmitEditChapter}
-      >
-        <EditChapter
-          selectedChapter={selectedChapter}
-          editChapterData={editChapterData}
-          setEditChapterData={setEditChapterData}
-        />
-      </Modal>
-      <Modal
-        title="Link a Course"
-        open={openCourseLink}
-        handleClose={handleCloseCourseLink}
-      >
-        <LinkCourse />
-      </Modal>
-      <Modal
-        title="Add a New Member"
-        open={openMemberNew}
-        handleClose={handleCloseMemberNew}
-      >
-        <NewMember />
-      </Modal>
-      <Modal
-        title="Edit Member"
-        // TODO: Replicate material function below for chapter members
-        // handleSubmit={handleSubmitEditMaterial}
-        open={openMemberEdit}
-        handleClose={() => {
-          setOpenMemberEdit(false)
-        }}
-      >
-        <EditMember
-          editMemberDetails={editMemberDetails}
-          setEditMemberDetails={setEditMemberDetails}
-        />
-      </Modal>
-    </main>
+        <section className="container">
+          <div className="header-row">
+            <h1>{selectedChapter && selectedChapter.name}</h1>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpenChapterEdit()}
+              aria-label="edit"
+            >
+              <EditIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+          <div className="header-row">
+            <h2>Members</h2>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpenMemberNew()}
+              aria-label="Add a new chapter member"
+            >
+              <PersonAddIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+          <div className="data-grid">
+            {members && (
+              <DataGrid
+                rows={members}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 20 },
+                  },
+                }}
+                pageSizeOptions={[20]}
+                slots={{
+                  noRowsOverlay: NoRowsOverlay,
+                }}
+                autoHeight={true}
+                sx={{ "--DataGrid-overlayHeight": "300px" }}
+                aria-label="Data grid of chapter members"
+              />
+            )}
+          </div>
+        </section>
+        <section className="container">
+          <div className="header-row">
+            <h2>Available Courses</h2>
+            <IconButton
+              color="primary"
+              size="large"
+              onClick={() => handleOpenCourseLink()}
+              aria-label="Link a course to the chapter"
+            >
+              <AddIcon fontSize="inherit" />
+            </IconButton>
+          </div>
+          {/* TODO: Change the name of the variable for data source here */}
+          {showDataTable(demoData)}
+          <div className="italic">
+            <Link underline="hover" href="/portal/courses">
+              Visit the Courses page to access course materials.
+            </Link>
+          </div>
+        </section>
+
+        <Modal
+          title="Edit Chapter"
+          open={openChapterEdit}
+          handleClose={handleCloseChapterEdit}
+          handleSubmit={handleSubmitEditChapter}
+        >
+          <EditChapter
+            selectedChapter={selectedChapter}
+            editChapterData={editChapterData}
+            setEditChapterData={setEditChapterData}
+          />
+        </Modal>
+        <Modal
+          title="Link a Course"
+          open={openCourseLink}
+          handleClose={handleCloseCourseLink}
+        >
+          <LinkCourse />
+        </Modal>
+        <Modal
+          title="Add a New Member"
+          open={openMemberNew}
+          handleClose={handleCloseMemberNew}
+        >
+          <NewMember />
+        </Modal>
+        <Modal
+          title="Edit Member"
+          // TODO: Replicate material function below for chapter members
+          // handleSubmit={handleSubmitEditMaterial}
+          open={openMemberEdit}
+          handleClose={() => {
+            setOpenMemberEdit(false)
+          }}
+        >
+          <EditMember
+            editMemberDetails={editMemberDetails}
+            setEditMemberDetails={setEditMemberDetails}
+          />
+        </Modal>
+      </main>
+    )
   )
 }
 

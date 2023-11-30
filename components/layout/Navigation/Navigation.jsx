@@ -33,11 +33,14 @@ function AdminLinks() {
 
 export default function Navigation() {
   const { current_user } = useData()
+
   return (
-    <nav className={styles["site-nav"]}>
-      <div className="container">
-        <AdminLinks />
-      </div>
-    </nav>
+    current_user && (
+      <nav className={styles["site-nav"]}>
+        <div className="container">
+          <AdminLinks />
+        </div>
+      </nav>
+    )
   )
 }

@@ -98,64 +98,66 @@ const ChaptersPage = () => {
   }, [chapters])
 
   return (
-    <main>
-      <section className="container">
-        <div className="header-row">
-          <h1>Chapters</h1>
-          {current_user &&
-          current_user.role_id === 1 &&
-          current_user.chapter_id === 1 ? (
-            <IconButton
-              color="primary"
-              size="large"
-              onClick={() => handleOpen()}
-              aria-label="Add a new chapter"
-            >
-              <GroupAddIcon fontSize="inherit" />
-            </IconButton>
-          ) : null}
-        </div>
-        <p className="italic">
-          This is a list of all the chapters that are managed within the app.
-          Use the button above to create a new chapter, or use any of the links
-          below to view or edit a chapter.
-        </p>
-        <div className="data-grid">
-          {localChapters && (
-            <DataGrid
-              rows={localChapters}
-              getRowId={(row) => row.id}
-              columns={columns.map((column) =>
-                column.field === "name"
-                  ? { ...column, renderCell: handleRowClick }
-                  : column
-              )}
-              initialState={{
-                pagination: {
-                  paginationModel: { pageSize: 20 },
-                },
-              }}
-              pageSizeOptions={[20]}
-              slots={{
-                noRowsOverlay: NoRowsOverlay,
-              }}
-              autoHeight={true}
-              sx={{ "--DataGrid-overlayHeight": "300px" }}
-              aria-label="Data grid of chapters"
-            />
-          )}
-        </div>
-      </section>
+    localChapters && (
+      <main>
+        <section className="container">
+          <div className="header-row">
+            <h1>Chapters</h1>
+            {current_user &&
+            current_user.role_id === 1 &&
+            current_user.chapter_id === 1 ? (
+              <IconButton
+                color="primary"
+                size="large"
+                onClick={() => handleOpen()}
+                aria-label="Add a new chapter"
+              >
+                <GroupAddIcon fontSize="inherit" />
+              </IconButton>
+            ) : null}
+          </div>
+          <p className="italic">
+            This is a list of all the chapters that are managed within the app.
+            Use the button above to create a new chapter, or use any of the
+            links below to view or edit a chapter.
+          </p>
+          <div className="data-grid">
+            {localChapters && (
+              <DataGrid
+                rows={localChapters}
+                getRowId={(row) => row.id}
+                columns={columns.map((column) =>
+                  column.field === "name"
+                    ? { ...column, renderCell: handleRowClick }
+                    : column
+                )}
+                initialState={{
+                  pagination: {
+                    paginationModel: { pageSize: 20 },
+                  },
+                }}
+                pageSizeOptions={[20]}
+                slots={{
+                  noRowsOverlay: NoRowsOverlay,
+                }}
+                autoHeight={true}
+                sx={{ "--DataGrid-overlayHeight": "300px" }}
+                aria-label="Data grid of chapters"
+              />
+            )}
+          </div>
+        </section>
 
-      <Modal
-        title="Create a New Chapter"
-        open={open}
-        handleClose={handleClose}
-        handleSubmit={handleSubmitForm}
-      >
-        <NewChapter formState={formState} setFormState={setFormState} />
-      </Modal>
-    </main>
+        <Modal
+          title="Create a New Chapter"
+          open={open}
+          handleClose={handleClose}
+          handleSubmit={handleSubmitForm}
+        >
+          <NewChapter formState={formState} setFormState={setFormState} />
+        </Modal>
+      </main>
+    )
   )
 }
 

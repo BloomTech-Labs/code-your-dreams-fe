@@ -15,21 +15,23 @@ export default function Header() {
   }
 
   return (
-    <header className={styles["site-header"]}>
-      <div className={`container ${styles["header-container"]}`}>
-        <div className={styles["left-side"]}>
-          <SiteLogo />
-          <div className={styles["org-header"]}>
-            <span className={`${styles.title} h4`}>
-              {current_user ? current_user.chapter_name : ""}
-            </span>
-            <span className={styles.role}>
-              {current_user ? roleMap[current_user.role] : ""}
-            </span>
+    current_user && (
+      <header className={styles["site-header"]}>
+        <div className={`container ${styles["header-container"]}`}>
+          <div className={styles["left-side"]}>
+            <SiteLogo />
+            <div className={styles["org-header"]}>
+              <span className={`${styles.title} h4`}>
+                {current_user ? current_user.chapter_name : ""}
+              </span>
+              <span className={styles.role}>
+                {current_user ? roleMap[current_user.role] : ""}
+              </span>
+            </div>
           </div>
+          {current_user ? <NavBar /> : ""}
         </div>
-        {current_user ? <NavBar /> : ""}
-      </div>
-    </header>
+      </header>
+    )
   )
 }
