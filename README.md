@@ -252,3 +252,4 @@ A chapter admin user enables those with the role to administer other users in th
 - Logout from the app.
 - _(Optional)_
   - If the super admin account is no longer needed, go to Auth0 and delete the super admin account used for testing.
+# code-your-dreams-fe
